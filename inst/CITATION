@@ -1,0 +1,11 @@
+citHeader("To cite manytreaties in publications use:")
+
+citEntry(
+  entry    = "Manual",
+  title    = "Manytreaties: Agreements for manydata",
+  author   = "James Hollway",
+  year     = "2021",
+  url      = "https://github.com/globalgov/manytreaties",
+  textVersion = paste("J. Hollway. Agreements for manydata. 2021."
+  )
+)
