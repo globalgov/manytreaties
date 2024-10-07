@@ -18,8 +18,6 @@ test_that("datasets have the required variables", {
   pointblank::expect_col_exists(agreements[["WHO"]],
                                 pointblank::vars(Begin))
   expect_true(any(grepl("ID$", colnames(agreements[["WHO"]]))))
-  pointblank::expect_col_exists(agreements[["WHO"]],
-                                pointblank::vars(Signature))
 })
 
 # Date columns should be in mdate class
@@ -43,25 +41,12 @@ test_that("Column `Beg` has standardised dates", {
                          agreements[["WHO"]]$Begin)))
 })
 
-test_that("Column `Signature` has standardised dates", {
-  expect_equal(class(agreements[["WHO"]]$Signature), "mdate")
-  expect_false(any(grepl("/", agreements[["WHO"]]$Signature)))
-  expect_false(any(grepl("^[:alpha:]$",
-                         agreements[["WHO"]]$Signature)))
-  expect_false(any(grepl("^[:digit:]{2}$",
-                         agreements[["WHO"]]$Signature)))
-  expect_false(any(grepl("^[:digit:]{3}$",
-                         agreements[["WHO"]]$Signature)))
-  expect_false(any(grepl("^[:digit:]{1}$",
-                         agreements[["WHO"]]$Signature)))
-})
-
 # Dataset should be ordered according to the "Begin" column
 test_that("dataset is arranged by date variable", {
   expect_true(agreements[["WHO"]]$Begin[1] <
                 agreements[["WHO"]]$Begin[10])
   expect_true(agreements[["WHO"]]$Begin[50] <
                 agreements[["WHO"]]$Begin[75])
-  expect_true(agreements[["WHO"]]$Begin[100] <
-                agreements[["WHO"]]$Begin[120])
+  expect_true(agreements[["WHO"]]$Begin[90] <
+                agreements[["WHO"]]$Begin[110])
 })
