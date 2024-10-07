@@ -477,8 +477,31 @@ HUGGO_hlt <- HUGGO_hlt %>%
   dplyr::mutate(Domain = "Health")
 HUGGO <- dplyr::bind_rows(HUGGO_env, HUGGO_trd, HUGGO_hlt)
 
-# Combine data for rows on the same agreement
+# Combine data for rows on the same agreement in different domains
+# CTMHWD_1989A (health and environment)
+CTMHWD_1989A <- dplyr::filter(HUGGO, manyID == "CTMHWD_1989A") %>%
+  dplyr::summarise(across(everything(), ~first(., na_rm = T))) %>%
+  dplyr::mutate(Domain = "Environment, Health",
+                Coder = "Diego, Jael")
+HUGGO[which(HUGGO$manyID == "CTMHWD_1989A"),] <- CTMHWD_1989A[1,]
+# NCLRSF_1994A (health and environment)
+NCLRSF_1994A <- dplyr::filter(HUGGO, manyID == "NCLRSF_1994A") %>%
+  dplyr::summarise(across(everything(), ~first(., na_rm = T))) %>%
+  dplyr::mutate(Domain = "Environment, Health",
+                Coder = "Diego, Jael")
+HUGGO[which(HUGGO$manyID == "NCLRSF_1994A"),] <- NCLRSF_1994A[1,]
+# FRMWTC_2003A (health and environment)
+FRMWTC_2003A <- dplyr::filter(HUGGO, manyID == "FRMWTC_2003A") %>%
+  dplyr::summarise(across(everything(), ~first(., na_rm = T))) %>%
+  dplyr::mutate(Domain = "Environment, Health",
+                Coder = "Diego, Jael")
+HUGGO[which(HUGGO$manyID == "FRMWTC_2003A"),] <- FRMWTC_2003A[1,]
 
+HUGGO <- dplyr::distinct(HUGGO)
+
+# remove rows with missing information for the same agreement
+HUGGO <- HUGGO[-2305,] # remove duplicate row for BI07WA_1991A
+HUGGO <- HUGGO[-2617,] # remove duplicate row for GBR-USA[VIA]_1993A
 
 # Format data correctly for exporting
 HUGGO <- HUGGO %>%

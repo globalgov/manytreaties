@@ -21,7 +21,7 @@
 #' 7 variables: manyID, treatyID, Title, Begin, Signature, Force, trendID.}
 #' \item{WHO: }{A dataset with 114 observations and the following
 #' 6 variables: manyID, treatyID, Title, Begin, Organisation, Topic.}
-#' \item{HUGGO: }{A dataset with 4822 observations and the following
+#' \item{HUGGO: }{A dataset with 4816 observations and the following
 #' 59 variables: manyID, treatyID, Title, Begin, End, Signature, Force, TreatyText, url, Domain, AgreementType, DocType, GeogArea, gengID, ieaID, ecolexID, Parties, verified, DocValidUntilDate, Notes, Download, MEA_type, Ambit, Region, subject_ecolex, subject_iea, Keywords, Lineage, Sequence, AdoptedIn, Languages, Appendices, Depository, DepositoryURL, Published, Website1, Website2, Secretariat, SecretariatURL, UNEP, Supersedes, References, EnabledBy, AmendedBy, Lit, Data, Coded, Abstract, Language, Orig_noneng_title, match, Citation, Formal, Dataset, Source, Health_as_primary_intent, Comments, Topic, Coder.}
 #' }
 #' @source
