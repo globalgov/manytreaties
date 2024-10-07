@@ -2,6 +2,9 @@
 
 # This is a template for importing, cleaning, and exporting data
 # ready for the many package.
+# The WHO dataset is obtained from the WHO MiNDBank repository,
+# gathering UN and WHO resolutions related to mental health, substance abuse,
+# disability, general health, human rights and development.
 
 # Stage one: scraping information from WHO website
 who_url <- rvest::read_html("https://extranet.who.int/mindbank/collection/un_who_resolutions/all?page=all")
