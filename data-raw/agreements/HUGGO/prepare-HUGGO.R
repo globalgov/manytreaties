@@ -128,8 +128,6 @@ HUGGO_env <- dplyr::left_join(HUGGO_env, manyID, by = "treatyID")
 
 # Stage three: Verify data and merge verified data and additional treaties into HUGGO_env dataset
 
-# Step one: Merge original HUGGO data with verified metadata of treaties in the agreements datacube
-
 # Load data frame with verified metadata (of treaties present in HUGGO)
 HUGGO7 <- read.csv("data-raw/agreements/HUGGO/HUGGO_env_reconciled.csv")
 
@@ -163,7 +161,7 @@ HUGGO_env <- dplyr::full_join(HUGGO_env, HUGGO9,
                   Signature.y, Force.x, Force.y, End.x, End.y, Parties.x,
                   Parties.y)
 
-# Clean merged data
+# Reformat merged data
 HUGGO_env <- HUGGO_env %>%
   dplyr::mutate(Title = ifelse(!is.na(Title.y), Title.y, Title.x),
                 Beg = ifelse(!is.na(Beg.y), Beg.y, Beg.x),
@@ -258,404 +256,8 @@ HUGGO_env <- HUGGO_env %>%
                   Published, Website1, Website2, Secretariat, SecretariatURL,
                   UNEP, Supersedes, References, EnabledBy, AmendedBy, Lit,
                   Data, Coded, Abstract) %>%
-  dplyr::arrange(Beg)
-
-# Step two: Remove duplicate rows
-
-# First row NA remove
-HUGGO_env <- HUGGO_env[-(which(is.na(HUGGO_env$manyID))), ]
-
-# Clean rows that share the same manyID
-
-# BAD-CHE[LCT]_1884P
-# Additional Convention Between Switzerland Baden And Alsace-Lorraine
-# Concerning Fishing In Lake Constance And Its Tributaries
-which(HUGGO_env$manyID == "BAD-CHE[LCT]_1884P")
-remove <- which(HUGGO_env$manyID == "BAD-CHE[LCT]_1884P" &
-                  HUGGO_env$gengID == "GENG-0077")
-# Keep one row
-HUGGO_env <- HUGGO_env[-(remove[-1]), ]
-
-# Protocol To The Additional Convention Between Switzerland Baden And
-# Alsace-Lorraine Concerning Fishing In Lake Constance And Its Tributaries
-which(HUGGO_env$manyID == "BAD-CHE[LCT]_1884P")
-remove <- which(HUGGO_env$manyID == "BAD-CHE[LCT]_1884P" &
-                  HUGGO_env$gengID == "GENG-0078")
-# Keep one row
-HUGGO_env <- HUGGO_env[-(remove[-1]), ]
-
-# CAN-USA[LLW]_1925P:CAN-USA[LLW]_1925A
-which(HUGGO_env$manyID == "CAN-USA[LLW]_1925P:CAN-USA[LLW]_1925A")
-# Keep row with verified information (Force)
-HUGGO_env <- HUGGO_env[-(which(HUGGO_env$manyID == "CAN-USA[LLW]_1925P:CAN-USA[LLW]_1925A"
-                               & HUGGO_env$Force == "1925-07-17")), ]
-
-# OP06SP_1952A
-which(HUGGO_env$manyID == "OP06SP_1952A")
-# Keep row with more information
-HUGGO_env <- HUGGO_env[-(which(HUGGO_env$manyID == "OP06SP_1952A"
-                               & !is.na(HUGGO_env$Region))), ]
-
-# CDSMMZ_1954P20
-which(HUGGO_env$manyID == "CDSMMZ_1954P20")
-# Fully duplicate rows, keep one
-remove <- which(HUGGO_env$manyID == "CDSMMZ_1954P20")
-HUGGO_env <- HUGGO_env[-(remove[-1]), ]
-
-# ESP-PRT[FSF]_1969A
-which(HUGGO_env$manyID == "ESP-PRT[FSF]_1969A")
-# Fully duplicate rows, keep one
-remove <- which(HUGGO_env$manyID == "ESP-PRT[FSF]_1969A")
-HUGGO_env <- HUGGO_env[-(remove[-1]), ]
-
-# ELCCDF_1972A
-which(HUGGO_env$manyID == "ELCCDF_1972A")
-# Duplicate rows, keep the one considered when verifying metadata
-HUGGO_env <- HUGGO_env[-(which(HUGGO_env$manyID == "ELCCDF_1972A"
-                               & is.na(HUGGO_env$url))), ]
-
-# RUS-USA[HSA]_1975A
-which(HUGGO_env$manyID == "RUS-USA[HSA]_1975A")
-# Two fully duplicated treaties, remove duplicated rows
-remove <- which(HUGGO_env$manyID == "RUS-USA[HSA]_1975A"
-                & HUGGO_env$gengID == "GENG-1181")
-HUGGO_env <- HUGGO_env[-(remove[-1]), ]
-remove <- which(HUGGO_env$manyID == "RUS-USA[HSA]_1975A"
-                & HUGGO_env$gengID == "GENG-1248")
-HUGGO_env <- HUGGO_env[-(remove[-1]), ]
-
-# CAN-NOR[CSS]_1975N
-which(HUGGO_env$manyID == "CAN-NOR[CSS]_1975N")
-# Two fully duplicated treaties, remove duplicated rows
-remove <- which(HUGGO_env$manyID == "CAN-NOR[CSS]_1975N"
-                & HUGGO_env$Force == "1975-04-23")
-HUGGO_env <- HUGGO_env[-(remove[-1]), ]
-remove <- which(HUGGO_env$manyID == "CAN-NOR[CSS]_1975N"
-                & HUGGO_env$Force == "1975-12-12")
-HUGGO_env <- HUGGO_env[-(remove[-1]), ]
-
-# GU14US_1975A
-which(HUGGO_env$manyID == "GU14US_1975A")
-# Two fully duplicated treaties, remove duplicated rows
-remove <- which(HUGGO_env$manyID == "GU14US_1975A"
-                & HUGGO_env$Signature == "1975-05-30")
-HUGGO_env <- HUGGO_env[-(remove[-1]), ]
-remove <- which(HUGGO_env$manyID == "GU14US_1975A"
-                & HUGGO_env$Signature == "1975-12-16")
-HUGGO_env <- HUGGO_env[-(remove[-1]), ]
-
-# GUY-RUS[UNF]_1977A
-which(HUGGO_env$manyID == "GUY-RUS[UNF]_1977A")
-# Fully duplicate rows, keep one
-remove <- which(HUGGO_env$manyID == "GUY-RUS[UNF]_1977A")
-HUGGO_env <- HUGGO_env[-(remove[-1]), ]
-
-# DEU-LUX[FFA]_1980N
-which(HUGGO_env$manyID == "DEU-LUX[FFA]_1980N")
-# Duplicate rows, keep one with more data
-HUGGO_env <- HUGGO_env[-(which(HUGGO_env$manyID == "DEU-LUX[FFA]_1980N"
-                               & is.na(HUGGO_env$Ambit))), ]
-
-# ESPOTF_1983A
-which(HUGGO_env$manyID == "ESPOTF_1983A")
-# Full duplicate rows, keep one
-remove <- which(HUGGO_env$manyID == "ESPOTF_1983A")
-HUGGO_env <- HUGGO_env[-(remove[-1]), ]
-
-# CAN-USA[FCS]_1989A
-which(HUGGO_env$manyID == "CAN-USA[FCS]_1989A")
-# Full duplicate rows, keep one
-remove <- which(HUGGO_env$manyID == "CAN-USA[FCS]_1989A")
-HUGGO_env <- HUGGO_env[-(remove[-1]), ]
-
-# AUS-JPN[LLF]_1990P
-which(HUGGO_env$manyID == "AUS-JPN[LLF]_1990P")
-# Full duplicate rows, keep one
-remove <- which(HUGGO_env$manyID == "AUS-JPN[LLF]_1990P")
-HUGGO_env <- HUGGO_env[-(remove[-1]), ]
-
-# TPNWLA_1991E:TPNWLA_1967A
-which(HUGGO_env$manyID == "TPNWLA_1991E:TPNWLA_1967A")
-# Duplicate rows, keep one with more information
-HUGGO_env <- HUGGO_env[-(which(HUGGO_env$manyID == "TPNWLA_1991E:TPNWLA_1967A"
-                               & is.na(HUGGO_env$url))), ]
-
-# SWZ-ZAF[DUK]_1992A
-which(HUGGO_env$manyID == "SWZ-ZAF[DUK]_1992A")
-# Fully duplicate rows, keep one
-remove <- which(HUGGO_env$manyID == "SWZ-ZAF[DUK]_1992A")
-HUGGO_env <- HUGGO_env[-(remove[-1]), ]
-
-# RUS-UKR[FSA]_1993A
-which(HUGGO_env$manyID == "RUS-UKR[FSA]_1993A")
-# Duplicate rows, keep the one with verified metadata
-HUGGO_env <- HUGGO_env[-(which(HUGGO_env$manyID == "RUS-UKR[FSA]_1993A"
-                               & is.na(HUGGO_env$url))), ]
-
-# EB06DB_1993A
-which(HUGGO_env$manyID == "EB06DB_1993A")
-# Fully duplicate rows, keep one
-remove <- which(HUGGO_env$manyID == "EB06DB_1993A")
-HUGGO_env <- HUGGO_env[-(remove[-1]), ]
-
-# BJ06TP_1995A
-# Two fully duplicated treaties
-# Jordan and Sudan
-remove <- which(HUGGO_env$manyID == "BJ06TP_1995A"
-                & HUGGO_env$Beg == "1995-02-19")
-HUGGO_env <- HUGGO_env[-(remove[-1]), ]
-# Jordan and Tunis
-remove <- which(HUGGO_env$manyID == "BJ06TP_1995A"
-                & HUGGO_env$Beg == "1995-04-27")
-HUGGO_env <- HUGGO_env[-(remove[-1]), ]
-
-# CTMHWD_1995E:CTMHWD_1989A
-which(HUGGO_env$manyID == "CTMHWD_1995E:CTMHWD_1989A")
-# Duplicate rows, keep one with verified metadata
-HUGGO_env <- HUGGO_env[-(which(HUGGO_env$manyID == "CTMHWD_1995E:CTMHWD_1989A"
-                               & is.na(HUGGO_env$url))), ]
-
-# GIN-EC[ECF]_1995P
-which(HUGGO_env$manyID == "GIN-EC[ECF]_1995P")
-# Fully duplicate rows, keep one
-remove <- which(HUGGO_env$manyID == "GIN-EC[ECF]_1995P")
-HUGGO_env <- HUGGO_env[-(remove[-1]), ]
-
-# CE06NS_1999A
-which(HUGGO_env$manyID == "CE06NS_1999A")
-# Two fully duplicated treaties
-# Remove duplicate rows
-remove <- which(HUGGO_env$manyID == "CE06NS_1999A"
-                & HUGGO_env$Beg == "1999-07-19")
-HUGGO_env <- HUGGO_env[-(remove[-1]), ]
-remove <- which(HUGGO_env$manyID == "CE06NS_1999A"
-                & HUGGO_env$Beg == "1999-07-23")
-HUGGO_env <- HUGGO_env[-(remove[-1]), ]
-
-# AGO-EC[CPF]_2000P
-which(HUGGO_env$manyID == "AGO-EC[CPF]_2000P")
-# Two fully duplicated treaties, remove duplicate rows
-remove <- which(HUGGO_env$manyID == "AGO-EC[CPF]_2000P"
-                & HUGGO_env$Beg == "2000-03-30")
-HUGGO_env <- HUGGO_env[-(remove[-1]), ]
-remove <- which(HUGGO_env$manyID == "AGO-EC[CPF]_2000P"
-                & HUGGO_env$Beg == "2000-07-06")
-HUGGO_env <- HUGGO_env[-(remove[-1]), ]
-
-# SEN-EC[CFP]_2002A
-which(HUGGO_env$manyID == "SEN-EC[CFP]_2002A")
-# Two fully duplicated treaties, remove duplicate rows
-remove <- which(HUGGO_env$manyID == "SEN-EC[CFP]_2002A"
-                & HUGGO_env$End == "2001-12-31")
-HUGGO_env <- HUGGO_env[-(remove[-1]), ]
-remove <- which(HUGGO_env$manyID == "SEN-EC[CFP]_2002A"
-                & HUGGO_env$End == "2001-07-31")
-HUGGO_env <- HUGGO_env[-(remove[-1]), ]
-
-# CRI-USA[TTE]_2003A
-which(HUGGO_env$manyID == "CRI-USA[TTE]_2003A")
-# Fully duplicated treaty, remove duplicate row
-remove <- which(HUGGO_env$manyID == "CRI-USA[TTE]_2003A")
-HUGGO_env <- HUGGO_env[-(remove[-1]), ]
-
-# DNK-EC[RGH]_2007A1:DNK-EC[RGH]_2007A1
-which(HUGGO_env$manyID == "DNK-EC[RGH]_2007A1:DNK-EC[RGH]_2007A1")
-# Fully duplicated treaty, remove duplicate rows
-remove <- which(HUGGO_env$manyID == "DNK-EC[RGH]_2007A1:DNK-EC[RGH]_2007A1")
-HUGGO_env <- HUGGO_env[-(remove[-1]), ]
-
-# ID04MN_2004E8
-which(HUGGO_env$manyID == "ID04MN_2004E8")
-# Two fully duplicated treaties, remove duplicate rows
-remove <- which(HUGGO_env$manyID == "ID04MN_2004E8" & is.na(HUGGO_env$url))
-HUGGO_env <- HUGGO_env[-(remove[-1]), ]
-remove <- which(HUGGO_env$manyID == "ID04MN_2004E8" & !is.na(HUGGO_env$url))
-HUGGO_env <- HUGGO_env[-(remove[-1]), ]
-
-# Clean rows that have data about the same agreement, but with
-# different manyID
-
-# Convention Between Finland And Russia With Regard To Fishing And Sealing On
-# Lake Ladoga Helsingfors
-id <- "GENG-0218"
-which(HUGGO_env$gengID == gengID)
-## Keep row with verified data, but match manyID
-HUGGO_env[which(HUGGO_env$gengID == id & !is.na(HUGGO_env$url)), 1] <-
-  HUGGO_env[which(HUGGO_env$gengID == id & is.na(HUGGO_env$url)), 1]
-HUGGO_env <- HUGGO_env[-(which(HUGGO_env$gengID == id &
-                                 is.na(HUGGO_env$url))), ]
-
-# Convention Between The Union Of Soviet Socialist Republics And Finland
-# Concerning The Maintenance Of River Channels And The Regulation Of Fishing On
-# Watercourses Forming Part Of The Frontier Between Russia And Finland
-id <- "GENG-0219"
-which(HUGGO_env$gengID == id)
-## Keep row with verified data, but match manyID
-HUGGO_env[which(HUGGO_env$gengID == id & !is.na(HUGGO_env$url)), 1] <-
-  HUGGO_env[which(HUGGO_env$gengID == id & is.na(HUGGO_env$url)), 1]
-HUGGO_env <- HUGGO_env[-(which(HUGGO_env$gengID == id &
-                                 is.na(HUGGO_env$url))), ]
-
-# Protocol For The Prohibition Of The Use In War Of Asphyxiating Poisonous Or
-# Other Gases And Of Bacteriological Methods Of Warfare
-id <- "GENG-0240"
-which(HUGGO_env$gengID == id)
-# Keep row with verified data and manyID matching with treatyID
-HUGGO_env <- HUGGO_env[-(which(HUGGO_env$manyID == "PU04MW_1925P"
-                               & HUGGO_env$gengID == id)), ]
-
-# Nordic Mutual Emergency Assistance Agreement In Connection With Radiation
-# Accidents
-id <- "GENG-0679"
-which(HUGGO_env$gengID == id)
-# Duplicated row under different manyID.
-# Keep row with manyID matching treatyID
-HUGGO_env <- HUGGO_env[-(which(HUGGO_env$gengID == id
-                               & HUGGO_env$manyID == "AR04SN_1963A")), ]
-
-# Agreement Between The Government Of The United States Of America And The
-# Government Of The Union Of Soviet Socialist Republics Relating To Fishing For
-# King And Tanner Crab
-id <- "RUS-USA[KTC]_1973A"
-which(HUGGO_env$treatyID == id)
-## Keep row with verified data and manyID matching with treatyID
-HUGGO_env <- HUGGO_env[-(which(HUGGO_env$treatyID == id
-                               & HUGGO_env$manyID == "RUS-USA[CSC]_1973A")), ]
-
-# Agreement Between The Government Of The United States Of America And The
-# Government Of The Union Of Soviet Socialist Republics Relating To Fishing
-# Operations In The North Eastern Pacific Ocean
-id <- "RUS-USA[UFO]_1973A"
-which(HUGGO_env$treatyID == id)
-# Keep row with verified data, but match manyID to treatyID
-HUGGO_env[which(!is.na(HUGGO_env$url) &
-                  HUGGO_env$treatyID == id), 1] <-
-  HUGGO_env[which(is.na(HUGGO_env$url) & HUGGO_env$treatyID == id), 1]
-HUGGO_env <- HUGGO_env[-(which(HUGGO_env$treatyID == id &
-                                 is.na(HUGGO_env$url))), ]
-
-# Agreement Between The Government Of The United States Of America And The
-# Government Of The USSR Relating To The Consideration Of Claims Resulting From
-# Damage To Fishing Vessels Or Gear And Measures To Prevent Fishing Conflicts
-id <- "RUS-USA[PFC]_1973A"
-which(HUGGO_env$treatyID == "RUS-USA[PFC]_1973A")
-# Keep row with verified data
-HUGGO_env <- HUGGO_env[-(which(HUGGO_env$treatyID == "RUS-USA[PFC]_1973A" &
-                                 HUGGO_env$manyID == "RUS-USA[CSC]_1973A")), ]
-
-# Agreement Between The Government Of The United States Of America And The
-# Government Of The Union Of Soviet Socialist Republics On Certain Fishery
-# Problems On The High Seas In The Western Areas Of The Middle Atlantic Ocean
-id <- "RUS-USA[HSA]_1973A"
-which(HUGGO_env$treatyID == id)
-# Keep row with verified data
-HUGGO_env <- HUGGO_env[-(which(HUGGO_env$treatyID == id &
-                                 HUGGO_env$manyID == "RUS-USA[CSC]_1973A")), ]
-
-# Agreement Between The Government Of The Union Of Soviet Socialist Republics
-# And The Government Of The Peoples Republic Of Bulgaria Concerning Fishing For
-# Anchovies And Sprats In Each Others Territorial Waters In The Black Sea
-id <- "BGR-RUS[WBS]_1978A"
-which(HUGGO_env$treatyID == id)
-## Keep row with verified data
-HUGGO_env <- HUGGO_env[-(which(HUGGO_env$treatyID == id &
-                                 is.na(HUGGO_env$url))), ]
-
-# Agreement Between The Cabinet Of Ministers Of Belarus And The Government Of
-# The Russian Federation On Cooperation In Fuel And Energy Sector
-id <- "BLR-RUS[FES]_1994A"
-which(HUGGO_env$treatyID == id)
-# Keep row with verified data
-HUGGO_env <- HUGGO_env[-(which(HUGGO_env$treatyID == id &
-                                 is.na(HUGGO_env$url))), ]
-
-# Convention On Conservation And Development Of Fishery Resources In The Border
-# Sections Of The Parana And Paraguay Rivers Between Argentina And Paraguay
-id <- "ARG-PRY[SPR]_1996A"
-which(HUGGO_env$treatyID == id)
-## Keep row with verified data
-HUGGO_env <- HUGGO_env[-(which(HUGGO_env$treatyID == id &
-                                 is.na(HUGGO_env$url))), ]
-
-# Agreement Between Romania And Hungary Regarding Rapid Notification Of A
-# Nuclear Accident
-id <- "HUN-ROU[NNA]_1997A"
-which(HUGGO_env$treatyID == id)
-## Keep row with verified data, but match manyID
-HUGGO_env[which(HUGGO_env$treatyID == id & !is.na(HUGGO_env$url)), 1] <-
-  HUGGO_env[which(HUGGO_env$treatyID == id & is.na(HUGGO_env$url)), 1]
-HUGGO_env <- HUGGO_env[-(which(HUGGO_env$treatyID == id &
-                                 is.na(HUGGO_env$url))), ]
-
-# Agreement Between The Government Of The
-# Republic Of Lithuania And The Government
-# Of The Russian Federation On The Cooperation
-# In The Field Of Fishing
-id <- "LTU-RUS[RFF]_1999A"
-which(HUGGO_env$treatyID == id)
-## Keep row with verified data, but match manyID
-HUGGO_env[which(HUGGO_env$treatyID == id & !is.na(HUGGO_env$url)), 1] <-
-  HUGGO_env[which(HUGGO_env$treatyID == id & is.na(HUGGO_env$url)), 1]
-HUGGO_env <- HUGGO_env[-(which(HUGGO_env$treatyID == id &
-                                 is.na(HUGGO_env$url))), ]
-
-# Agreement Between The State Committee Of Energy Saving Of Ukraine And The
-# Committee Of Energetic Efficiency Of Belarus On Cooperation In The Sphere Of
-# Energetic Efficiency And Renewable Energy
-id <- "BLR-UKR[ERE]_2001A"
-which(HUGGO_env$treatyID == id)
-# Keep row with verified data
-HUGGO_env <- HUGGO_env[-(which(HUGGO_env$treatyID == id &
-                                 is.na(HUGGO_env$url))), ]
-
-# Additional Protocol To The Environment Treaty Between The Government Of
-# Argentina And The Government Of The Republic Of Bolivia
-id <- "ARG-BOL[ENB]_2004P"
-which(HUGGO_env$treatyID == id)
-## Keep row with verified data, but match manyID
-HUGGO_env[which(HUGGO_env$treatyID == id & !is.na(HUGGO_env$url)), 1] <-
-  HUGGO_env[which(HUGGO_env$treatyID == id & is.na(HUGGO_env$url)), 1]
-HUGGO_env <- HUGGO_env[-(which(HUGGO_env$treatyID == id &
-                                 is.na(HUGGO_env$url))), ]
-
-# Cooperation Agreement Between The Government Of The Republic Of Paraguay And
-# The Government Of The Federative Republic Of Brazil For Sustainable
-# Development And Integrated Management Of The Apa River Basin
-id <- "BRA-PRY[IMA]_2006A"
-which(HUGGO_env$treatyID == "BRA-PRY[IMA]_2006A")
-# Keep row with verified data
-HUGGO_env <- HUGGO_env[-(which(HUGGO_env$treatyID == "BRA-PRY[IMA]_2006A" &
-                                 (is.na(HUGGO_env$url)))), ]
-
-# Agreement Between The Government Of The Russian Federation And The Government
-# Of South Africa In The Sphere Of Water Relations And Forest Management
-id <- "RUS-ZAF[RFM]_2007A"
-which(HUGGO_env$treatyID == id)
-# Keep row with verified data, but match manyID
-HUGGO_env[which(HUGGO_env$treatyID == id & !is.na(HUGGO_env$url)), 1] <-
-  HUGGO_env[which(HUGGO_env$treatyID == id & is.na(HUGGO_env$url)), 1]
-HUGGO_env <- HUGGO_env[-(which(HUGGO_env$treatyID == id &
-                                 is.na(HUGGO_env$url))), ]
-
-# Agreement Between The Cabinet Of Ministers Of Ukraine And The Government Of
-# Belarus On Joint Management And Protection Of Transboundary Waterbodies
-title <- "Protection Of Transboundary Waterbodies"
-parties <- "BLR-UKR"
-which(grepl(title, HUGGO_env$Title) & HUGGO_env$Parties == parties)
-# Two duplicate rows under different manyID. Remove row with less info,
-# but keep url and Force
-HUGGO_env[which(grepl(title, HUGGO_env$Title) & HUGGO_env$Parties == parties &
-                  is.na(HUGGO_env$url)), 7] <-
-  HUGGO_env[which(grepl(title, HUGGO_env$Title) & HUGGO_env$Parties == parties &
-                    !is.na(HUGGO_env$url)), 7]
-HUGGO_env[which(grepl(title, HUGGO_env$Title) & HUGGO_env$Parties == parties &
-                  is.na(HUGGO_env$url)), 6] <-
-  HUGGO_env[which(grepl(title, HUGGO_env$Title) & HUGGO_env$Parties == parties &
-                    !is.na(HUGGO_env$AgreementType)), 6]
-HUGGO_env <- HUGGO_env[-(which(grepl(title, HUGGO_env$Title) &
-                                 HUGGO_env$Parties == parties &
-                                 is.na(HUGGO_env$AgreementType) &
-                                 HUGGO_env$Beg == "2001-10-16")), ]
+  dplyr::arrange(Beg) %>%
+  dplyr::rename(Begin = Beg)
 
 # Stage four: Matching agreements with titles in different languages
 noneng <- HUGGO_env %>%
@@ -748,11 +350,17 @@ HUGGO_env <- HUGGO_env[-which(HUGGO_env$manyID == "UB08IB_1893A" | HUGGO_env$man
                          HUGGO_env$manyID == "VB13GV_2008O" | HUGGO_env$manyID == "CS18PS_1954A"|
                          HUGGO_env$manyID == "CS18PS_1954A"),]
 
-# Stage five: Recode "9999-XX-XX-" Force date for PF07BS_1897A, RM04LF_1937A,
+# Stage five: Correct coding for variables
+
+# Recode "9999-XX-XX-" Force date for PF07BS_1897A, RM04LF_1937A,
 # IP07TS_1971E, CPRAEM_2005P:CPRAEM_1999A, EF04GG_2007A
 # since this coding is no longer used for Force dates in HUGGO_env dataset.
 HUGGO_env <- HUGGO_env %>%
   dplyr::mutate(Force = ifelse(grepl("9999-XX-XX-", Force), NA, Force))
+
+# Recode 'NA' values for TreatyText
+HUGGO_env <- HUGGO_env %>%
+  dplyr::mutate(TreatyText = ifelse(is.na(TreatyText), 0, TreatyText))
 
 ### Trade agreements
 
@@ -861,7 +469,16 @@ HUGGO_hlt <- HUGGO_hlt %>%
 HUGGO_hlt$Topic <- manypkgs::code_domain(HUGGO_hlt$Title, type  = "health")
 
 ### Merge data on environmental, trade, and health agreements together
+HUGGO_env <- HUGGO_env %>%
+  dplyr::mutate(Domain = "Environment")
+HUGGO_trd <- HUGGO_trd %>%
+  dplyr::mutate(Domain = "Trade")
+HUGGO_hlt <- HUGGO_hlt %>%
+  dplyr::mutate(Domain = "Health")
 HUGGO <- dplyr::bind_rows(HUGGO_env, HUGGO_trd, HUGGO_hlt)
+
+# Combine data for rows on the same agreement
+
 
 # Format data correctly for exporting
 HUGGO <- HUGGO %>%
@@ -872,7 +489,10 @@ HUGGO <- HUGGO %>%
                 Signature = messydates::as_messydate(Signature),
                 Force = messydates::as_messydate(Force),
                 End = messydates::as_messydate(End)) %>%
-  dplyr::arrange(Begin)
+  dplyr::arrange(Begin) %>%
+  dplyr::relocate(Coder, .after = last_col()) %>%
+  dplyr::relocate(manyID, treatyID, Title, Begin, End, Signature, Force,
+                  TreatyText, url, Domain)
 
 # Stage seven: Connecting data
 # Next run the following line to make HUGGO available
