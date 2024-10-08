@@ -3,14 +3,12 @@
 # This is a template for importing, cleaning, and exporting data
 # for the 'many' packages.
 
-# Stage one: Collecting data
-HUGGO_MEM <- readr::read_csv("data-raw/memberships/HUGGO_MEM/gnevar.csv")
+#### Environmental agreements
+# Stage one: Assembling original data
+HUGGO_MEM_env <- readr::read_csv("data-raw/memberships/HUGGO_MEM/gnevar.csv")
 
 # Stage two: Correcting data
-# In this stage you will want to correct the variable names and
-# formats of the 'HUGGO_MEM' object until the object created
-# below (in stage three) passes all the tests.
-HUGGO_MEM <- as_tibble(HUGGO_MEM) %>%
+HUGGO_MEM_env <- as_tibble(HUGGO_MEM_env) %>%
   janitor::remove_empty(which = "cols") %>%
   dplyr::mutate(gengID = GENG,
                 ecolexID = ECOLEX,
@@ -42,9 +40,9 @@ HUGGO_MEM <- as_tibble(HUGGO_MEM) %>%
   dplyr::distinct()
 
 # Add treatyID column
-HUGGO_MEM$treatyID <- manypkgs::code_agreements(HUGGO_MEM,
-                                                HUGGO_MEM$Title,
-                                                HUGGO_MEM$Begin)
+HUGGO_MEM_env$treatyID <- manypkgs::code_agreements(HUGGO_MEM_env,
+                                                    HUGGO_MEM_env$Title,
+                                                    HUGGO_MEM_env$Begin)
 
 # Add MEA edges data (MGENG dataset)
 # For some more information about the variables and codes,
@@ -80,7 +78,8 @@ MEA_edges <- as_tibble(MEA_edges) %>%
   dplyr::distinct()
 
 # Add titles and ID variables from HUGGO agreements data
-agreements <- manyenviron::agreements$HUGGO %>%
+agreements <- manytreaties::agreements$HUGGO %>%
+  dplyr::filter(stringr::str_detect(Domain, "Environment")) %>%
   dplyr::select(c(gengID, Title, Begin, End, Signature, Force, ecolexID, ieaID))
 MEA_edges <- dplyr::inner_join(MEA_edges, agreements, by = "gengID") %>%
   dplyr::distinct()
@@ -91,17 +90,18 @@ MEA_edges$treatyID <- manypkgs::code_agreements(MEA_edges,
                                                 MEA_edges$Begin)
 
 # Join Data
-HUGGO_MEM <- dplyr::full_join(HUGGO_MEM, MEA_edges) %>%
+HUGGO_MEM_env <- dplyr::full_join(HUGGO_MEM_env, MEA_edges) %>%
   dplyr::distinct()
 
 # Add manyID column
-manyID <- manypkgs::condense_agreements(idvar = HUGGO_MEM$treatyID)
-HUGGO_MEM <- dplyr::left_join(HUGGO_MEM, manyID, by = "treatyID")
+manyID <- manypkgs::condense_agreements(idvar = HUGGO_MEM_env$treatyID)
+HUGGO_MEM_env <- dplyr::left_join(HUGGO_MEM_env, manyID, by = "treatyID")
 
 # Reorder variables
-HUGGO_MEM <- dplyr::relocate(HUGGO_MEM, c("manyID", "treatyID", "stateID",
-                                          "Title", "Begin", "End", "Signature",
-                                          "Force")) %>%
+HUGGO_MEM_env <- dplyr::relocate(HUGGO_MEM_env, c("manyID", "treatyID",
+                                                  "stateID", "Title", "Begin",
+                                                  "End", "Signature",
+                                                  "Force")) %>%
   dplyr::mutate(across(everything(), ~stringr::str_replace_all(., "^NA$",
                                                                NA_character_))) %>%
   dplyr::distinct() %>%
@@ -129,35 +129,35 @@ for(i in nrow(verified)){
   treatyID <- verified[i, 13]
   title <- verified[i, 2]
   y <- 0
-  y <- which(HUGGO_MEM$manyID == manyID & HUGGO_MEM$treatyID == treatyID &
-                         HUGGO_MEM$Title == title)
+  y <- which(HUGGO_MEM_env$manyID == manyID & HUGGO_MEM_env$treatyID == treatyID &
+                         HUGGO_MEM_env$Title == title)
   # Match dates
   # Begin
-  HUGGO_MEM[y, "Begin"] <- messydates::as_messydate(verified[i, "Begin"])
+  HUGGO_MEM_env[y, "Begin"] <- messydates::as_messydate(verified[i, "Begin"])
   # End
-  HUGGO_MEM[y, "End"] <- messydates::as_messydate(verified[i, "End"])
+  HUGGO_MEM_env[y, "End"] <- messydates::as_messydate(verified[i, "End"])
   # Signature
-  HUGGO_MEM[y, "Signature"] <- messydates::as_messydate(verified[i, "Signature"])
+  HUGGO_MEM_env[y, "Signature"] <- messydates::as_messydate(verified[i, "Signature"])
   # Force
-  HUGGO_MEM[y, "Force"] <- messydates::as_messydate(verified[i, "Force"])
+  HUGGO_MEM_env[y, "Force"] <- messydates::as_messydate(verified[i, "Force"])
   }
 
 # Step two: Convert dates to mdate class
-HUGGO_MEM$stateSignature <- messydates::as_messydate(HUGGO_MEM$stateSignature)
-HUGGO_MEM$stateRat <- messydates::as_messydate(HUGGO_MEM$stateRat)
-HUGGO_MEM$stateForce <- messydates::as_messydate(HUGGO_MEM$stateForce)
-HUGGO_MEM$stateForce2 <- messydates::as_messydate(HUGGO_MEM$stateForce2)
-HUGGO_MEM$stateForce3 <- messydates::as_messydate(HUGGO_MEM$stateForce3)
-HUGGO_MEM$stateWithdrawal <- messydates::as_messydate(HUGGO_MEM$stateWithdrawal)
-HUGGO_MEM$stateWithdrawal2 <- messydates::as_messydate(HUGGO_MEM$stateWithdrawal2)
-HUGGO_MEM$Accession <- messydates::as_messydate(HUGGO_MEM$Accession)
-HUGGO_MEM$Acceptance <- messydates::as_messydate(HUGGO_MEM$Acceptance)
-HUGGO_MEM$ProvisionalApp <- messydates::as_messydate(HUGGO_MEM$ProvisionalApp)
-HUGGO_MEM$Consent <- messydates::as_messydate(HUGGO_MEM$Consent)
-HUGGO_MEM <- dplyr::distinct(HUGGO_MEM)
+HUGGO_MEM_env$stateSignature <- messydates::as_messydate(HUGGO_MEM_env$stateSignature)
+HUGGO_MEM_env$stateRat <- messydates::as_messydate(HUGGO_MEM_env$stateRat)
+HUGGO_MEM_env$stateForce <- messydates::as_messydate(HUGGO_MEM_env$stateForce)
+HUGGO_MEM_env$stateForce2 <- messydates::as_messydate(HUGGO_MEM_env$stateForce2)
+HUGGO_MEM_env$stateForce3 <- messydates::as_messydate(HUGGO_MEM_env$stateForce3)
+HUGGO_MEM_env$stateWithdrawal <- messydates::as_messydate(HUGGO_MEM_env$stateWithdrawal)
+HUGGO_MEM_env$stateWithdrawal2 <- messydates::as_messydate(HUGGO_MEM_env$stateWithdrawal2)
+HUGGO_MEM_env$Accession <- messydates::as_messydate(HUGGO_MEM_env$Accession)
+HUGGO_MEM_env$Acceptance <- messydates::as_messydate(HUGGO_MEM_env$Acceptance)
+HUGGO_MEM_env$ProvisionalApp <- messydates::as_messydate(HUGGO_MEM_env$ProvisionalApp)
+HUGGO_MEM_env$Consent <- messydates::as_messydate(HUGGO_MEM_env$Consent)
+HUGGO_MEM_env <- dplyr::distinct(HUGGO_MEM_env)
 
-# Stage four: Merging verified data (HUGGO_MEM_reconciled.csv and HUGGO_MEM_additional.csv) with original data (HUGGO_MEM_original.csv)
-HUGGO_MEM_reconciled <- readr::read_csv("data-raw/memberships/HUGGO_MEM/HUGGO_MEM_reconciled.csv") %>%
+# Stage four: Merging verified data (HUGGO_MEM_env_reconciled.csv and HUGGO_MEM_env_additional.csv) with original data
+HUGGO_MEM_env_reconciled <- readr::read_csv("data-raw/memberships/HUGGO_MEM/HUGGO_MEM_env_reconciled.csv") %>%
   dplyr::mutate(Begin = messydates::as_messydate(Begin),
                 End = messydates::as_messydate(End),
                 Signature = messydates::as_messydate(Signature),
@@ -177,7 +177,7 @@ HUGGO_MEM_reconciled <- readr::read_csv("data-raw/memberships/HUGGO_MEM/HUGGO_ME
                 Acceptance = messydates::as_messydate(Acceptance),
                 Accession = messydates::as_messydate(Accession),
                 Succession = ifelse(!is.na(Succession), 1, 0))
-HUGGO_MEM_additional <- readr::read_csv("data-raw/memberships/HUGGO_MEM/HUGGO_MEM_additional.csv") %>%
+HUGGO_MEM_env_additional <- readr::read_csv("data-raw/memberships/HUGGO_MEM/HUGGO_MEM_env_additional.csv") %>%
   dplyr::mutate(Begin = messydates::as_messydate(Begin),
                 End = messydates::as_messydate(End),
                 Signature = messydates::as_messydate(Signature),
@@ -197,12 +197,12 @@ HUGGO_MEM_additional <- readr::read_csv("data-raw/memberships/HUGGO_MEM/HUGGO_ME
                 Acceptance = messydates::as_messydate(Acceptance),
                 Accession = messydates::as_messydate(Accession),
                 Succession = ifelse(!is.na(Succession), 1, 0))
-HUGGO_MEM_new <- dplyr::bind_rows(HUGGO_MEM_reconciled, HUGGO_MEM_additional) %>%
+HUGGO_MEM_env_new <- dplyr::bind_rows(HUGGO_MEM_env_reconciled, HUGGO_MEM_env_additional) %>%
   dplyr::arrange(Begin, manyID)
 
-HUGGO_MEM <- dplyr::full_join(HUGGO_MEM, HUGGO_MEM_new,
+HUGGO_MEM_env <- dplyr::full_join(HUGGO_MEM_env, HUGGO_MEM_env_new,
                               by = c("manyID", "treatyID", "Title", "stateID"))
-HUGGO_MEM <- HUGGO_MEM %>%
+HUGGO_MEM_env <- HUGGO_MEM_env %>%
   manydata::transmutate(Begin = ifelse(!is.na(Begin.y), Begin.y, Begin.x),
                         End = ifelse(!is.na(End.y), End.y, End.x),
                         Signature = ifelse(!is.na(Signature.y), Signature.y,
@@ -301,14 +301,14 @@ repstateIDs <- manypkgs::code_states(c("Armenia", "Azerbaijan", "Belarus",
                                      activity = FALSE,
                                      replace = "ID")
 
-HUGGO_MEM <- HUGGO_MEM %>%
+HUGGO_MEM_env <- HUGGO_MEM_env %>%
   dplyr::mutate(Succession = ifelse(stateID %in% repstateIDs, 1, Succession))
 
-HUGGO_MEM <- HUGGO_MEM %>%
+HUGGO_MEM_env <- HUGGO_MEM_env %>%
   dplyr::mutate(Succession = ifelse(is.na(Succession), 0, Succession))
 
 # Match non-English treaty titles to English treaty titles
-noneng <- HUGGO_MEM %>%
+noneng <- HUGGO_MEM_env %>%
   dplyr::filter(manyID == "UB08IB_1893A")
 noneng <- noneng %>%
   dplyr::rename(match = manyID, Orig_noneng_title = Title) %>%
@@ -318,171 +318,21 @@ noneng <- noneng %>%
   dplyr::mutate(manyID = "AH12IF_1893A")
 noneng <- noneng %>%
   dplyr::select(manyID, Begin, Orig_noneng_title, match)
-HUGGO_MEM <- dplyr::left_join(HUGGO_MEM, noneng, by = c("manyID", "Begin"))
+HUGGO_MEM_env <- dplyr::left_join(HUGGO_MEM_env, noneng, by = c("manyID", "Begin"))
 # remove rows with non-English titles identified above
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "UB08IB_1893A"),]
-
-# Remove duplicated entries
-HUGGO_MEM <- dplyr::distinct(HUGGO_MEM)
-
-# PW05MW_1925P
-# remove extra row for AUT
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "PW05MW_1925P" & HUGGO_MEM$stateID == "AUT" & is.na(HUGGO_MEM$obsolete)),]
-
-# INTRRW_1946A
-# remove extra row for ISL
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "INTRRW_1946A" & HUGGO_MEM$stateID == "ISL" & HUGGO_MEM$StateForce == HUGGO_MEM$StateForce2),]
-# remove extra row for PAN
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "INTRRW_1946A" & HUGGO_MEM$stateID == "PAN" & HUGGO_MEM$StateForce == HUGGO_MEM$StateForce2),]
-# remove extra row for BRA
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "INTRRW_1946A" & HUGGO_MEM$stateID == "BRA" & is.na(HUGGO_MEM$StateForce3)),]
-# remove row with non-NA StateSignature date for SWE that has been verified
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "INTRRW_1946A" & HUGGO_MEM$stateID == "SWE" & !is.na(HUGGO_MEM$StateSignature)),]
-# remove extra row for DMA
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "INTRRW_1946A" & HUGGO_MEM$stateID == "DMA" & HUGGO_MEM$StateForce == HUGGO_MEM$StateForce2),]
-# remove extra row for URY
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "INTRRW_1946A" & HUGGO_MEM$stateID == "URY" & HUGGO_MEM$StateForce == HUGGO_MEM$StateForce2),]
-# remove extra row for BLZ
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "INTRRW_1946A" & HUGGO_MEM$stateID == "BLZ" & HUGGO_MEM$StateForce == HUGGO_MEM$StateForce2),]
-# remove extra row for ECU
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "INTRRW_1946A" & HUGGO_MEM$stateID == "ECU" & HUGGO_MEM$StateForce == HUGGO_MEM$StateForce2),]
-# remove extra row for ITA
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "INTRRW_1946A" & HUGGO_MEM$stateID == "ITA" & HUGGO_MEM$StateSignature == HUGGO_MEM$StateRatification), ]
-# remove extra row for HUN that has been verified
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "INTRRW_1946A" & HUGGO_MEM$stateID == "HUN" & HUGGO_MEM$StateSignature == HUGGO_MEM$StateRatification), ]
-# remove row with StateSignature date later than StateRatification date for BEL
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "INTRRW_1946A" & HUGGO_MEM$stateID == "BEL" & HUGGO_MEM$StateSignature > HUGGO_MEM$StateRatification), ]
-# remove row with StateSignature date later than StateRatification date for SUR
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "INTRRW_1946A" & HUGGO_MEM$stateID == "SUR" & HUGGO_MEM$StateSignature > HUGGO_MEM$StateRatification), ]
-# remove row with StateSignature date later than StateRatification date for CZE
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "INTRRW_1946A" & HUGGO_MEM$stateID == "CZE" & HUGGO_MEM$StateSignature > HUGGO_MEM$StateRatification), ]
-# remove extra row for ERI
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "INTRRW_1946A" & HUGGO_MEM$stateID == "ERI" & HUGGO_MEM$StateSignature == HUGGO_MEM$StateRatification), ]
-
-# INTRPB_1950A
-# remove extra row for MCO
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "INTRPB_1950A" & HUGGO_MEM$stateID == "MCO" & is.na(HUGGO_MEM$obsolete)),]
-# remove extra row for FRA
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "INTRPB_1950A" & HUGGO_MEM$stateID == "FRA" & is.na(HUGGO_MEM$obsolete)),]
-# remove extra row for GRC
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "INTRPB_1950A" & HUGGO_MEM$stateID == "GRC" & is.na(HUGGO_MEM$obsolete)),]
-# remove extra row for AUT
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "INTRPB_1950A" & HUGGO_MEM$stateID == "AUT" & is.na(HUGGO_MEM$obsolete)),]
-# remove extra row for PRT
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "INTRPB_1950A" & HUGGO_MEM$stateID == "PRT" & is.na(HUGGO_MEM$obsolete)),]
-# remove extra row for BGR
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "INTRPB_1950A" & HUGGO_MEM$stateID == "BGR" & is.na(HUGGO_MEM$obsolete)),]
-
-# TPNWLA_1967A
-# remove extra row for BOL
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "TPNWLA_1967A" & HUGGO_MEM$stateID == "BOL" & is.na(HUGGO_MEM$obsolete)),]
-
-# IR06PC_1969A
-# remove extra row for BEL
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "IR06PC_1969A" & HUGGO_MEM$stateID == "BEL" & is.na(HUGGO_MEM$obsolete)),]
-
-# PD05WD_1972A
-# removed row without StateForce2 for LBR
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "PD05WD_1972A" & HUGGO_MEM$stateID == "LBR" & is.na(HUGGO_MEM$StateForce2)),]
-# removed row without StateForce2 for JOR
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "PD05WD_1972A" & HUGGO_MEM$stateID == "JOR" & is.na(HUGGO_MEM$StateForce2)),]
-# removed row without StateForce2 for IRN
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "PD05WD_1972A" & HUGGO_MEM$stateID == "IRN" & is.na(HUGGO_MEM$StateForce2)),]
-# removed row without StateForce2 for MUS
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "PD05WD_1972A" & HUGGO_MEM$stateID == "MUS" & is.na(HUGGO_MEM$StateForce2)),]
-# removed row without StateForce2 for RWA
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "PD05WD_1972A" & HUGGO_MEM$stateID == "RWA" & is.na(HUGGO_MEM$StateForce2)),]
-# removed row without StateForce2 for GHA
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "PD05WD_1972A" & HUGGO_MEM$stateID == "GHA" & is.na(HUGGO_MEM$StateForce2)),]
-# removed row without StateForce2 for COD
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "PD05WD_1972A" & HUGGO_MEM$stateID == "COD" & is.na(HUGGO_MEM$StateForce2)),]
-# removed row without StateForce2 for LSO
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "PD05WD_1972A" & HUGGO_MEM$stateID == "LSO" & is.na(HUGGO_MEM$StateForce2)),]
-# removed row without StateForce2 for VEN
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "PD05WD_1972A" & HUGGO_MEM$stateID == "VEN" & is.na(HUGGO_MEM$StateForce2)),]
-# removed row without StateForce2 for NIC
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "PD05WD_1972A" & HUGGO_MEM$stateID == "NIC" & is.na(HUGGO_MEM$StateForce2)),]
-# removed row without StateForce2 for NZL
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "PD05WD_1972A" & HUGGO_MEM$stateID == "NZL" & is.na(HUGGO_MEM$StateForce2)),]
-# removed row without StateForce2 for BDI
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "PD05WD_1972A" & HUGGO_MEM$stateID == "BDI" & is.na(HUGGO_MEM$StateForce2)),]
-# removed row without StateForce2 for LKA
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "PD05WD_1972A" & HUGGO_MEM$stateID == "LKA" & is.na(HUGGO_MEM$StateForce2)),]
-
-# LRTAP_1979A
-# Correct stateID for DDR entry
-HUGGO_MEM[which(HUGGO_MEM$manyID == "LRTAP_1979A" & HUGGO_MEM$stateID == "DEU" & HUGGO_MEM$StateEnd == "1990-10-03"), 5] <- "DDR"
-# removed row without StateForce2 for USA
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "LRTAP_1979A" & HUGGO_MEM$stateID == "USA" & is.na(HUGGO_MEM$StateForce2)),]
-
-# FCNEAF_1980A
-# Remove row with non-NA StateEnd for BGR
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "FCNEAF_1980A" & HUGGO_MEM$stateID == "BGR" & !is.na(HUGGO_MEM$StateEnd)),]
-
-# MNSDOL_1987P
-# Correct Accession date for NZL
-HUGGO_MEM[which(HUGGO_MEM$manyID == "MNSDOL_1987P" & HUGGO_MEM$stateID == "NZL" & !is.na(HUGGO_MEM$Accession)), 19] <- NA
-HUGGO_MEM <- dplyr::distinct(HUGGO_MEM)
-
-# CTMHWD_1989A
-# Correct Accession date for NZL
-HUGGO_MEM[which(HUGGO_MEM$manyID == "CTMHWD_1989A" & HUGGO_MEM$stateID == "NZL" & !is.na(HUGGO_MEM$Accession)), 19] <- NA
-HUGGO_MEM <- dplyr::distinct(HUGGO_MEM)
-
-# UNCLOS_1982A
-# remove row without stateForce_ecolex and stateForce_iea for AFG
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "UNCLOS_1982A" & HUGGO_MEM$stateID == "AFG" & is.na(HUGGO_MEM$stateForce_ecolex)),]
-# Correct Accession date for NZL
-HUGGO_MEM[which(HUGGO_MEM$manyID == "UNCLOS_1982A" & HUGGO_MEM$stateID == "NZL" & !is.na(HUGGO_MEM$Accession)), 19] <- NA
-HUGGO_MEM <- dplyr::distinct(HUGGO_MEM)
-
-#	NCLRSF_1994A
-# remove duplicate entry with wrong End date for AUT
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "NCLRSF_1994A" & HUGGO_MEM$stateID == "AUT" & is.na(HUGGO_MEM$End)),]
-# add missing End dates
-HUGGO_MEM[which(HUGGO_MEM$manyID == "NCLRSF_1994A" & is.na(HUGGO_MEM$End)), 8] <- messydates::as_messydate("1999-04-09")
-
-# IL07SS_1996A
-# remove extra row for GBR
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "IL07SS_1996A" & HUGGO_MEM$stateID == "GBR" & is.na(HUGGO_MEM$obsolete)),]
-# remove extra row for DEU
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "IL07SS_1996A" & HUGGO_MEM$stateID == "DEU" & is.na(HUGGO_MEM$obsolete)),]
-# remove extra row for CAN
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "IL07SS_1996A" & HUGGO_MEM$stateID == "CAN" & is.na(HUGGO_MEM$obsolete)),]
-# remove extra row for SWE
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "IL07SS_1996A" & HUGGO_MEM$stateID == "SWE" & is.na(HUGGO_MEM$obsolete)),]
-# remove extra row for FIN
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "IL07SS_1996A" & HUGGO_MEM$stateID == "FIN" & is.na(HUGGO_MEM$obsolete)),]
-# remove extra row for DNK
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "IL07SS_1996A" & HUGGO_MEM$stateID == "DNK" & is.na(HUGGO_MEM$obsolete)),]
-# remove extra row for NOR
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "IL07SS_1996A" & HUGGO_MEM$stateID == "NOR" & is.na(HUGGO_MEM$obsolete)),]
-# remove extra row for NLD
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "IL07SS_1996A" & HUGGO_MEM$stateID == "NLD" & is.na(HUGGO_MEM$obsolete)),]
-
-# IE05PD_2003P:IE05PD_1971A
-# remove extra row for ESP
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "IE05PD_2003P:IE05PD_1971A" & HUGGO_MEM$stateID == "ESP" & is.na(HUGGO_MEM$obsolete)),]
-# remove extra row for DNK
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "IE05PD_2003P:IE05PD_1971A" & HUGGO_MEM$stateID == "DNK" & is.na(HUGGO_MEM$obsolete)),]
-# remove extra row for FRA
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "IE05PD_2003P:IE05PD_1971A" & HUGGO_MEM$stateID == "FRA" & is.na(HUGGO_MEM$obsolete)),]
-# remove extra row for IRL
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "IE05PD_2003P:IE05PD_1971A" & HUGGO_MEM$stateID == "IRL" & is.na(HUGGO_MEM$obsolete)),]
-# remove extra row for SVN
-HUGGO_MEM <- HUGGO_MEM[-which(HUGGO_MEM$manyID == "IE05PD_2003P:IE05PD_1971A" & HUGGO_MEM$stateID == "SVN" & is.na(HUGGO_MEM$obsolete)),]
+HUGGO_MEM_env <- HUGGO_MEM_env[-which(HUGGO_MEM_env$manyID == "UB08IB_1893A"),]
 
 # Stage five: Format data correctly for export
 
 # Correct StateSignature dates coded #### as missing
-HUGGO_MEM <- HUGGO_MEM %>%
+HUGGO_MEM_env <- HUGGO_MEM_env %>%
   dplyr::mutate(StateSignature = ifelse(grepl("######", StateSignature),
                                         NA, StateSignature),
                 StateRatification = ifelse(grepl("######", StateRatification),
                                         NA, StateRatification))
 
 # Make sure all data are in correct class
-HUGGO_MEM <- HUGGO_MEM %>%
+HUGGO_MEM_env <- HUGGO_MEM_env %>%
   dplyr::mutate(across(everything(),
                       ~stringr::str_replace_all(., "^NA$", NA_character_))) %>%
   dplyr::distinct() %>%
@@ -500,13 +350,223 @@ HUGGO_MEM <- HUGGO_MEM %>%
                 Term = messydates::as_messydate(Term),
                 Accession = messydates::as_messydate(Accession))
 
-# Reorder variables for clarity
+### Trade agreements
+# Stage one: Import verified data
+HUGGO_MEM_trd <- readr::read_csv("data-raw/memberships/HUGGO_MEM/HUGGO_MEM_trade_additional.csv")
+
+# Stage two: Correcting data
+
+# Format data correctly
+HUGGO_MEM_trd <- HUGGO_MEM_trd |>
+  dplyr::mutate(Begin = dplyr::coalesce(Signature, Force)) |>
+  dplyr::mutate(
+    #standardise state names
+    StateName2 = manypkgs::code_states(StateName, activity = FALSE,
+                                       replace = "names"),
+    StateName = ifelse(!is.na(StateName2) & StateName != StateName2, StateName2,
+                       StateName),
+    # check stateIDs are correct
+    stateID = ifelse(is.na(stateID),
+                     manypkgs::code_states(StateName, activity = FALSE,
+                                           replace = "ID"),
+                     stateID),
+    stateID2 = manypkgs::code_states(StateName, activity = FALSE,
+                                     replace = "ID"),
+    stateID = ifelse(!is.na(stateID2) & stateID != stateID2, stateID2, stateID),
+    across(everything(),
+           ~stringr::str_replace_all(., "^NA$", NA_character_))) |>
+  dplyr::distinct() |>
+  dplyr::mutate(Begin = messydates::as_messydate(Begin),
+                Signature = messydates::as_messydate(Signature),
+                Force = messydates::as_messydate(Force),
+                End = messydates::as_messydate(End),
+                StateRatification = messydates::as_messydate(StateRatification),
+                StateSignature = messydates::as_messydate(StateSignature),
+                StateForce = messydates::as_messydate(StateForce),
+                StateEnd = messydates::as_messydate(StateEnd),
+                Accession = messydates::as_messydate(Accession)) |>
+  dplyr::select(-c(StateName2, stateID2)) |>
+  dplyr::arrange(Begin)
+
+# correct StateName for Hong Kong
+HUGGO_MEM_trd <- HUGGO_MEM_trd |>
+  dplyr::mutate(StateName = ifelse(StateName == "Hong Kong",
+                                   "China - Hong Kong",
+                                   StateName))
+
+# Add manyIDs and treatyIDs for newly added entries
+HUGGO_MEM_trd$treatyID <- manypkgs::code_agreements(HUGGO_MEM_trd, HUGGO_MEM_trd$Title,
+                                                HUGGO_MEM_trd$Begin)
+
+manyID <- manypkgs::condense_agreements(manytreaties::memberships)
+HUGGO_MEM_trd <- dplyr::left_join(HUGGO_MEM_trd, manyID, by = "treatyID") |>
+  dplyr::distinct()
+HUGGO_MEM_trd <- HUGGO_MEM_trd |>
+  dplyr::mutate(manyID = ifelse(!is.na(manyID.x), manyID.x, manyID.y)) |>
+  dplyr::select(-c(manyID.x, manyID.y)) |>
+  dplyr::relocate(manyID, treatyID)
+
+### Health agreements
+# Stage one: Import verified data
+HUGGO_MEM_hlt <- readr::read_csv("data-raw/memberships/HUGGO_MEM/HUGGO_MEM_health_additional.csv")
+
+# Stage two: Correcting data
+HUGGO_MEM_hlt <- as_tibble(HUGGO_MEM_hlt) %>%
+  dplyr::mutate(stateID = manypkgs::code_states(StateName, activity = FALSE,
+                                                replace = "ID"),
+                Begin = messydates::as_messydate(Begin),
+                Signature = messydates::as_messydate(Signature),
+                Force = messydates::as_messydate(Force),
+                End = messydates::as_messydate(End),
+                StateSignature = messydates::as_messydate(StateSignature),
+                StateRatification = messydates::as_messydate(StateRatification),
+                StateEnd = messydates::as_messydate(StateEnd),
+                StateForce = messydates::as_messydate(StateForce)) %>%
+  dplyr::arrange(Begin)
+
+# Code state names correctly
+HUGGO_MEM_hlt <- HUGGO_MEM_hlt %>%
+  dplyr::mutate(StateName = ifelse(StateName == "Democratic Republic of the Congo - Congo",
+                                   "Democratic Republic of the Congo",
+                                   StateName),
+                # correct double StateNames and stateIDs
+                stateID = ifelse(stateID == "COD - COG",
+                                 "COD",
+                                 stateID)) %>%
+  # remove entries for NA: StateNames that were European Atomic Energy Community
+  # and World Psychiatric Association
+  dplyr::filter(!is.na(StateName))
+
+# Ensure NAs and data are coded correctly
+HUGGO_MEM_hlt <- HUGGO_MEM_hlt %>%
+  dplyr::mutate(Begin = ifelse(Begin == "-", NA, Begin),
+                Signature = ifelse(Signature == "-", NA, Signature),
+                Force = ifelse(Force == "-", NA, Force),
+                End = ifelse(End == "-", NA, End),
+                StateSignature = ifelse(StateSignature == "-", NA,
+                                        StateSignature),
+                StateRatification = ifelse(StateRatification == "-", NA,
+                                           StateRatification),
+                StateForce = ifelse(StateForce == "-", NA, StateForce),
+                StateEnd = ifelse(StateEnd == "-", NA, StateEnd)) %>%
+  dplyr::mutate(across(everything(),
+                       ~stringr::str_replace_all(., "^NA$", NA_character_))) %>%
+  dplyr::mutate(Begin = messydates::as_messydate(Begin),
+                Signature = messydates::as_messydate(Signature),
+                Force = messydates::as_messydate(Force),
+                End = messydates::as_messydate(End),
+                StateSignature = messydates::as_messydate(StateSignature),
+                StateRatification = messydates::as_messydate(StateRatification),
+                StateForce = messydates::as_messydate(StateForce),
+                StateEnd = messydates::as_messydate(StateEnd),
+                StateName = manypkgs::standardise_titles(StateName),
+                Accession = messydates::as_messydate(Accession)) %>%
+  dplyr::arrange(Begin, manyID, stateID) %>%
+  dplyr::select(manyID, Title, Begin, stateID, StateName,
+                StateSignature, StateRatification, StateForce, StateEnd,
+                `Rat=Notif`, Accession, Succession,
+                treatyID, Signature, Force, End, Coder) %>%
+  dplyr::distinct()
+
+### Merge data from different domains into one dataset
+HUGGO_MEM_env$Domain <- "Environment"
+HUGGO_MEM_trd$Domain <- "Trade"
+HUGGO_MEM_hlt$Domain <- "Health"
+overlap <- HUGGO_MEM_hlt %>%
+  dplyr::filter(manyID == "CTMHWD_1989A" | manyID == "NCLRSF_1994A" |
+                  manyID == "FRMWTC_2003A")
+HUGGO_MEM_hlt_rem <- HUGGO_MEM_hlt %>%
+  dplyr::filter(manyID != "CTMHWD_1989A" & manyID != "NCLRSF_1994A" &
+                  manyID != "FRMWTC_2003A")
+
+HUGGO_MEM <- dplyr::bind_rows(HUGGO_MEM_env, HUGGO_MEM_trd, HUGGO_MEM_hlt_rem)
+
+# Add in overlapping agreements
+HUGGO_MEM <- dplyr::full_join(HUGGO_MEM, overlap,
+                              by = c("manyID", "treatyID", "stateID", "Begin"))
+
 HUGGO_MEM <- HUGGO_MEM %>%
-  dplyr::relocate(manyID, Title, Begin, stateID, StateSignature,
-                  StateRatification, StateForce, StateEnd, Accession,
-                  Succession, treatyID, Signature, Force, End,
-                  gengID, ieaID, ecolexID, Coder) %>%
-  dplyr::arrange(Begin, manyID, stateID)
+  dplyr::mutate(StateSignature = ifelse(!is.na(Domain.y), StateSignature.y,
+                                        StateSignature.x),
+                StateRatification = ifelse(!is.na(Domain.y), StateRatification.y,
+                                           StateRatification.x),
+                StateForce = ifelse(!is.na(Domain.y), StateForce.y,
+                                    StateForce.x),
+                StateEnd = ifelse(!is.na(Domain.y), StateEnd.y,
+                                  StateEnd.x),
+                Accession = ifelse(!is.na(Domain.y), Accession.y,
+                                   Accession.x),
+                Succession = ifelse(!is.na(Domain.y), Succession.y,
+                                    Succession.x),
+                Signature = ifelse(!is.na(Domain.y), Signature.y,
+                                   Signature.x),
+                Force = ifelse(!is.na(Domain.y), Force.y,
+                               Force.x),
+                End = ifelse(!is.na(Domain.y), End.y,
+                             End.x),
+                Coder = ifelse(!is.na(Coder.x) & !is.na(Coder.y),
+                               "Diego, Jael",
+                               ifelse(is.na(Coder.x), Coder.y, Coder.x)),
+                Domain = ifelse(!is.na(Domain.x) & !is.na(Domain.y),
+                               "Environment, Health",
+                               ifelse(is.na(Domain.x), Domain.y, Domain.x)),
+                `Rat=Notif` = ifelse(!is.na(`Rat=Notif.x`), `Rat=Notif.x`,
+                                     `Rat=Notif.y`),
+                StateName = ifelse(!is.na(StateName.x), StateName.x,
+                                   StateName.y)) %>%
+  dplyr::rename(Title = Title.x, Title2 = Title.y)
+
+# Remove unnecessary variables from merging
+HUGGO_MEM <- HUGGO_MEM %>%
+  dplyr::select(-c(StateSignature.x, StateSignature.y, StateRatification.x,
+                   StateRatification.y, StateForce.x, StateForce.y,
+                   StateEnd.x, StateEnd.y, Accession.x, Accession.y,
+                   Succession.x, Succession.y, Signature.x, Signature.y,
+                   Force.x, Force.y, End.x, End.y, Coder.x, Coder.y,
+                   Domain.x, Domain.y, `Rat=Notif.x`, `Rat=Notif.y`,
+                   StateName.x, StateName.y)) %>%
+  dplyr::distinct()
+
+# Replace NA titles from joining overlapping agreements manually
+HUGGO_MEM <- HUGGO_MEM %>%
+  dplyr::mutate(Title = ifelse(is.na(Title) & manyID == "FRMWTC_2003A",
+                               "WHO Framework Convention On Tobacco Control (FCTC)",
+                               ifelse(is.na(Title) & manyID == "CTMHWD_1989A",
+                                      "Convention On The Control Of Transboundary Movements Of Hazardous Wastes And Their Disposal",
+                                      ifelse(is.na(Title) & manyID == "NCLRSF_1994A",
+                                             "Convention On Nuclear Safety",
+                                             Title))))
+
+### Reorder variables for clarity
+HUGGO_MEM <- HUGGO_MEM %>%
+  dplyr::relocate(manyID, Title, Begin, stateID, StateName, StateSignature,
+                  StateRatification, StateForce, StateEnd, `Rat=Notif`,
+                  Accession, Succession, treatyID, Signature, Force, End,
+                  gengID, url) %>%
+  dplyr::distinct() %>%
+  dplyr::arrange(Begin, manyID, stateID) %>%
+  dplyr::relocate(c(Domain, Coder), .after = last_col())
+
+# Ensure dates are coded correctly
+HUGGO_MEM <- HUGGO_MEM %>%
+  dplyr::mutate(across(everything(),
+                       ~stringr::str_replace_all(., "^NA$", NA_character_))) %>%
+  dplyr::mutate(Begin = messydates::as_messydate(Begin),
+                Signature = messydates::as_messydate(Signature),
+                Force = messydates::as_messydate(Force),
+                End = messydates::as_messydate(End),
+                StateSignature = messydates::as_messydate(StateSignature),
+                StateRatification = messydates::as_messydate(StateRatification),
+                StateForce = messydates::as_messydate(StateForce),
+                StateEnd = messydates::as_messydate(StateEnd),
+                StateName = manypkgs::standardise_titles(StateName),
+                Accession = messydates::as_messydate(Accession),
+                StateForce2 = messydates::as_messydate(StateForce2),
+                StateForce3 = messydates::as_messydate(StateForce3),
+                StateEnd2 = messydates::as_messydate(StateEnd2),
+                stateForce_ecolex = messydates::as_messydate(stateForce_ecolex),
+                stateForce_iea = messydates::as_messydate(stateForce_iea),
+                Term = messydates::as_messydate(Term))
 
 # Stage three: Connecting data
 # Next run the following line to make HUGGO_MEM available
