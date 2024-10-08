@@ -1,6 +1,7 @@
 Package: manytreaties
 Title: International Agreements for the many Universe
 Version: 0.0.1
+Date: 2024-10-09
 Authors@R: 
     c(person(given = "James",
              family = "Hollway",
