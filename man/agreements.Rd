@@ -6,9 +6,11 @@
 \title{agreements datacube documentation}
 \format{
 The agreements datacube is a list that contains the
-following 9 datasets: GHHR, GPTAD, HEIDI, IEADB, LABPTA, TOTA, TREND, WHO, HUGGO.
+following 9 datasets: GHHR, GPTAD, HEIDI, IEADB, LABPTA, TOTA, TREND, WHO,
+HUGGO.
 For more information and references to each of the datasets used,
-please use the \code{manydata::call_sources()} and \code{manydata::compare_dimensions()} functions.
+please use the \code{manydata::call_sources()} and
+\code{manydata::compare_dimensions()} functions.
 \describe{
 \item{GHHR: }{A dataset with 149 observations and the following
 8 variables: manyID, treatyID, Title, Begin, Region, LegalStatus, Lineage,

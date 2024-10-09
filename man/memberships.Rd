@@ -35,12 +35,12 @@ W. B. Group.
 \emph{Global Preferential Trade Agreement Database (GPTAD)}.
 \url{https://wits.worldbank.org/gptad/library.aspx}. 2013.}
 \item{IEADB_MEM: }{
-R. B. Mitchell, L. B. Andonova, M. Axelrod, et al. “What we know (and could know) about internationalenvironmental agreements”.
+R. B. Mitchell, L. B. Andonova, M. Axelrod, et al. “What we know (and could know) about international environmental agreements”.
 \emph{Global Environmental Politics} 20.1 (2020), pp. 103-121.}
 \item{TFDD_MEM: }{
 O. College of Earth and O. S. U. Atmospheric Science.
-\emph{Product of the Transboundary Freshwater DisputeDatabase}. \url{http://transboundarywaters.science.oregonstate.edu.}. 2021.}
-\link{1} D. Bhugra, S. Pathare, R. Joshi, et al. “A review of mental health policies from Commonwealthcountries”. In: \emph{International Journal of Social Psychiatry} 64.1 (2018), pp. 3-8.\link{2} B. M. Meier, O. A. Cabrera, A. Ayala, et al. “Bridging international law and rights-basedlitigation: mapping health-related rights through the development of the global health and humanrights database”. In: \emph{Health & Hum. Rts.} 14 (2012), p. 20.}
+\emph{Product of the Transboundary Freshwater DisputeDatabase}.
+\url{http://transboundarywaters.science.oregonstate.edu.}. 2021.}
 }
 }
 \usage{

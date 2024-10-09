@@ -4,7 +4,7 @@
 #' following 4 datasets: GPTAD_MEM, IEADB_MEM, TFDD_MEM, HUGGO_MEM.
 #' For more information and references to each of the datasets used,
 #' please use the `manydata::call_sources()` and `manydata::compare_dimensions()` functions.
-#'\describe{
+#' \describe{
 #' \item{GPTAD_MEM: }{A dataset with 2192 observations and the following
 #' 9 variables: manyID, treatyID, Title, Begin, stateID, Signature, Force,
 #' StateName, gptadID.}
@@ -29,11 +29,12 @@
 #' _Global Preferential Trade Agreement Database (GPTAD)_.
 #' <https://wits.worldbank.org/gptad/library.aspx>. 2013.}
 #' \item{IEADB_MEM: }{
-#' R. B. Mitchell, L. B. Andonova, M. Axelrod, et al. “What we know (and could know) about internationalenvironmental agreements”.
+#' R. B. Mitchell, L. B. Andonova, M. Axelrod, et al. “What we know (and could know) about international environmental agreements”.
 #' _Global Environmental Politics_ 20.1 (2020), pp. 103-121.}
 #' \item{TFDD_MEM: }{
 #' O. College of Earth and O. S. U. Atmospheric Science.
-#' _Product of the Transboundary Freshwater DisputeDatabase_. <http://transboundarywaters.science.oregonstate.edu.>. 2021.}
+#' _Product of the Transboundary Freshwater DisputeDatabase_.
+#' <http://transboundarywaters.science.oregonstate.edu.>. 2021.}
 #' }
 #' @section URL:
 #' \itemize{
