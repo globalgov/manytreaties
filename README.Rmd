@@ -27,7 +27,7 @@ manydata::call_packages("manytreaties") # this downloads and installs the named 
 
 Once you have installed the package, you can see the different datasets included in a specific datacube in the {`manytreaties`} package using the following function.
 
-```{r datasets, eval = FALSE}}
+```{r datasets, eval = FALSE}
 manydata::call_sources("manytreaties", "agreements")
 ```
 
