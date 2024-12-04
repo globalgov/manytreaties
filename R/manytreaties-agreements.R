@@ -26,7 +26,7 @@
 #' 7 variables: manyID, treatyID, Title, Begin, Signature, Force, trendID.}
 #' \item{WHO: }{A dataset with 114 observations and the following
 #' 6 variables: manyID, treatyID, Title, Begin, Organisation, Topic.}
-#' \item{HUGGO: }{A dataset with 4816 observations and the following
+#' \item{HUGGO: }{A dataset with 4835 observations and the following
 #' 59 variables: manyID, treatyID, Title, Begin, End, Signature, Force,
 #' TreatyText, url, Domain, AgreementType, DocType, GeogArea, gengID, ieaID,
 #' ecolexID, Parties, verified, DocValidUntilDate, Notes, Download, MEA_type,
