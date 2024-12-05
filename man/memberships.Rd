@@ -17,8 +17,9 @@ StateName, gptadID.}
 12 variables: manyID, treatyID, Title, Begin, stateID, End, stateSignature,
 Signature, Rat, Force, DocType, ieadbID.}
 \item{TFDD_MEM: }{A dataset with 1832 observations and the following
-8 variables: manyID, treatyID, Title, Begin, stateID, Signature, tfddID, Memberships.}
-\item{HUGGO_MEM: }{A dataset with 91664 observations and the following
+8 variables: manyID, treatyID, Title, Begin, stateID, Signature, tfddID,
+Memberships.}
+\item{HUGGO_MEM: }{A dataset with 91740 observations and the following
 41 variables: manyID, treatyID, Title, Begin, stateID, StateName,
 StateSignature, StateRatification, StateForce, StateEnd, Rat=Notif,
 Accession, Succession, Signature, Force, End, gengID, url, ieaID, ecolexID,
@@ -104,47 +105,47 @@ memberships datacube documentation
 #> ------------------------------------------------------------------------------
 #> |   Column Name   |  Data Type  |  Observations  |  Missing  |  Missing (\%)  |
 #> ------------------------------------------------------------------------------
-#> |     manyID      |  character  |           91664|     0     |       0       |
-#> |    treatyID     |  character  |           91664|     0     |       0       |
-#> |      Title      |  character  |           91664|     0     |       0       |
-#> |      Begin      |    mdate    |           91664|    12     |     0.01      |
-#> |     stateID     |  character  |           91664|     0     |       0       |
-#> |    StateName    |  character  |           91664|   50485   |     55.08     |
-#> | StateSignature  |    mdate    |           91664|   17944   |     19.58     |
-#> |StateRatification|    mdate    |           91664|   63905   |     69.72     |
-#> |   StateForce    |    mdate    |           91664|   50866   |     55.49     |
-#> |    StateEnd     |    mdate    |           91664|   33488   |     36.53     |
-#> |    Rat=Notif    |  character  |           91664|   90447   |     98.67     |
-#> |    Accession    |    mdate    |           91664|   77166   |     84.18     |
-#> |   Succession    |  character  |           91664|     0     |       0       |
-#> |    Signature    |    mdate    |           91664|    16     |     0.02      |
-#> |      Force      |    mdate    |           91664|   34564   |     37.71     |
-#> |       End       |    mdate    |           91664|   38809   |     42.34     |
-#> |     gengID      |  character  |           91664|   40705   |     44.41     |
-#> |       url       |  character  |           91664|   90814   |     99.07     |
-#> |      ieaID      |  character  |           91664|   49313   |     53.8      |
-#> |    ecolexID     |  character  |           91664|   71665   |     78.18     |
-#> |   StateForce2   |    mdate    |           91664|   84977   |     92.7      |
-#> |   StateForce3   |    mdate    |           91664|   87974   |     95.97     |
-#> |    StateEnd2    |    mdate    |           91664|   87968   |     95.97     |
-#> |      Term       |    mdate    |           91664|   90486   |     98.71     |
-#> |    Comments     |  character  |           91664|   88384   |     96.42     |
-#> |     Deposit     |  character  |           91664|   90014   |     98.2      |
-#> |    obsolete     |  character  |           91664|   79089   |     86.28     |
-#> | ProvisionalApp  |  character  |           91664|   90892   |     99.16     |
-#> |   Reservation   |  character  |           91664|   90908   |     99.18     |
-#> |      Notes      |  character  |           91664|   91478   |     99.8      |
-#> |stateForce_ecolex|    mdate    |           91664|   73147   |     79.8      |
-#> | stateForce_iea  |    mdate    |           91664|   73147   |     79.8      |
-#> |     Consent     |  character  |           91664|   91440   |     99.76     |
-#> |   Acceptance    |  character  |           91664|   91139   |     99.43     |
-#> |Orig_noneng_title|  character  |           91664|   91660   |      100      |
-#> |      match      |  character  |           91664|   91660   |      100      |
-#> |     gptadID     |  character  |           91664|   89495   |     97.63     |
-#> |     destaID     |  character  |           91664|   86612   |     94.49     |
-#> |     Title2      |  character  |           91664|   91187   |     99.48     |
-#> |     Domain      |  character  |           91664|     0     |       0       |
-#> |      Coder      |  character  |           91664|    15     |     0.02      |
+#> |     manyID      |  character  |           91740|     0     |       0       |
+#> |      Title      |  character  |           91740|     0     |       0       |
+#> |      Begin      |    mdate    |           91740|    12     |     0.01      |
+#> |     stateID     |  character  |           91740|     0     |       0       |
+#> |    StateName    |  character  |           91740|   50485   |     55.03     |
+#> | StateSignature  |    mdate    |           91740|   17944   |     19.56     |
+#> |StateRatification|    mdate    |           91740|   63971   |     69.73     |
+#> |   StateForce    |    mdate    |           91740|   50867   |     55.45     |
+#> |    StateEnd     |    mdate    |           91740|   33487   |     36.5      |
+#> |    Rat=Notif    |  character  |           91740|   90513   |     98.66     |
+#> |    Accession    |    mdate    |           91740|   77242   |     84.2      |
+#> |   Succession    |  character  |           91740|     0     |       0       |
+#> |    treatyID     |  character  |           91740|     0     |       0       |
+#> |    Signature    |    mdate    |           91740|    16     |     0.02      |
+#> |      Force      |    mdate    |           91740|   34565   |     37.68     |
+#> |       End       |    mdate    |           91740|   38808   |     42.3      |
+#> |     gengID      |  character  |           91740|   40781   |     44.45     |
+#> |       url       |  character  |           91740|   90814   |     98.99     |
+#> |      ieaID      |  character  |           91740|   49389   |     53.84     |
+#> |    ecolexID     |  character  |           91740|   71741   |     78.2      |
+#> |   StateForce2   |    mdate    |           91740|   85053   |     92.71     |
+#> |   StateForce3   |    mdate    |           91740|   88050   |     95.98     |
+#> |    StateEnd2    |    mdate    |           91740|   88044   |     95.97     |
+#> |      Term       |    mdate    |           91740|   90562   |     98.72     |
+#> |    Comments     |  character  |           91740|   88460   |     96.42     |
+#> |     Deposit     |  character  |           91740|   90090   |     98.2      |
+#> |    obsolete     |  character  |           91740|   79165   |     86.29     |
+#> | ProvisionalApp  |  character  |           91740|   90968   |     99.16     |
+#> |   Reservation   |  character  |           91740|   90984   |     99.18     |
+#> |      Notes      |  character  |           91740|   91554   |     99.8      |
+#> |stateForce_ecolex|    mdate    |           91740|   73223   |     79.82     |
+#> | stateForce_iea  |    mdate    |           91740|   73223   |     79.82     |
+#> |     Consent     |  character  |           91740|   91516   |     99.76     |
+#> |   Acceptance    |  character  |           91740|   91215   |     99.43     |
+#> |Orig_noneng_title|  character  |           91740|   91736   |      100      |
+#> |      match      |  character  |           91740|   91736   |      100      |
+#> |     gptadID     |  character  |           91740|   89571   |     97.64     |
+#> |     destaID     |  character  |           91740|   86689   |     94.49     |
+#> |     Title2      |  character  |           91740|   91263   |     99.48     |
+#> |     Domain      |  character  |           91740|     0     |       0       |
+#> |      Coder      |  character  |           91740|    15     |     0.02      |
 #> ------------------------------------------------------------------------------
 }\if{html}{\out{</div>}}
 }

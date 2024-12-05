@@ -31,7 +31,7 @@ Signature, Force, Lineage, ieadbID.}
 7 variables: manyID, treatyID, Title, Begin, Signature, Force, trendID.}
 \item{WHO: }{A dataset with 114 observations and the following
 6 variables: manyID, treatyID, Title, Begin, Organisation, Topic.}
-\item{HUGGO: }{A dataset with 4816 observations and the following
+\item{HUGGO: }{A dataset with 4835 observations and the following
 59 variables: manyID, treatyID, Title, Begin, End, Signature, Force,
 TreatyText, url, Domain, AgreementType, DocType, GeogArea, gengID, ieaID,
 ecolexID, Parties, verified, DocValidUntilDate, Notes, Download, MEA_type,
@@ -213,65 +213,65 @@ agreements datacube documentation
 #> -------------------------------------------------------------------------------------
 #> |      Column Name       |  Data Type  |  Observations  |  Missing  |  Missing (\%)  |
 #> -------------------------------------------------------------------------------------
-#> |         manyID         |  character  |            4816|     0     |       0       |
-#> |        treatyID        |  character  |            4816|     0     |       0       |
-#> |         Title          |  character  |            4816|     0     |       0       |
-#> |         Begin          |    mdate    |            4816|    57     |     1.18      |
-#> |          End           |    mdate    |            4816|   3156    |     65.53     |
-#> |       Signature        |    mdate    |            4816|    57     |     1.18      |
-#> |         Force          |    mdate    |            4816|   1815    |     37.69     |
-#> |       TreatyText       |  character  |            4816|     0     |       0       |
-#> |          url           |  character  |            4816|   2796    |     58.06     |
-#> |         Domain         |  character  |            4816|     0     |       0       |
-#> |     AgreementType      |  character  |            4816|   2113    |     43.87     |
-#> |        DocType         |  character  |            4816|   2077    |     43.13     |
-#> |        GeogArea        |  character  |            4816|   2676    |     55.56     |
-#> |         gengID         |  character  |            4816|   1033    |     21.45     |
-#> |         ieaID          |  character  |            4816|   4121    |     85.57     |
-#> |        ecolexID        |  character  |            4816|   4339    |     90.1      |
-#> |        Parties         |  character  |            4816|   2546    |     52.87     |
-#> |        verified        |  character  |            4816|   4768    |      99       |
-#> |   DocValidUntilDate    |  character  |            4816|   4782    |     99.29     |
-#> |         Notes          |  character  |            4816|   4769    |     99.02     |
-#> |        Download        |  character  |            4816|   3918    |     81.35     |
-#> |        MEA_type        |  character  |            4816|   4121    |     85.57     |
-#> |         Ambit          |  character  |            4816|   4398    |     91.32     |
-#> |         Region         |  character  |            4816|   4570    |     94.89     |
-#> |     subject_ecolex     |  character  |            4816|   4340    |     90.12     |
-#> |      subject_iea       |  character  |            4816|   4121    |     85.57     |
-#> |        Keywords        |  character  |            4816|   4410    |     91.57     |
-#> |        Lineage         |  character  |            4816|   4121    |     85.57     |
-#> |        Sequence        |  character  |            4816|   4122    |     85.59     |
-#> |       AdoptedIn        |  character  |            4816|   4390    |     91.15     |
-#> |       Languages        |  character  |            4816|   4340    |     90.12     |
-#> |       Appendices       |  character  |            4816|   4781    |     99.27     |
-#> |       Depository       |  character  |            4816|   4430    |     91.99     |
-#> |     DepositoryURL      |  character  |            4816|   4800    |     99.67     |
-#> |       Published        |  character  |            4816|   4555    |     94.58     |
-#> |        Website1        |  character  |            4816|   4435    |     92.09     |
-#> |        Website2        |  character  |            4816|   4792    |     99.5      |
-#> |      Secretariat       |  character  |            4816|   4122    |     85.59     |
-#> |     SecretariatURL     |  character  |            4816|   4122    |     85.59     |
-#> |          UNEP          |  character  |            4816|   4615    |     95.83     |
-#> |       Supersedes       |  character  |            4816|   4799    |     99.65     |
-#> |       References       |  character  |            4816|   4781    |     99.27     |
-#> |       EnabledBy        |  character  |            4816|   4709    |     97.78     |
-#> |       AmendedBy        |  character  |            4816|   4725    |     98.11     |
-#> |          Lit           |  character  |            4816|   4271    |     88.68     |
-#> |          Data          |  character  |            4816|   4279    |     88.85     |
-#> |         Coded          |  character  |            4816|   4518    |     93.81     |
-#> |        Abstract        |  character  |            4816|   4790    |     99.46     |
-#> |        Language        |  character  |            4816|   3467    |     71.99     |
-#> |   Orig_noneng_title    |  character  |            4816|   4760    |     98.84     |
-#> |         match          |  character  |            4816|   4760    |     98.84     |
-#> |        Citation        |  character  |            4816|   4815    |     99.98     |
-#> |         Formal         |  character  |            4816|   4587    |     95.25     |
-#> |        Dataset         |  character  |            4816|   4587    |     95.25     |
-#> |         Source         |  character  |            4816|   4588    |     95.27     |
-#> |Health_as_primary_intent|  character  |            4816|   4587    |     95.25     |
-#> |        Comments        |  character  |            4816|   4793    |     99.52     |
-#> |         Topic          |  character  |            4816|   4587    |     95.25     |
-#> |         Coder          |  character  |            4816|     0     |       0       |
+#> |         manyID         |  character  |            4835|     0     |       0       |
+#> |        treatyID        |  character  |            4835|     0     |       0       |
+#> |         Title          |  character  |            4835|     0     |       0       |
+#> |         Begin          |    mdate    |            4835|    57     |     1.18      |
+#> |          End           |    mdate    |            4835|   3156    |     65.27     |
+#> |       Signature        |    mdate    |            4835|    57     |     1.18      |
+#> |         Force          |    mdate    |            4835|   1816    |     37.56     |
+#> |       TreatyText       |  character  |            4835|     0     |       0       |
+#> |          url           |  character  |            4835|   2796    |     57.83     |
+#> |         Domain         |  character  |            4835|     0     |       0       |
+#> |     AgreementType      |  character  |            4835|   2132    |     44.1      |
+#> |        DocType         |  character  |            4835|   2096    |     43.35     |
+#> |        GeogArea        |  character  |            4835|   2695    |     55.74     |
+#> |         gengID         |  character  |            4835|   1052    |     21.76     |
+#> |         ieaID          |  character  |            4835|   4140    |     85.63     |
+#> |        ecolexID        |  character  |            4835|   4358    |     90.13     |
+#> |        Parties         |  character  |            4835|   2565    |     53.05     |
+#> |        verified        |  character  |            4835|   4787    |     99.01     |
+#> |   DocValidUntilDate    |  character  |            4835|   4801    |     99.3      |
+#> |         Notes          |  character  |            4835|   4788    |     99.03     |
+#> |        Download        |  character  |            4835|   3937    |     81.43     |
+#> |        MEA_type        |  character  |            4835|   4140    |     85.63     |
+#> |         Ambit          |  character  |            4835|   4417    |     91.35     |
+#> |         Region         |  character  |            4835|   4589    |     94.91     |
+#> |     subject_ecolex     |  character  |            4835|   4359    |     90.16     |
+#> |      subject_iea       |  character  |            4835|   4140    |     85.63     |
+#> |        Keywords        |  character  |            4835|   4429    |     91.6      |
+#> |        Lineage         |  character  |            4835|   4140    |     85.63     |
+#> |        Sequence        |  character  |            4835|   4141    |     85.65     |
+#> |       AdoptedIn        |  character  |            4835|   4409    |     91.19     |
+#> |       Languages        |  character  |            4835|   4359    |     90.16     |
+#> |       Appendices       |  character  |            4835|   4800    |     99.28     |
+#> |       Depository       |  character  |            4835|   4449    |     92.02     |
+#> |     DepositoryURL      |  character  |            4835|   4819    |     99.67     |
+#> |       Published        |  character  |            4835|   4574    |     94.6      |
+#> |        Website1        |  character  |            4835|   4454    |     92.12     |
+#> |        Website2        |  character  |            4835|   4811    |     99.5      |
+#> |      Secretariat       |  character  |            4835|   4141    |     85.65     |
+#> |     SecretariatURL     |  character  |            4835|   4141    |     85.65     |
+#> |          UNEP          |  character  |            4835|   4634    |     95.84     |
+#> |       Supersedes       |  character  |            4835|   4818    |     99.65     |
+#> |       References       |  character  |            4835|   4800    |     99.28     |
+#> |       EnabledBy        |  character  |            4835|   4728    |     97.79     |
+#> |       AmendedBy        |  character  |            4835|   4744    |     98.12     |
+#> |          Lit           |  character  |            4835|   4290    |     88.73     |
+#> |          Data          |  character  |            4835|   4298    |     88.89     |
+#> |         Coded          |  character  |            4835|   4537    |     93.84     |
+#> |        Abstract        |  character  |            4835|   4809    |     99.46     |
+#> |        Language        |  character  |            4835|   3486    |     72.1      |
+#> |   Orig_noneng_title    |  character  |            4835|   4779    |     98.84     |
+#> |         match          |  character  |            4835|   4779    |     98.84     |
+#> |        Citation        |  character  |            4835|   4834    |     99.98     |
+#> |         Formal         |  character  |            4835|   4606    |     95.26     |
+#> |        Dataset         |  character  |            4835|   4606    |     95.26     |
+#> |         Source         |  character  |            4835|   4607    |     95.28     |
+#> |Health_as_primary_intent|  character  |            4835|   4606    |     95.26     |
+#> |        Comments        |  character  |            4835|   4812    |     99.52     |
+#> |         Topic          |  character  |            4835|   4606    |     95.26     |
+#> |         Coder          |  character  |            4835|     0     |       0       |
 #> -------------------------------------------------------------------------------------
 }\if{html}{\out{</div>}}
 }
