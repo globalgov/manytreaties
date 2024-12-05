@@ -5334,22 +5334,6 @@ PCFCSU_2019O,PCFCSU_2019O,Pacific States UK,14.03.2019,GBR,14.03.2019,2021,31.12
 PCFCSU_2019O,PCFCSU_2019O,Pacific States UK,14.03.2019,PNG,14.03.2019,2021,31.12.9999,Papua New Guinea,NA,14.03.2019,NA,2021,31.12.9999,NA,Jael,NA,0,NA
 PCFCSU_2019O,PCFCSU_2019O,Pacific States UK,14.03.2019,WSM,14.03.2019,2021,31.12.9999,Samoa,NA,14.03.2019,NA,31.03.2022,31.12.9999,NA,Jael,NA,0,NA
 PCFCSU_2019O,PCFCSU_2019O,Pacific States UK,14.03.2019,SLB,14.03.2019,2021,31.12.9999,Solomon Islands,NA,14.03.2019,NA,31.03.2022,31.12.9999,NA,Jael,NA,0,NA
-CRFRMU_2019O,CRFRMU_2019O,CARIFORUM UK,22.03.2019,ATG,22.03.2019,NA,NA,Antigua and Barbuda,NA,22.03.2019,NA,NA,NA,NA,Jael,NA,0,NA
-CRFRMU_2019O,CRFRMU_2019O,CARIFORUM UK,22.03.2019,BHS,22.03.2019,NA,NA,Bahamas,NA,22.03.2019,NA,NA,NA,NA,Jael,NA,0,NA
-CRFRMU_2019O,CRFRMU_2019O,CARIFORUM UK,22.03.2019,BLZ,22.03.2019,NA,NA,Belize,NA,22.03.2019,NA,NA,NA,NA,Jael,NA,0,NA
-CRFRMU_2019O,CRFRMU_2019O,CARIFORUM UK,22.03.2019,BRB,22.03.2019,NA,NA,Barbados,NA,22.03.2019,NA,NA,NA,NA,Jael,NA,0,NA
-CRFRMU_2019O,CRFRMU_2019O,CARIFORUM UK,22.03.2019,DMA,22.03.2019,NA,NA,Dominica,NA,22.03.2019,NA,NA,NA,NA,Jael,NA,0,NA
-CRFRMU_2019O,CRFRMU_2019O,CARIFORUM UK,22.03.2019,DOM,22.03.2019,NA,NA,Dominican Republic,NA,22.03.2019,NA,NA,NA,NA,Jael,NA,0,NA
-CRFRMU_2019O,CRFRMU_2019O,CARIFORUM UK,22.03.2019,GBR,22.03.2019,NA,NA,United Kingdom,NA,22.03.2019,NA,NA,NA,NA,Jael,NA,0,NA
-CRFRMU_2019O,CRFRMU_2019O,CARIFORUM UK,22.03.2019,GRD,22.03.2019,NA,NA,Grenada,NA,22.03.2019,NA,NA,NA,NA,Jael,NA,0,NA
-CRFRMU_2019O,CRFRMU_2019O,CARIFORUM UK,22.03.2019,GUY,22.03.2019,NA,NA,Guyana,NA,22.03.2019,NA,NA,NA,NA,Jael,NA,0,NA
-CRFRMU_2019O,CRFRMU_2019O,CARIFORUM UK,22.03.2019,HTI,22.03.2019,NA,NA,Haiti,NA,NA,NA,NA,NA,NA,Jael,NA,0,NA
-CRFRMU_2019O,CRFRMU_2019O,CARIFORUM UK,22.03.2019,JAM,22.03.2019,NA,NA,Jamaica,NA,22.03.2019,NA,NA,NA,NA,Jael,NA,0,NA
-CRFRMU_2019O,CRFRMU_2019O,CARIFORUM UK,22.03.2019,KNA,22.03.2019,NA,NA,St. Kitts and Nevis,NA,22.03.2019,NA,NA,NA,NA,Jael,NA,0,NA
-CRFRMU_2019O,CRFRMU_2019O,CARIFORUM UK,22.03.2019,LCA,22.03.2019,NA,NA,St. Lucia,NA,22.03.2019,NA,NA,NA,NA,Jael,NA,0,NA
-CRFRMU_2019O,CRFRMU_2019O,CARIFORUM UK,22.03.2019,SUR,22.03.2019,NA,NA,Suriname,NA,22.03.2019,NA,NA,NA,NA,Jael,NA,0,NA
-CRFRMU_2019O,CRFRMU_2019O,CARIFORUM UK,22.03.2019,TTO,22.03.2019,NA,NA,Trinidad and Tobago,NA,22.03.2019,NA,NA,NA,NA,Jael,NA,0,NA
-CRFRMU_2019O,CRFRMU_2019O,CARIFORUM UK,22.03.2019,VCT,22.03.2019,NA,NA,St. Vincent and Grenadines,NA,22.03.2019,NA,NA,NA,NA,Jael,NA,0,NA
 AUS-HKG[NA]_2019O,AUS-HKG[NA]_2019O,Australia Hong Kong,26.03.2019,AUS,26.03.2019,17.01.2020,31.12.9999,Australia,NA,26.03.2019,NA,17.01.2020,31.12.9999,NA,Jael,"https://www.abf.gov.au/importing-exporting-and-manufacturing/fta/free-trade-agreements/hong-kong#:~:text=The%20Free%20Trade%20Agreement%20between,on%2026%20March%202019%20in",0,NA
 AUS-HKG[NA]_2019O,AUS-HKG[NA]_2019O,Australia Hong Kong,26.03.2019,HKG,26.03.2019,17.01.2020,31.12.9999,Hong Kong SAR China,NA,26.03.2019,NA,17.01.2020,31.12.9999,NA,Jael,https://www.dfat.gov.au/trade/agreements/in-force/a-hkfta/Pages/default,0,NA
 BIH-TUR[NA]_2019O,BIH-TUR[TRK]_2019O,Bosnia And Herzegovina Turkey,02.05.2019,BIH,02.05.2019,01.08.2021,31.12.9999,Bosnia and Herzegovina,NA,02.05.2019,NA,01.08.2021,31.12.9999,NA,Jael,https://www.trade.gov.tr/free-trade-agreements/bosnia-herzegovina,1,NA
@@ -5457,10 +5441,10 @@ IDN-KOR[KOR]_6176O,IDN-KOR[KOR]_2020O,Indonesia Korea,18.12.2020,IDN,18.12.2020,
 IDN-KOR[KOR]_6176O,IDN-KOR[KOR]_2020O,Indonesia Korea,18.12.2020,KOR,18.12.2020,01.01.2023,31.12.9999,South Korea,NA,18.12.2020,2021-12,01.01.2023,31.12.9999,NA,Jael,https://www.aseanbriefing.com/news/indonesia-south-korea-free-trade-agreement-to-take-effect/,0,NA
 IND-MUS[NA]_6176O,IND-MUS[NA]_2021O,India Mauritius,22.02.2021,IND,22.02.2021,01.04.2021,31.12.9999,India,NA,22.02.2021,NA,01.04.2021,31.12.9999,NA,Jael,https://www.mauritiustrade.mu/en/trade-agreements/india,0,NA
 IND-MUS[NA]_6176O,IND-MUS[NA]_2021O,India Mauritius,22.02.2021,MUS,22.02.2021,01.04.2021,31.12.9999,Mauritius,NA,22.02.2021,NA,01.04.2021,31.12.9999,NA,Jael,https://www.mauritiustrade.mu/en/trade-agreements/india,0,NA
-ICLLNU_2021O,ICLLNU_2021O,Iceland Liechtenstein Norway UK,08.07.2021,GBR,08.07.2021,NA,NA,United Kingdom,NA,08.07.2021,NA,NA,NA,NA,Jael,https://lordslibrary.parliament.uk/the-united-kingdoms-free-trade-agreement-with-iceland-liechtenstein-and-norway/,0,NA
-ICLLNU_2021O,ICLLNU_2021O,Iceland Liechtenstein Norway UK,08.07.2021,ISL,08.07.2021,NA,NA,Iceland,NA,08.07.2021,NA,NA,NA,NA,Jael,https://lordslibrary.parliament.uk/the-united-kingdoms-free-trade-agreement-with-iceland-liechtenstein-and-norway/,0,NA
-ICLLNU_2021O,ICLLNU_2021O,Iceland Liechtenstein Norway UK,08.07.2021,NOR,08.07.2021,NA,NA,Norway,NA,08.07.2021,NA,NA,NA,NA,Jael,https://lordslibrary.parliament.uk/the-united-kingdoms-free-trade-agreement-with-iceland-liechtenstein-and-norway/,0,NA
-ICLLNU_2021O,ICLLNU_2021O,Iceland Liechtenstein Norway UK,08.07.2021,LIE,08.07.2021,NA,NA,Liechtenstein,NA,08.07.2021,NA,NA,NA,NA,Jael,https://lordslibrary.parliament.uk/the-united-kingdoms-free-trade-agreement-with-iceland-liechtenstein-and-norway/,0,NA
+ICLLNU_2021O,ICLLNU_2021O,Iceland Liechtenstein Norway UK,08.07.2021,GBR,08.07.2021,01.09.2022,31.12.9999,United Kingdom,NA,08.07.2021,NA,01.01.2022,31.12.9999,NA,Jael,https://lordslibrary.parliament.uk/the-united-kingdoms-free-trade-agreement-with-iceland-liechtenstein-and-norway/,0,NA
+ICLLNU_2021O,ICLLNU_2021O,Iceland Liechtenstein Norway UK,08.07.2021,ISL,08.07.2021,01.09.2022,31.12.9999,Iceland,NA,08.07.2021,NA,01.09.2022,31.12.9999,NA,Jael,https://lordslibrary.parliament.uk/the-united-kingdoms-free-trade-agreement-with-iceland-liechtenstein-and-norway/,0,NA
+ICLLNU_2021O,ICLLNU_2021O,Iceland Liechtenstein Norway UK,08.07.2021,NOR,08.07.2021,01.09.2022,31.12.9999,Norway,NA,08.07.2021,NA,01.12.2021,31.12.9999,NA,Jael,https://lordslibrary.parliament.uk/the-united-kingdoms-free-trade-agreement-with-iceland-liechtenstein-and-norway/,0,NA
+ICLLNU_2021O,ICLLNU_2021O,Iceland Liechtenstein Norway UK,08.07.2021,LIE,08.07.2021,01.09.2022,31.12.9999,Liechtenstein,NA,08.07.2021,NA,01.01.2022,31.12.9999,NA,Jael,https://lordslibrary.parliament.uk/the-united-kingdoms-free-trade-agreement-with-iceland-liechtenstein-and-norway/,0,NA
 ASTRZU_6176O,AUS-GBR[NA]_2021O,Australia UK,17.12.2021,AUS,17.12.2021,31.05.2023,31.12.9999,Australia,NA,17.12.2021,04.05.2023,31.05.2023,31.12.9999,1,Jael,https://www.dfat.gov.au/trade/agreements/negotiations/aukfta/australia-uk-fta-negotiations-fact-sheet,0,NA
 ASTRZU_6176O,AUS-GBR[NA]_2021O,Australia UK,17.12.2021,GBR,17.12.2021,31.05.2023,31.12.9999,United Kingdom,NA,17.12.2021,30.05.2023,31.05.2023,31.12.9999,1,Jael,https://www.dfat.gov.au/trade/agreements/negotiations/aukfta/australia-uk-fta-negotiations-fact-sheet,0,NA
 TUR-UKR[UKR]_6176O,TUR-UKR[TRK]_2022O,Turkey Ukraine,03.02.2022,TUR,03.02.2022,NA,NA,Turkey,NA,03.02.2022,NA,NA,NA,NA,Jael,https://www.president.gov.ua/en/news/ugoda-pro-zonu-vilnoyi-torgivli-mizh-ukrayinoyu-j-turechchin-72705,0,NA
