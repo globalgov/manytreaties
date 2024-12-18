@@ -213,8 +213,8 @@ agreements datacube documentation
 #> -------------------------------------------------------------------------------------
 #> |      Column Name       |  Data Type  |  Observations  |  Missing  |  Missing (\%)  |
 #> -------------------------------------------------------------------------------------
-#> |         manyID         |  character  |            4837|     2     |     0.04      |
-#> |        treatyID        |  character  |            4837|     2     |     0.04      |
+#> |         manyID         |  character  |            4837|     0     |       0       |
+#> |        treatyID        |  character  |            4837|     0     |       0       |
 #> |         Title          |  character  |            4837|     0     |       0       |
 #> |         Begin          |    mdate    |            4837|    57     |     1.18      |
 #> |          End           |    mdate    |            4837|   3156    |     65.25     |
