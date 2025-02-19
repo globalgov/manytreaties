@@ -1,42 +1,40 @@
-#' agreements datacube documentation
-#'
-#' @format The agreements datacube is a list that contains the
-#' following 9 datasets: GHHR, GPTAD, HEIDI, IEADB, LABPTA, TOTA, TREND, WHO,
-#' HUGGO.
-#' For more information and references to each of the datasets used,
-#' please use the `manydata::call_sources()` and
-#' `manydata::compare_dimensions()` functions.
+#' agreements datacube
+#' @description The `agreements` datacube is a list containing 
+#'   `r length(manytreaties::agreements)` datasets: 
+#'   `r cli::pluralize("{names(manytreaties::agreements)}")`.
+#'   It is a work-in-progress, so please let us know if you have any comments or suggestions.
+#' @format 
 #' \describe{
-#' \item{GHHR: }{A dataset with 149 observations and the following
-#' 8 variables: manyID, treatyID, Title, Begin, Region, LegalStatus, Lineage,
-#' ghhrID.}
-#' \item{GPTAD: }{A dataset with 340 observations and the following
-#' 10 variables: manyID, treatyID, Title, Begin, AgreementType, DocType,
-#' GeogArea, Signature, Force, gptadID.}
-#' \item{HEIDI: }{A dataset with 2280 observations and the following
-#' 7 variables: manyID, treatyID, Title, Begin, Signature, Lineage, heidiID.}
-#' \item{IEADB: }{A dataset with 3667 observations and the following
-#' 10 variables: manyID, treatyID, Title, Begin, DocType, AgreementType,
-#' Signature, Force, Lineage, ieadbID.}
-#' \item{LABPTA: }{A dataset with 483 observations and the following
-#' 7 variables: manyID, treatyID, Title, Begin, Signature, Force, labptaID.}
-#' \item{TOTA: }{A dataset with 442 observations and the following
-#' 7 variables: manyID, treatyID, Title, Begin, Signature, Force, totaID.}
-#' \item{TREND: }{A dataset with 710 observations and the following
-#' 7 variables: manyID, treatyID, Title, Begin, Signature, Force, trendID.}
-#' \item{WHO: }{A dataset with 114 observations and the following
-#' 6 variables: manyID, treatyID, Title, Begin, Organisation, Topic.}
-#' \item{HUGGO: }{A dataset with 4837 observations and the following
-#' 59 variables: manyID, treatyID, Title, Begin, End, Signature, Force,
-#' TreatyText, url, Domain, AgreementType, DocType, GeogArea, gengID, ieaID,
-#' ecolexID, Parties, verified, DocValidUntilDate, Notes, Download, MEA_type,
-#' Ambit, Region, subject_ecolex, subject_iea, Keywords, Lineage, Sequence,
-#' AdoptedIn, Languages, Appendices, Depository, DepositoryURL, Published,
-#' Website1, Website2, Secretariat, SecretariatURL, UNEP, Supersedes,
-#' References, EnabledBy, AmendedBy, Lit, Data, Coded, Abstract, Language,
-#' Orig_noneng_title, match, Citation, Formal, Dataset, Source,
-#' Health_as_primary_intent, Comments, Topic, Coder.}
+#' \item{HUGGO: }{A dataset with `r prettyNum(nrow(manytreaties::agreements$HUGGO), big.mark=",")` 
+#' observations and `r ncol(manytreaties::agreements$HUGGO)` variables: 
+#' `r cli::pluralize("{names(manytreaties::agreements$HUGGO)}")`.}
+#' \item{IEADB: }{A dataset with `r prettyNum(nrow(manytreaties::agreements$IEADB), big.mark=",")` 
+#' observations and `r ncol(manytreaties::agreements$IEADB)` variables: 
+#' `r cli::pluralize("{names(manytreaties::agreements$IEADB)}")`.}
+#' \item{HEIDI: }{A dataset with `r prettyNum(nrow(manytreaties::agreements$HEIDI), big.mark=",")` 
+#' observations and `r ncol(manytreaties::agreements$HEIDI)` variables: 
+#' `r cli::pluralize("{names(manytreaties::agreements$HEIDI)}")`.}
+#' \item{TREND: }{A dataset with `r prettyNum(nrow(manytreaties::agreements$TREND), big.mark=",")` 
+#' observations and `r ncol(manytreaties::agreements$TREND)` variables: 
+#' `r cli::pluralize("{names(manytreaties::agreements$TREND)}")`.}
+#' \item{LABPTA: }{A dataset with `r prettyNum(nrow(manytreaties::agreements$LABPTA), big.mark=",")` 
+#' observations and `r ncol(manytreaties::agreements$LABPTA)` variables: 
+#' `r cli::pluralize("{names(manytreaties::agreements$LABPTA)}")`.}
+#' \item{TOTA: }{A dataset with `r prettyNum(nrow(manytreaties::agreements$TOTA), big.mark=",")` 
+#' observations and `r ncol(manytreaties::agreements$TOTA)` variables: 
+#' `r cli::pluralize("{names(manytreaties::agreements$TOTA)}")`.}
+#' \item{GPTAD: }{A dataset with `r prettyNum(nrow(manytreaties::agreements$GPTAD), big.mark=",")` 
+#' observations and `r ncol(manytreaties::agreements$GPTAD)` variables: 
+#' `r cli::pluralize("{names(manytreaties::agreements$GPTAD)}")`.}
+#' \item{GHHR: }{A dataset with `r prettyNum(nrow(manytreaties::agreements$GHHR), big.mark=",")` 
+#' observations and `r ncol(manytreaties::agreements$GHHR)` variables: 
+#' `r cli::pluralize("{names(manytreaties::agreements$GHHR)}")`.}
+#' \item{WHO: }{A dataset with `r prettyNum(nrow(manytreaties::agreements$WHO), big.mark=",")` 
+#' observations and `r ncol(manytreaties::agreements$WHO)` variables: 
+#' `r cli::pluralize("{names(manytreaties::agreements$WHO)}")`.}
 #' }
+#' For more information and references to each of the datasets used,
+#' please use the `manydata::call_sources()` and `manydata::compare_dimensions()` functions.
 #' @source
 #' \itemize{
 #' \item{GHHR: }{
@@ -106,6 +104,17 @@
 #' \item{HUGGO: }{Hand-coded data by the GGO team.}
 #' }
 #' @section Mapping:
+#' 
+#' |  *manytreaties*  | *G*  | *ISD* | *COW* | *ICOW* | *RATRULES* |
+#' |:---------------|:------|:------|:------|:-------|:-----------|
+#' | stateID  | | | | | StatID |
+#' | Begin | Start | Start | styear,stmonth,stday | IndDate|
+#' | End | Finish | Finish | endyear,endmonth,endday | |
+#' | StateName | Name of State | State.Name | statenme | Name |
+#' | cowID | Cow ID | COW.ID | stateabb | State |
+#' | cowNR | Cow NR. | COW.Nr | ccode | |
+#' | RatProcedure | | | | | Rat |
+#' 
 #' \itemize{
 #' \item{GHHR: }{
 #' Variable Mapping
