@@ -3,42 +3,35 @@
 \docType{data}
 \name{memberships}
 \alias{memberships}
-\title{memberships datacube documentation}
+\title{memberships datacube}
 \format{
-The memberships datacube is a list that contains the
-following 4 datasets: GPTAD_MEM, IEADB_MEM, TFDD_MEM, HUGGO_MEM.
+\describe{
+\item{HUGGO: }{A dataset with 91,729
+observations and 41 variables:
+manyID, Title, Begin, stateID, StateName, StateSignature, StateRatification, StateForce, StateEnd, Rat=Notif, Accession, Succession, treatyID, Signature, Force, End, gengID, url, ..., Domain, and Coder.}
+\item{HUGGO: }{A dataset with 15,463
+observations and 12 variables:
+manyID, treatyID, Title, Begin, stateID, End, stateSignature, Signature, Rat, Force, DocType, and ieadbID.}
+\item{HUGGO: }{A dataset with 2,192
+observations and 9 variables:
+manyID, treatyID, Title, Begin, stateID, Signature, Force, StateName, and gptadID.}
+\item{HUGGO: }{A dataset with 1,832
+observations and 8 variables:
+manyID, treatyID, Title, Begin, stateID, Signature, tfddID, and Memberships.}
+}
 For more information and references to each of the datasets used,
 please use the \code{manydata::call_sources()} and \code{manydata::compare_dimensions()} functions.
-\describe{
-\item{GPTAD_MEM: }{A dataset with 2192 observations and the following
-9 variables: manyID, treatyID, Title, Begin, stateID, Signature, Force,
-StateName, gptadID.}
-\item{IEADB_MEM: }{A dataset with 15463 observations and the following
-12 variables: manyID, treatyID, Title, Begin, stateID, End, stateSignature,
-Signature, Rat, Force, DocType, ieadbID.}
-\item{TFDD_MEM: }{A dataset with 1832 observations and the following
-8 variables: manyID, treatyID, Title, Begin, stateID, Signature, tfddID,
-Memberships.}
-\item{HUGGO_MEM: }{A dataset with 91729 observations and the following
-41 variables: manyID, treatyID, Title, Begin, stateID, StateName,
-StateSignature, StateRatification, StateForce, StateEnd, Rat=Notif,
-Accession, Succession, Signature, Force, End, gengID, url, ieaID, ecolexID,
-StateForce2, StateForce3, StateEnd2, Term, Comments, Deposit, obsolete,
-ProvisionalApp, Reservation, Notes, stateForce_ecolex, stateForce_iea,
-Consent, Acceptance, Orig_noneng_title, match, gptadID, destaID, Title2,
-Domain, Coder.}
-}
 }
 \source{
 \itemize{
-\item{GPTAD_MEM: }{
+\item{GPTAD: }{
 W. B. Group.
 \emph{Global Preferential Trade Agreement Database (GPTAD)}.
 \url{https://wits.worldbank.org/gptad/library.aspx}. 2013.}
-\item{IEADB_MEM: }{
+\item{IEADB: }{
 R. B. Mitchell, L. B. Andonova, M. Axelrod, et al. “What we know (and could know) about international environmental agreements”.
-\emph{Global Environmental Politics} 20.1 (2020), pp. 103-121.}
-\item{TFDD_MEM: }{
+\emph{Global Environmental Politics} 20.1 (2020), pp. 103-121. \url{https://iea.uoregon.edu/country-members}}
+\item{TFDD: }{
 O. College of Earth and O. S. U. Atmospheric Science.
 \emph{Product of the Transboundary Freshwater DisputeDatabase}.
 \url{http://transboundarywaters.science.oregonstate.edu.}. 2021.}
@@ -48,60 +41,13 @@ O. College of Earth and O. S. U. Atmospheric Science.
 memberships
 }
 \description{
-memberships datacube documentation
+The \code{memberships} datacube is a list containing
+4 datasets:
+HUGGO, IEADB, GPTAD, and TFDD.
+It is a work-in-progress, so please let us know if you have any comments or suggestions.
 }
 \details{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{#> $GPTAD_MEM
-#> ----------------------------------------------------------------------------
-#> |  Column Name  |  Data Type  |  Observations  |  Missing  |  Missing (\%)  |
-#> ----------------------------------------------------------------------------
-#> |    manyID     |  character  |            2192|     0     |       0       |
-#> |   treatyID    |  character  |            2192|     0     |       0       |
-#> |     Title     |  character  |            2192|     0     |       0       |
-#> |     Begin     |    mdate    |            2192|    99     |     4.52      |
-#> |    stateID    |  character  |            2192|    55     |     2.51      |
-#> |   Signature   |    mdate    |            2192|    310    |     14.14     |
-#> |     Force     |    mdate    |            2192|    285    |      13       |
-#> |   StateName   |  character  |            2192|    36     |     1.64      |
-#> |    gptadID    |  character  |            2192|     0     |       0       |
-#> ----------------------------------------------------------------------------
-#> 
-#> 
-#> $IEADB_MEM
-#> ----------------------------------------------------------------------------
-#> |  Column Name  |  Data Type  |  Observations  |  Missing  |  Missing (\%)  |
-#> ----------------------------------------------------------------------------
-#> |    manyID     |  character  |           15463|     0     |       0       |
-#> |   treatyID    |  character  |           15463|     0     |       0       |
-#> |     Title     |  character  |           15463|     0     |       0       |
-#> |     Begin     |    mdate    |           15463|     0     |       0       |
-#> |    stateID    |  character  |           15463|     0     |       0       |
-#> |      End      |    mdate    |           15463|   14593   |     94.37     |
-#> |stateSignature |    mdate    |           15463|   5797    |     37.49     |
-#> |   Signature   |    mdate    |           15463|     0     |       0       |
-#> |      Rat      |    mdate    |           15463|   5485    |     35.47     |
-#> |     Force     |    mdate    |           15463|     0     |       0       |
-#> |    DocType    |  character  |           15463|     0     |       0       |
-#> |    ieadbID    |   numeric   |           15463|     0     |       0       |
-#> ----------------------------------------------------------------------------
-#> 
-#> 
-#> $TFDD_MEM
-#> ----------------------------------------------------------------------------
-#> |  Column Name  |  Data Type  |  Observations  |  Missing  |  Missing (\%)  |
-#> ----------------------------------------------------------------------------
-#> |    manyID     |  character  |            1832|     0     |       0       |
-#> |   treatyID    |  character  |            1832|     0     |       0       |
-#> |     Title     |  character  |            1832|     1     |     0.05      |
-#> |     Begin     |    mdate    |            1832|    102    |     5.57      |
-#> |    stateID    |  character  |            1832|     1     |     0.05      |
-#> |   Signature   |    mdate    |            1832|    102    |     5.57      |
-#> |    tfddID     |   numeric   |            1832|     1     |     0.05      |
-#> |  Memberships  |  character  |            1832|    805    |     43.94     |
-#> ----------------------------------------------------------------------------
-#> 
-#> 
-#> $HUGGO_MEM
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> $HUGGO
 #> ------------------------------------------------------------------------------
 #> |   Column Name   |  Data Type  |  Observations  |  Missing  |  Missing (\%)  |
 #> ------------------------------------------------------------------------------
@@ -147,24 +93,58 @@ memberships datacube documentation
 #> |     Domain      |  character  |           91729|     0     |       0       |
 #> |      Coder      |  character  |           91729|    15     |     0.02      |
 #> ------------------------------------------------------------------------------
+#> 
+#> 
+#> $IEADB
+#> ----------------------------------------------------------------------------
+#> |  Column Name  |  Data Type  |  Observations  |  Missing  |  Missing (\%)  |
+#> ----------------------------------------------------------------------------
+#> |    manyID     |  character  |           15463|     0     |       0       |
+#> |   treatyID    |  character  |           15463|     0     |       0       |
+#> |     Title     |  character  |           15463|     0     |       0       |
+#> |     Begin     |    mdate    |           15463|     0     |       0       |
+#> |    stateID    |  character  |           15463|     0     |       0       |
+#> |      End      |    mdate    |           15463|   14593   |     94.37     |
+#> |stateSignature |    mdate    |           15463|   5797    |     37.49     |
+#> |   Signature   |    mdate    |           15463|     0     |       0       |
+#> |      Rat      |    mdate    |           15463|   5485    |     35.47     |
+#> |     Force     |    mdate    |           15463|     0     |       0       |
+#> |    DocType    |  character  |           15463|     0     |       0       |
+#> |    ieadbID    |   numeric   |           15463|     0     |       0       |
+#> ----------------------------------------------------------------------------
+#> 
+#> 
+#> $GPTAD
+#> ----------------------------------------------------------------------------
+#> |  Column Name  |  Data Type  |  Observations  |  Missing  |  Missing (\%)  |
+#> ----------------------------------------------------------------------------
+#> |    manyID     |  character  |            2192|     0     |       0       |
+#> |   treatyID    |  character  |            2192|     0     |       0       |
+#> |     Title     |  character  |            2192|     0     |       0       |
+#> |     Begin     |    mdate    |            2192|    99     |     4.52      |
+#> |    stateID    |  character  |            2192|    55     |     2.51      |
+#> |   Signature   |    mdate    |            2192|    310    |     14.14     |
+#> |     Force     |    mdate    |            2192|    285    |      13       |
+#> |   StateName   |  character  |            2192|    36     |     1.64      |
+#> |    gptadID    |  character  |            2192|     0     |       0       |
+#> ----------------------------------------------------------------------------
+#> 
+#> 
+#> $TFDD
+#> ----------------------------------------------------------------------------
+#> |  Column Name  |  Data Type  |  Observations  |  Missing  |  Missing (\%)  |
+#> ----------------------------------------------------------------------------
+#> |    manyID     |  character  |            1832|     0     |       0       |
+#> |   treatyID    |  character  |            1832|     0     |       0       |
+#> |     Title     |  character  |            1832|     1     |     0.05      |
+#> |     Begin     |    mdate    |            1832|    102    |     5.57      |
+#> |    stateID    |  character  |            1832|     1     |     0.05      |
+#> |   Signature   |    mdate    |            1832|    102    |     5.57      |
+#> |    tfddID     |   numeric   |            1832|     1     |     0.05      |
+#> |  Memberships  |  character  |            1832|    805    |     43.94     |
+#> ----------------------------------------------------------------------------
 }\if{html}{\out{</div>}}
 }
-\section{URL}{
-
-\itemize{
-\item{GPTAD_MEM: }{
-\url{https://wits.worldbank.org/gptad/library.aspx}
-}
-\item{IEADB_MEM: }{
-\url{https://iea.uoregon.edu/country-members}
-}
-\item{TFDD_MEM: }{
-\url{https://transboundarywaters.science.oregonstate.edu/}
-}
-\item{HUGGO_MEM: }{Hand-coded data by the GGO team.}
-}
-}
-
 \section{Mapping}{
 
 \itemize{
@@ -204,14 +184,6 @@ Variable Mapping\tabular{cc}{
    CCODE \tab stateID \cr
    DocumentName \tab Title \cr
    Signatories \tab Memberships \cr
-}
-
-
-}
-\item{HUGGO_MEM: }{
-Variable Mapping\tabular{cc}{
-   \emph{from} \tab \emph{to} \cr
-   NA \tab NA \cr
 }
 
 
