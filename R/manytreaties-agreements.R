@@ -105,109 +105,17 @@
 #' }
 #' @section Mapping:
 #' 
-#' |  *manytreaties*  | *G*  | *ISD* | *COW* | *ICOW* | *RATRULES* |
-#' |:---------------|:------|:------|:------|:-------|:-----------|
-#' | stateID  | | | | | StatID |
-#' | Begin | Start | Start | styear,stmonth,stday | IndDate|
-#' | End | Finish | Finish | endyear,endmonth,endday | |
-#' | StateName | Name of State | State.Name | statenme | Name |
-#' | cowID | Cow ID | COW.ID | stateabb | State |
-#' | cowNR | Cow NR. | COW.Nr | ccode | |
-#' | RatProcedure | | | | | Rat |
+#' |  *manytreaties*  | *IEADB*  | *HEIDI* | *TREND* | *LABPTA* | *TOTA* | *GPTAD* | *GHHR* | *WHO* |
+#' |:-----------------|:---------|:--------|:--------|:---------|:-------|:-------|:-------|:-------|
+#' | Title  | Treaty Name | Name.of.the.agreement | Trade.Agreement | Name | name | Common.Name |
+#' | Signature  | Signature Date | signature.date | Year | year | date_signed | Date.of.Signature |
+#' | Force  | Date IEA entered into force | | Year | year | date_into_force | Date.of.Entry.into.Force | Year of adoption |
+#' | mitchID  | IEA# | | | | |
+#' | heidiID  | | ID | | | |
+#' | labptaID  | | | | Number | |
+#' | AgreementType  | Agreement Type (level 2) | | | | |
+#' | DocType  | Inclusion | | | | | Type |
 #' 
-#' \itemize{
-#' \item{GHHR: }{
-#' Variable Mapping
-#'
-#' |  *from*  | *to*
-#' |:------------:|:------------:|
-#' | Year of adoption | Begin |
-#'
-#' }
-#' \item{GPTAD: }{
-#' Variable Mapping
-#' 
-#' |  *from*  | *to*
-#' |:------------:|:------------:|
-#' | Common.Name | Title |
-#' | Date.of.Signature | Signature |
-#' | Date.of.Entry.into.Force | Force |
-#' | Type | DocType |
-#' | Type | AgreementType |
-#' | Type | GeogArea |
-#' 
-#' }
-#' \item{HEIDI: }{
-#' Variable Mapping
-#' 
-#' |  *from*  | *to*
-#' |:------------:|:------------:|
-#' | ID | heidiID |
-#' | 'Name.of.the.agreement' | Title |
-#' | signature.date | Signature |
-#' 
-#' }
-#' \item{IEADB: }{
-#' Variable Mapping
-#' 
-#' |  *from*  | *to*
-#' |:------------:|:------------:|
-#' | 'IEA# (click for add'l info)' | ieadbID |
-#' | 'Treaty Name' | Title |
-#' | 'Signature Date' | Signature |
-#' | 'Date IEA entered into force' | Force |
-#' | 'Agreement Type (level 2)' | AgreementType |
-#' | Inclusion | DocType |
-#' 
-#' }
-#' \item{LABPTA: }{
-#' Variable Mapping
-#' 
-#' |  *from*  | *to*
-#' |:------------:|:------------:|
-#' | Number | labptaID |
-#' | Name | Title |
-#' | year | Signature |
-#' | year | Force |
-#' 
-#' }
-#' \item{TOTA: }{
-#' Variable Mapping
-#' 
-#' |  *from*  | *to*
-#' |:------------:|:------------:|
-#' | name | Title |
-#' | date_signed | Signature |
-#' | date_into_force | Force |
-#' 
-#' }
-#' \item{TREND: }{
-#' Variable Mapping
-#' 
-#' |  *from*  | *to*
-#' |:------------:|:------------:|
-#' | Trade.Agreement | Title |
-#' | Year | Signature |
-#' | Year | Force |
-#' 
-#' }
-#' \item{WHO: }{
-#' Variable Mapping
-#'
-#' |  *from*  | *to*
-#' |:------------:|:------------:|
-#' | NA | NA |
-#'
-#' }
-#' \item{HUGGO: }{
-#' Variable Mapping
-#' 
-#' |  *from*  | *to*
-#' |:------------:|:------------:|
-#' | NA | NA |
-#' 
-#' }
-#' }
 #' @md
 #' @details
 #' ``` {r, echo = FALSE, warning = FALSE}

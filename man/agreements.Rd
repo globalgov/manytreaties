@@ -304,110 +304,16 @@ It is a work-in-progress, so please let us know if you have any comments or sugg
 }
 
 \section{Mapping}{
-\tabular{llllll}{
-   \emph{manytreaties} \tab \emph{G} \tab \emph{ISD} \tab \emph{COW} \tab \emph{ICOW} \tab \emph{RATRULES} \cr
-   stateID \tab  \tab  \tab  \tab  \tab StatID \cr
-   Begin \tab Start \tab Start \tab styear,stmonth,stday \tab IndDate \tab  \cr
-   End \tab Finish \tab Finish \tab endyear,endmonth,endday \tab  \tab  \cr
-   StateName \tab Name of State \tab State.Name \tab statenme \tab Name \tab  \cr
-   cowID \tab Cow ID \tab COW.ID \tab stateabb \tab State \tab  \cr
-   cowNR \tab Cow NR. \tab COW.Nr \tab ccode \tab  \tab  \cr
-   RatProcedure \tab  \tab  \tab  \tab  \tab Rat \cr
-}
-
-
-\itemize{
-\item{GHHR: }{
-Variable Mapping\tabular{cc}{
-   \emph{from} \tab \emph{to} \cr
-   Year of adoption \tab Begin \cr
-}
-
-
-}
-\item{GPTAD: }{
-Variable Mapping\tabular{cc}{
-   \emph{from} \tab \emph{to} \cr
-   Common.Name \tab Title \cr
-   Date.of.Signature \tab Signature \cr
-   Date.of.Entry.into.Force \tab Force \cr
-   Type \tab DocType \cr
-   Type \tab AgreementType \cr
-   Type \tab GeogArea \cr
-}
-
-
-}
-\item{HEIDI: }{
-Variable Mapping\tabular{cc}{
-   \emph{from} \tab \emph{to} \cr
-   ID \tab heidiID \cr
-   'Name.of.the.agreement' \tab Title \cr
-   signature.date \tab Signature \cr
-}
-
-
-}
-\item{IEADB: }{
-Variable Mapping\tabular{cc}{
-   \emph{from} \tab \emph{to} \cr
-   'IEA# (click for add'l info)' \tab ieadbID \cr
-   'Treaty Name' \tab Title \cr
-   'Signature Date' \tab Signature \cr
-   'Date IEA entered into force' \tab Force \cr
-   'Agreement Type (level 2)' \tab AgreementType \cr
-   Inclusion \tab DocType \cr
-}
-
-
-}
-\item{LABPTA: }{
-Variable Mapping\tabular{cc}{
-   \emph{from} \tab \emph{to} \cr
-   Number \tab labptaID \cr
-   Name \tab Title \cr
-   year \tab Signature \cr
-   year \tab Force \cr
-}
-
-
-}
-\item{TOTA: }{
-Variable Mapping\tabular{cc}{
-   \emph{from} \tab \emph{to} \cr
-   name \tab Title \cr
-   date_signed \tab Signature \cr
-   date_into_force \tab Force \cr
-}
-
-
-}
-\item{TREND: }{
-Variable Mapping\tabular{cc}{
-   \emph{from} \tab \emph{to} \cr
-   Trade.Agreement \tab Title \cr
-   Year \tab Signature \cr
-   Year \tab Force \cr
-}
-
-
-}
-\item{WHO: }{
-Variable Mapping\tabular{cc}{
-   \emph{from} \tab \emph{to} \cr
-   NA \tab NA \cr
-}
-
-
-}
-\item{HUGGO: }{
-Variable Mapping\tabular{cc}{
-   \emph{from} \tab \emph{to} \cr
-   NA \tab NA \cr
-}
-
-
-}
+\tabular{lllllllll}{
+   \emph{manytreaties} \tab \emph{IEADB} \tab \emph{HEIDI} \tab \emph{TREND} \tab \emph{LABPTA} \tab \emph{TOTA} \tab \emph{GPTAD} \tab \emph{GHHR} \tab \emph{WHO} \cr
+   Title \tab Treaty Name \tab Name.of.the.agreement \tab Trade.Agreement \tab Name \tab name \tab Common.Name \tab  \tab  \cr
+   Signature \tab Signature Date \tab signature.date \tab Year \tab year \tab date_signed \tab Date.of.Signature \tab  \tab  \cr
+   Force \tab Date IEA entered into force \tab  \tab Year \tab year \tab date_into_force \tab Date.of.Entry.into.Force \tab Year of adoption \tab  \cr
+   mitchID \tab IEA# \tab  \tab  \tab  \tab  \tab  \tab  \tab  \cr
+   heidiID \tab  \tab ID \tab  \tab  \tab  \tab  \tab  \tab  \cr
+   labptaID \tab  \tab  \tab  \tab Number \tab  \tab  \tab  \tab  \cr
+   AgreementType \tab Agreement Type (level 2) \tab  \tab  \tab  \tab  \tab  \tab  \tab  \cr
+   DocType \tab Inclusion \tab  \tab  \tab  \tab  \tab Type \tab  \tab  \cr
 }
 }
 
