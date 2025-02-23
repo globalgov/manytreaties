@@ -49,7 +49,7 @@ reference:
     desc: "manytreaties contains the following datacubes"
     contents:
     - agreements
-    - memberships
+    - parties
 footer:
   structure:
     left: devs
