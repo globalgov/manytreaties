@@ -39,42 +39,57 @@ please use the \code{manydata::call_sources()} and \code{manydata::compare_dimen
 }
 \source{
 \itemize{
-\item{GHHR: }{
-B. M. Meier, O. A. Cabrera, A. Ayala, et al.
-“Bridging international law and rights-based litigation:mapping health-related rights through the development of the global health and human rights database”.
-\emph{Health & Human Rights.} 14 (2012), p. 20.}
-\item{GPTAD: }{
-World Bank Group. \emph{Global Preferential Trade Agreement Database (GPTAD)}.
-Online database. publisher: World Bank Group. 2014.
-\url{https://wits.worldbank.org/gptad/library.aspx}.}
-\item{HEIDI: }{
-J-F. Morin, and C. Blouin. "How environmental treaties contribute to global health governance".
-\emph{Globalization and health} 15.1 (2019), pp. 1-8.
+\item{HUGGO: }{
+Hollway, James, Henrique Sposito, and Jael Tan. 2021.
+International agreements for manydata.
 }
 \item{IEADB: }{
-R. B. Mitchell et al. "What we know (and could know) about international environmental agreements".
-\emph{Global Environmental Politics} 20.1 (2020), pp. 103-121.
+Mitchell, Ron B. et al. 2020.
+"What we know (and could know) about international environmental agreements".
+\emph{Global Environmental Politics} 20.1, pp. 103-121.
+\url{https://www.iea.ulaval.ca/en/agreements}
+}
+\item{HEIDI: }{
+Morin, Jean-Frederic, and Chantal Blouin. 2019.
+"How environmental treaties contribute to global health governance".
+\emph{Globalization and health} 15.1, pp. 1-8.
+\url{https://www.chaire-epi.ulaval.ca/en/data/heidi}
+}
+\item{TREND: }{
+Morin, Jean-Frederic, Andreas Dür, and Lisa Lechner. 2018.
+“Mapping the trade and environment nexus: Insights from a newdataset”.
+\emph{Global Environmental Politics} 18.1, pp. 122-139.
+\url{http://www.chaire-epi.ulaval.ca/en/trend}
 }
 \item{LABPTA: }{
-D. Raess, A. Dür, and D. Sari.
+Raess, Damien, Andreas Dür, and D. Sari. 2018.
 “Protecting labor rights in preferential trade agreements: The role of trade unions, left governments, and skilled labor”.
-In: \emph{The Review of International Organizations} 2.13(2018), pp. 143-162.
-DOI: 10.1007/s11558-018-9301-z.}
+\emph{The Review of International Organizations} 2.13, pp. 143-162.
+\doi{10.1007/s11558-018-9301-z}
+}
 \item{TOTA: }{
-W. Alschner, J. Seiermann, and D. Skougarevskiy.
-\emph{Text-as-data analysis of preferential tradeagreements: Mapping the PTA landscape}.
-2017. \url{https://github.com/mappingtreaties/tota.git}.}
-\item{TREND: }{
-J. Morin, A. Dür, and L. Lechner.
-“Mapping the trade and environment nexus: Insights from a newdataset”.
-In: \emph{Global Environmental Politics} 18.1 (2018), pp. 122-139.}
+Alschner, Wolfgang, Julia Seiermann, and Dmitriy Skougarevskiy. 2017.
+“Text-as-data analysis of preferential trade agreements: Mapping the PTA landscape”.
+UNCTAD Research Paper No. 5.
+\url{https://github.com/mappingtreaties/tota.git}.
+}
+\item{GPTAD: }{
+World Bank Group. 2014.
+\emph{Global Preferential Trade Agreement Database (GPTAD)}.
+Online database. World Bank Group.
+\url{https://wits.worldbank.org/gptad/library.aspx}
+}
+\item{GHHR: }{
+B. M. Meier, O. A. Cabrera, A. Ayala, et al. 2012.
+“Bridging international law and rights-based litigation: Mapping health-related rights through the development of the global health and human rights database”.
+\emph{Health & Human Rights.} 14, p. 20.
+\url{https://www.globalhealthrights.org/instruments/instrument-region/}
+}
 \item{WHO: }{
-World Health Organization.
+World Health Organization. 2024.
 \emph{WHO MiNDbank: More Inclusiveness Needed in Disability and Development}.
-Online database. publisher: World Health Organization. 2024.
-\url{https://extranet.who.int/mindbank/}.}
-\item{HUGGO: }{
-J. Hollway. International agreements for manydata. 2021.
+Online database. World Health Organization.
+\url{https://extranet.who.int/mindbank/}
 }
 }
 }
@@ -272,37 +287,6 @@ It is a work-in-progress, so please let us know if you have any comments or sugg
 #> ----------------------------------------------------------------------------
 }\if{html}{\out{</div>}}
 }
-\section{URL}{
-
-\itemize{
-\item{GHHR: }{
-\url{https://www.globalhealthrights.org/instruments/instrument-region/}
-}
-\item{GPTAD: }{
-\url{https://wits.worldbank.org/gptad/library.aspx}
-}
-\item{HEIDI: }{
-\url{https://www.chaire-epi.ulaval.ca/en/data/heidi}
-}
-\item{IEADB: }{
-\url{https://iea.uoregon.edu/base-agreement-list}
-}
-\item{LABPTA: }{
-\url{https://doi.org/10.1007/s11558-018-9301-z}
-}
-\item{TOTA: }{
-\url{https://github.com/mappingtreaties/tota.git}
-}
-\item{TREND: }{
-\url{http://www.chaire-epi.ulaval.ca/en/trend}
-}
-\item{WHO: }{
-\url{https://www.mindbank.info/collection/un_who_resolutions/all?page=all}
-}
-\item{HUGGO: }{Hand-coded data by the GGO team.}
-}
-}
-
 \section{Mapping}{
 \tabular{lllllllll}{
    \emph{manytreaties} \tab \emph{IEADB} \tab \emph{HEIDI} \tab \emph{TREND} \tab \emph{LABPTA} \tab \emph{TOTA} \tab \emph{GPTAD} \tab \emph{GHHR} \tab \emph{WHO} \cr
