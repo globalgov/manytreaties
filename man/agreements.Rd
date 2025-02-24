@@ -6,9 +6,8 @@
 \title{agreements datacube}
 \format{
 \describe{
-\item{HUGGO: }{A dataset with 4,837
-observations and 59 variables:
-manyID, treatyID, Title, Begin, End, Signature, Force, TreatyText, url, Domain, AgreementType, DocType, GeogArea, gengID, ieaID, ecolexID, Parties, verified, ..., Topic, and Coder.}
+\item{HUGGO \if{html}{\out{<img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>}}:}{A dataset with 4,837
+observations and 50 variables:
 \item{IEADB: }{A dataset with 3,667
 observations and 10 variables:
 manyID, treatyID, Title, Begin, DocType, AgreementType, Signature, Force, Lineage, and ieadbID.}
@@ -18,13 +17,13 @@ manyID, treatyID, Title, Begin, Signature, Lineage, and heidiID.}
 \item{TREND: }{A dataset with 710
 observations and 7 variables:
 manyID, treatyID, Title, Begin, Signature, Force, and trendID.}
-\item{LABPTA: }{A dataset with 483
+\item{LABPTA \if{html}{\out{<img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>}}:}{A dataset with 483
 observations and 7 variables:
 manyID, treatyID, Title, Begin, Signature, Force, and labptaID.}
-\item{TOTA: }{A dataset with 442
+\item{TOTA \if{html}{\out{<img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>}}:}{A dataset with 442
 observations and 7 variables:
 manyID, treatyID, Title, Begin, Signature, Force, and totaID.}
-\item{GPTAD: }{A dataset with 340
+\item{GPTAD \if{html}{\out{<img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>}}:}{A dataset with 340
 observations and 10 variables:
 manyID, treatyID, Title, Begin, AgreementType, DocType, GeogArea, Signature, Force, and gptadID.}
 \item{GHHR: }{A dataset with 149

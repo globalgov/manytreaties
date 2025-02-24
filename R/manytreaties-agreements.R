@@ -5,25 +5,26 @@
 #'   It is a work-in-progress, so please let us know if you have any comments or suggestions.
 #' @format 
 #' \describe{
-#' \item{HUGGO: }{A dataset with `r prettyNum(nrow(manytreaties::agreements$HUGGO), big.mark=",")` 
+#' \item{HUGGO <img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>:}{A dataset with `r prettyNum(nrow(manytreaties::agreements$HUGGO), big.mark=",")` 
 #'   observations and `r ncol(manytreaties::agreements$HUGGO)` variables: 
 #'   `r cli::pluralize("{names(manytreaties::agreements$HUGGO)}")`.}
 #' \item{IEADB: }{A dataset with `r prettyNum(nrow(manytreaties::agreements$IEADB), big.mark=",")` 
 #'   observations and `r ncol(manytreaties::agreements$IEADB)` variables: 
-#'   `r cli::pluralize("{names(manytreaties::agreements$IEADB)}")`.}
+#'   `r cli::pluralize("{names(manytreaties::agreements$IEADB)}")`.
+#'   }
 #' \item{HEIDI: }{A dataset with `r prettyNum(nrow(manytreaties::agreements$HEIDI), big.mark=",")` 
 #'   observations and `r ncol(manytreaties::agreements$HEIDI)` variables: 
 #'   `r cli::pluralize("{names(manytreaties::agreements$HEIDI)}")`.}
 #' \item{TREND: }{A dataset with `r prettyNum(nrow(manytreaties::agreements$TREND), big.mark=",")` 
 #'   observations and `r ncol(manytreaties::agreements$TREND)` variables: 
 #'   `r cli::pluralize("{names(manytreaties::agreements$TREND)}")`.}
-#' \item{LABPTA: }{A dataset with `r prettyNum(nrow(manytreaties::agreements$LABPTA), big.mark=",")` 
+#' \item{LABPTA <img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>:}{A dataset with `r prettyNum(nrow(manytreaties::agreements$LABPTA), big.mark=",")` 
 #'   observations and `r ncol(manytreaties::agreements$LABPTA)` variables: 
 #'   `r cli::pluralize("{names(manytreaties::agreements$LABPTA)}")`.}
-#' \item{TOTA: }{A dataset with `r prettyNum(nrow(manytreaties::agreements$TOTA), big.mark=",")` 
+#' \item{TOTA <img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>:}{A dataset with `r prettyNum(nrow(manytreaties::agreements$TOTA), big.mark=",")` 
 #'   observations and `r ncol(manytreaties::agreements$TOTA)` variables: 
 #'   `r cli::pluralize("{names(manytreaties::agreements$TOTA)}")`.}
-#' \item{GPTAD: }{A dataset with `r prettyNum(nrow(manytreaties::agreements$GPTAD), big.mark=",")` 
+#' \item{GPTAD <img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>:}{A dataset with `r prettyNum(nrow(manytreaties::agreements$GPTAD), big.mark=",")` 
 #'   observations and `r ncol(manytreaties::agreements$GPTAD)` variables: 
 #'   `r cli::pluralize("{names(manytreaties::agreements$GPTAD)}")`.}
 #' \item{GHHR: }{A dataset with `r prettyNum(nrow(manytreaties::agreements$GHHR), big.mark=",")` 
