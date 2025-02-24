@@ -5,16 +5,16 @@
 #'   It is a work-in-progress, so please let us know if you have any comments or suggestions.
 #' @format 
 #' \describe{
-#' \item{HUGGO: }{A dataset with `r prettyNum(nrow(manytreaties::parties$HUGGO), big.mark=",")` 
+#' \item{HUGGO <img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>:}{A dataset with `r prettyNum(nrow(manytreaties::parties$HUGGO), big.mark=",")` 
 #' observations and `r ncol(manytreaties::parties$HUGGO)` variables: 
 #' `r cli::pluralize("{names(manytreaties::parties$HUGGO)}")`.}
 #' \item{IEADB: }{A dataset with `r prettyNum(nrow(manytreaties::parties$IEADB), big.mark=",")` 
 #' observations and `r ncol(manytreaties::parties$IEADB)` variables: 
 #' `r cli::pluralize("{names(manytreaties::parties$IEADB)}")`.}
-#' \item{GPTAD: }{A dataset with `r prettyNum(nrow(manytreaties::parties$GPTAD), big.mark=",")` 
+#' \item{GPTAD <img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>:}{A dataset with `r prettyNum(nrow(manytreaties::parties$GPTAD), big.mark=",")` 
 #' observations and `r ncol(manytreaties::parties$GPTAD)` variables: 
 #' `r cli::pluralize("{names(manytreaties::parties$GPTAD)}")`.}
-#' \item{TFDD: }{A dataset with `r prettyNum(nrow(manytreaties::parties$TFDD), big.mark=",")` 
+#' \item{TFDD <img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/cc-zero.png" height="12"/>:}{A dataset with `r prettyNum(nrow(manytreaties::parties$TFDD), big.mark=",")` 
 #' observations and `r ncol(manytreaties::parties$TFDD)` variables: 
 #' `r cli::pluralize("{names(manytreaties::parties$TFDD)}")`.}
 #' }

@@ -6,16 +6,16 @@
 \title{parties datacube}
 \format{
 \describe{
-\item{HUGGO: }{A dataset with 91,729
+\item{HUGGO \if{html}{\out{<img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>}}:}{A dataset with 91,729
 observations and 41 variables:
 manyID, Title, Begin, stateID, StateName, StateSignature, StateRatification, StateForce, StateEnd, Rat=Notif, Accession, Succession, treatyID, Signature, Force, End, gengID, url, ..., Domain, and Coder.}
 \item{IEADB: }{A dataset with 15,463
 observations and 12 variables:
 manyID, treatyID, Title, Begin, stateID, End, stateSignature, Signature, Rat, Force, DocType, and ieadbID.}
-\item{GPTAD: }{A dataset with 2,192
+\item{GPTAD \if{html}{\out{<img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>}}:}{A dataset with 2,192
 observations and 9 variables:
 manyID, treatyID, Title, Begin, stateID, Signature, Force, StateName, and gptadID.}
-\item{TFDD: }{A dataset with 1,832
+\item{TFDD \if{html}{\out{<img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/cc-zero.png" height="12"/>}}:}{A dataset with 1,832
 observations and 8 variables:
 manyID, treatyID, Title, Begin, stateID, Signature, tfddID, and Memberships.}
 }
