@@ -26,12 +26,6 @@ manyID, treatyID, Title, Begin, Signature, Force, and totaID.}
 \item{GPTAD \if{html}{\out{<img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>}}:}{A dataset with 340
 observations and 10 variables:
 manyID, treatyID, Title, Begin, AgreementType, DocType, GeogArea, Signature, Force, and gptadID.}
-\item{GHHR: }{A dataset with 149
-observations and 8 variables:
-manyID, treatyID, Title, Begin, Region, LegalStatus, Lineage, and ghhrID.}
-\item{WHO: }{A dataset with 114
-observations and 6 variables:
-manyID, treatyID, Title, Begin, Organisation, and Topic.}
 }
 For more information and references to each of the datasets used,
 please use the \code{manydata::call_sources()} and \code{manydata::compare_dimensions()} functions.
@@ -78,18 +72,6 @@ World Bank Group. 2014.
 Online database. World Bank Group.
 \url{https://wits.worldbank.org/gptad/library.aspx}
 }
-\item{GHHR: }{
-B. M. Meier, O. A. Cabrera, A. Ayala, et al. 2012.
-“Bridging international law and rights-based litigation: Mapping health-related rights through the development of the global health and human rights database”.
-\emph{Health & Human Rights.} 14, p. 20.
-\url{https://www.globalhealthrights.org/instruments/instrument-region/}
-}
-\item{WHO: }{
-World Health Organization. 2024.
-\emph{WHO MiNDbank: More Inclusiveness Needed in Disability and Development}.
-Online database. World Health Organization.
-\url{https://extranet.who.int/mindbank/}
-}
 }
 }
 \usage{
@@ -97,8 +79,8 @@ agreements
 }
 \description{
 The \code{agreements} datacube is a list containing
-9 datasets:
-HUGGO, IEADB, HEIDI, TREND, LABPTA, TOTA, GPTAD, GHHR, and WHO.
+7 datasets:
+HUGGO, IEADB, HEIDI, TREND, LABPTA, TOTA, and GPTAD.
 It is a work-in-progress, so please let us know if you have any comments or suggestions.
 }
 \details{
@@ -256,47 +238,19 @@ It is a work-in-progress, so please let us know if you have any comments or sugg
 #> |     Force     |    mdate    |             340|    63     |     18.53     |
 #> |    gptadID    |  character  |             340|     0     |       0       |
 #> ----------------------------------------------------------------------------
-#> 
-#> 
-#> $GHHR
-#> ----------------------------------------------------------------------------
-#> |  Column Name  |  Data Type  |  Observations  |  Missing  |  Missing (\%)  |
-#> ----------------------------------------------------------------------------
-#> |    manyID     |  character  |             149|     0     |       0       |
-#> |   treatyID    |  character  |             149|     0     |       0       |
-#> |     Title     |  character  |             149|     0     |       0       |
-#> |     Begin     |    mdate    |             149|     3     |     2.01      |
-#> |    Region     |  character  |             149|     0     |       0       |
-#> |  LegalStatus  |  character  |             149|     0     |       0       |
-#> |    Lineage    |  character  |             149|    52     |     34.9      |
-#> |    ghhrID     |  character  |             149|     0     |       0       |
-#> ----------------------------------------------------------------------------
-#> 
-#> 
-#> $WHO
-#> ----------------------------------------------------------------------------
-#> |  Column Name  |  Data Type  |  Observations  |  Missing  |  Missing (\%)  |
-#> ----------------------------------------------------------------------------
-#> |    manyID     |  character  |             114|     0     |       0       |
-#> |   treatyID    |  character  |             114|     0     |       0       |
-#> |     Title     |  character  |             114|     0     |       0       |
-#> |     Begin     |    mdate    |             114|     0     |       0       |
-#> | Organisation  |  character  |             114|     0     |       0       |
-#> |     Topic     |  character  |             114|     0     |       0       |
-#> ----------------------------------------------------------------------------
 }\if{html}{\out{</div>}}
 }
 \section{Mapping}{
-\tabular{lllllllll}{
-   \emph{manytreaties} \tab \emph{IEADB} \tab \emph{HEIDI} \tab \emph{TREND} \tab \emph{LABPTA} \tab \emph{TOTA} \tab \emph{GPTAD} \tab \emph{GHHR} \tab \emph{WHO} \cr
-   Title \tab Treaty Name \tab Name.of.the.agreement \tab Trade.Agreement \tab Name \tab name \tab Common.Name \tab  \tab  \cr
-   Signature \tab Signature Date \tab signature.date \tab Year \tab year \tab date_signed \tab Date.of.Signature \tab  \tab  \cr
-   Force \tab Date IEA entered into force \tab  \tab Year \tab year \tab date_into_force \tab Date.of.Entry.into.Force \tab Year of adoption \tab  \cr
-   mitchID \tab IEA# \tab  \tab  \tab  \tab  \tab  \tab  \tab  \cr
-   heidiID \tab  \tab ID \tab  \tab  \tab  \tab  \tab  \tab  \cr
-   labptaID \tab  \tab  \tab  \tab Number \tab  \tab  \tab  \tab  \cr
-   AgreementType \tab Agreement Type (level 2) \tab  \tab  \tab  \tab  \tab  \tab  \tab  \cr
-   DocType \tab Inclusion \tab  \tab  \tab  \tab  \tab Type \tab  \tab  \cr
+\tabular{lllllll}{
+   \emph{manytreaties} \tab \emph{IEADB} \tab \emph{HEIDI} \tab \emph{TREND} \tab \emph{LABPTA} \tab \emph{TOTA} \tab \emph{GPTAD} \cr
+   Title \tab Treaty Name \tab Name.of.the.agreement \tab Trade.Agreement \tab Name \tab name \tab Common.Name \cr
+   Signature \tab Signature Date \tab signature.date \tab Year \tab year \tab date_signed \tab Date.of.Signature \cr
+   Force \tab Date IEA entered into force \tab  \tab Year \tab year \tab date_into_force \tab Date.of.Entry.into.Force \cr
+   mitchID \tab IEA# \tab  \tab  \tab  \tab  \tab  \cr
+   heidiID \tab  \tab ID \tab  \tab  \tab  \tab  \cr
+   labptaID \tab  \tab  \tab  \tab Number \tab  \tab  \cr
+   AgreementType \tab Agreement Type (level 2) \tab  \tab  \tab  \tab  \tab  \cr
+   DocType \tab Inclusion \tab  \tab  \tab  \tab  \tab Type \cr
 }
 }
 

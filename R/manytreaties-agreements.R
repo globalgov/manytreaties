@@ -27,12 +27,6 @@
 #' \item{GPTAD <img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>:}{A dataset with `r prettyNum(nrow(manytreaties::agreements$GPTAD), big.mark=",")` 
 #'   observations and `r ncol(manytreaties::agreements$GPTAD)` variables: 
 #'   `r cli::pluralize("{names(manytreaties::agreements$GPTAD)}")`.}
-#' \item{GHHR: }{A dataset with `r prettyNum(nrow(manytreaties::agreements$GHHR), big.mark=",")` 
-#'   observations and `r ncol(manytreaties::agreements$GHHR)` variables: 
-#'   `r cli::pluralize("{names(manytreaties::agreements$GHHR)}")`.}
-#' \item{WHO: }{A dataset with `r prettyNum(nrow(manytreaties::agreements$WHO), big.mark=",")` 
-#'   observations and `r ncol(manytreaties::agreements$WHO)` variables: 
-#'   `r cli::pluralize("{names(manytreaties::agreements$WHO)}")`.}
 #' }
 #' For more information and references to each of the datasets used,
 #' please use the `manydata::call_sources()` and `manydata::compare_dimensions()` functions.
@@ -78,26 +72,14 @@
 #' Online database. World Bank Group.
 #' \url{https://wits.worldbank.org/gptad/library.aspx}
 #' }
-#' \item{GHHR: }{
-#' B. M. Meier, O. A. Cabrera, A. Ayala, et al. 2012.
-#' “Bridging international law and rights-based litigation: Mapping health-related rights through the development of the global health and human rights database”.
-#' _Health & Human Rights._ 14, p. 20.
-#' \url{https://www.globalhealthrights.org/instruments/instrument-region/}
-#' }
-#' \item{WHO: }{
-#' World Health Organization. 2024.
-#' _WHO MiNDbank: More Inclusiveness Needed in Disability and Development_. 
-#' Online database. World Health Organization.
-#' \url{https://extranet.who.int/mindbank/}
-#' }
 #' }
 #' @section Mapping:
 #' 
-#' |  *manytreaties*  | *IEADB*  | *HEIDI* | *TREND* | *LABPTA* | *TOTA* | *GPTAD* | *GHHR* | *WHO* |
-#' |:-----------------|:---------|:--------|:--------|:---------|:-------|:-------|:-------|:-------|
+#' |  *manytreaties*  | *IEADB*  | *HEIDI* | *TREND* | *LABPTA* | *TOTA* | *GPTAD* |
+#' |:-----------------|:---------|:--------|:--------|:---------|:-------|:-------|
 #' | Title  | Treaty Name | Name.of.the.agreement | Trade.Agreement | Name | name | Common.Name |
 #' | Signature  | Signature Date | signature.date | Year | year | date_signed | Date.of.Signature |
-#' | Force  | Date IEA entered into force | | Year | year | date_into_force | Date.of.Entry.into.Force | Year of adoption |
+#' | Force  | Date IEA entered into force | | Year | year | date_into_force | Date.of.Entry.into.Force | 
 #' | mitchID  | IEA# | | | | |
 #' | heidiID  | | ID | | | |
 #' | labptaID  | | | | Number | |
