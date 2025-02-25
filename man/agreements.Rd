@@ -47,13 +47,13 @@ International agreements for manydata.
 }
 \item{IEADB: }{
 Mitchell, Ron B. et al. 2020.
-What we know (and could know) about international environmental agreements.
+"What we know (and could know) about international environmental agreements".
 \emph{Global Environmental Politics} 20.1, pp. 103-121.
 \url{https://www.iea.ulaval.ca/en/agreements}
 }
 \item{HEIDI: }{
 Morin, Jean-Frederic, and Chantal Blouin. 2019.
-How environmental treaties contribute to global health governance.
+"How environmental treaties contribute to global health governance".
 \emph{Globalization and health} 15.1, pp. 1-8.
 \url{https://www.chaire-epi.ulaval.ca/en/data/heidi}
 }
@@ -64,25 +64,25 @@ Product of the Transboundary FreshwaterDispute Database.
 }
 \item{TREND: }{
 Morin, Jean-Frederic, Andreas Dür, and Lisa Lechner. 2018.
-Mapping the trade and environment nexus: Insights from a new dataset.
+"Mapping the trade and environment nexus: Insights from a new dataset".
 \emph{Global Environmental Politics} 18.1, pp. 122-139.
 \url{http://www.chaire-epi.ulaval.ca/en/trend}
 }
 \item{LABPTA: }{
 Raess, Damien, Andreas Dür, and D. Sari. 2018.
-Protecting labor rights in preferential trade agreements: The role of trade unions, left governments, and skilled labor.
+"Protecting labor rights in preferential trade agreements: The role of trade unions, left governments, and skilled labor".
 \emph{The Review of International Organizations} 2.13, pp. 143-162.
 \doi{10.1007/s11558-018-9301-z}
 }
 \item{TOTA: }{
 Alschner, Wolfgang, Julia Seiermann, and Dmitriy Skougarevskiy. 2017.
-Text-as-data analysis of preferential trade agreements: Mapping the PTA landscape.
+"Text-as-data analysis of preferential trade agreements: Mapping the PTA landscape".
 UNCTAD Research Paper No. 5.
 \url{https://github.com/mappingtreaties/tota.git}.
 }
 \item{GPTAD: }{
 World Bank Group. 2014.
-Global Preferential Trade Agreement Database (GPTAD).
+"Global Preferential Trade Agreement Database (GPTAD)".
 Online database. \emph{World Bank Group}.
 \url{https://wits.worldbank.org/gptad/library.aspx}
 }
@@ -264,23 +264,22 @@ agreements datacube documentation
 }\if{html}{\out{</div>}}
 }
 \section{Mapping}{
-
-
-|  \emph{manytreaties}  | \emph{IEADB}  | \emph{HEIDI} | \emph{TFDD} | \emph{TREND} | \emph{LABPTA} | \emph{TOTA} | \emph{GPTAD} |
-|:-----------------|:---------|:--------|:--------|:---------|:-------|:-------|
-| Title  | Treaty Name | Name.of.the.agreement | DocumentName| Trade.Agreement | Name | name | Common.Name |
-| Signature  | Signature Date | signature.date | DateSigned | Year | year | date_signed | Date.of.Signature |
-| Force  | Date IEA entered into force | | | Year | year | date_into_force | Date.of.Entry.into.Force |
-| mitchID  | IEA# | | | | | |
-| heidiID  | | ID | | | | |
-| labptaID | | | | | Number | | |
-| tfddID | | | 2016Update ID | | | | |
-| AgreementType  | Agreement Type (level 2) | | DocType | | | | |
-| DocType  | Inclusion | | NumberParties | | | | Type |
-| GeogArea | | | GeoScope | | | | |
-| Basin | | | Basin Name | | | | |
-| Issue | | | Issue Area | | | | |
-| Lineage | | | PrimaryTFDDID | | | | |
+\tabular{llllllll}{
+   \emph{manytreaties} \tab \emph{IEADB} \tab \emph{HEIDI} \tab \emph{TFDD} \tab \emph{TREND} \tab \emph{LABPTA} \tab \emph{TOTA} \tab \emph{GPTAD} \cr
+   Title \tab Treaty Name \tab Name.of.the.agreement \tab DocumentName \tab Trade.Agreement \tab Name \tab name \tab Common.Name \cr
+   Signature \tab Signature Date \tab signature.date \tab DateSigned \tab Year \tab year \tab date_signed \tab Date.of.Signature \cr
+   Force \tab Date IEA entered into force \tab  \tab  \tab Year \tab year \tab date_into_force \tab Date.of.Entry.into.Force \cr
+   mitchID \tab IEA# \tab  \tab  \tab  \tab  \tab  \tab  \cr
+   heidiID \tab  \tab ID \tab  \tab  \tab  \tab  \tab  \cr
+   labptaID \tab  \tab  \tab  \tab  \tab Number \tab  \tab  \cr
+   tfddID \tab  \tab  \tab 2016Update ID \tab  \tab  \tab  \tab  \cr
+   AgreementType \tab Agreement Type (level 2) \tab  \tab DocType \tab  \tab  \tab  \tab  \cr
+   DocType \tab Inclusion \tab  \tab NumberParties \tab  \tab  \tab  \tab Type \cr
+   GeogArea \tab  \tab  \tab GeoScope \tab  \tab  \tab  \tab  \cr
+   Basin \tab  \tab  \tab Basin Name \tab  \tab  \tab  \tab  \cr
+   Issue \tab  \tab  \tab Issue Area \tab  \tab  \tab  \tab  \cr
+   Lineage \tab  \tab  \tab PrimaryTFDDID \tab  \tab  \tab  \tab  \cr
+}
 }
 
 \keyword{datasets}
