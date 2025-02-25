@@ -3,19 +3,26 @@
 \docType{data}
 \name{agreements}
 \alias{agreements}
-\title{agreements datacube}
+\title{agreements datacube documentation}
 \format{
+The agreements datacube is a list that contains the
+following 8 datasets: HUGGO, IEADB, HEIDI, TREND, LABPTA, TOTA, GPTAD, TFDD.
+For more information and references to each of the datasets used,
+please use the \code{manydata::call_sources()} and \code{manydata::compare_dimensions()} functions.
+
 \describe{
 \item{HUGGO \if{html}{\out{<img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>}}:}{A dataset with 4,837
 observations and 50 variables:
 manyID, treatyID, Title, Begin, End, Signature, Force, TreatyText, URL, Domain, AgreementType, DocType, GeogArea, gengID, mitchID, verified, DocValidUntilDate, Notes, ..., Topic, and Coder.}
 \item{IEADB: }{A dataset with 3,667
 observations and 10 variables:
-manyID, treatyID, Title, Begin, DocType, AgreementType, Signature, Force, Lineage, and mitchID.
-}
+manyID, treatyID, Title, Begin, DocType, AgreementType, Signature, Force, Lineage, and mitchID.}
 \item{HEIDI: }{A dataset with 2,280
 observations and 7 variables:
 manyID, treatyID, Title, Begin, Signature, Lineage, and heidiID.}
+\item{TFDD: }{A dataset with 784
+observations and 14 variables:
+manyID, Title, Begin, Signature, AgreementType, DocType, GeogArea, Water_as_consumable_rsc, NotTreaty, Issue, Basin, Lineage, tfddID, and treatyID.}
 \item{TREND: }{A dataset with 710
 observations and 7 variables:
 manyID, treatyID, Title, Begin, Signature, Force, and trendID.}
@@ -40,38 +47,43 @@ International agreements for manydata.
 }
 \item{IEADB: }{
 Mitchell, Ron B. et al. 2020.
-"What we know (and could know) about international environmental agreements".
+What we know (and could know) about international environmental agreements.
 \emph{Global Environmental Politics} 20.1, pp. 103-121.
 \url{https://www.iea.ulaval.ca/en/agreements}
 }
 \item{HEIDI: }{
 Morin, Jean-Frederic, and Chantal Blouin. 2019.
-"How environmental treaties contribute to global health governance".
+How environmental treaties contribute to global health governance.
 \emph{Globalization and health} 15.1, pp. 1-8.
 \url{https://www.chaire-epi.ulaval.ca/en/data/heidi}
 }
+\item{TFDD: }{
+College of Earth, Ocean and Atmospheric Science, Oregon State University. 2021.
+Product of the Transboundary FreshwaterDispute Database.
+\url{http://transboundarywaters.science.oregonstate.edu}
+}
 \item{TREND: }{
 Morin, Jean-Frederic, Andreas Dür, and Lisa Lechner. 2018.
-“Mapping the trade and environment nexus: Insights from a newdataset”.
+Mapping the trade and environment nexus: Insights from a new dataset.
 \emph{Global Environmental Politics} 18.1, pp. 122-139.
 \url{http://www.chaire-epi.ulaval.ca/en/trend}
 }
 \item{LABPTA: }{
 Raess, Damien, Andreas Dür, and D. Sari. 2018.
-“Protecting labor rights in preferential trade agreements: The role of trade unions, left governments, and skilled labor”.
+Protecting labor rights in preferential trade agreements: The role of trade unions, left governments, and skilled labor.
 \emph{The Review of International Organizations} 2.13, pp. 143-162.
 \doi{10.1007/s11558-018-9301-z}
 }
 \item{TOTA: }{
 Alschner, Wolfgang, Julia Seiermann, and Dmitriy Skougarevskiy. 2017.
-“Text-as-data analysis of preferential trade agreements: Mapping the PTA landscape”.
+Text-as-data analysis of preferential trade agreements: Mapping the PTA landscape.
 UNCTAD Research Paper No. 5.
 \url{https://github.com/mappingtreaties/tota.git}.
 }
 \item{GPTAD: }{
 World Bank Group. 2014.
-\emph{Global Preferential Trade Agreement Database (GPTAD)}.
-Online database. World Bank Group.
+Global Preferential Trade Agreement Database (GPTAD).
+Online database. \emph{World Bank Group}.
 \url{https://wits.worldbank.org/gptad/library.aspx}
 }
 }
@@ -80,10 +92,7 @@ Online database. World Bank Group.
 agreements
 }
 \description{
-The \code{agreements} datacube is a list containing
-7 datasets:
-HUGGO, IEADB, HEIDI, TREND, LABPTA, TOTA, and GPTAD.
-It is a work-in-progress, so please let us know if you have any comments or suggestions.
+agreements datacube documentation
 }
 \details{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#> $HUGGO
@@ -174,6 +183,27 @@ It is a work-in-progress, so please let us know if you have any comments or sugg
 #> ----------------------------------------------------------------------------
 #> 
 #> 
+#> $TFDD
+#> ------------------------------------------------------------------------------------
+#> |      Column Name      |  Data Type  |  Observations  |  Missing  |  Missing (\%)  |
+#> ------------------------------------------------------------------------------------
+#> |        manyID         |  character  |             784|     0     |       0       |
+#> |         Title         |  character  |             784|     0     |       0       |
+#> |         Begin         |    mdate    |             784|     5     |     0.64      |
+#> |       Signature       |    mdate    |             784|     5     |     0.64      |
+#> |     AgreementType     |  character  |             784|    200    |     25.51     |
+#> |        DocType        |  character  |             784|    14     |     1.79      |
+#> |       GeogArea        |  character  |             784|    239    |     30.48     |
+#> |Water_as_consumable_rsc|  character  |             784|     1     |     0.13      |
+#> |       NotTreaty       |  character  |             784|     1     |     0.13      |
+#> |         Issue         |  character  |             784|    234    |     29.85     |
+#> |         Basin         |  character  |             784|     0     |       0       |
+#> |        Lineage        |  character  |             784|    345    |     44.01     |
+#> |        tfddID         |  character  |             784|     0     |       0       |
+#> |       treatyID        |  character  |             784|     0     |       0       |
+#> ------------------------------------------------------------------------------------
+#> 
+#> 
 #> $TREND
 #> ----------------------------------------------------------------------------
 #> |  Column Name  |  Data Type  |  Observations  |  Missing  |  Missing (\%)  |
@@ -234,17 +264,23 @@ It is a work-in-progress, so please let us know if you have any comments or sugg
 }\if{html}{\out{</div>}}
 }
 \section{Mapping}{
-\tabular{lllllll}{
-   \emph{manytreaties} \tab \emph{IEADB} \tab \emph{HEIDI} \tab \emph{TREND} \tab \emph{LABPTA} \tab \emph{TOTA} \tab \emph{GPTAD} \cr
-   Title \tab Treaty Name \tab Name.of.the.agreement \tab Trade.Agreement \tab Name \tab name \tab Common.Name \cr
-   Signature \tab Signature Date \tab signature.date \tab Year \tab year \tab date_signed \tab Date.of.Signature \cr
-   Force \tab Date IEA entered into force \tab  \tab Year \tab year \tab date_into_force \tab Date.of.Entry.into.Force \cr
-   mitchID \tab IEA# \tab  \tab  \tab  \tab  \tab  \cr
-   heidiID \tab  \tab ID \tab  \tab  \tab  \tab  \cr
-   labptaID \tab  \tab  \tab  \tab Number \tab  \tab  \cr
-   AgreementType \tab Agreement Type (level 2) \tab  \tab  \tab  \tab  \tab  \cr
-   DocType \tab Inclusion \tab  \tab  \tab  \tab  \tab Type \cr
-}
+
+
+|  \emph{manytreaties}  | \emph{IEADB}  | \emph{HEIDI} | \emph{TFDD} | \emph{TREND} | \emph{LABPTA} | \emph{TOTA} | \emph{GPTAD} |
+|:-----------------|:---------|:--------|:--------|:---------|:-------|:-------|
+| Title  | Treaty Name | Name.of.the.agreement | DocumentName| Trade.Agreement | Name | name | Common.Name |
+| Signature  | Signature Date | signature.date | DateSigned | Year | year | date_signed | Date.of.Signature |
+| Force  | Date IEA entered into force | | | Year | year | date_into_force | Date.of.Entry.into.Force |
+| mitchID  | IEA# | | | | | |
+| heidiID  | | ID | | | | |
+| labptaID | | | | | Number | | |
+| tfddID | | | 2016Update ID | | | | |
+| AgreementType  | Agreement Type (level 2) | | DocType | | | | |
+| DocType  | Inclusion | | NumberParties | | | | Type |
+| GeogArea | | | GeoScope | | | | |
+| Basin | | | Basin Name | | | | |
+| Issue | | | Issue Area | | | | |
+| Lineage | | | PrimaryTFDDID | | | | |
 }
 
 \keyword{datasets}
