@@ -102,6 +102,6 @@
 #' @md
 #' @details
 #' ``` {r, echo = FALSE, warning = FALSE}
-#' lapply(agreements, messydates::mreport)
+#' lapply(agreements, manydata::mreport)
 #' ```
 "agreements"

@@ -12,8 +12,8 @@ please use the \code{manydata::call_sources()} and \code{manydata::compare_dimen
 
 \describe{
 \item{HUGGO \if{html}{\out{<img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>}}:}{A dataset with 4,837
-observations and 50 variables:
-manyID, treatyID, Title, Begin, End, Signature, Force, TreatyText, URL, Domain, AgreementType, DocType, GeogArea, gengID, mitchID, verified, DocValidUntilDate, Notes, ..., Topic, and Coder.}
+observations and 39 variables:
+manyID, treatyID, Title, Begin, End, Signature, Force, Term, TreatyText, TextURL, Domain, Topic, AgreementType, MEA_type, DocType, Download, Ambit, Region, ..., Notes, and gengID.}
 \item{IEADB: }{A dataset with 3,667
 observations and 10 variables:
 manyID, treatyID, Title, Begin, DocType, AgreementType, Signature, Force, Lineage, and mitchID.}
@@ -96,171 +96,160 @@ agreements datacube documentation
 }
 \details{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#> $HUGGO
-#> ------------------------------------------------------------------------------
-#> |   Column Name   |  Data Type  |  Observations  |  Missing  |  Missing (\%)  |
-#> ------------------------------------------------------------------------------
-#> |     manyID      |  character  |            4837|     0     |       0       |
-#> |    treatyID     |  character  |            4837|     0     |       0       |
-#> |      Title      |  character  |            4837|     0     |       0       |
-#> |      Begin      |    mdate    |            4837|    57     |     1.18      |
-#> |       End       |    mdate    |            4837|   3156    |     65.25     |
-#> |    Signature    |    mdate    |            4837|    57     |     1.18      |
-#> |      Force      |    mdate    |            4837|   1816    |     37.54     |
-#> |   TreatyText    |  character  |            4837|     0     |       0       |
-#> |       URL       |  character  |            4837|   2796    |     57.8      |
-#> |     Domain      |  character  |            4837|    79     |     1.63      |
-#> |  AgreementType  |  character  |            4837|   2132    |     44.08     |
-#> |     DocType     |  character  |            4837|   2096    |     43.33     |
-#> |    GeogArea     |  character  |            4837|   2697    |     55.76     |
-#> |     gengID      |  character  |            4837|   1054    |     21.79     |
-#> |     mitchID     |  character  |            4837|   4142    |     85.63     |
-#> |    verified     |  character  |            4837|   4789    |     99.01     |
-#> |DocValidUntilDate|  character  |            4837|   4803    |     99.3      |
-#> |      Notes      |  character  |            4837|   4790    |     99.03     |
-#> |    Download     |  character  |            4837|   3939    |     81.43     |
-#> |    MEA_type     |  character  |            4837|   4142    |     85.63     |
-#> |      Ambit      |  character  |            4837|   4419    |     91.36     |
-#> |     Region      |  character  |            4837|   4591    |     94.91     |
-#> |    Keywords     |  character  |            4837|   4431    |     91.61     |
-#> |     Lineage     |  character  |            4837|   4142    |     85.63     |
-#> |    Sequence     |  character  |            4837|   4143    |     85.65     |
-#> |    AdoptedIn    |  character  |            4837|   4411    |     91.19     |
-#> |    Languages    |  character  |            4837|   4361    |     90.16     |
-#> |   Appendices    |  character  |            4837|   4802    |     99.28     |
-#> |   Depository    |  character  |            4837|   4451    |     92.02     |
-#> |  DepositoryURL  |  character  |            4837|   4821    |     99.67     |
-#> |    Published    |  character  |            4837|   4576    |     94.6      |
-#> |    Website1     |  character  |            4837|   4456    |     92.12     |
-#> |    Website2     |  character  |            4837|   4813    |     99.5      |
-#> |   Secretariat   |  character  |            4837|   4143    |     85.65     |
-#> | SecretariatURL  |  character  |            4837|   4143    |     85.65     |
-#> |      UNEP       |  character  |            4837|   4636    |     95.84     |
-#> |       Lit       |  character  |            4837|   4292    |     88.73     |
-#> |      Data       |  character  |            4837|   4300    |     88.9      |
-#> |      Coded      |  character  |            4837|   4539    |     93.84     |
-#> |    Abstract     |  character  |            4837|   4811    |     99.46     |
-#> |    Language     |  character  |            4837|   3488    |     72.11     |
-#> |    OrigTitle    |  character  |            4837|   4781    |     98.84     |
-#> |      match      |  character  |            4837|   4781    |     98.84     |
-#> |    Citation     |  character  |            4837|   4836    |     99.98     |
-#> |     Formal      |  character  |            4837|   4608    |     95.27     |
-#> |     Dataset     |  character  |            4837|   4608    |     95.27     |
-#> |     Source      |  character  |            4837|   4609    |     95.29     |
-#> |    Comments     |  character  |            4837|   4814    |     99.52     |
-#> |      Topic      |  character  |            4837|   4608    |     95.27     |
-#> |      Coder      |  character  |            4837|     0     |       0       |
-#> ------------------------------------------------------------------------------
+#> --------------------------------------------------------
+#> |  Variable   |  Class  |  Obs  |  Missing  |  Miss \%  |
+#> --------------------------------------------------------
+#> |manyID       |character|   4837|          0|         0|
+#> |treatyID     |character|   4837|          0|         0|
+#> |Title        |character|   4837|          0|         0|
+#> |Begin        |mdate    |   4780|         57|      1.18|
+#> |End          |mdate    |   1681|       3156|     65.25|
+#> |Signature    |mdate    |   4780|         57|      1.18|
+#> |Force        |mdate    |   3021|       1816|     37.54|
+#> |Term         |mdate    |     32|       4805|     99.34|
+#> |TreatyText   |logical  |   4837|          0|         0|
+#> |TextURL      |character|   2043|       2794|     57.76|
+#> |Domain       |character|   4758|         79|      1.63|
+#> |Topic        |character|    229|       4608|     95.27|
+#> |AgreementType|character|   2705|       2132|     44.08|
+#> |MEA_type     |character|    695|       4142|     85.63|
+#> |DocType      |character|   2741|       2096|     43.33|
+#> |Download     |logical  |    898|       3939|     81.43|
+#> |Ambit        |character|   2335|       2502|     51.73|
+#> |Region       |character|    246|       4591|     94.91|
+#> |Keywords     |character|    406|       4431|     91.61|
+#> |Lineage      |character|    695|       4142|     85.63|
+#> |Sequence     |character|    694|       4143|     85.65|
+#> |AdoptedIn    |character|    426|       4411|     91.19|
+#> |Depository   |character|    386|       4451|     92.02|
+#> |Published    |character|    261|       4576|      94.6|
+#> |Website      |character|    843|       3994|     82.57|
+#> |Secretariat  |character|    694|       4143|     85.65|
+#> |Abstract     |character|     26|       4811|     99.46|
+#> |Appendices   |numeric  |     35|       4802|     99.28|
+#> |Language     |character|   1349|       3488|     72.11|
+#> |Languages    |character|    476|       4361|     90.16|
+#> |OrigTitle    |character|     56|       4781|     98.84|
+#> |match        |character|     56|       4781|     98.84|
+#> |Formal       |logical  |    229|       4608|     95.27|
+#> |Source       |character|    229|       4608|     95.27|
+#> |Coder        |character|   4837|          0|         0|
+#> |Coded        |character|    298|       4539|     93.84|
+#> |Comments     |character|     71|       4766|     98.53|
+#> |Notes        |character|     47|       4790|     99.03|
+#> |gengID       |character|   3783|       1054|     21.79|
+#> --------------------------------------------------------
 #> 
 #> 
 #> $IEADB
-#> ----------------------------------------------------------------------------
-#> |  Column Name  |  Data Type  |  Observations  |  Missing  |  Missing (\%)  |
-#> ----------------------------------------------------------------------------
-#> |    manyID     |  character  |            3667|     0     |       0       |
-#> |   treatyID    |  character  |            3667|     0     |       0       |
-#> |     Title     |  character  |            3667|     0     |       0       |
-#> |     Begin     |    mdate    |            3667|     0     |       0       |
-#> |    DocType    |  character  |            3667|     0     |       0       |
-#> | AgreementType |  character  |            3667|     0     |       0       |
-#> |   Signature   |    mdate    |            3667|    65     |     1.77      |
-#> |     Force     |    mdate    |            3667|    868    |     23.67     |
-#> |    Lineage    |  character  |            3667|     0     |       0       |
-#> |    mitchID    |  character  |            3667|     0     |       0       |
-#> ----------------------------------------------------------------------------
+#> --------------------------------------------------------
+#> |  Variable   |  Class  |  Obs  |  Missing  |  Miss \%  |
+#> --------------------------------------------------------
+#> |manyID       |character|   3667|          0|         0|
+#> |treatyID     |character|   3667|          0|         0|
+#> |Title        |character|   3667|          0|         0|
+#> |Begin        |mdate    |   3667|          0|         0|
+#> |DocType      |character|   3667|          0|         0|
+#> |AgreementType|character|   3667|          0|         0|
+#> |Signature    |mdate    |   3602|         65|      1.77|
+#> |Force        |mdate    |   2799|        868|     23.67|
+#> |Lineage      |character|   3667|          0|         0|
+#> |mitchID      |character|   3667|          0|         0|
+#> --------------------------------------------------------
 #> 
 #> 
 #> $HEIDI
-#> ----------------------------------------------------------------------------
-#> |  Column Name  |  Data Type  |  Observations  |  Missing  |  Missing (\%)  |
-#> ----------------------------------------------------------------------------
-#> |    manyID     |  character  |            2280|     0     |       0       |
-#> |   treatyID    |  character  |            2280|     0     |       0       |
-#> |     Title     |  character  |            2280|     0     |       0       |
-#> |     Begin     |    mdate    |            2280|    27     |     1.18      |
-#> |   Signature   |    mdate    |            2280|    27     |     1.18      |
-#> |    Lineage    |  character  |            2280|     0     |       0       |
-#> |    heidiID    |   numeric   |            2280|     0     |       0       |
-#> ----------------------------------------------------------------------------
+#> -------------------------------------------------------
+#> |  Variable  |  Class  |  Obs  |  Missing  |  Miss \%  |
+#> -------------------------------------------------------
+#> |manyID      |character|   2280|          0|         0|
+#> |treatyID    |character|   2280|          0|         0|
+#> |Title       |character|   2280|          0|         0|
+#> |Begin       |mdate    |   2253|         27|      1.18|
+#> |Signature   |mdate    |   2253|         27|      1.18|
+#> |Lineage     |character|   2280|          0|         0|
+#> |heidiID     |numeric  |   2280|          0|         0|
+#> -------------------------------------------------------
 #> 
 #> 
 #> $TFDD
-#> ------------------------------------------------------------------------------------
-#> |      Column Name      |  Data Type  |  Observations  |  Missing  |  Missing (\%)  |
-#> ------------------------------------------------------------------------------------
-#> |        manyID         |  character  |             784|     0     |       0       |
-#> |         Title         |  character  |             784|     0     |       0       |
-#> |         Begin         |    mdate    |             784|     5     |     0.64      |
-#> |       Signature       |    mdate    |             784|     5     |     0.64      |
-#> |     AgreementType     |  character  |             784|    200    |     25.51     |
-#> |        DocType        |  character  |             784|    14     |     1.79      |
-#> |       GeogArea        |  character  |             784|    239    |     30.48     |
-#> |Water_as_consumable_rsc|  character  |             784|     1     |     0.13      |
-#> |       NotTreaty       |  character  |             784|     1     |     0.13      |
-#> |         Issue         |  character  |             784|    234    |     29.85     |
-#> |         Basin         |  character  |             784|     0     |       0       |
-#> |        Lineage        |  character  |             784|    345    |     44.01     |
-#> |        tfddID         |  character  |             784|     0     |       0       |
-#> |       treatyID        |  character  |             784|     0     |       0       |
-#> ------------------------------------------------------------------------------------
+#> ------------------------------------------------------------------
+#> |       Variable        |  Class  |  Obs  |  Missing  |  Miss \%  |
+#> ------------------------------------------------------------------
+#> |manyID                 |character|    784|          0|         0|
+#> |Title                  |character|    784|          0|         0|
+#> |Begin                  |mdate    |    779|          5|      0.64|
+#> |Signature              |mdate    |    779|          5|      0.64|
+#> |AgreementType          |character|    584|        200|     25.51|
+#> |DocType                |character|    770|         14|      1.79|
+#> |GeogArea               |character|    545|        239|     30.48|
+#> |Water_as_consumable_rsc|character|    783|          1|      0.13|
+#> |NotTreaty              |character|    783|          1|      0.13|
+#> |Issue                  |character|    550|        234|     29.85|
+#> |Basin                  |character|    784|          0|         0|
+#> |Lineage                |character|    439|        345|     44.01|
+#> |tfddID                 |character|    784|          0|         0|
+#> |treatyID               |character|    784|          0|         0|
+#> ------------------------------------------------------------------
 #> 
 #> 
 #> $TREND
-#> ----------------------------------------------------------------------------
-#> |  Column Name  |  Data Type  |  Observations  |  Missing  |  Missing (\%)  |
-#> ----------------------------------------------------------------------------
-#> |    manyID     |  character  |             710|     0     |       0       |
-#> |   treatyID    |  character  |             710|     0     |       0       |
-#> |     Title     |  character  |             710|     0     |       0       |
-#> |     Begin     |    mdate    |             710|     5     |      0.7      |
-#> |   Signature   |    mdate    |             710|     5     |      0.7      |
-#> |     Force     |    mdate    |             710|     5     |      0.7      |
-#> |    trendID    |  character  |             710|     0     |       0       |
-#> ----------------------------------------------------------------------------
+#> -------------------------------------------------------
+#> |  Variable  |  Class  |  Obs  |  Missing  |  Miss \%  |
+#> -------------------------------------------------------
+#> |manyID      |character|    710|          0|         0|
+#> |treatyID    |character|    710|          0|         0|
+#> |Title       |character|    710|          0|         0|
+#> |Begin       |mdate    |    705|          5|       0.7|
+#> |Signature   |mdate    |    705|          5|       0.7|
+#> |Force       |mdate    |    705|          5|       0.7|
+#> |trendID     |character|    710|          0|         0|
+#> -------------------------------------------------------
 #> 
 #> 
 #> $LABPTA
-#> ----------------------------------------------------------------------------
-#> |  Column Name  |  Data Type  |  Observations  |  Missing  |  Missing (\%)  |
-#> ----------------------------------------------------------------------------
-#> |    manyID     |  character  |             483|     0     |       0       |
-#> |   treatyID    |  character  |             483|     0     |       0       |
-#> |     Title     |  character  |             483|     0     |       0       |
-#> |     Begin     |    mdate    |             483|     0     |       0       |
-#> |   Signature   |    mdate    |             483|     0     |       0       |
-#> |     Force     |    mdate    |             483|     0     |       0       |
-#> |   labptaID    |  character  |             483|     0     |       0       |
-#> ----------------------------------------------------------------------------
+#> -------------------------------------------------------
+#> |  Variable  |  Class  |  Obs  |  Missing  |  Miss \%  |
+#> -------------------------------------------------------
+#> |manyID      |character|    483|          0|         0|
+#> |treatyID    |character|    483|          0|         0|
+#> |Title       |character|    483|          0|         0|
+#> |Begin       |mdate    |    483|          0|         0|
+#> |Signature   |mdate    |    483|          0|         0|
+#> |Force       |mdate    |    483|          0|         0|
+#> |labptaID    |character|    483|          0|         0|
+#> -------------------------------------------------------
 #> 
 #> 
 #> $TOTA
-#> ----------------------------------------------------------------------------
-#> |  Column Name  |  Data Type  |  Observations  |  Missing  |  Missing (\%)  |
-#> ----------------------------------------------------------------------------
-#> |    manyID     |  character  |             442|     0     |       0       |
-#> |   treatyID    |  character  |             442|     0     |       0       |
-#> |     Title     |  character  |             442|     0     |       0       |
-#> |     Begin     |    mdate    |             442|     0     |       0       |
-#> |   Signature   |    mdate    |             442|     0     |       0       |
-#> |     Force     |    mdate    |             442|     3     |     0.68      |
-#> |    totaID     |  character  |             442|     0     |       0       |
-#> ----------------------------------------------------------------------------
+#> -------------------------------------------------------
+#> |  Variable  |  Class  |  Obs  |  Missing  |  Miss \%  |
+#> -------------------------------------------------------
+#> |manyID      |character|    442|          0|         0|
+#> |treatyID    |character|    442|          0|         0|
+#> |Title       |character|    442|          0|         0|
+#> |Begin       |mdate    |    442|          0|         0|
+#> |Signature   |mdate    |    442|          0|         0|
+#> |Force       |mdate    |    439|          3|      0.68|
+#> |totaID      |character|    442|          0|         0|
+#> -------------------------------------------------------
 #> 
 #> 
 #> $GPTAD
-#> ----------------------------------------------------------------------------
-#> |  Column Name  |  Data Type  |  Observations  |  Missing  |  Missing (\%)  |
-#> ----------------------------------------------------------------------------
-#> |    manyID     |  character  |             340|     0     |       0       |
-#> |   treatyID    |  character  |             340|     0     |       0       |
-#> |     Title     |  character  |             340|     0     |       0       |
-#> |     Begin     |    mdate    |             340|    30     |     8.82      |
-#> | AgreementType |  character  |             340|     0     |       0       |
-#> |    DocType    |  character  |             340|     0     |       0       |
-#> |   GeogArea    |  character  |             340|    75     |     22.06     |
-#> |   Signature   |    mdate    |             340|    53     |     15.59     |
-#> |     Force     |    mdate    |             340|    63     |     18.53     |
-#> |    gptadID    |  character  |             340|     0     |       0       |
-#> ----------------------------------------------------------------------------
+#> --------------------------------------------------------
+#> |  Variable   |  Class  |  Obs  |  Missing  |  Miss \%  |
+#> --------------------------------------------------------
+#> |manyID       |character|    340|          0|         0|
+#> |treatyID     |character|    340|          0|         0|
+#> |Title        |character|    340|          0|         0|
+#> |Begin        |mdate    |    310|         30|      8.82|
+#> |AgreementType|character|    340|          0|         0|
+#> |DocType      |character|    340|          0|         0|
+#> |GeogArea     |character|    265|         75|     22.06|
+#> |Signature    |mdate    |    287|         53|     15.59|
+#> |Force        |mdate    |    277|         63|     18.53|
+#> |gptadID      |character|    340|          0|         0|
+#> --------------------------------------------------------
 }\if{html}{\out{</div>}}
 }
 \section{Mapping}{

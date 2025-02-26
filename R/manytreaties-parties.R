@@ -64,6 +64,6 @@
 #' @md
 #' @details
 #' ``` {r, echo = FALSE, warning = FALSE}
-#' lapply(parties, messydates::mreport)
+#' lapply(parties, mreport)
 #' ```
 "parties"

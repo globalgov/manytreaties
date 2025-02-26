@@ -58,101 +58,101 @@ It is a work-in-progress, so please let us know if you have any comments or sugg
 }
 \details{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#> $HUGGO
-#> ------------------------------------------------------------------------------
-#> |   Column Name   |  Data Type  |  Observations  |  Missing  |  Missing (\%)  |
-#> ------------------------------------------------------------------------------
-#> |     manyID      |  character  |           91729|     0     |       0       |
-#> |      Title      |  character  |           91729|     0     |       0       |
-#> |      Begin      |    mdate    |           91729|    12     |     0.01      |
-#> |     stateID     |  character  |           91729|     0     |       0       |
-#> |    StateName    |  character  |           91729|   50485   |     55.04     |
-#> | StateSignature  |    mdate    |           91729|   17944   |     19.56     |
-#> |StateRatification|    mdate    |           91729|   63960   |     69.73     |
-#> |   StateForce    |    mdate    |           91729|   50851   |     55.44     |
-#> |    StateEnd     |    mdate    |           91729|   33471   |     36.49     |
-#> |    Rat=Notif    |  character  |           91729|   90502   |     98.66     |
-#> |    Accession    |    mdate    |           91729|   77230   |     84.19     |
-#> |   Succession    |  character  |           91729|     0     |       0       |
-#> |    treatyID     |  character  |           91729|     0     |       0       |
-#> |    Signature    |    mdate    |           91729|    16     |     0.02      |
-#> |      Force      |    mdate    |           91729|   34549   |     37.66     |
-#> |       End       |    mdate    |           91729|   38792   |     42.29     |
-#> |     gengID      |  character  |           91729|   40770   |     44.45     |
-#> |       url       |  character  |           91729|   90798   |     98.99     |
-#> |      ieaID      |  character  |           91729|   49378   |     53.83     |
-#> |    ecolexID     |  character  |           91729|   71730   |     78.2      |
-#> |   StateForce2   |    mdate    |           91729|   85042   |     92.71     |
-#> |   StateForce3   |    mdate    |           91729|   88039   |     95.98     |
-#> |    StateEnd2    |    mdate    |           91729|   88033   |     95.97     |
-#> |      Term       |    mdate    |           91729|   90551   |     98.72     |
-#> |    Comments     |  character  |           91729|   88449   |     96.42     |
-#> |     Deposit     |  character  |           91729|   90079   |     98.2      |
-#> |    obsolete     |  character  |           91729|   79154   |     86.29     |
-#> | ProvisionalApp  |  character  |           91729|   90957   |     99.16     |
-#> |   Reservation   |  character  |           91729|   90973   |     99.18     |
-#> |      Notes      |  character  |           91729|   91543   |     99.8      |
-#> |stateForce_ecolex|    mdate    |           91729|   73212   |     79.81     |
-#> | stateForce_iea  |    mdate    |           91729|   73212   |     79.81     |
-#> |     Consent     |  character  |           91729|   91505   |     99.76     |
-#> |   Acceptance    |  character  |           91729|   91204   |     99.43     |
-#> |Orig_noneng_title|  character  |           91729|   91725   |      100      |
-#> |      match      |  character  |           91729|   91725   |      100      |
-#> |     gptadID     |  character  |           91729|   89560   |     97.64     |
-#> |     destaID     |  character  |           91729|   86694   |     94.51     |
-#> |     Title2      |  character  |           91729|   91252   |     99.48     |
-#> |     Domain      |  character  |           91729|     0     |       0       |
-#> |      Coder      |  character  |           91729|    15     |     0.02      |
-#> ------------------------------------------------------------------------------
+#> ------------------------------------------------------------
+#> |    Variable     |  Class  |  Obs  |  Missing  |  Miss \%  |
+#> ------------------------------------------------------------
+#> |manyID           |character|  91729|          0|         0|
+#> |Title            |character|  91729|          0|         0|
+#> |Begin            |mdate    |  91717|         12|      0.01|
+#> |stateID          |character|  91729|          0|         0|
+#> |StateName        |character|  41244|      50485|     55.04|
+#> |StateSignature   |mdate    |  73785|      17944|     19.56|
+#> |StateRatification|mdate    |  27769|      63960|     69.73|
+#> |StateForce       |mdate    |  40878|      50851|     55.44|
+#> |StateEnd         |mdate    |  58258|      33471|     36.49|
+#> |Rat=Notif        |character|   1227|      90502|     98.66|
+#> |Accession        |mdate    |  14499|      77230|     84.19|
+#> |Succession       |character|  91729|          0|         0|
+#> |treatyID         |character|  91729|          0|         0|
+#> |Signature        |mdate    |  91713|         16|      0.02|
+#> |Force            |mdate    |  57180|      34549|     37.66|
+#> |End              |mdate    |  52937|      38792|     42.29|
+#> |gengID           |character|  50959|      40770|     44.45|
+#> |url              |character|    931|      90798|     98.99|
+#> |ieaID            |character|  42351|      49378|     53.83|
+#> |ecolexID         |character|  19999|      71730|      78.2|
+#> |StateForce2      |mdate    |   6687|      85042|     92.71|
+#> |StateForce3      |mdate    |   3690|      88039|     95.98|
+#> |StateEnd2        |mdate    |   3696|      88033|     95.97|
+#> |Term             |mdate    |   1178|      90551|     98.72|
+#> |Comments         |character|   3280|      88449|     96.42|
+#> |Deposit          |character|   1650|      90079|      98.2|
+#> |obsolete         |character|  12575|      79154|     86.29|
+#> |ProvisionalApp   |character|    772|      90957|     99.16|
+#> |Reservation      |character|    756|      90973|     99.18|
+#> |Notes            |character|    186|      91543|      99.8|
+#> |stateForce_ecolex|mdate    |  18517|      73212|     79.81|
+#> |stateForce_iea   |mdate    |  18517|      73212|     79.81|
+#> |Consent          |character|    224|      91505|     99.76|
+#> |Acceptance       |character|    525|      91204|     99.43|
+#> |Orig_noneng_title|character|      4|      91725|       100|
+#> |match            |character|      4|      91725|       100|
+#> |gptadID          |character|   2169|      89560|     97.64|
+#> |destaID          |character|   5035|      86694|     94.51|
+#> |Title2           |character|    477|      91252|     99.48|
+#> |Domain           |character|  91729|          0|         0|
+#> |Coder            |character|  91714|         15|      0.02|
+#> ------------------------------------------------------------
 #> 
 #> 
 #> $IEADB
-#> ----------------------------------------------------------------------------
-#> |  Column Name  |  Data Type  |  Observations  |  Missing  |  Missing (\%)  |
-#> ----------------------------------------------------------------------------
-#> |    manyID     |  character  |           15463|     0     |       0       |
-#> |   treatyID    |  character  |           15463|     0     |       0       |
-#> |     Title     |  character  |           15463|     0     |       0       |
-#> |     Begin     |    mdate    |           15463|     0     |       0       |
-#> |    stateID    |  character  |           15463|     0     |       0       |
-#> |      End      |    mdate    |           15463|   14593   |     94.37     |
-#> |stateSignature |    mdate    |           15463|   5797    |     37.49     |
-#> |   Signature   |    mdate    |           15463|     0     |       0       |
-#> |      Rat      |    mdate    |           15463|   5485    |     35.47     |
-#> |     Force     |    mdate    |           15463|     0     |       0       |
-#> |    DocType    |  character  |           15463|     0     |       0       |
-#> |    ieadbID    |   numeric   |           15463|     0     |       0       |
-#> ----------------------------------------------------------------------------
+#> ---------------------------------------------------------
+#> |   Variable   |  Class  |  Obs  |  Missing  |  Miss \%  |
+#> ---------------------------------------------------------
+#> |manyID        |character|  15463|          0|         0|
+#> |treatyID      |character|  15463|          0|         0|
+#> |Title         |character|  15463|          0|         0|
+#> |Begin         |mdate    |  15463|          0|         0|
+#> |stateID       |character|  15463|          0|         0|
+#> |End           |mdate    |    870|      14593|     94.37|
+#> |stateSignature|mdate    |   9666|       5797|     37.49|
+#> |Signature     |mdate    |  15463|          0|         0|
+#> |Rat           |mdate    |   9978|       5485|     35.47|
+#> |Force         |mdate    |  15463|          0|         0|
+#> |DocType       |character|  15463|          0|         0|
+#> |ieadbID       |numeric  |  15463|          0|         0|
+#> ---------------------------------------------------------
 #> 
 #> 
 #> $GPTAD
-#> ----------------------------------------------------------------------------
-#> |  Column Name  |  Data Type  |  Observations  |  Missing  |  Missing (\%)  |
-#> ----------------------------------------------------------------------------
-#> |    manyID     |  character  |            2192|     0     |       0       |
-#> |   treatyID    |  character  |            2192|     0     |       0       |
-#> |     Title     |  character  |            2192|     0     |       0       |
-#> |     Begin     |    mdate    |            2192|    99     |     4.52      |
-#> |    stateID    |  character  |            2192|    55     |     2.51      |
-#> |   Signature   |    mdate    |            2192|    310    |     14.14     |
-#> |     Force     |    mdate    |            2192|    285    |      13       |
-#> |   StateName   |  character  |            2192|    36     |     1.64      |
-#> |    gptadID    |  character  |            2192|     0     |       0       |
-#> ----------------------------------------------------------------------------
+#> -------------------------------------------------------
+#> |  Variable  |  Class  |  Obs  |  Missing  |  Miss \%  |
+#> -------------------------------------------------------
+#> |manyID      |character|   2192|          0|         0|
+#> |treatyID    |character|   2192|          0|         0|
+#> |Title       |character|   2192|          0|         0|
+#> |Begin       |mdate    |   2093|         99|      4.52|
+#> |stateID     |character|   2137|         55|      2.51|
+#> |Signature   |mdate    |   1882|        310|     14.14|
+#> |Force       |mdate    |   1907|        285|        13|
+#> |StateName   |character|   2156|         36|      1.64|
+#> |gptadID     |character|   2192|          0|         0|
+#> -------------------------------------------------------
 #> 
 #> 
 #> $TFDD
-#> ----------------------------------------------------------------------------
-#> |  Column Name  |  Data Type  |  Observations  |  Missing  |  Missing (\%)  |
-#> ----------------------------------------------------------------------------
-#> |    manyID     |  character  |            1832|     0     |       0       |
-#> |   treatyID    |  character  |            1832|     0     |       0       |
-#> |     Title     |  character  |            1832|     1     |     0.05      |
-#> |     Begin     |    mdate    |            1832|    102    |     5.57      |
-#> |    stateID    |  character  |            1832|     1     |     0.05      |
-#> |   Signature   |    mdate    |            1832|    102    |     5.57      |
-#> |    tfddID     |   numeric   |            1832|     1     |     0.05      |
-#> |  Memberships  |  character  |            1832|    805    |     43.94     |
-#> ----------------------------------------------------------------------------
+#> -------------------------------------------------------
+#> |  Variable  |  Class  |  Obs  |  Missing  |  Miss \%  |
+#> -------------------------------------------------------
+#> |manyID      |character|   1832|          0|         0|
+#> |treatyID    |character|   1832|          0|         0|
+#> |Title       |character|   1831|          1|      0.05|
+#> |Begin       |mdate    |   1730|        102|      5.57|
+#> |stateID     |character|   1831|          1|      0.05|
+#> |Signature   |mdate    |   1730|        102|      5.57|
+#> |tfddID      |numeric  |   1831|          1|      0.05|
+#> |Memberships |character|   1027|        805|     43.94|
+#> -------------------------------------------------------
 }\if{html}{\out{</div>}}
 }
 \section{Mapping}{
