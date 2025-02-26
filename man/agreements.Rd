@@ -129,11 +129,8 @@ agreements datacube documentation
 #> |Languages    |character|    476|       4361|     90.16|
 #> |OrigTitle    |character|     56|       4781|     98.84|
 #> |match        |character|     56|       4781|     98.84|
-#> |Source       |character|    229|       4608|     95.27|
 #> |Coder        |character|   4837|          0|         0|
-#> |Coded        |character|    298|       4539|     93.84|
-#> |Comments     |character|     71|       4766|     98.53|
-#> |Notes        |character|     47|       4790|     99.03|
+#> |Comments     |character|    358|       4479|      92.6|
 #> |gengID       |character|   3783|       1054|     21.79|
 #> --------------------------------------------------------
 #> 
