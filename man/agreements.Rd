@@ -12,8 +12,8 @@ please use the \code{manydata::call_sources()} and \code{manydata::compare_dimen
 
 \describe{
 \item{HUGGO \if{html}{\out{<img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>}}:}{A dataset with 4,837
-observations and 39 variables:
-manyID, treatyID, Title, Begin, End, Signature, Force, Term, TreatyText, TextURL, Domain, Topic, AgreementType, MEA_type, DocType, Download, Ambit, Region, ..., Notes, and gengID.}
+observations and 30 variables:
+manyID, treatyID, Title, Begin, End, Signature, Force, Term, TreatyText, TextURL, Domain, AgreementType, DocType, Ambit, Region, Keywords, Lineage, AdoptedIn, ..., Comments, and gengID.}
 \item{IEADB: }{A dataset with 3,667
 observations and 10 variables:
 manyID, treatyID, Title, Begin, DocType, AgreementType, Signature, Force, Lineage, and mitchID.}
@@ -114,12 +114,10 @@ agreements datacube documentation
 #> |AgreementType|character|   2705|       2132|     44.08|
 #> |MEA_type     |character|    695|       4142|     85.63|
 #> |DocType      |character|   2741|       2096|     43.33|
-#> |Download     |logical  |    898|       3939|     81.43|
 #> |Ambit        |character|   2335|       2502|     51.73|
 #> |Region       |character|    246|       4591|     94.91|
 #> |Keywords     |character|    406|       4431|     91.61|
 #> |Lineage      |character|    695|       4142|     85.63|
-#> |Sequence     |character|    694|       4143|     85.65|
 #> |AdoptedIn    |character|    426|       4411|     91.19|
 #> |Depository   |character|    386|       4451|     92.02|
 #> |Published    |character|    261|       4576|      94.6|
@@ -131,7 +129,6 @@ agreements datacube documentation
 #> |Languages    |character|    476|       4361|     90.16|
 #> |OrigTitle    |character|     56|       4781|     98.84|
 #> |match        |character|     56|       4781|     98.84|
-#> |Formal       |logical  |    229|       4608|     95.27|
 #> |Source       |character|    229|       4608|     95.27|
 #> |Coder        |character|   4837|          0|         0|
 #> |Coded        |character|    298|       4539|     93.84|
