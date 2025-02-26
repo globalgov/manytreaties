@@ -108,7 +108,7 @@ agreements datacube documentation
 #> |Force        |mdate    |   3021|       1816|     37.54|
 #> |Term         |mdate    |     32|       4805|     99.34|
 #> |TreatyText   |logical  |   4837|          0|         0|
-#> |TextURL      |character|   2043|       2794|     57.76|
+#> |TextURL      |character|   2047|       2790|     57.68|
 #> |Domain       |character|   4811|         26|      0.54|
 #> |AgreementType|character|   3033|       1804|      37.3|
 #> |DocType      |character|   2741|       2096|     43.33|
@@ -121,7 +121,6 @@ agreements datacube documentation
 #> |Published    |character|    261|       4576|      94.6|
 #> |Website      |character|    843|       3994|     82.57|
 #> |Secretariat  |character|    694|       4143|     85.65|
-#> |Abstract     |character|     26|       4811|     99.46|
 #> |Appendices   |numeric  |     35|       4802|     99.28|
 #> |Language     |character|   1349|       3488|     72.11|
 #> |Languages    |character|    476|       4361|     90.16|
