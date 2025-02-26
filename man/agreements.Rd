@@ -109,9 +109,8 @@ agreements datacube documentation
 #> |Term         |mdate    |     32|       4805|     99.34|
 #> |TreatyText   |logical  |   4837|          0|         0|
 #> |TextURL      |character|   2043|       2794|     57.76|
-#> |AgreementType|character|   2705|       2132|     44.08|
-#> |MEA_type     |character|    695|       4142|     85.63|
 #> |Domain       |character|   4811|         26|      0.54|
+#> |AgreementType|character|   3033|       1804|      37.3|
 #> |DocType      |character|   2741|       2096|     43.33|
 #> |Ambit        |character|   2335|       2502|     51.73|
 #> |Region       |character|    246|       4591|     94.91|
