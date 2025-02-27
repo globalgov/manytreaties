@@ -1,7 +1,7 @@
 ---
 title: "What Does Global Health Governance Look Like?"
 author: "Jael Tan, Henrique Sposito, and Esther Peev"
-date: "`r Sys.Date()`"
+date: "9 October 2024"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{What Does Global Health Governance Look Like?}
@@ -55,7 +55,7 @@ and included in the HUGGO dataset as 2020-06-19.
 With manual coding, the HUGGO dataset provides more precise and accurate data than what was obtained from webpage scraping.
   
   
-Extending from data in the agreements datacube, the HUGGO_MEM dataset in the `memberships` datacube contains hand-coded data of 39,000 observations on state memberships to international health instruments.
+Extending from data in the agreements datacube, the HUGGO dataset in the `parties` datacube contains hand-coded data of 39,000 observations on state memberships to international health instruments.
 This is, to our knowledge, the first such dataset available.
   
   
@@ -90,14 +90,14 @@ manytreaties::agreements$HUGGO[,c(1:5, 10, 56, 58)] %>%
 
 ### Memberships
 
-The **memberships** datacube contains hand-coded data on states' memberships to instruments governing the global health sphere. 
-The `HUGGO_MEM` dataset includes specific adoption/signature ('StateSignature'),
+The **parties** datacube contains hand-coded data on states' memberships to instruments governing the global health sphere. 
+The `HUGGO` dataset includes specific adoption/signature ('StateSignature'),
 ratification ('StateRatification'), entry into force ('StateForce'),
 and termination ('StateEnd') dates for each state during its membership to an agreement.
 States that have predecessor or successor entities since 1945 are also identified in the Succession variable.
 
 ```{r mem, warning=FALSE, message=FALSE, fig.align='center', fig.asp=1.2, fig.width=7}
-manytreaties::memberships$HUGGO_MEM[,c(1:5, 7:10, 13, 40)] %>% 
+manytreaties::parties$HUGGO[,c(1:5, 7:10, 13, 40)] %>% 
   dplyr::filter(grepl("Health", Domain)) %>%
   dplyr::filter(messydates::year(Begin) == "2005" & stateID == "CHE") %>% 
   kable("html")
@@ -117,7 +117,7 @@ formal <- manytreaties::agreements$HUGGO %>%
   dplyr::filter(Formal == 1) %>%
   dplyr::select(manyID, treatyID) %>%
   dplyr::distinct()
-net <- manytreaties::memberships$HUGGO_MEM %>%
+net <- manytreaties::parties$HUGGO %>%
   dplyr::filter(grepl("Health", Domain)) %>%
   dplyr::select(manyID, stateID, Title, Begin) %>%
   dplyr::mutate(year = messydates::year(Begin)) %>%

@@ -27,8 +27,8 @@ navbar:
         href: articles/membership_dashboard.html
       - text: Trade Treaties by Country and Year
         href: articles/trade_treaty_year_dashboard.html
-      - text: What Does Global Health Governance Look Like?
-        href: articles/healthdata.html
+      # - text: What Does Global Health Governance Look Like?
+      #   href: articles/healthdata.html
     news:
       text: News
       href: news/index.html
@@ -49,7 +49,7 @@ reference:
     desc: "manytreaties contains the following datacubes"
     contents:
     - agreements
-    - memberships
+    - parties
 footer:
   structure:
     left: devs

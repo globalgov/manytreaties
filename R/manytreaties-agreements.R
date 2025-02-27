@@ -1,207 +1,107 @@
 #' agreements datacube documentation
 #'
 #' @format The agreements datacube is a list that contains the
-#' following 9 datasets: GHHR, GPTAD, HEIDI, IEADB, LABPTA, TOTA, TREND, WHO,
-#' HUGGO.
+#' following 8 datasets: HUGGO, IEADB, HEIDI, TREND, LABPTA, TOTA, GPTAD, TFDD.
 #' For more information and references to each of the datasets used,
-#' please use the `manydata::call_sources()` and
-#' `manydata::compare_dimensions()` functions.
+#' please use the `manydata::call_sources()` and `manydata::compare_dimensions()` functions.
+#' @format 
 #' \describe{
-#' \item{GHHR: }{A dataset with 149 observations and the following
-#' 8 variables: manyID, treatyID, Title, Begin, Region, LegalStatus, Lineage,
-#' ghhrID.}
-#' \item{GPTAD: }{A dataset with 340 observations and the following
-#' 10 variables: manyID, treatyID, Title, Begin, AgreementType, DocType,
-#' GeogArea, Signature, Force, gptadID.}
-#' \item{HEIDI: }{A dataset with 2280 observations and the following
-#' 7 variables: manyID, treatyID, Title, Begin, Signature, Lineage, heidiID.}
-#' \item{IEADB: }{A dataset with 3667 observations and the following
-#' 10 variables: manyID, treatyID, Title, Begin, DocType, AgreementType,
-#' Signature, Force, Lineage, ieadbID.}
-#' \item{LABPTA: }{A dataset with 483 observations and the following
-#' 7 variables: manyID, treatyID, Title, Begin, Signature, Force, labptaID.}
-#' \item{TOTA: }{A dataset with 442 observations and the following
-#' 7 variables: manyID, treatyID, Title, Begin, Signature, Force, totaID.}
-#' \item{TREND: }{A dataset with 710 observations and the following
-#' 7 variables: manyID, treatyID, Title, Begin, Signature, Force, trendID.}
-#' \item{WHO: }{A dataset with 114 observations and the following
-#' 6 variables: manyID, treatyID, Title, Begin, Organisation, Topic.}
-#' \item{HUGGO: }{A dataset with 4816 observations and the following
-#' 59 variables: manyID, treatyID, Title, Begin, End, Signature, Force,
-#' TreatyText, url, Domain, AgreementType, DocType, GeogArea, gengID, ieaID,
-#' ecolexID, Parties, verified, DocValidUntilDate, Notes, Download, MEA_type,
-#' Ambit, Region, subject_ecolex, subject_iea, Keywords, Lineage, Sequence,
-#' AdoptedIn, Languages, Appendices, Depository, DepositoryURL, Published,
-#' Website1, Website2, Secretariat, SecretariatURL, UNEP, Supersedes,
-#' References, EnabledBy, AmendedBy, Lit, Data, Coded, Abstract, Language,
-#' Orig_noneng_title, match, Citation, Formal, Dataset, Source,
-#' Health_as_primary_intent, Comments, Topic, Coder.}
+#' \item{HUGGO <img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>:}{A dataset with `r prettyNum(nrow(manytreaties::agreements$HUGGO), big.mark=",")` 
+#'   observations and `r ncol(manytreaties::agreements$HUGGO)` variables: 
+#'   `r cli::pluralize("{names(manytreaties::agreements$HUGGO)}")`.}
+#' \item{IEADB: }{A dataset with `r prettyNum(nrow(manytreaties::agreements$IEADB), big.mark=",")` 
+#'   observations and `r ncol(manytreaties::agreements$IEADB)` variables: 
+#'   `r cli::pluralize("{names(manytreaties::agreements$IEADB)}")`.}
+#' \item{HEIDI: }{A dataset with `r prettyNum(nrow(manytreaties::agreements$HEIDI), big.mark=",")` 
+#'   observations and `r ncol(manytreaties::agreements$HEIDI)` variables: 
+#'   `r cli::pluralize("{names(manytreaties::agreements$HEIDI)}")`.}
+#' \item{TFDD: }{A dataset with `r prettyNum(nrow(manytreaties::agreements$TFDD), big.mark=",")`
+#'   observations and `r ncol(manytreaties::agreements$TFDD)` variables:
+#'   `r cli::pluralize("{names(manytreaties::agreements$TFDD)}")`.}
+#' \item{TREND: }{A dataset with `r prettyNum(nrow(manytreaties::agreements$TREND), big.mark=",")` 
+#'   observations and `r ncol(manytreaties::agreements$TREND)` variables: 
+#'   `r cli::pluralize("{names(manytreaties::agreements$TREND)}")`.}
+#' \item{LABPTA <img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>:}{A dataset with `r prettyNum(nrow(manytreaties::agreements$LABPTA), big.mark=",")` 
+#'   observations and `r ncol(manytreaties::agreements$LABPTA)` variables: 
+#'   `r cli::pluralize("{names(manytreaties::agreements$LABPTA)}")`.}
+#' \item{TOTA <img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>:}{A dataset with `r prettyNum(nrow(manytreaties::agreements$TOTA), big.mark=",")` 
+#'   observations and `r ncol(manytreaties::agreements$TOTA)` variables: 
+#'   `r cli::pluralize("{names(manytreaties::agreements$TOTA)}")`.}
+#' \item{GPTAD <img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>:}{A dataset with `r prettyNum(nrow(manytreaties::agreements$GPTAD), big.mark=",")` 
+#'   observations and `r ncol(manytreaties::agreements$GPTAD)` variables: 
+#'   `r cli::pluralize("{names(manytreaties::agreements$GPTAD)}")`.}
 #' }
+#' For more information and references to each of the datasets used,
+#' please use the `manydata::call_sources()` and `manydata::compare_dimensions()` functions.
 #' @source
 #' \itemize{
-#' \item{GHHR: }{
-#' B. M. Meier, O. A. Cabrera, A. Ayala, et al.
-#' “Bridging international law and rights-based litigation:mapping health-related rights through the development of the global health and human rights database”.
-#' _Health & Human Rights._ 14 (2012), p. 20.}
-#' \item{GPTAD: }{
-#' World Bank Group. _Global Preferential Trade Agreement Database (GPTAD)_.
-#' Online database. publisher: World Bank Group. 2014.
-#' <https://wits.worldbank.org/gptad/library.aspx>.}
-#' \item{HEIDI: }{
-#' J-F. Morin, and C. Blouin. "How environmental treaties contribute to global health governance".
-#' _Globalization and health_ 15.1 (2019), pp. 1-8.
+#' \item{HUGGO: }{
+#' Hollway, James, Henrique Sposito, and Jael Tan. 2021.
+#' International agreements for manydata.
 #' }
 #' \item{IEADB: }{
-#' R. B. Mitchell et al. "What we know (and could know) about international environmental agreements".
-#' _Global Environmental Politics_ 20.1 (2020), pp. 103-121.
-#' }
-#' \item{LABPTA: }{
-#' D. Raess, A. Dür, and D. Sari.
-#' “Protecting labor rights in preferential trade agreements: The role of trade unions, left governments, and skilled labor”.
-#' In: _The Review of International Organizations_ 2.13(2018), pp. 143-162.
-#' DOI: 10.1007/s11558-018-9301-z.}
-#' \item{TOTA: }{
-#' W. Alschner, J. Seiermann, and D. Skougarevskiy.
-#' _Text-as-data analysis of preferential tradeagreements: Mapping the PTA landscape_.
-#' 2017. <https://github.com/mappingtreaties/tota.git>.}
-#' \item{TREND: }{
-#' J. Morin, A. Dür, and L. Lechner.
-#' “Mapping the trade and environment nexus: Insights from a newdataset”.
-#' In: _Global Environmental Politics_ 18.1 (2018), pp. 122-139.}
-#' \item{WHO: }{
-#' World Health Organization.
-#' _WHO MiNDbank: More Inclusiveness Needed in Disability and Development_. 
-#' Online database. publisher: World Health Organization. 2024.
-#' <https://extranet.who.int/mindbank/>.}
-#' \item{HUGGO: }{
-#' J. Hollway. International agreements for manydata. 2021.
-#' }
-#' }
-#' @section URL:
-#' \itemize{
-#' \item{GHHR: }{
-#' \url{https://www.globalhealthrights.org/instruments/instrument-region/}
-#' }
-#' \item{GPTAD: }{
-#' \url{https://wits.worldbank.org/gptad/library.aspx}
+#' Mitchell, Ron B. et al. 2020.
+#' "What we know (and could know) about international environmental agreements".
+#' _Global Environmental Politics_ 20.1, pp. 103-121.
+#' \url{https://www.iea.ulaval.ca/en/agreements}
 #' }
 #' \item{HEIDI: }{
+#' Morin, Jean-Frederic, and Chantal Blouin. 2019.
+#' "How environmental treaties contribute to global health governance".
+#' _Globalization and health_ 15.1, pp. 1-8.
 #' \url{https://www.chaire-epi.ulaval.ca/en/data/heidi}
 #' }
-#' \item{IEADB: }{
-#' \url{https://iea.uoregon.edu/base-agreement-list}
-#' }
-#' \item{LABPTA: }{
-#' \url{https://doi.org/10.1007/s11558-018-9301-z}
-#' }
-#' \item{TOTA: }{
-#' \url{https://github.com/mappingtreaties/tota.git}
+#' \item{TFDD: }{
+#' College of Earth, Ocean and Atmospheric Science, Oregon State University. 2021.
+#' Product of the Transboundary FreshwaterDispute Database.
+#' \url{http://transboundarywaters.science.oregonstate.edu}
 #' }
 #' \item{TREND: }{
+#' Morin, Jean-Frederic, Andreas Dür, and Lisa Lechner. 2018.
+#' "Mapping the trade and environment nexus: Insights from a new dataset".
+#' _Global Environmental Politics_ 18.1, pp. 122-139.
 #' \url{http://www.chaire-epi.ulaval.ca/en/trend}
 #' }
-#' \item{WHO: }{
-#' \url{https://www.mindbank.info/collection/un_who_resolutions/all?page=all}
-#' }
-#' \item{HUGGO: }{Hand-coded data by the GGO team.}
-#' }
-#' @section Mapping:
-#' \itemize{
-#' \item{GHHR: }{
-#' Variable Mapping
-#'
-#' |  *from*  | *to*
-#' |:------------:|:------------:|
-#' | Year of adoption | Begin |
-#'
-#' }
-#' \item{GPTAD: }{
-#' Variable Mapping
-#' 
-#' |  *from*  | *to*
-#' |:------------:|:------------:|
-#' | Common.Name | Title |
-#' | Date.of.Signature | Signature |
-#' | Date.of.Entry.into.Force | Force |
-#' | Type | DocType |
-#' | Type | AgreementType |
-#' | Type | GeogArea |
-#' 
-#' }
-#' \item{HEIDI: }{
-#' Variable Mapping
-#' 
-#' |  *from*  | *to*
-#' |:------------:|:------------:|
-#' | ID | heidiID |
-#' | 'Name.of.the.agreement' | Title |
-#' | signature.date | Signature |
-#' 
-#' }
-#' \item{IEADB: }{
-#' Variable Mapping
-#' 
-#' |  *from*  | *to*
-#' |:------------:|:------------:|
-#' | 'IEA# (click for add'l info)' | ieadbID |
-#' | 'Treaty Name' | Title |
-#' | 'Signature Date' | Signature |
-#' | 'Date IEA entered into force' | Force |
-#' | 'Agreement Type (level 2)' | AgreementType |
-#' | Inclusion | DocType |
-#' 
-#' }
 #' \item{LABPTA: }{
-#' Variable Mapping
-#' 
-#' |  *from*  | *to*
-#' |:------------:|:------------:|
-#' | Number | labptaID |
-#' | Name | Title |
-#' | year | Signature |
-#' | year | Force |
-#' 
+#' Raess, Damien, Andreas Dür, and D. Sari. 2018.
+#' "Protecting labor rights in preferential trade agreements: The role of trade unions, left governments, and skilled labor".
+#' _The Review of International Organizations_ 2.13, pp. 143-162.
+#' \doi{10.1007/s11558-018-9301-z}
 #' }
 #' \item{TOTA: }{
-#' Variable Mapping
-#' 
-#' |  *from*  | *to*
-#' |:------------:|:------------:|
-#' | name | Title |
-#' | date_signed | Signature |
-#' | date_into_force | Force |
-#' 
+#' Alschner, Wolfgang, Julia Seiermann, and Dmitriy Skougarevskiy. 2017.
+#' "Text-as-data analysis of preferential trade agreements: Mapping the PTA landscape".
+#' UNCTAD Research Paper No. 5.
+#' \url{https://github.com/mappingtreaties/tota.git}.
 #' }
-#' \item{TREND: }{
-#' Variable Mapping
-#' 
-#' |  *from*  | *to*
-#' |:------------:|:------------:|
-#' | Trade.Agreement | Title |
-#' | Year | Signature |
-#' | Year | Force |
-#' 
-#' }
-#' \item{WHO: }{
-#' Variable Mapping
-#'
-#' |  *from*  | *to*
-#' |:------------:|:------------:|
-#' | NA | NA |
-#'
-#' }
-#' \item{HUGGO: }{
-#' Variable Mapping
-#' 
-#' |  *from*  | *to*
-#' |:------------:|:------------:|
-#' | NA | NA |
-#' 
+#' \item{GPTAD: }{
+#' World Bank Group. 2014.
+#' "Global Preferential Trade Agreement Database (GPTAD)".
+#' Online database. _World Bank Group_.
+#' \url{https://wits.worldbank.org/gptad/library.aspx}
 #' }
 #' }
+#' @section Mapping:
+#' 
+#' |  *manytreaties*  | *IEADB*  | *HEIDI* | *TFDD* | *TREND* | *LABPTA* | *TOTA* | *GPTAD* |
+#' |:-----------------|:---------|:--------|:-------|:--------|:---------|:-------|:--------|
+#' | Title  | Treaty Name | Name.of.the.agreement | DocumentName| Trade.Agreement | Name | name | Common.Name |
+#' | Signature  | Signature Date | signature.date | DateSigned | Year | year | date_signed | Date.of.Signature |
+#' | Force  | Date IEA entered into force | | | Year | year | date_into_force | Date.of.Entry.into.Force | 
+#' | mitchID  | IEA# | | | | | |
+#' | heidiID  | | ID | | | | |
+#' | labptaID | | | | | Number | |
+#' | tfddID | | | 2016Update ID | | | |
+#' | AgreementType  | Agreement Type (level 2) | | DocType | | | |
+#' | Ambit  | Inclusion | | NumberParties | | | | Type |
+#' | GeogArea | | | GeoScope | | | |
+#' | Basin | | | Basin Name | | | |
+#' | Issue | | | Issue Area | | | |
+#' | Lineage | | | PrimaryTFDDID | | | |
+#' 
 #' @md
 #' @details
 #' ``` {r, echo = FALSE, warning = FALSE}
-#' lapply(agreements, messydates::mreport)
+#' lapply(agreements, manydata::mreport)
 #' ```
 "agreements"
