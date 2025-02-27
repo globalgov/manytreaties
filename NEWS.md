@@ -1,3 +1,26 @@
+# manytreaties 0.1.0
+
+2025-02-27
+
+## Data
+* Consolidated variables in `agreements$HUGGO`
+  * Closed #4 by removing `verified` and `Download` variables
+  * Removed `Sequence`, `Formal`, and `Appendices` variables as not currently necessary
+  * Combined `DocType` and `Ambit` variables into `Ambit`
+  * Combined `Source`, `Coded`, and `Notes` variables into `Comments`
+  * Combined `Domain` and `Topic` variables together into `Domain`
+  * Combined `AgreementType` and `MEA_type` variables together into `AgreementType`
+  * Used abstract links in `TextURL` where URL is not available
+* Corrected errors to data in HUGGO
+* Dropped GHHR and WHO datasets from `agreements`
+* Added TFDD dataset in `agreements`
+* Reordered datasets in `agreements` datacube by number of observations
+* Added license badges to `agreements` and `parties` datacubes
+* Renamed `memberships` datacube `parties`
+* Added recent UK trade agreements to `parties$HUGGO`
+* Improved variable mapping explanation
+* Improved dataset documentation by making it computational, updating links and sources
+
 # manytreaties 0.0.1
 
 2024-10-08
