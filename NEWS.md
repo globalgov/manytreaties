@@ -2,6 +2,9 @@
 
 2025-02-27
 
+## Package
+* Closed #2 by updating GitHub actions in prchecks and pushrelease
+
 ## Data
 * Consolidated variables in `agreements$HUGGO`
   * Closed #4 by removing `verified` and `Download` variables
@@ -20,7 +23,7 @@
 * Renamed `memberships` datacube `parties`
 * Added recent UK trade agreements to `parties$HUGGO`
 * Improved variable mapping explanation
-* Improved dataset documentation by making it computational, updating links and sources
+* Improved dataset documentation by making it computational, updating links and sources, and tabulated variable mapping
 
 # manytreaties 0.0.1
 
