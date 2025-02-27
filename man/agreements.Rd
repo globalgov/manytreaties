@@ -107,12 +107,9 @@ agreements datacube documentation
 #> |Signature    |mdate    |   4780|         57|      1.18|
 #> |Force        |mdate    |   3021|       1816|     37.54|
 #> |Term         |mdate    |     32|       4805|     99.34|
-#> |TreatyText   |logical  |   4837|          0|         0|
-#> |TextURL      |character|   2047|       2790|     57.68|
 #> |Domain       |character|   4811|         26|      0.54|
 #> |AgreementType|character|   3033|       1804|      37.3|
-#> |DocType      |character|   2741|       2096|     43.33|
-#> |Ambit        |character|   2335|       2502|     51.73|
+#> |Ambit        |character|   2930|       1907|     39.43|
 #> |Region       |character|    246|       4591|     94.91|
 #> |Keywords     |character|    406|       4431|     91.61|
 #> |Lineage      |character|    695|       4142|     85.63|
