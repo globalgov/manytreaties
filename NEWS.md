@@ -15,6 +15,7 @@
 * Dropped GHHR and WHO datasets from `agreements`
 * Added TFDD dataset in `agreements`
 * Reordered datasets in `agreements` datacube by number of observations
+* Renamed DocType variable Ambit for all other datasets in agreements
 * Added license badges to `agreements` and `parties` datacubes
 * Renamed `memberships` datacube `parties`
 * Added recent UK trade agreements to `parties$HUGGO`

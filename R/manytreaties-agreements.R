@@ -93,7 +93,7 @@
 #' | labptaID | | | | | Number | |
 #' | tfddID | | | 2016Update ID | | | |
 #' | AgreementType  | Agreement Type (level 2) | | DocType | | | |
-#' | DocType  | Inclusion | | NumberParties | | | | Type |
+#' | Ambit  | Inclusion | | NumberParties | | | | Type |
 #' | GeogArea | | | GeoScope | | | |
 #' | Basin | | | Basin Name | | | |
 #' | Issue | | | Issue Area | | | |
