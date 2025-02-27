@@ -108,7 +108,7 @@ agreements datacube documentation
 #> |Force        |mdate    |   3021|       1816|     37.54|
 #> |Term         |mdate    |     32|       4805|     99.34|
 #> |Domain       |character|   4811|         26|      0.54|
-#> |AgreementType|character|   3033|       1804|      37.3|
+#> |AgreementType|character|   4012|        825|     17.06|
 #> |Ambit        |character|   2930|       1907|     39.43|
 #> |Region       |character|    246|       4591|     94.91|
 #> |Keywords     |character|    406|       4431|     91.61|
