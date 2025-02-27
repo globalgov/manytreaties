@@ -16,13 +16,13 @@ observations and 28 variables:
 manyID, treatyID, Title, Begin, End, Signature, Force, Term, Domain, AgreementType, Ambit, Region, Keywords, Lineage, AdoptedIn, Depository, Published, Secretariat, ..., Comments, and gengID.}
 \item{IEADB: }{A dataset with 3,667
 observations and 10 variables:
-manyID, treatyID, Title, Begin, DocType, AgreementType, Signature, Force, Lineage, and mitchID.}
+manyID, treatyID, Title, Begin, Ambit, AgreementType, Signature, Force, Lineage, and mitchID.}
 \item{HEIDI: }{A dataset with 2,280
 observations and 7 variables:
 manyID, treatyID, Title, Begin, Signature, Lineage, and heidiID.}
 \item{TFDD: }{A dataset with 784
 observations and 14 variables:
-manyID, Title, Begin, Signature, AgreementType, DocType, GeogArea, Water_as_consumable_rsc, NotTreaty, Issue, Basin, Lineage, tfddID, and treatyID.}
+manyID, Title, Begin, Signature, AgreementType, Ambit, GeogArea, Water_as_consumable_rsc, NotTreaty, Issue, Basin, Lineage, tfddID, and treatyID.}
 \item{TREND: }{A dataset with 710
 observations and 7 variables:
 manyID, treatyID, Title, Begin, Signature, Force, and trendID.}
@@ -34,7 +34,7 @@ observations and 7 variables:
 manyID, treatyID, Title, Begin, Signature, Force, and totaID.}
 \item{GPTAD \if{html}{\out{<img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>}}:}{A dataset with 340
 observations and 10 variables:
-manyID, treatyID, Title, Begin, AgreementType, DocType, GeogArea, Signature, Force, and gptadID.}
+manyID, treatyID, Title, Begin, AgreementType, Ambit, GeogArea, Signature, Force, and gptadID.}
 }
 For more information and references to each of the datasets used,
 please use the \code{manydata::call_sources()} and \code{manydata::compare_dimensions()} functions.
@@ -138,7 +138,7 @@ agreements datacube documentation
 #> |treatyID     |character|   3667|          0|         0|
 #> |Title        |character|   3667|          0|         0|
 #> |Begin        |mdate    |   3667|          0|         0|
-#> |DocType      |character|   3667|          0|         0|
+#> |Ambit        |character|   3667|          0|         0|
 #> |AgreementType|character|   3667|          0|         0|
 #> |Signature    |mdate    |   3602|         65|      1.77|
 #> |Force        |mdate    |   2799|        868|     23.67|
@@ -170,7 +170,7 @@ agreements datacube documentation
 #> |Begin                  |mdate    |    779|          5|      0.64|
 #> |Signature              |mdate    |    779|          5|      0.64|
 #> |AgreementType          |character|    584|        200|     25.51|
-#> |DocType                |character|    770|         14|      1.79|
+#> |Ambit                  |character|    770|         14|      1.79|
 #> |GeogArea               |character|    545|        239|     30.48|
 #> |Water_as_consumable_rsc|character|    783|          1|      0.13|
 #> |NotTreaty              |character|    783|          1|      0.13|
@@ -233,7 +233,7 @@ agreements datacube documentation
 #> |Title        |character|    340|          0|         0|
 #> |Begin        |mdate    |    310|         30|      8.82|
 #> |AgreementType|character|    340|          0|         0|
-#> |DocType      |character|    340|          0|         0|
+#> |Ambit        |character|    340|          0|         0|
 #> |GeogArea     |character|    265|         75|     22.06|
 #> |Signature    |mdate    |    287|         53|     15.59|
 #> |Force        |mdate    |    277|         63|     18.53|
@@ -252,7 +252,7 @@ agreements datacube documentation
    labptaID \tab  \tab  \tab  \tab  \tab Number \tab  \tab  \cr
    tfddID \tab  \tab  \tab 2016Update ID \tab  \tab  \tab  \tab  \cr
    AgreementType \tab Agreement Type (level 2) \tab  \tab DocType \tab  \tab  \tab  \tab  \cr
-   DocType \tab Inclusion \tab  \tab NumberParties \tab  \tab  \tab  \tab Type \cr
+   Ambit \tab Inclusion \tab  \tab NumberParties \tab  \tab  \tab  \tab Type \cr
    GeogArea \tab  \tab  \tab GeoScope \tab  \tab  \tab  \tab  \cr
    Basin \tab  \tab  \tab Basin Name \tab  \tab  \tab  \tab  \cr
    Issue \tab  \tab  \tab Issue Area \tab  \tab  \tab  \tab  \cr
