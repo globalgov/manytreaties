@@ -12,8 +12,8 @@ please use the \code{manydata::call_sources()} and \code{manydata::compare_dimen
 
 \describe{
 \item{HUGGO \if{html}{\out{<img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>}}:}{A dataset with 4,837
-observations and 30 variables:
-manyID, treatyID, Title, Begin, End, Signature, Force, Term, TreatyText, TextURL, Domain, AgreementType, DocType, Ambit, Region, Keywords, Lineage, AdoptedIn, ..., Comments, and gengID.}
+observations and 28 variables:
+manyID, treatyID, Title, Begin, End, Signature, Force, Term, Domain, AgreementType, Ambit, Region, Keywords, Lineage, AdoptedIn, Depository, Published, Secretariat, ..., Comments, and gengID.}
 \item{IEADB: }{A dataset with 3,667
 observations and 10 variables:
 manyID, treatyID, Title, Begin, DocType, AgreementType, Signature, Force, Lineage, and mitchID.}
@@ -119,13 +119,14 @@ agreements datacube documentation
 #> |AdoptedIn    |character|    426|       4411|     91.19|
 #> |Depository   |character|    386|       4451|     92.02|
 #> |Published    |character|    261|       4576|      94.6|
-#> |Website      |character|    843|       3994|     82.57|
 #> |Secretariat  |character|    694|       4143|     85.65|
-#> |Appendices   |numeric  |     35|       4802|     99.28|
+#> |Website      |character|    843|       3994|     82.57|
+#> |OrigTitle    |character|     56|       4781|     98.84|
 #> |Language     |character|   1349|       3488|     72.11|
 #> |Languages    |character|    476|       4361|     90.16|
-#> |OrigTitle    |character|     56|       4781|     98.84|
 #> |match        |character|     56|       4781|     98.84|
+#> |Text         |logical  |   4837|          0|         0|
+#> |TextURL      |character|   2047|       2790|     57.68|
 #> |Coder        |character|   4837|          0|         0|
 #> |Comments     |character|    358|       4479|      92.6|
 #> |gengID       |character|   3783|       1054|     21.79|
