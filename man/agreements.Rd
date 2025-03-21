@@ -5,11 +5,6 @@
 \alias{agreements}
 \title{agreements datacube documentation}
 \format{
-The agreements datacube is a list that contains the
-following 8 datasets: HUGGO, IEADB, HEIDI, TREND, LABPTA, TOTA, GPTAD, TFDD.
-For more information and references to each of the datasets used,
-please use the \code{manydata::call_sources()} and \code{manydata::compare_dimensions()} functions.
-
 \describe{
 \item{HUGGO \if{html}{\out{<img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>}}:}{A dataset with 4,837
 observations and 28 variables:
@@ -92,7 +87,8 @@ Online database. \emph{World Bank Group}.
 agreements
 }
 \description{
-agreements datacube documentation
+The \code{manytreaties::agreements} datacube is a list containing 8 datasets: HUGGO, IEADB, HEIDI, TFDD, TREND, LABPTA, TOTA, and GPTAD.
+It is a work-in-progress, so please let us know if you have any comments or suggestions.
 }
 \details{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#> $HUGGO

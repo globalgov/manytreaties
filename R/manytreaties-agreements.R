@@ -1,9 +1,6 @@
 #' agreements datacube documentation
-#'
-#' @format The agreements datacube is a list that contains the
-#' following 8 datasets: HUGGO, IEADB, HEIDI, TREND, LABPTA, TOTA, GPTAD, TFDD.
-#' For more information and references to each of the datasets used,
-#' please use the `manydata::call_sources()` and `manydata::compare_dimensions()` functions.
+#' @description `r describe_datacube(manytreaties::agreements)`.
+#'   It is a work-in-progress, so please let us know if you have any comments or suggestions.
 #' @format 
 #' \describe{
 #' \item{HUGGO <img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>:}{A dataset with `r prettyNum(nrow(manytreaties::agreements$HUGGO), big.mark=",")` 
