@@ -31,53 +31,7 @@
 #' For more information and references to each of the datasets used,
 #' please use the `manydata::call_sources()` and `manydata::compare_dimensions()` functions.
 #' @source
-#' \itemize{
-#' \item{HUGGO: }{
-#' Hollway, James, Henrique Sposito, and Jael Tan. 2021.
-#' International agreements for manydata.
-#' }
-#' \item{IEADB: }{
-#' Mitchell, Ron B. et al. 2020.
-#' "What we know (and could know) about international environmental agreements".
-#' _Global Environmental Politics_ 20.1, pp. 103-121.
-#' \url{https://www.iea.ulaval.ca/en/agreements}
-#' }
-#' \item{HEIDI: }{
-#' Morin, Jean-Frederic, and Chantal Blouin. 2019.
-#' "How environmental treaties contribute to global health governance".
-#' _Globalization and health_ 15.1, pp. 1-8.
-#' \url{https://www.chaire-epi.ulaval.ca/en/data/heidi}
-#' }
-#' \item{TFDD: }{
-#' College of Earth, Ocean and Atmospheric Science, Oregon State University. 2021.
-#' Product of the Transboundary FreshwaterDispute Database.
-#' \url{http://transboundarywaters.science.oregonstate.edu}
-#' }
-#' \item{TREND: }{
-#' Morin, Jean-Frederic, Andreas Dür, and Lisa Lechner. 2018.
-#' "Mapping the trade and environment nexus: Insights from a new dataset".
-#' _Global Environmental Politics_ 18.1, pp. 122-139.
-#' \url{http://www.chaire-epi.ulaval.ca/en/trend}
-#' }
-#' \item{LABPTA: }{
-#' Raess, Damien, Andreas Dür, and D. Sari. 2018.
-#' "Protecting labor rights in preferential trade agreements: The role of trade unions, left governments, and skilled labor".
-#' _The Review of International Organizations_ 2.13, pp. 143-162.
-#' \doi{10.1007/s11558-018-9301-z}
-#' }
-#' \item{TOTA: }{
-#' Alschner, Wolfgang, Julia Seiermann, and Dmitriy Skougarevskiy. 2017.
-#' "Text-as-data analysis of preferential trade agreements: Mapping the PTA landscape".
-#' UNCTAD Research Paper No. 5.
-#' \url{https://github.com/mappingtreaties/tota.git}.
-#' }
-#' \item{GPTAD: }{
-#' World Bank Group. 2014.
-#' "Global Preferential Trade Agreement Database (GPTAD)".
-#' Online database. _World Bank Group_.
-#' \url{https://wits.worldbank.org/gptad/library.aspx}
-#' }
-#' }
+#'   `r call_citations(agreements, output = "help")`
 #' @section Mapping:
 #' 
 #' |  *manytreaties*  | *IEADB*  | *HEIDI* | *TFDD* | *TREND* | *LABPTA* | *TOTA* | *GPTAD* |
@@ -102,3 +56,22 @@
 #' lapply(agreements, manydata::mreport)
 #' ```
 "agreements"
+
+info_agreements <- tibble::tibble(Dataset = names(data(parties, package = "manytreaties")),
+                                   Source = c("Hollway, James, Henrique Sposito, and Jael Tan. 2021. International agreements for manydata.",
+                                              "Mitchell, Ron B. et al. 2020. 'What we know (and could know) about international environmental agreements'. _Global Environmental Politics_ 20.1, pp. 103-121.",
+                                              "Morin, Jean-Frederic, and Chantal Blouin. 2019. 'How environmental treaties contribute to global health governance'. _Globalization and health_ 15.1, pp. 1-8.",
+                                              "Oregon College of Earth and Oregon State University Atmospheric Science. 2021. _Product of the Transboundary Freshwater Dispute Database_.",
+                                              "Morin, Jean-Frederic, Andreas Dür, and Lisa Lechner. 2018. 'Mapping the trade and environment nexus: Insights from a new dataset'. _Global Environmental Politics_ 18.1, pp. 122-139.",
+                                              "Raess, Damien, Andreas Dür, and D. Sari. 2018. 'Protecting labor rights in preferential trade agreements: The role of trade unions, left governments, and skilled labor'. _The Review of International Organizations_ 2.13, pp. 143-162.",
+                                              "Alschner, Wolfgang, Julia Seiermann, and Dmitriy Skougarevskiy. 2017. 'Text-as-data analysis of preferential trade agreements: Mapping the PTA landscape'. UNCTAD Research Paper No. 5.",
+                                              "World Bank Group. 2014. _Global Preferential Trade Agreement Database (GPTAD)_. Online database. World Bank Group."),
+                                      URL = c("",
+                                              "https://www.iea.ulaval.ca/en/country-members",
+                                              "https://www.chaire-epi.ulaval.ca/en/data/heidi",
+                                              "http://transboundarywaters.science.oregonstate.edu",
+                                              "http://www.chaire-epi.ulaval.ca/en/trend",
+                                              "https://doi.org/10.1007/s11558-018-9301-z",
+                                              "https://github.com/mappingtreaties/tota.git",
+                                              "https://wits.worldbank.org/gptad/library.aspx"))
+
