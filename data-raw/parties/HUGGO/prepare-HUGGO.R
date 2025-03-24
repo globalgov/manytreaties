@@ -568,10 +568,13 @@ HUGGO_MEM <- HUGGO_MEM %>%
                 stateForce_iea = messydates::as_messydate(stateForce_iea),
                 Term = messydates::as_messydate(Term))
 
+# Rename dataset to avoid clashes when consolidating
+HUGGO <- HUGGO_MEM
+
 # Stage three: Connecting data
-# Next run the following line to make HUGGO_MEM available
+# Next run the following line to make HUGGO available
 # within the package.
-manypkgs::export_data(HUGGO_MEM, datacube = "memberships",
+manypkgs::export_data(HUGGO, datacube = "parties",
                       URL = "Hand-coded by the GGO team")
 # This function also does two additional things.
 # First, it creates a set of tests for this object to ensure
