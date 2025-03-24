@@ -6,9 +6,9 @@
 \title{parties datacube}
 \format{
 \describe{
-\item{HUGGO \if{html}{\out{<img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>}}:}{A dataset with 91,729
+\item{HUGGO \if{html}{\out{<img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>}}:}{A dataset with 91,673
 observations and 31 variables:
-stateID, treatyID, Begin, End, manyID, Title, StateSignature, StateRatification, StateForce, StateEnd, Rat=Notif, Accession, Succession, Signature, Force, url, StateForce2, StateForce3, ..., match, and Coder.}
+stateID, manyID, Title, Begin, End, StateSignature, StateRatification, StateForce, StateEnd, Rat=Notif, treatyID, Accession, Succession, Signature, Force, url, StateForce2, StateForce3, ..., match, and Coder.}
 \item{IEADB: }{A dataset with 15,463
 observations and 11 variables:
 stateID, treatyID, Begin, End, manyID, Title, stateSignature, Signature, Rat, Force, and ieadbID.}
@@ -42,37 +42,37 @@ It is a work-in-progress, so please let us know if you have any comments or sugg
 #> ------------------------------------------------------------
 #> |    Variable     |  Class  |  Obs  |  Missing  |  Miss \%  |
 #> ------------------------------------------------------------
-#> |stateID          |character|  91729|          0|         0|
-#> |treatyID         |character|  91729|          0|         0|
-#> |Begin            |mdate    |  91717|         12|      0.01|
-#> |End              |mdate    |  52937|      38792|     42.29|
-#> |manyID           |character|  91729|          0|         0|
-#> |Title            |character|  91729|          0|         0|
-#> |StateSignature   |mdate    |  73785|      17944|     19.56|
-#> |StateRatification|mdate    |  27769|      63960|     69.73|
-#> |StateForce       |mdate    |  40878|      50851|     55.44|
-#> |StateEnd         |mdate    |  58258|      33471|     36.49|
-#> |Rat=Notif        |character|   1227|      90502|     98.66|
-#> |Accession        |mdate    |  14499|      77230|     84.19|
-#> |Succession       |character|  91729|          0|         0|
-#> |Signature        |mdate    |  91713|         16|      0.02|
-#> |Force            |mdate    |  57180|      34549|     37.66|
-#> |url              |character|    931|      90798|     98.99|
-#> |StateForce2      |mdate    |   6687|      85042|     92.71|
-#> |StateForce3      |mdate    |   3690|      88039|     95.98|
-#> |StateEnd2        |mdate    |   3696|      88033|     95.97|
-#> |Term             |mdate    |   1178|      90551|     98.72|
-#> |Comments         |character|   3280|      88449|     96.42|
-#> |obsolete         |character|  12575|      79154|     86.29|
-#> |ProvisionalApp   |character|    772|      90957|     99.16|
-#> |Reservation      |character|    756|      90973|     99.18|
-#> |Notes            |character|    186|      91543|      99.8|
-#> |stateForce_ecolex|mdate    |  18517|      73212|     79.81|
-#> |stateForce_iea   |mdate    |  18517|      73212|     79.81|
-#> |Consent          |character|    224|      91505|     99.76|
-#> |Acceptance       |character|    525|      91204|     99.43|
-#> |match            |character|      4|      91725|       100|
-#> |Coder            |character|  91714|         15|      0.02|
+#> |stateID          |character|  91673|          0|         0|
+#> |manyID           |character|  91673|          0|         0|
+#> |Title            |character|  91673|          0|         0|
+#> |Begin            |mdate    |  91661|         12|      0.01|
+#> |End              |mdate    |  52885|      38788|     42.31|
+#> |StateSignature   |mdate    |  73756|      17917|     19.54|
+#> |StateRatification|mdate    |  27769|      63904|     69.71|
+#> |StateForce       |mdate    |  40826|      50847|     55.47|
+#> |StateEnd         |mdate    |  58205|      33468|     36.51|
+#> |Rat=Notif        |character|   1227|      90446|     98.66|
+#> |treatyID         |character|  91673|          0|         0|
+#> |Accession        |mdate    |  14472|      77201|     84.21|
+#> |Succession       |character|  91673|          0|         0|
+#> |Signature        |mdate    |  91657|         16|      0.02|
+#> |Force            |mdate    |  57124|      34549|     37.69|
+#> |url              |character|    931|      90742|     98.98|
+#> |StateForce2      |character|   6687|      84986|     92.71|
+#> |StateForce3      |character|   3690|      87983|     95.97|
+#> |StateEnd2        |character|   3696|      87977|     95.97|
+#> |Term             |character|   1178|      90495|     98.71|
+#> |Comments         |character|   3280|      88393|     96.42|
+#> |obsolete         |character|  12575|      79098|     86.28|
+#> |ProvisionalApp   |character|    772|      90901|     99.16|
+#> |Reservation      |character|    756|      90917|     99.18|
+#> |Notes            |character|    186|      91487|      99.8|
+#> |stateForce_ecolex|character|  18517|      73156|      79.8|
+#> |stateForce_iea   |character|  18517|      73156|      79.8|
+#> |Consent          |character|    224|      91449|     99.76|
+#> |Acceptance       |character|    525|      91148|     99.43|
+#> |match            |character|      4|      91669|       100|
+#> |Coder            |character|  91658|         15|      0.02|
 #> ------------------------------------------------------------
 #> 
 #> 

@@ -40,8 +40,8 @@ please use the \code{manydata::call_sources()} and \code{manydata::compare_dimen
 \item Mitchell, Ron B. et al. 2020. 'What we know (and could know) about international environmental agreements'. \emph{Global Environmental Politics} 20.1, pp. 103-121.
 \item Morin, Jean-Frederic, and Chantal Blouin. 2019. 'How environmental treaties contribute to global health governance'. \emph{Globalization and health} 15.1, pp. 1-8.
 \item Oregon College of Earth and Oregon State University Atmospheric Science. 2021. \emph{Product of the Transboundary Freshwater Dispute Database}.
-\item Morin, Jean-Frederic, Andreas Dür, and Lisa Lechner. 2018. 'Mapping the trade and environment nexus: Insights from a new dataset'. \emph{Global Environmental Politics} 18.1, pp. 122-139.
-\item Raess, Damien, Andreas Dür, and D. Sari. 2018. 'Protecting labor rights in preferential trade agreements: The role of trade unions, left governments, and skilled labor'. \emph{The Review of International Organizations} 2.13, pp. 143-162.
+\item Morin, Jean-Frederic, Andreas Duer, and Lisa Lechner. 2018. 'Mapping the trade and environment nexus: Insights from a new dataset'. \emph{Global Environmental Politics} 18.1, pp. 122-139.
+\item Raess, Damien, Andreas Duer, and D. Sari. 2018. 'Protecting labor rights in preferential trade agreements: The role of trade unions, left governments, and skilled labor'. \emph{The Review of International Organizations} 2.13, pp. 143-162.
 \item Alschner, Wolfgang, Julia Seiermann, and Dmitriy Skougarevskiy. 2017. 'Text-as-data analysis of preferential trade agreements: Mapping the PTA landscape'. UNCTAD Research Paper No. 5.
 \item World Bank Group. 2014. \emph{Global Preferential Trade Agreement Database (GPTAD)}. Online database. World Bank Group.
 }
