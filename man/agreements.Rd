@@ -6,9 +6,9 @@
 \title{agreements datacube documentation}
 \format{
 \describe{
-\item{HUGGO \if{html}{\out{<img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>}}:}{A dataset with 4,837
+\item{HUGGO \if{html}{\out{<img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>}}:}{A dataset with 4,829
 observations and 28 variables:
-manyID, treatyID, Title, Begin, End, Signature, Force, Term, Domain, AgreementType, Ambit, Region, Keywords, Lineage, AdoptedIn, Depository, Published, Secretariat, ..., Comments, and gengID.}
+manyID, treatyID, Title, Begin, End, Signature, Force, Term, Domain, AgreementType, Ambit, Region, Keywords, Lineage, AdoptedIn, Depository, Published, Secretariat, ..., gengID, and Coder.}
 \item{IEADB: }{A dataset with 3,667
 observations and 10 variables:
 manyID, treatyID, Title, Begin, Ambit, AgreementType, Signature, Force, Lineage, and mitchID.}
@@ -58,34 +58,34 @@ It is a work-in-progress, so please let us know if you have any comments or sugg
 #> --------------------------------------------------------
 #> |  Variable   |  Class  |  Obs  |  Missing  |  Miss \%  |
 #> --------------------------------------------------------
-#> |manyID       |character|   4837|          0|         0|
-#> |treatyID     |character|   4837|          0|         0|
-#> |Title        |character|   4837|          0|         0|
-#> |Begin        |mdate    |   4780|         57|      1.18|
-#> |End          |mdate    |   1681|       3156|     65.25|
-#> |Signature    |mdate    |   4780|         57|      1.18|
-#> |Force        |mdate    |   3021|       1816|     37.54|
-#> |Term         |mdate    |     32|       4805|     99.34|
-#> |Domain       |character|   4811|         26|      0.54|
-#> |AgreementType|character|   4012|        825|     17.06|
-#> |Ambit        |character|   2930|       1907|     39.43|
-#> |Region       |character|    246|       4591|     94.91|
-#> |Keywords     |character|    406|       4431|     91.61|
-#> |Lineage      |character|    695|       4142|     85.63|
-#> |AdoptedIn    |character|    426|       4411|     91.19|
-#> |Depository   |character|    386|       4451|     92.02|
-#> |Published    |character|    261|       4576|      94.6|
-#> |Secretariat  |character|    694|       4143|     85.65|
-#> |Website      |character|    843|       3994|     82.57|
-#> |OrigTitle    |character|     56|       4781|     98.84|
-#> |Language     |character|   1349|       3488|     72.11|
-#> |Languages    |character|    476|       4361|     90.16|
-#> |match        |character|     56|       4781|     98.84|
-#> |Text         |logical  |   4837|          0|         0|
-#> |TextURL      |character|   2047|       2790|     57.68|
-#> |Coder        |character|   4837|          0|         0|
-#> |Comments     |character|    358|       4479|      92.6|
-#> |gengID       |character|   3783|       1054|     21.79|
+#> |manyID       |character|   4829|          0|         0|
+#> |treatyID     |character|   4829|          0|         0|
+#> |Title        |character|   4829|          0|         0|
+#> |Begin        |mdate    |   4772|         57|      1.18|
+#> |End          |mdate    |   1681|       3148|     65.19|
+#> |Signature    |mdate    |   4772|         57|      1.18|
+#> |Force        |mdate    |   3016|       1813|     37.54|
+#> |Term         |character|     32|       4797|     99.34|
+#> |Domain       |character|   4803|         26|      0.54|
+#> |AgreementType|character|   4004|        825|     17.08|
+#> |Ambit        |character|   3551|       1278|     26.47|
+#> |Region       |character|    246|       4583|     94.91|
+#> |Keywords     |character|    406|       4423|     91.59|
+#> |Lineage      |character|    695|       4134|     85.61|
+#> |AdoptedIn    |character|    426|       4403|     91.18|
+#> |Depository   |character|    386|       4443|     92.01|
+#> |Published    |character|    261|       4568|      94.6|
+#> |Secretariat  |character|    694|       4135|     85.63|
+#> |Website      |character|    843|       3986|     82.54|
+#> |OrigTitle    |character|     56|       4773|     98.84|
+#> |Language     |character|   1349|       3480|     72.06|
+#> |Languages    |character|    476|       4353|     90.14|
+#> |match        |character|     56|       4773|     98.84|
+#> |Text         |character|   4829|          0|         0|
+#> |TextURL      |character|   2047|       2782|     57.61|
+#> |Comments     |character|    358|       4471|     92.59|
+#> |gengID       |character|   3775|       1054|     21.83|
+#> |Coder        |character|   4829|          0|         0|
 #> --------------------------------------------------------
 #> 
 #> 

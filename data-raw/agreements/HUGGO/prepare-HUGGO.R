@@ -503,6 +503,76 @@ HUGGO <- dplyr::distinct(HUGGO)
 HUGGO <- HUGGO[-2305,] # remove duplicate row for BI07WA_1991A
 HUGGO <- HUGGO[-2617,] # remove duplicate row for GBR-USA[VIA]_1993A
 
+# Add AgreementType, Ambit data
+HUGGO <- HUGGO %>%
+  dplyr::mutate(AgreementType = ifelse(AgreementType == "Y" | AgreementType == "W" |AgreementType == "X" |AgreementType == "V" | AgreementType == "Q",
+                                       "Informal Agreement",
+                                       ifelse(stringr::str_detect(Title, "Amend"),
+                                              "Amendment",
+                                              ifelse(stringr::str_detect(Title, "Protocol"),
+                                                     "Protocol", "Agreement"))))
+
+HUGGO <- HUGGO %>%
+  dplyr::mutate(Ambit = ifelse(manyID == "SPPLNE_2004P3:PRTLNE_1960A",
+                               "Global", Ambit))
+states <- manystates:::countryregex %>%
+  dplyr::select(Label)
+trade <- HUGGO %>%
+  dplyr::filter(stringr::str_detect(Domain, "Trade")) %>%
+  dplyr::select(manyID, treatyID, Title, Begin, End, Ambit)
+trade$nstates <- lapply(trade$Title, function(x)
+  {sum(stringr::str_count(x, states$Label))})
+trade <- trade %>%
+  dplyr::mutate(Ambit = ifelse(Ambit == "Other", NA, Ambit),
+                Ambit = ifelse(nstates == 2,
+                               "Bilateral",
+                               ifelse(stringr::str_detect(Title, "Papua New Guinea|US "),
+                                      "Bilateral",
+                                      ifelse(Title == "GATT471947", "Multilateral",
+                                             "Regional/restricted"))))
+trade <- trade %>% # correct errors
+  dplyr::mutate(Ambit = ifelse(stringr::str_detect(Title, "Venezuela") & manyID != "CRBBCV_1992O",
+                               "Bilateral", Ambit),
+                Ambit = ifelse(manyID == "DOM-PAN[NA]_1985O", "Bilateral", Ambit),
+                Ambit = ifelse(manyID == "DMNRCA_1998O", "Regional/restricted", Ambit),
+                Ambit = ifelse(manyID == "UNTSVN_2000O", "Bilateral", Ambit),
+                Ambit = ifelse(manyID == "CZE-SVK[SCU]_1992O", "Bilateral", Ambit),
+                Ambit = ifelse(manyID == "ICLLNU_2021O", "Regional/restricted", Ambit),
+                Ambit = ifelse(manyID == "ICLNNU_2020O", "Regional/restricted", Ambit),
+                Ambit = ifelse(stringr::str_detect(Title, "Libya"), "Bilateral", Ambit),
+                Ambit = ifelse(stringr::str_detect(Title, "Lao"), "Bilateral", Ambit),
+                Ambit = ifelse(stringr::str_detect(Title, "Taiwan"), "Bilateral", Ambit),
+                Ambit = ifelse(stringr::str_detect(Title, "Russia"), "Bilateral", Ambit),
+                Ambit = ifelse(stringr::str_detect(Title, "Bolivia") & manyID != "BLVMRC_1996O",
+                               "Bilateral", Ambit),
+                Ambit = ifelse(stringr::str_detect(Title, "Ukraine") & !stringr::str_detect(Title, "EC|EFTA"),
+                               "Bilateral", Ambit),
+                Ambit = ifelse(stringr::str_detect(Title, "Moldova") & !stringr::str_detect(Title, "EC|EFTA"),
+                               "Bilateral", Ambit),
+                Ambit = ifelse(stringr::str_detect(Title, "Korea") & !stringr::str_detect(Title, "ASEAN|EFTA|Association Of South East Asian Nations|EC|Central America"),
+                               "Bilateral", Ambit),
+                Ambit = ifelse(stringr::str_detect(Title, "Macedonia") & !stringr::str_detect(Title, "EC|EFTA"),
+                               "Bilateral", Ambit),
+                Ambit = ifelse(stringr::str_detect(Title, "Serbia") & !stringr::str_detect(Title, "EC|EFTA"),
+                               "Bilateral", Ambit),
+                Ambit = ifelse(stringr::str_detect(Title, "Bosnia") & !stringr::str_detect(Title, "EC|EFTA"),
+                               "Bilateral", Ambit),
+                Ambit = ifelse(stringr::str_detect(Title, "Syria") & !stringr::str_detect(Title, "EC|EFTA"),
+                               "Bilateral", Ambit),
+                Ambit = ifelse(stringr::str_detect(Title, " UK|UK ") & !stringr::str_detect(Title, "EC|EFTA|EU|African|Pacific|CARIFORUM|Central America|Andean"),
+                               "Bilateral", Ambit),
+                Ambit = ifelse(stringr::str_detect(Title, "Palestinian Authority") & !stringr::str_detect(Title, "EC"),
+                               "Bilateral", Ambit))
+trade <- trade %>% dplyr::select(-nstates)
+HUGGO <- HUGGO %>%
+  dplyr::left_join(trade, by = c("manyID", "treatyID", "Title", "Begin", "End"))
+HUGGO <- HUGGO %>%
+  dplyr::mutate(Ambit = ifelse(stringr::str_detect(Domain, "Trade"), Ambit.y, Ambit.x)) %>%
+  dplyr::select(-c(Ambit.x, Ambit.y)) %>%
+  dplyr::distinct() %>%
+  dplyr::relocate(manyID, treatyID, Title, Begin, End, Signature, Force, Term,
+                  Domain, AgreementType, Ambit)
+
 # Format data correctly for exporting
 HUGGO <- HUGGO %>%
   dplyr::mutate(across(everything(),
@@ -513,9 +583,7 @@ HUGGO <- HUGGO %>%
                 Force = messydates::as_messydate(Force),
                 End = messydates::as_messydate(End)) %>%
   dplyr::arrange(Begin) %>%
-  dplyr::relocate(Coder, .after = last_col()) %>%
-  dplyr::relocate(manyID, treatyID, Title, Begin, End, Signature, Force,
-                  TreatyText, url, Domain)
+  dplyr::relocate(Coder, .after = last_col())
 
 # Stage seven: Connecting data
 # Next run the following line to make HUGGO available
