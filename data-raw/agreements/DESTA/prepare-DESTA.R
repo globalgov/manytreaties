@@ -59,14 +59,13 @@ DESTA <- tibble::as_tibble(DESTA) %>%
 DESTA$treatyID <- manypkgs::code_agreements(DESTA, DESTA$Title, DESTA$Begin)
 
 # Add manyID column
-manyID <- manypkgs::condense_agreements(manytrade::agreements)
-
-DESTA <- dplyr::left_join(DESTA, manyID, by = "treatyID")
+# manyID <- manypkgs::condense_agreements(manytrade::agreements)
+# DESTA <- dplyr::left_join(DESTA, manyID, by = "treatyID")
 
 # Re-order the columns
 DESTA <- DESTA %>% 
-  dplyr::select(manyID, Title, Begin, AgreementType, Ambit, GeogArea,
-                Signature, Force, treatyID, destaID) %>% 
+  dplyr::select(treatyID, Title, Begin, AgreementType, Ambit, GeogArea,
+                Signature, Force, destaID) %>% 
   dplyr::arrange(Begin)
 
 # manypkgs includes several functions that should help cleaning and 

@@ -16,8 +16,8 @@ treatyID, Title, Begin, Ambit, AgreementType, Signature, Force, Lineage, and mit
 observations and 6 variables:
 treatyID, Title, Begin, Signature, Lineage, and heidiID.}
 \item{DESTA: }{A dataset with 959
-observations and 10 variables:
-manyID, treatyID, Title, Begin, AgreementType, Ambit, GeogArea, Signature, Force, and destaID.}
+observations and 9 variables:
+treatyID, Title, Begin, AgreementType, Ambit, GeogArea, Signature, Force, and destaID.}
 \item{TFDD: }{A dataset with 784
 observations and 13 variables:
 treatyID, Title, Begin, Signature, AgreementType, Ambit, GeogArea, Water_as_consumable_rsc, NotTreaty, Issue, Basin, Lineage, and tfddID.}
@@ -125,7 +125,6 @@ It is a work-in-progress, so please let us know if you have any comments or sugg
 #> --------------------------------------------------------
 #> |  Variable   |  Class  |  Obs  |  Missing  |  Miss \%  |
 #> --------------------------------------------------------
-#> |manyID       |character|    959|          0|         0|
 #> |treatyID     |character|    959|          0|         0|
 #> |Title        |character|    959|          0|         0|
 #> |Begin        |mdate    |    878|         81|      8.45|
