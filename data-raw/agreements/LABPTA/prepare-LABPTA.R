@@ -26,12 +26,12 @@ LABPTA <- tibble::as_tibble(LABPTA) %>%
 LABPTA$treatyID <- manypkgs::code_agreements(LABPTA, LABPTA$Title, LABPTA$Begin)
 
 # Add manyID column
-manyID <- manypkgs::condense_agreements(manytrade::agreements)
-LABPTA <- dplyr::left_join(LABPTA, manyID, by = "treatyID")
+# manyID <- manypkgs::condense_agreements(manytrade::agreements)
+# LABPTA <- dplyr::left_join(LABPTA, manyID, by = "treatyID")
 
 # Re-order the columns
 LABPTA <- LABPTA %>%
-  dplyr::select(manyID, Title, Begin, Signature, Force, treatyID, labptaID) %>%
+  dplyr::select(treatyID, Title, Begin, Signature, Force, labptaID) %>%
   dplyr::arrange(Begin)
 
 # Check for duplicates in manyID

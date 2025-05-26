@@ -585,6 +585,11 @@ HUGGO <- HUGGO %>%
   dplyr::arrange(Begin) %>%
   dplyr::relocate(Coder, .after = last_col())
 
+# Remove manyID, use treatyID for identifying observations and relating datasets
+HUGGO <- HUGGO %>%
+  dplyr::select(-manyID) %>%
+  dplyr::relocate(treatyID)
+
 # Stage seven: Connecting data
 # Next run the following line to make HUGGO available
 # within the package.

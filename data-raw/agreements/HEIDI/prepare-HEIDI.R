@@ -35,8 +35,8 @@ HEIDI <- dplyr::left_join(HEIDI, manyID, by = "treatyID")
 
 # Re-order the columns
 HEIDI <- HEIDI %>%
-  dplyr::select(manyID, Title, Begin, Signature,
-                Lineage, treatyID, heidiID) %>%
+  dplyr::select(treatyID, Title, Begin, Signature,
+                Lineage, heidiID) %>%
   dplyr::arrange(Begin)
 
 # manypkgs includes several functions that should help cleaning

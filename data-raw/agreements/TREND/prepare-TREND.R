@@ -38,12 +38,12 @@ TREND <- TREND %>%
 TREND$treatyID <- manypkgs::code_agreements(TREND, TREND$Title, TREND$Begin)
 
 # Add manyID column
-manyID <- manypkgs::condense_agreements(manytrade::agreements)
-TREND <- dplyr::left_join(TREND, manyID, by = "treatyID")
+# manyID <- manypkgs::condense_agreements(manytrade::agreements)
+# TREND <- dplyr::left_join(TREND, manyID, by = "treatyID")
 
 # Re-order the columns
 TREND <- TREND %>%
-  dplyr::select(manyID, Title, Begin, Signature, Force, treatyID, trendID) %>%
+  dplyr::select(treatyID, Title, Begin, Signature, Force, trendID) %>%
   dplyr::arrange(Begin)
 
 # Check for duplicates in manyID
