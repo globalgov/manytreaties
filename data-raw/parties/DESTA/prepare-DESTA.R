@@ -70,12 +70,12 @@ DESTA$stateID <- countrycode::countrycode(DESTA$stateID,
 DESTA$treatyID <- manypkgs::code_agreements(DESTA, DESTA$Title, DESTA$Begin)
 
 # Add manyID column
-manyID <- manypkgs::condense_agreements(manytrade::memberships)
-DESTA <- dplyr::left_join(DESTA, manyID, by = "treatyID") %>%
-  dplyr::distinct()
+# manyID <- manypkgs::condense_agreements(manytrade::memberships)
+# DESTA <- dplyr::left_join(DESTA, manyID, by = "treatyID") %>%
+#   dplyr::distinct()
 
 # Re-order the columns
-DESTA <- dplyr::relocate(DESTA, manyID, stateID, Title, Begin, Signature,
+DESTA <- dplyr::relocate(DESTA, stateID, treatyID, Begin, Title, Signature,
                          Force, StateName, destaID)
 DESTA <- DESTA %>% 
   dplyr::mutate(across(everything(),

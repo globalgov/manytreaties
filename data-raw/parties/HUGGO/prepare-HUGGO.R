@@ -571,6 +571,11 @@ HUGGO_MEM <- HUGGO_MEM %>%
 # Rename dataset to avoid clashes when consolidating
 HUGGO <- HUGGO_MEM
 
+# Remove manyID, use treatyID for identifying observations and relating datasets
+HUGGO <- HUGGO %>%
+  dplyr::select(-manyID) %>%
+  dplyr::relocate(treatyID)
+
 # Stage three: Connecting data
 # Next run the following line to make HUGGO available
 # within the package.

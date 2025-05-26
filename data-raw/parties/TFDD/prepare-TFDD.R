@@ -27,21 +27,20 @@ TFDD_MEM$treatyID <- manypkgs::code_agreements(TFDD_MEM,
                                                TFDD_MEM$Begin)
 
 # Add manyID column
-manyID <- manypkgs::condense_agreements(manyenviron::memberships)
-TFDD_MEM <- dplyr::left_join(TFDD_MEM, manyID, by = "treatyID")
+# manyID <- manypkgs::condense_agreements(manyenviron::memberships)
+# TFDD_MEM <- dplyr::left_join(TFDD_MEM, manyID, by = "treatyID")
 
 # Re-order the columns
-TFDD_MEM <- dplyr::relocate(TFDD_MEM, manyID)
+TFDD <- dplyr::relocate(TFDD_MEM, stateID, treatyID, Begin)
 
 # manypkgs includes several functions that should help cleaning
 # and standardising your data.
 # Please see the vignettes or website for more details.
 
 # Stage three: Connecting data
-# Next run the following line to make TFDD_MEM available
+# Next run the following line to make TFDD available
 # within the package.
-manypkgs::export_data(TFDD_MEM,
-                      datacube = "memberships",
+manypkgs::export_data(TFDD, datacube = "parties",
                       URL = "https://transboundarywaters.science.oregonstate.edu/")
 # This function also does two additional things.
 # First, it creates a set of tests for this object to ensure

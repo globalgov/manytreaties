@@ -39,20 +39,23 @@ IEADB_MEM$treatyID <- manypkgs::code_agreements(IEADB_MEM,
                                                 IEADB_MEM$Begin)
 
 # Add manyID column
-manyID <- manypkgs::condense_agreements(manyenviron::memberships)
-IEADB_MEM <- dplyr::left_join(IEADB_MEM, manyID, by = "treatyID") %>% 
+# manyID <- manypkgs::condense_agreements(manyenviron::memberships)
+# IEADB_MEM <- dplyr::left_join(IEADB_MEM, manyID, by = "treatyID") %>% 
+#   dplyr::distinct() %>%
+#   dplyr::relocate(manyID)
+
+IEADB <- IEADB_MEM %>%
   dplyr::distinct() %>%
-  dplyr::relocate(manyID)
+  dplyr::relocate(stateID, treatyID)
 
 # manypkgs includes several functions that should help
 # cleaning and standardising your data.
 # Please see the vignettes or website for more details.
 
 # Stage three: Connecting data
-# Next run the following line to make IEA_MEM available
+# Next run the following line to make IEADB available
 # within the package.
-manypkgs::export_data(IEADB_MEM,
-                      datacube = "memberships",
+manypkgs::export_data(IEADB, datacube = "parties",
                       URL = "https://iea.uoregon.edu/country-members")
 # This function also does two additional things.
 # First, it creates a set of tests for this object to ensure

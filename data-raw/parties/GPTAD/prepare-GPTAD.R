@@ -81,8 +81,8 @@ GPTAD_MEM <- tibble::as_tibble(GPTAD_MEM) %>%
   dplyr::mutate(StateName = dplyr::recode(StateName,
                                           "EC" = "European Community")) %>%
   #not included in regex list because of overlaps with other country names
-  dplyr::mutate(stateID = manypkgs::code_states(StateName, activity = FALSE,
-                                                replace = "ID")) %>%
+  dplyr::mutate(stateID = manystates::code_states(StateName, activity = FALSE,
+                                                  replace = "ID")) %>%
   #add iso code for country names
   dplyr::mutate(`Date.of.Signature` = ifelse(`Date.of.Signature`=="n/a",
                                              NA, `Date.of.Signature`)) %>%
@@ -92,7 +92,7 @@ GPTAD_MEM <- tibble::as_tibble(GPTAD_MEM) %>%
                         Signature = messydates::as_messydate(`Date.of.Signature`),
                         Force = messydates::as_messydate(`Date.of.Entry.into.Force`)) %>%
   dplyr::mutate(Begin = dplyr::coalesce(Signature, Force)) %>%
-  dplyr::select(gptadID, stateID, StateName, Title, Begin, Signature, Force) %>%
+  dplyr::select(stateID, Title, Begin, Signature, Force) %>%
   dplyr::arrange(Begin) %>%
   dplyr::distinct()
 
@@ -101,13 +101,13 @@ GPTAD_MEM$treatyID <- manypkgs::code_agreements(GPTAD_MEM, GPTAD_MEM$Title,
                                                 GPTAD_MEM$Begin)
 
 # Add manyID column
-manyID <- manypkgs::condense_agreements(manytrade::memberships)
-GPTAD_MEM <- dplyr::left_join(GPTAD_MEM, manyID, by = "treatyID") %>%
-  dplyr::distinct()
+# manyID <- manypkgs::condense_agreements(manytrade::memberships)
+# GPTAD_MEM <- dplyr::left_join(GPTAD_MEM, manyID, by = "treatyID") %>%
+#   dplyr::distinct()
 
 # Re-order the columns
-GPTAD_MEM <- dplyr::relocate(GPTAD_MEM, manyID, stateID, Title, Begin,
-                             Signature, Force, StateName, gptadID)
+GPTAD <- GPTAD_MEM %>%
+  dplyr::relocate(stateID, treatyID, Begin, Title, Signature, Force)
 
 # Check for duplicates in manyID
 # duplicates <- GPTAD_MEM %>%
@@ -119,9 +119,9 @@ GPTAD_MEM <- dplyr::relocate(GPTAD_MEM, manyID, stateID, Title, Begin,
 # Please see the vignettes or website for more details.
 
 # Stage three: Connecting data
-# Next run the following line to make GPTAD_MEM available
+# Next run the following line to make GPTAD available
 # within the many universe.
-manypkgs::export_data(GPTAD_MEM, datacube = "memberships",
+manypkgs::export_data(GPTAD, datacube = "parties",
                       URL = "https://wits.worldbank.org/gptad/library.aspx")
 # This function also does two additional things.
 # First, it creates a set of tests for this object to ensure adherence
