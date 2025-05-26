@@ -7,15 +7,18 @@
 \format{
 \describe{
 \item{HUGGO \if{html}{\out{<img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>}}:}{A dataset with 91,673
-observations and 31 variables:
-stateID, manyID, Title, Begin, End, StateSignature, StateRatification, StateForce, StateEnd, Rat=Notif, treatyID, Accession, Succession, Signature, Force, url, StateForce2, StateForce3, ..., match, and Coder.}
+observations and 30 variables:
+treatyID, stateID, Title, Begin, End, StateSignature, StateRatification, StateForce, StateEnd, Rat=Notif, Accession, Succession, Signature, Force, url, StateForce2, StateForce3, StateEnd2, ..., match, and Coder.}
 \item{IEADB: }{A dataset with 15,463
 observations and 11 variables:
 stateID, treatyID, Begin, End, manyID, Title, stateSignature, Signature, Rat, Force, and ieadbID.}
-\item{GPTAD \if{html}{\out{<img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>}}:}{A dataset with 2,192
+\item{DESTA: }{A dataset with 7,466
+observations and 9 variables:
+manyID, treatyID, Title, Begin, stateID, Signature, Force, StateName, and destaID.
+\item{GPTAD: }{A dataset with 2,192
 observations and 7 variables:
 stateID, treatyID, Begin, manyID, Title, Signature, and Force.}
-\item{TFDD \if{html}{\out{<img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/cc-zero.png" height="12"/>}}:}{A dataset with 1,832
+\item{TFDD: }{A dataset with 1,832
 observations and 7 variables:
 stateID, treatyID, Begin, manyID, Title, Signature, and tfddID.}
 }
@@ -26,6 +29,7 @@ please use the \code{manydata::call_sources()} and \code{manydata::compare_dimen
 \itemize{
 \item Hollway, James, Henrique Sposito, and Jael Tan. 2021. International agreements for manydata.
 \item Mitchell, Ron B. et al. 2020. 'What we know (and could know) about international environmental agreements'. \emph{Global Environmental Politics} 20.1, pp. 103-121.
+\item Dür, Andreas, Leonardo Baccini, and Manfred Elsig. 2014. 'The Design of International Trade Agreements: Introducing a New Database'. \emph{The Review of International Organizations} 9.3, pp. 353-375.
 \item World Bank Group. 2014. \emph{Global Preferential Trade Agreement Database (GPTAD)}. Online database. World Bank Group.
 \item Oregon College of Earth and Oregon State University Atmospheric Science. 2021. \emph{Product of the Transboundary Freshwater Dispute Database}.
 }
@@ -34,7 +38,7 @@ please use the \code{manydata::call_sources()} and \code{manydata::compare_dimen
 parties
 }
 \description{
-The \code{manytreaties::parties} datacube is a list containing 4 datasets: HUGGO, IEADB, GPTAD, and TFDD.
+The \code{manytreaties::parties} datacube is a list containing 5 datasets: HUGGO, IEADB, GPTAD, TFDD, and DESTA.
 It is a work-in-progress, so please let us know if you have any comments or suggestions.
 }
 \details{
@@ -42,8 +46,8 @@ It is a work-in-progress, so please let us know if you have any comments or sugg
 #> ------------------------------------------------------------
 #> |    Variable     |  Class  |  Obs  |  Missing  |  Miss \%  |
 #> ------------------------------------------------------------
+#> |treatyID         |character|  91673|          0|         0|
 #> |stateID          |character|  91673|          0|         0|
-#> |manyID           |character|  91673|          0|         0|
 #> |Title            |character|  91673|          0|         0|
 #> |Begin            |mdate    |  91661|         12|      0.01|
 #> |End              |mdate    |  52885|      38788|     42.31|
@@ -52,7 +56,6 @@ It is a work-in-progress, so please let us know if you have any comments or sugg
 #> |StateForce       |mdate    |  40826|      50847|     55.47|
 #> |StateEnd         |mdate    |  58205|      33468|     36.51|
 #> |Rat=Notif        |character|   1227|      90446|     98.66|
-#> |treatyID         |character|  91673|          0|         0|
 #> |Accession        |mdate    |  14472|      77201|     84.21|
 #> |Succession       |character|  91673|          0|         0|
 #> |Signature        |mdate    |  91657|         16|      0.02|
@@ -120,23 +123,39 @@ It is a work-in-progress, so please let us know if you have any comments or sugg
 #> |Signature   |mdate    |   1730|        102|      5.57|
 #> |tfddID      |numeric  |   1831|          1|      0.05|
 #> -------------------------------------------------------
+#> 
+#> 
+#> $DESTA
+#> -------------------------------------------------------
+#> |  Variable  |  Class  |  Obs  |  Missing  |  Miss \%  |
+#> -------------------------------------------------------
+#> |manyID      |character|   7466|          0|         0|
+#> |treatyID    |character|   7466|          0|         0|
+#> |Title       |character|   7466|          0|         0|
+#> |Begin       |mdate    |   6836|        630|      8.44|
+#> |stateID     |character|   7455|         11|      0.15|
+#> |Signature   |mdate    |   6836|        630|      8.44|
+#> |Force       |mdate    |   4602|       2864|     38.36|
+#> |StateName   |character|   7466|          0|         0|
+#> |destaID     |character|   7466|          0|         0|
+#> -------------------------------------------------------
 }\if{html}{\out{</div>}}
 }
 \section{Mapping}{
-\tabular{llll}{
-   \emph{manytreaties} \tab \emph{IEADB} \tab \emph{GPTAD} \tab \emph{TFDD} \cr
-   stateID \tab country \tab  \tab CCODE \cr
-   Signature \tab csig \tab Date.of.Signature \tab DateSigned \cr
-   Rat \tab crat \tab  \tab  \cr
-   Force \tab ceif3 \tab Date.of.Entry.into.Force \tab  \cr
-   Force2 \tab ceif4 \tab  \tab  \cr
-   End \tab tterm \tab  \tab  \cr
-   Title \tab treatyname \tab Common.Name \tab DocumentName \cr
-   Memberships \tab  \tab StateName \tab Signatories \cr
-   tfddID \tab  \tab  \tab 2016Update ID \cr
-   mitchID \tab ieadbID \tab  \tab  \cr
-   AgreementType \tab  \tab  \tab  \cr
-   DocType \tab inclusion \tab  \tab  \cr
+\tabular{lllll}{
+   \emph{manytreaties} \tab \emph{IEADB} \tab \emph{DESTA} \tab \emph{GPTAD} \tab \emph{TFDD} \cr
+   stateID \tab country \tab Member \tab  \tab CCODE \cr
+   Signature \tab csig \tab year \tab Date.of.Signature \tab DateSigned \cr
+   Rat \tab crat \tab  \tab  \tab  \cr
+   Force \tab ceif3 \tab entryforceyear \tab Date.of.Entry.into.Force \tab  \cr
+   Force2 \tab ceif4 \tab  \tab  \tab  \cr
+   End \tab tterm \tab  \tab  \tab  \cr
+   Title \tab treatyname \tab name \tab Common.Name \tab DocumentName \cr
+   Memberships \tab  \tab  \tab StateName \tab Signatories \cr
+   destaID \tab  \tab base_treaty \tab  \tab  \cr
+   tfddID \tab  \tab  \tab  \tab 2016Update ID \cr
+   mitchID \tab ieadbID \tab  \tab  \tab  \cr
+   DocType \tab inclusion \tab  \tab  \tab  \cr
 }
 }
 
