@@ -7,29 +7,32 @@
 \format{
 \describe{
 \item{HUGGO \if{html}{\out{<img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>}}:}{A dataset with 4,829
-observations and 28 variables:
-manyID, treatyID, Title, Begin, End, Signature, Force, Term, Domain, AgreementType, Ambit, Region, Keywords, Lineage, AdoptedIn, Depository, Published, Secretariat, ..., gengID, and Coder.}
+observations and 27 variables:
+treatyID, Title, Begin, End, Signature, Force, Term, Domain, AgreementType, Ambit, Region, Keywords, Lineage, AdoptedIn, Depository, Published, Secretariat, Website, ..., gengID, and Coder.}
 \item{IEADB: }{A dataset with 3,667
-observations and 10 variables:
-manyID, treatyID, Title, Begin, Ambit, AgreementType, Signature, Force, Lineage, and mitchID.}
+observations and 9 variables:
+treatyID, Title, Begin, Ambit, AgreementType, Signature, Force, Lineage, and mitchID.}
 \item{HEIDI: }{A dataset with 2,280
-observations and 7 variables:
-manyID, treatyID, Title, Begin, Signature, Lineage, and heidiID.}
-\item{TFDD: }{A dataset with 784
-observations and 14 variables:
-manyID, Title, Begin, Signature, AgreementType, Ambit, GeogArea, Water_as_consumable_rsc, NotTreaty, Issue, Basin, Lineage, tfddID, and treatyID.}
-\item{TREND: }{A dataset with 710
-observations and 7 variables:
-manyID, treatyID, Title, Begin, Signature, Force, and trendID.}
-\item{LABPTA \if{html}{\out{<img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>}}:}{A dataset with 483
-observations and 7 variables:
-manyID, treatyID, Title, Begin, Signature, Force, and labptaID.}
-\item{TOTA \if{html}{\out{<img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>}}:}{A dataset with 442
-observations and 7 variables:
-manyID, treatyID, Title, Begin, Signature, Force, and totaID.}
-\item{GPTAD \if{html}{\out{<img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>}}:}{A dataset with 340
+observations and 6 variables:
+treatyID, Title, Begin, Signature, Lineage, and heidiID.}
+\item{DESTA: }{A dataset with 959
 observations and 10 variables:
-manyID, treatyID, Title, Begin, AgreementType, Ambit, GeogArea, Signature, Force, and gptadID.}
+manyID, treatyID, Title, Begin, AgreementType, Ambit, GeogArea, Signature, Force, and destaID.}
+\item{TFDD: }{A dataset with 784
+observations and 13 variables:
+treatyID, Title, Begin, Signature, AgreementType, Ambit, GeogArea, Water_as_consumable_rsc, NotTreaty, Issue, Basin, Lineage, and tfddID.}
+\item{TREND: }{A dataset with 710
+observations and 6 variables:
+treatyID, Title, Begin, Signature, Force, and trendID.}
+\item{LABPTA: }{A dataset with 483
+observations and 6 variables:
+treatyID, Title, Begin, Signature, Force, and labptaID.}
+\item{TOTA: }{A dataset with 442
+observations and 6 variables:
+treatyID, Title, Begin, Signature, Force, and totaID.}
+\item{GPTAD: }{A dataset with 340
+observations and 9 variables:
+treatyID, Title, Begin, AgreementType, Ambit, GeogArea, Signature, Force, and gptadID.}
 }
 For more information and references to each of the datasets used,
 please use the \code{manydata::call_sources()} and \code{manydata::compare_dimensions()} functions.
@@ -39,6 +42,7 @@ please use the \code{manydata::call_sources()} and \code{manydata::compare_dimen
 \item Hollway, James, Henrique Sposito, and Jael Tan. 2021. International agreements for manydata.
 \item Mitchell, Ron B. et al. 2020. 'What we know (and could know) about international environmental agreements'. \emph{Global Environmental Politics} 20.1, pp. 103-121.
 \item Morin, Jean-Frederic, and Chantal Blouin. 2019. 'How environmental treaties contribute to global health governance'. \emph{Globalization and health} 15.1, pp. 1-8.
+\item Dür, Andreas, Leonardo Baccini, and Manfred Elsig. 2014. 'The Design of International Trade Agreements: Introducing a New Database'. \emph{The Review of International Organizations} 9.3, pp. 353-375.
 \item Oregon College of Earth and Oregon State University Atmospheric Science. 2021. \emph{Product of the Transboundary Freshwater Dispute Database}.
 \item Morin, Jean-Frederic, Andreas Duer, and Lisa Lechner. 2018. 'Mapping the trade and environment nexus: Insights from a new dataset'. \emph{Global Environmental Politics} 18.1, pp. 122-139.
 \item Raess, Damien, Andreas Duer, and D. Sari. 2018. 'Protecting labor rights in preferential trade agreements: The role of trade unions, left governments, and skilled labor'. \emph{The Review of International Organizations} 2.13, pp. 143-162.
@@ -50,7 +54,7 @@ please use the \code{manydata::call_sources()} and \code{manydata::compare_dimen
 agreements
 }
 \description{
-The \code{manytreaties::agreements} datacube is a list containing 8 datasets: HUGGO, IEADB, HEIDI, TFDD, TREND, LABPTA, TOTA, and GPTAD.
+The \code{manytreaties::agreements} datacube is a list containing 9 datasets: HUGGO, IEADB, HEIDI, DESTA, TFDD, TREND, LABPTA, TOTA, and GPTAD.
 It is a work-in-progress, so please let us know if you have any comments or suggestions.
 }
 \details{
@@ -58,7 +62,6 @@ It is a work-in-progress, so please let us know if you have any comments or sugg
 #> --------------------------------------------------------
 #> |  Variable   |  Class  |  Obs  |  Missing  |  Miss \%  |
 #> --------------------------------------------------------
-#> |manyID       |character|   4829|          0|         0|
 #> |treatyID     |character|   4829|          0|         0|
 #> |Title        |character|   4829|          0|         0|
 #> |Begin        |mdate    |   4772|         57|      1.18|
@@ -93,7 +96,6 @@ It is a work-in-progress, so please let us know if you have any comments or sugg
 #> --------------------------------------------------------
 #> |  Variable   |  Class  |  Obs  |  Missing  |  Miss \%  |
 #> --------------------------------------------------------
-#> |manyID       |character|   3667|          0|         0|
 #> |treatyID     |character|   3667|          0|         0|
 #> |Title        |character|   3667|          0|         0|
 #> |Begin        |mdate    |   3667|          0|         0|
@@ -110,7 +112,6 @@ It is a work-in-progress, so please let us know if you have any comments or sugg
 #> -------------------------------------------------------
 #> |  Variable  |  Class  |  Obs  |  Missing  |  Miss \%  |
 #> -------------------------------------------------------
-#> |manyID      |character|   2280|          0|         0|
 #> |treatyID    |character|   2280|          0|         0|
 #> |Title       |character|   2280|          0|         0|
 #> |Begin       |mdate    |   2253|         27|      1.18|
@@ -120,11 +121,28 @@ It is a work-in-progress, so please let us know if you have any comments or sugg
 #> -------------------------------------------------------
 #> 
 #> 
+#> $DESTA
+#> --------------------------------------------------------
+#> |  Variable   |  Class  |  Obs  |  Missing  |  Miss \%  |
+#> --------------------------------------------------------
+#> |manyID       |character|    959|          0|         0|
+#> |treatyID     |character|    959|          0|         0|
+#> |Title        |character|    959|          0|         0|
+#> |Begin        |mdate    |    878|         81|      8.45|
+#> |AgreementType|character|    959|          0|         0|
+#> |Ambit        |character|    959|          0|         0|
+#> |GeogArea     |character|    959|          0|         0|
+#> |Signature    |mdate    |    878|         81|      8.45|
+#> |Force        |mdate    |    717|        242|     25.23|
+#> |destaID      |character|    959|          0|         0|
+#> --------------------------------------------------------
+#> 
+#> 
 #> $TFDD
 #> ------------------------------------------------------------------
 #> |       Variable        |  Class  |  Obs  |  Missing  |  Miss \%  |
 #> ------------------------------------------------------------------
-#> |manyID                 |character|    784|          0|         0|
+#> |treatyID               |character|    784|          0|         0|
 #> |Title                  |character|    784|          0|         0|
 #> |Begin                  |mdate    |    779|          5|      0.64|
 #> |Signature              |mdate    |    779|          5|      0.64|
@@ -137,7 +155,6 @@ It is a work-in-progress, so please let us know if you have any comments or sugg
 #> |Basin                  |character|    784|          0|         0|
 #> |Lineage                |character|    439|        345|     44.01|
 #> |tfddID                 |character|    784|          0|         0|
-#> |treatyID               |character|    784|          0|         0|
 #> ------------------------------------------------------------------
 #> 
 #> 
@@ -145,7 +162,6 @@ It is a work-in-progress, so please let us know if you have any comments or sugg
 #> -------------------------------------------------------
 #> |  Variable  |  Class  |  Obs  |  Missing  |  Miss \%  |
 #> -------------------------------------------------------
-#> |manyID      |character|    710|          0|         0|
 #> |treatyID    |character|    710|          0|         0|
 #> |Title       |character|    710|          0|         0|
 #> |Begin       |mdate    |    705|          5|       0.7|
@@ -159,7 +175,6 @@ It is a work-in-progress, so please let us know if you have any comments or sugg
 #> -------------------------------------------------------
 #> |  Variable  |  Class  |  Obs  |  Missing  |  Miss \%  |
 #> -------------------------------------------------------
-#> |manyID      |character|    483|          0|         0|
 #> |treatyID    |character|    483|          0|         0|
 #> |Title       |character|    483|          0|         0|
 #> |Begin       |mdate    |    483|          0|         0|
@@ -173,7 +188,6 @@ It is a work-in-progress, so please let us know if you have any comments or sugg
 #> -------------------------------------------------------
 #> |  Variable  |  Class  |  Obs  |  Missing  |  Miss \%  |
 #> -------------------------------------------------------
-#> |manyID      |character|    442|          0|         0|
 #> |treatyID    |character|    442|          0|         0|
 #> |Title       |character|    442|          0|         0|
 #> |Begin       |mdate    |    442|          0|         0|
@@ -187,7 +201,6 @@ It is a work-in-progress, so please let us know if you have any comments or sugg
 #> --------------------------------------------------------
 #> |  Variable   |  Class  |  Obs  |  Missing  |  Miss \%  |
 #> --------------------------------------------------------
-#> |manyID       |character|    340|          0|         0|
 #> |treatyID     |character|    340|          0|         0|
 #> |Title        |character|    340|          0|         0|
 #> |Begin        |mdate    |    310|         30|      8.82|
@@ -201,21 +214,22 @@ It is a work-in-progress, so please let us know if you have any comments or sugg
 }\if{html}{\out{</div>}}
 }
 \section{Mapping}{
-\tabular{llllllll}{
-   \emph{manytreaties} \tab \emph{IEADB} \tab \emph{HEIDI} \tab \emph{TFDD} \tab \emph{TREND} \tab \emph{LABPTA} \tab \emph{TOTA} \tab \emph{GPTAD} \cr
-   Title \tab Treaty Name \tab Name.of.the.agreement \tab DocumentName \tab Trade.Agreement \tab Name \tab name \tab Common.Name \cr
-   Signature \tab Signature Date \tab signature.date \tab DateSigned \tab Year \tab year \tab date_signed \tab Date.of.Signature \cr
-   Force \tab Date IEA entered into force \tab  \tab  \tab Year \tab year \tab date_into_force \tab Date.of.Entry.into.Force \cr
-   mitchID \tab IEA# \tab  \tab  \tab  \tab  \tab  \tab  \cr
-   heidiID \tab  \tab ID \tab  \tab  \tab  \tab  \tab  \cr
-   labptaID \tab  \tab  \tab  \tab  \tab Number \tab  \tab  \cr
-   tfddID \tab  \tab  \tab 2016Update ID \tab  \tab  \tab  \tab  \cr
-   AgreementType \tab Agreement Type (level 2) \tab  \tab DocType \tab  \tab  \tab  \tab  \cr
-   Ambit \tab Inclusion \tab  \tab NumberParties \tab  \tab  \tab  \tab Type \cr
-   GeogArea \tab  \tab  \tab GeoScope \tab  \tab  \tab  \tab  \cr
-   Basin \tab  \tab  \tab Basin Name \tab  \tab  \tab  \tab  \cr
-   Issue \tab  \tab  \tab Issue Area \tab  \tab  \tab  \tab  \cr
-   Lineage \tab  \tab  \tab PrimaryTFDDID \tab  \tab  \tab  \tab  \cr
+\tabular{lllllllll}{
+   \emph{manytreaties} \tab \emph{IEADB} \tab \emph{HEIDI} \tab \emph{DESTA} \tab \emph{TFDD} \tab \emph{TREND} \tab \emph{LABPTA} \tab \emph{TOTA} \tab \emph{GPTAD} \cr
+   Title \tab Treaty Name \tab Name.of.the.agreement \tab name \tab DocumentName \tab Trade.Agreement \tab Name \tab name \tab Common.Name \cr
+   Signature \tab Signature Date \tab signature.date \tab year \tab DateSigned \tab Year \tab year \tab date_signed \tab Date.of.Signature \cr
+   Force \tab Date IEA entered into force \tab  \tab entryforceyea \tab  \tab Year \tab year \tab date_into_force \tab Date.of.Entry.into.Force \cr
+   mitchID \tab IEA# \tab  \tab  \tab  \tab  \tab  \tab  \tab  \cr
+   heidiID \tab  \tab ID \tab  \tab  \tab  \tab  \tab  \tab  \cr
+   destaID \tab  \tab  \tab base_treaty \tab  \tab  \tab  \tab  \tab  \cr
+   labptaID \tab  \tab  \tab  \tab  \tab Number \tab  \tab  \tab  \cr
+   tfddID \tab  \tab  \tab 2016Update ID \tab  \tab  \tab  \tab  \tab  \cr
+   AgreementType \tab Agreement Type (level 2) \tab  \tab entry_type \tab DocType \tab  \tab  \tab  \tab  \cr
+   Ambit \tab Inclusion \tab  \tab typememb \tab NumberParties \tab  \tab  \tab  \tab Type \cr
+   GeogArea \tab  \tab  \tab regioncon \tab GeoScope \tab  \tab  \tab  \tab  \cr
+   Basin \tab  \tab  \tab  \tab Basin Name \tab  \tab  \tab  \tab  \cr
+   Issue \tab  \tab  \tab  \tab Issue Area \tab  \tab  \tab  \tab  \cr
+   Lineage \tab  \tab  \tab  \tab PrimaryTFDDID \tab  \tab  \tab  \tab  \cr
 }
 }
 
