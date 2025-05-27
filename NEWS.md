@@ -1,3 +1,18 @@
+# manytreaties 0.1.1
+
+2025-05-26
+
+## Package
+* Updated healthdata vignette to match changes to datasets
+* Updated pkgdown file with new logo
+* Updated documentation for `agreements` and `parties` datacubes
+
+## Data
+* Added back DESTA in `agreements` and `parties` datacube
+* Corrected some errors in dates in `HUGGO` dataset
+* Added AgreementType and Ambit data for trade agreements in `HUGGO` dataset
+* Removed manyID in favour of using treatyID as identifier in datasets
+
 # manytreaties 0.1.0
 
 2025-02-27
