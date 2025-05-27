@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Ubuntu+Mono');
 
 /* Color Palette
-manytreaties light blue #ADD8E6, used for standard links
+manytreaties light blue #86B0AE, used for standard links
 Light Green #3B60C4, used for hovered links
 Green Sheen #3D7DAD, Used for active things
 Dark White #f3f3f3, used for discrete active things, like the active dropdown
@@ -31,11 +31,11 @@ h4 {
 
 /* Package name in the navbar*/
 .navbar-light .navbar-brand {
-  color: #ADD8E6;
+  color: #86B0AE;
 }
 /* Navbar menu names*/
 .navbar-light .navbar-nav .nav-link {
-  color: #ADD8E6;
+  color: #86B0AE;
 }
 
 .version {
@@ -77,12 +77,12 @@ code{
 /* Functions in the code */
 pre code span.fu{
   font-size: 14px;
-  color: #ADD8E6;
+  color: #86B0AE;
 }
 
 /*Links in code and header*/
 code a, pre a{
-  color: #ADD8E6;
+  color: #86B0AE;
 }
 
 .docs-link:hover{
@@ -90,28 +90,28 @@ code a, pre a{
 }
 /*What is this thing?*/
 .docs-link{
-  color: #ADD8E6;
+  color: #86B0AE;
 }
 /*Links in paragraphs*/
 p>a {
-  color: #ADD8E6;
+  color: #86B0AE;
 }
 /*What is this?*/
 .panel-body>a {
-  color: #ADD8E6;
+  color: #86B0AE;
 }
 
 h4>a {
-  color: #ADD8E6;
+  color: #86B0AE;
 }
 
 li>a {
-  color: #ADD8E6;
+  color: #86B0AE;
 }
 /* Link in the dropdown menu if active*/
 .dropdown-menu > .active > a,
 .dropdown-menu>.active>a:focus {
-  background-color: #ADD8E6;
+  background-color: #86B0AE;
 }
 .dropdown-menu>.active>a:hover{
   background-color: #3D7DAD;
@@ -122,15 +122,15 @@ a .caret{
 }
 
 small>a{
-  color: #ADD8E6;
+  color: #86B0AE;
 }
 
 .sourceCode>a{
-  color: #ADD8E6;
+  color: #86B0AE;
 }
 
 .fl{
-  color: #ADD8E6;
+  color: #86B0AE;
 }
 /*Strings in code*/
 pre code span.st{
@@ -178,7 +178,7 @@ pre {
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
     color: #f3f3f3;
-    background-color: #ADD8E6;
+    background-color: #86B0AE;
 }
 
 .navbar-default .navbar-nav > li > a:hover,
@@ -211,22 +211,22 @@ pre {
 .nav-pills>li.active>a:hover,
 .nav-pills>li.active>a:focus {
   color: #F0760F;
-  background-color: #ADD8E6;
+  background-color: #86B0AE;
   font-weight: bold;
 }
 
 .navbar-default .navbar-nav>li>a{
-  color: #ADD8E6;
+  color: #86B0AE;
   font-size: 14px;
 }
 /*Package name in the navbar*/
 .navbar-default .navbar-link{
-  color: #ADD8E6;
+  color: #86B0AE;
   font-size: 30px;
 }
 
 div>a{
-  color: #ADD8E6;
+  color: #86B0AE;
 }
 /* General links when hovered over*/
 a:hover, a:focus {
@@ -238,8 +238,8 @@ a:hover, a:focus {
 }
 
 .btn-primary{
-  background-color: #ADD8E6;
-  border-color: #ADD8E6;
+  background-color: #86B0AE;
+  border-color: #86B0AE;
 }
 
 .panel-orange > .panel-heading{
