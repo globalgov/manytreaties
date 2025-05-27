@@ -10,17 +10,17 @@
 observations and 30 variables:
 treatyID, stateID, Title, Begin, End, StateSignature, StateRatification, StateForce, StateEnd, Rat=Notif, Accession, Succession, Signature, Force, url, StateForce2, StateForce3, StateEnd2, ..., match, and Coder.}
 \item{IEADB: }{A dataset with 15,463
-observations and 11 variables:
-stateID, treatyID, Begin, End, manyID, Title, stateSignature, Signature, Rat, Force, and ieadbID.}
+observations and 10 variables:
+stateID, treatyID, Begin, End, Title, stateSignature, Signature, Rat, Force, and ieadbID.}
 \item{DESTA: }{A dataset with 7,466
-observations and 9 variables:
-manyID, treatyID, Title, Begin, stateID, Signature, Force, StateName, and destaID.
+observations and 8 variables:
+stateID, treatyID, Begin, Title, Signature, Force, StateName, and destaID.}
 \item{GPTAD: }{A dataset with 2,192
-observations and 7 variables:
-stateID, treatyID, Begin, manyID, Title, Signature, and Force.}
+observations and 6 variables:
+stateID, treatyID, Begin, Title, Signature, and Force.}
 \item{TFDD: }{A dataset with 1,832
-observations and 7 variables:
-stateID, treatyID, Begin, manyID, Title, Signature, and tfddID.}
+observations and 6 variables:
+stateID, treatyID, Begin, Title, Signature, and tfddID.}
 }
 For more information and references to each of the datasets used,
 please use the \code{manydata::call_sources()} and \code{manydata::compare_dimensions()} functions.
@@ -38,7 +38,7 @@ please use the \code{manydata::call_sources()} and \code{manydata::compare_dimen
 parties
 }
 \description{
-The \code{manytreaties::parties} datacube is a list containing 5 datasets: HUGGO, IEADB, GPTAD, TFDD, and DESTA.
+The \code{manytreaties::parties} datacube is a list containing 5 datasets: HUGGO, IEADB, DESTA, GPTAD, and TFDD.
 It is a work-in-progress, so please let us know if you have any comments or suggestions.
 }
 \details{
@@ -87,7 +87,6 @@ It is a work-in-progress, so please let us know if you have any comments or sugg
 #> |treatyID      |character|  15463|          0|         0|
 #> |Begin         |mdate    |  15463|          0|         0|
 #> |End           |mdate    |    870|      14593|     94.37|
-#> |manyID        |character|  15463|          0|         0|
 #> |Title         |character|  15463|          0|         0|
 #> |stateSignature|mdate    |   9666|       5797|     37.49|
 #> |Signature     |mdate    |  15463|          0|         0|
@@ -97,6 +96,21 @@ It is a work-in-progress, so please let us know if you have any comments or sugg
 #> ---------------------------------------------------------
 #> 
 #> 
+#> $DESTA
+#> -------------------------------------------------------
+#> |  Variable  |  Class  |  Obs  |  Missing  |  Miss \%  |
+#> -------------------------------------------------------
+#> |stateID     |character|   7455|         11|      0.15|
+#> |treatyID    |character|   7466|          0|         0|
+#> |Begin       |mdate    |   6836|        630|      8.44|
+#> |Title       |character|   7466|          0|         0|
+#> |Signature   |mdate    |   6836|        630|      8.44|
+#> |Force       |mdate    |   4602|       2864|     38.36|
+#> |StateName   |character|   7466|          0|         0|
+#> |destaID     |character|   7466|          0|         0|
+#> -------------------------------------------------------
+#> 
+#> 
 #> $GPTAD
 #> -------------------------------------------------------
 #> |  Variable  |  Class  |  Obs  |  Missing  |  Miss \%  |
@@ -104,7 +118,6 @@ It is a work-in-progress, so please let us know if you have any comments or sugg
 #> |stateID     |character|   2137|         55|      2.51|
 #> |treatyID    |character|   2192|          0|         0|
 #> |Begin       |mdate    |   2093|         99|      4.52|
-#> |manyID      |character|   2192|          0|         0|
 #> |Title       |character|   2192|          0|         0|
 #> |Signature   |mdate    |   1882|        310|     14.14|
 #> |Force       |mdate    |   1907|        285|        13|
@@ -118,26 +131,9 @@ It is a work-in-progress, so please let us know if you have any comments or sugg
 #> |stateID     |character|   1831|          1|      0.05|
 #> |treatyID    |character|   1832|          0|         0|
 #> |Begin       |mdate    |   1730|        102|      5.57|
-#> |manyID      |character|   1832|          0|         0|
 #> |Title       |character|   1831|          1|      0.05|
 #> |Signature   |mdate    |   1730|        102|      5.57|
 #> |tfddID      |numeric  |   1831|          1|      0.05|
-#> -------------------------------------------------------
-#> 
-#> 
-#> $DESTA
-#> -------------------------------------------------------
-#> |  Variable  |  Class  |  Obs  |  Missing  |  Miss \%  |
-#> -------------------------------------------------------
-#> |manyID      |character|   7466|          0|         0|
-#> |treatyID    |character|   7466|          0|         0|
-#> |Title       |character|   7466|          0|         0|
-#> |Begin       |mdate    |   6836|        630|      8.44|
-#> |stateID     |character|   7455|         11|      0.15|
-#> |Signature   |mdate    |   6836|        630|      8.44|
-#> |Force       |mdate    |   4602|       2864|     38.36|
-#> |StateName   |character|   7466|          0|         0|
-#> |destaID     |character|   7466|          0|         0|
 #> -------------------------------------------------------
 }\if{html}{\out{</div>}}
 }

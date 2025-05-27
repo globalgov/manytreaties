@@ -11,7 +11,7 @@
 #' `r cli::pluralize("{names(manytreaties::parties$IEADB)}")`.}
 #' \item{DESTA: }{A dataset with `r prettyNum(nrow(manytreaties::parties$DESTA), big.mark=",")` 
 #' observations and `r ncol(manytreaties::parties$DESTA)` variables: 
-#' `r cli::pluralize("{names(manytreaties::parties$DESTA)}")`.
+#' `r cli::pluralize("{names(manytreaties::parties$DESTA)}")`.}
 #' \item{GPTAD: }{A dataset with `r prettyNum(nrow(manytreaties::parties$GPTAD), big.mark=",")` 
 #' observations and `r ncol(manytreaties::parties$GPTAD)` variables: 
 #' `r cli::pluralize("{names(manytreaties::parties$GPTAD)}")`.}
