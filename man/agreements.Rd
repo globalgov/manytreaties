@@ -42,7 +42,7 @@ please use the \code{manydata::call_sources()} and \code{manydata::compare_dimen
 \item Hollway, James, Henrique Sposito, and Jael Tan. 2021. International agreements for manydata.
 \item Mitchell, Ron B. et al. 2020. 'What we know (and could know) about international environmental agreements'. \emph{Global Environmental Politics} 20.1, pp. 103-121.
 \item Morin, Jean-Frederic, and Chantal Blouin. 2019. 'How environmental treaties contribute to global health governance'. \emph{Globalization and health} 15.1, pp. 1-8.
-\item Dür, Andreas, Leonardo Baccini, and Manfred Elsig. 2014. 'The Design of International Trade Agreements: Introducing a New Database'. \emph{The Review of International Organizations} 9.3, pp. 353-375.
+\item Duer, Andreas, Leonardo Baccini, and Manfred Elsig. 2014. 'The Design of International Trade Agreements: Introducing a New Database'. \emph{The Review of International Organizations} 9.3, pp. 353-375.
 \item Oregon College of Earth and Oregon State University Atmospheric Science. 2021. \emph{Product of the Transboundary Freshwater Dispute Database}.
 \item Morin, Jean-Frederic, Andreas Duer, and Lisa Lechner. 2018. 'Mapping the trade and environment nexus: Insights from a new dataset'. \emph{Global Environmental Politics} 18.1, pp. 122-139.
 \item Raess, Damien, Andreas Duer, and D. Sari. 2018. 'Protecting labor rights in preferential trade agreements: The role of trade unions, left governments, and skilled labor'. \emph{The Review of International Organizations} 2.13, pp. 143-162.
