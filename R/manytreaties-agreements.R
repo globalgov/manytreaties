@@ -61,7 +61,7 @@
 #' ```
 "agreements"
 
-info_agreements <- tibble::tibble(Dataset = names(data(agreements, package = "manytreaties")),
+info_agreements <- tibble::tibble(Dataset = names(utils::data(agreements, package = "manytreaties")),
                                    Source = c("Hollway, James, Henrique Sposito, and Jael Tan. 2021. International agreements for manydata.",
                                               "Mitchell, Ron B. et al. 2020. 'What we know (and could know) about international environmental agreements'. _Global Environmental Politics_ 20.1, pp. 103-121.",
                                               "Morin, Jean-Frederic, and Chantal Blouin. 2019. 'How environmental treaties contribute to global health governance'. _Globalization and health_ 15.1, pp. 1-8.",
