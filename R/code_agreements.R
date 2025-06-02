@@ -247,3 +247,54 @@ code_dates <- function(date) {
   uID
 }
 
+#' Code Known Agreements Abbreviation
+#'
+#' Some agreements have known abbreviations that facilitate their identification.
+#' @param title A character vector of treaty title
+#' @return A character vector of abbreviation of known treaties
+#' @importFrom dplyr case_when
+#' @importFrom purrr map
+#' @details The function identifies agreements that match the list of known
+#' agreements with their titles, abbreviations and signature dates and
+#' substitutes the known titles for abbreviations.For the complete list of
+#' known agreements coded for and their respective abbreviations please run
+#' the function without an argument (i.e. `code_known_agreements()`).
+#' @examples
+#' \dontrun{
+#' IEADB <- dplyr::slice_sample(manyenviron::agreements$IEADB, n = 10)
+#' code_known_agreements(IEADB$Title)
+#' }
+#' @export
+code_known_agreements <- function(title) {
+  if (missing(title)) {
+    # If missing argument, function returns list of known agreements coded
+    ka <- as.data.frame(abbreviations)
+    ka$title[15] <- paste(substr(ka$title[15], 0, 90), "...")
+    ka$title[17] <- paste(substr(ka$title[17], 0, 90), "...")
+    out <- knitr::kable(ka, "simple")
+  } else {
+    # Step 1: get abbreviations dataset
+    abbreviations <- purrr::map(abbreviations, as.character)
+    # Step 2: assign the specific abbreviation to the "known" treaties
+    ab <- sapply(abbreviations$title, function(x) grepl(x, title,
+                                                        ignore.case = T,
+                                                        perl = T) * 1)
+    colnames(ab) <- paste0(abbreviations$abbreviation, "_",
+                           as.character(stringr::str_remove_all(
+                             abbreviations$signature, "-")))
+    rownames(ab) <- title
+    out <- apply(ab, 1, function(x) paste(names(x[x == 1])))
+    # Assign NA when observation is not matched
+    out[out == "character(0)"] <- NA_character_
+    out <- unname(out)
+    out <- as.character(out)
+    out <- ifelse(grepl("c\\(", out), "PARIS_20151212", out)
+    # Step 3: keep year only for IDs
+    out <- ifelse(is.na(out), out, substr(out, 1, nchar(out) - 4))
+    # Step 4: if all missing, returns an empty list
+    lt <- as.numeric(length(title))
+    ifelse(length(out) == 0, out <- rep(NA_character_, lt), out)
+  }
+  out
+}
+

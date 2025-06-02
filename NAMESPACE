@@ -2,8 +2,10 @@
 
 export(code_accession_terms)
 export(code_agreements)
+export(code_dates)
 export(code_domain)
 export(code_entity)
+export(code_known_agreements)
 export(code_term)
 export(code_term_date)
 export(code_type)
