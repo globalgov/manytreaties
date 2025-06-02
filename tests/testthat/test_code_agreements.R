@@ -26,6 +26,8 @@ test_that("Code_agreements helper functions work properly", {
                                            "CEBRIP", "RIVER",
                                            "WTIIWH", "GU11TC",
                                            "GU13PO"))
+  expect_equal(code_linkage(data$title, data$date), c("", "RAMSA_1971A", "",
+                                                      "", "", "", "", "", ""))
 })
 
 # Test for datasets that have ranged dates

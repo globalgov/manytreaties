@@ -375,3 +375,94 @@ code_acronym <- function(title) {
   x
 }
 
+#' Code Agreement Linkages
+#'
+#' Identify the linkage between amendments and protocols to a main agreement.
+#' @param title A character vector of treaty title
+#' @param date A date variable
+#' @param return_all Do you want all the variables to be returned in a list?
+#' By default, FALSE.
+#' @importFrom stringr str_replace_all str_squish str_remove_all
+#' @importFrom purrr map
+#' @import dplyr
+#' @return A character vector of the agreements that are linked
+#' @details The function identifies duplicates by excluding
+#' "predictable" words from strings, this maintains key words then used
+#' to identify and link duplicates.
+#' This is a choice that considers errors should lie on the side of false
+#' negatives rather than false positives.
+#' For the complete list of words removed from title to identify duplicates
+#' please run the function without arguments (i.e. `code_linkage()`).
+#' @examples
+#' \dontrun{
+#' IEADB <- dplyr::slice_sample(manyenviron::agreements$IEADB, n = 10)
+#' code_linkage(IEADB$Title, IEADB$Begin)
+#' }
+#' @export
+code_linkage <- function(title, date, return_all = FALSE) {
+  # Initialize variables to suppress CMD notes
+  ref <- dup <- NULL
+  if (missing(title) & missing(date)) {
+    pred <- as.data.frame(predictable_words)
+    pred_words <- knitr::kable(pred, "simple")
+    pred_words
+  } else {
+    # Step 1: standardise titles to improve matching
+    treaty <- standardise_titles(as.character(title))
+    # Step 2: code parties if present
+    parties <- manystates::code_states(treaty)
+    usethis::ui_done("Coded agreement parties")
+    # Step 3: code agreement type
+    type <- code_type(treaty)
+    usethis::ui_done("Coded agreement type")
+    # Step 4: code known agreements
+    abbrev <- code_known_agreements(treaty)
+    usethis::ui_done("Coded known agreements")
+    # Step 5: give the observation a unique ID and acronym
+    uID <- code_dates(date)
+    usethis::ui_done("Coded agreement dates")
+    # Step 6: code acronyms from titles
+    acronym <- code_acronym(title)
+    usethis::ui_done("Coded acronyms for agreements")
+    # Step 7: remove 'predictable words' in agreements
+    pw <- paste0("\\<", paste(predictable_words$predictable_words,
+                              collapse = "\\>|\\<"), "\\>")
+    treaty <- gsub(pw, "", treaty, ignore.case = TRUE)
+    # Step 8: remove numbers, signs and parentheses
+    treaty <- gsub("\\s*\\([^\\)]+\\)", "", treaty, ignore.case = FALSE)
+    treaty <- gsub("-", " ", treaty, ignore.case = FALSE)
+    treaty <- stringr::str_replace_all(treaty, ",", "")
+    treaty <- stringr::str_remove_all(treaty, "[0-9]")
+    treaty <- data.frame(treaty = stringr::str_squish(treaty))
+    # Step 9: assign ID to observations
+    id <- ifelse((!is.na(abbrev)), paste0(abbrev, "A"),
+                 (ifelse((is.na(parties)), paste0(acronym, "_", uID, type),
+                         (ifelse((!is.na(parties)), paste0(parties, "_", uID,
+                                                           type), NA)))))
+    # Step 10: bind, arrange, find duplicates, original values, and assign same id
+    out <- cbind(treaty, id, parties, type, abbrev, uID, acronym) %>%
+      dplyr::mutate(row = dplyr::row_number()) %>%
+      dplyr::arrange(type) %>%
+      dplyr::group_by_at(dplyr::vars(treaty)) %>%
+      dplyr::mutate(dup = dplyr::row_number() > 1,
+                    ref = ifelse(dup, paste0(dplyr::first(id)),
+                                 as.character(id))) %>%
+      dplyr::group_by(ref) %>%
+      dplyr::mutate(n = dplyr::n(),
+                    line = dplyr::case_when(n != 1 ~ paste(ref),
+                                            n == 1 ~ "1")) %>%
+      dplyr::arrange(row)
+    # Step 11: keep only linkages for agreements
+    out$line <- ifelse(out$id == out$ref & out$type == "A", "1", out$line)
+    out$line <- stringr::str_replace_all(out$line, "^1$", "")
+    out$line <- stringr::str_replace_all(out$line,
+                                         "[0-9]{4}E|[0-9]{4}P|[0-9]{4}S|[0-9]{4}N|[0-9]{4}R|[0-9]{4}O",
+                                         "xxxxxxxxxxxxxxxxxxxxXx")
+    out$line <- ifelse(nchar(as.character(out$line)) > 20, "", out$line)
+    if (return_all == FALSE) {
+      out <- out$line
+    }
+    out
+  }
+}
+
