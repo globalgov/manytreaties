@@ -1,6 +1,6 @@
 # manytreaties 0.1.1
 
-2025-05-26
+2025-06-02
 
 ## Package
 * Updated healthdata vignette to match changes to datasets
@@ -12,6 +12,7 @@
 * Corrected some errors in dates in `HUGGO` dataset
 * Added AgreementType and Ambit data for trade agreements in `HUGGO` dataset
 * Removed manyID in favour of using treatyID as identifier in datasets
+* Closed #17 and #21 by updating treaty texts files
 
 # manytreaties 0.1.0
 
