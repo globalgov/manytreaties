@@ -73,52 +73,52 @@ generate_agreements <- function(n = 10, treaty_type = "any") {
   }
   stringi::stri_replace_all_regex(out, "\\s\\s+", " ")
 }
-
-#' @rdname generate_
-#' @param list Would you like all members to an agreement be listed in the
-#' same observation?
-#' By default, FALSE.
-#' If TRUE, pastes all members to an agreement together in the same observation
-#' separating them with commas.
-#' @importFrom dplyr %>% select rename
-#' @importFrom plyr ddply .
-#' @examples
-#' \donttest{
-#' generate_memberships(12)
-#' generate_memberships(12, treaty_type = "bilaterals")
-#' generate_memberships(12, treaty_type = "multilaterals")
-#' generate_memberships(12, list = TRUE)
+#' 
+#' #' @rdname generate_
+#' #' @param list Would you like all members to an agreement be listed in the
+#' #' same observation?
+#' #' By default, FALSE.
+#' #' If TRUE, pastes all members to an agreement together in the same observation
+#' #' separating them with commas.
+#' #' @importFrom dplyr %>% select rename
+#' #' @importFrom plyr ddply .
+#' #' @examples
+#' #' \donttest{
+#' #' generate_memberships(12)
+#' #' generate_memberships(12, treaty_type = "bilaterals")
+#' #' generate_memberships(12, treaty_type = "multilaterals")
+#' #' generate_memberships(12, list = TRUE)
+#' #' }
+#' #' @export
+#' generate_memberships <- function(n = 10, treaty_type = "any", list = FALSE) {
+#'   nm <- title <- NULL
+#'   membs <- manystates::code_states()$stateID
+#'   g_agreements <- data.frame(title = generate_agreements(n = n, treaty_type =
+#'                                                            treaty_type),
+#'                              nm = sample(100, n), membs = 0)
+#'   coment <- vapply(manystates::code_states()[, 3], function(x) grepl(x, g_agreements$title,
+#'                                                         ignore.case = T,
+#'                                                         perl = T) * 1,
+#'                    FUN.VALUE = numeric(n))
+#'   colnames(coment) <- manystates::code_states()[, 1]
+#'   rownames(coment) <- g_agreements$title
+#'   out <- unname(apply(coment, 1, function(x) paste(names(x[x == 1]),
+#'                                                    collapse = ", ")))
+#'   out[out == ""] <- NA
+#'   for (k in seq_len(length(g_agreements$nm))) {
+#'     g_agreements$membs[k] <- ifelse(grepl("Between The Parties of",
+#'                                           g_agreements$title[k]), out[k],
+#'                                     trimws(paste(
+#'                                       sample(membs,
+#'                                              as.numeric(g_agreements$nm[k])),
+#'                                                  collapse = ", ")))
+#'   }
+#'   g_agreements <- dplyr::select(g_agreements, -nm) %>%
+#'     dplyr::rename(membership = membs)
+#'   if (list == FALSE) {
+#'     g_agreements <- plyr::ddply(g_agreements, plyr::.(title), function(DF) {
+#'       data.frame(membership = trimws(strsplit(DF$membership, ",")[[1]]))
+#'     })
+#'   }
+#'   g_agreements
 #' }
-#' @export
-generate_memberships <- function(n = 10, treaty_type = "any", list = FALSE) {
-  nm <- title <- NULL
-  membs <- countryregex$StatID
-  g_agreements <- data.frame(title = generate_agreements(n = n, treaty_type =
-                                                           treaty_type),
-                             nm = sample(100, n), membs = 0)
-  coment <- vapply(countryregex[, 3], function(x) grepl(x, g_agreements$title,
-                                                        ignore.case = T,
-                                                        perl = T) * 1,
-                   FUN.VALUE = numeric(n))
-  colnames(coment) <- countryregex[, 1]
-  rownames(coment) <- g_agreements$title
-  out <- unname(apply(coment, 1, function(x) paste(names(x[x == 1]),
-                                                   collapse = ", ")))
-  out[out == ""] <- NA
-  for (k in seq_len(length(g_agreements$nm))) {
-    g_agreements$membs[k] <- ifelse(grepl("Between The Parties of",
-                                          g_agreements$title[k]), out[k],
-                                    trimws(paste(
-                                      sample(membs,
-                                             as.numeric(g_agreements$nm[k])),
-                                                 collapse = ", ")))
-  }
-  g_agreements <- dplyr::select(g_agreements, -nm) %>%
-    dplyr::rename(membership = membs)
-  if (list == FALSE) {
-    g_agreements <- plyr::ddply(g_agreements, plyr::.(title), function(DF) {
-      data.frame(membership = trimws(strsplit(DF$membership, ",")[[1]]))
-    })
-  }
-  g_agreements
-}
