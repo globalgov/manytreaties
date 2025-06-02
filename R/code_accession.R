@@ -42,10 +42,10 @@ code_accession_terms <- function(textvar, title = NULL, accession = NULL) {
                                             memb, ignore.case = T) ~ "open", )
       condition_2 <- dplyr::case_when(grepl("nomination", memb,
                                             ignore.case = T) ~ "Semi-open", )
-      condition_3 <- manypkgs::code_entity(title)
+      condition_3 <- code_entity(title)
       condition_3 <- ifelse(!stringr::str_detect(condition_3, "NA"),
                           paste0("entity: ", condition_3), NA)
-      condition_4 <- manypkgs::code_domain(title)
+      condition_4 <- code_domain(title)
       condition_4 <- ifelse(!stringr::str_detect(condition_4, "NA"),
                           paste0("domain: ", condition_4), NA)
       condition <- paste0(condition_1, " + ", condition_2, " + ",
@@ -76,3 +76,15 @@ code_accession_terms <- function(textvar, title = NULL, accession = NULL) {
   }
   }
 }
+
+member <- dplyr::tribble(~Process,~Criterion,
+                         "Majority vote: accession of a new member to the convention is subject to majority voting",
+                           "Activity: treaty restricted to the exercise of a certain activity",
+                         "Notification: new member states has to notify their consent to the competent body",
+                           "Geographic: treaty restricted to a certain geographical area",
+                         "Ratification: requires ratification from the new member",
+                           "Open: treaty open to any new member states within the geographical area and respecting conditions for accession",
+                         "Signature: requires signature from the new member",
+                           "Semi-open: accession of a new member to the treaty is subject to a vote from the member states",
+                         "Unanimity: accession of a new member to the convention is subject to unanimity voting",
+                           NA)
