@@ -101,3 +101,32 @@ correct_words <- function(s) {
   }
 }
 
+corrected_words <- dplyr::tribble(~words,~corr_words,
+"U\\.K\\.|^UK$","UK",
+"U\\.S\\. |^US$","USA",
+"U.S.S.R.","USSR",
+"Art[[:punct:]]","Article",
+"Co-operation|Coperation","Cooperation",
+"Co-operative|Coperative","Cooperative",
+"Wild Life|Wild-Life","Wildlife",
+"Decision Making","Decision-Making",
+"MaasMeuse","Maas",
+"Test-Ban","Test Ban",
+"Foot-and-Mouth","Foot and Mouth",
+"Nuclear-Weapon-Free","Nuclear Weapon Free",
+"Public Participation","Public Participation",
+"Deep-Sea","Deep Sea",
+"Land-Based|Landbased","Land Based",
+"Vietnam","Viet Nam",
+"Shipsballast|Ship's ballast","Ships Ballast",
+"North-East|Northeast","North East",
+"North-Eastern|Northeastern","North Eastern",
+"North-West|Northwest","North West",
+"North-western|Northwestern","North Western",
+"South-East|Southeast","South East",
+"South-Eastern|Southeastern","South Eastern",
+"South-West|Southwest","South West",
+"South-Western|Southwestern","South Western",
+"Indo-Pacific|Indopacific|Asia-Pacific|Asiapacific","Asia Pacific",
+"Co-ordinating|cordinating","Coordinating"
+)
