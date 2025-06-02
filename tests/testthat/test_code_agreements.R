@@ -21,6 +21,11 @@ test_that("Code_agreements helper functions work properly", {
   expect_equal(code_known_agreements(data$title), c(NA, "RAMSA_1971",
                                                     NA, NA, NA, NA,
                                                     "RAMSA_1971", NA, NA))
+  expect_equal(code_acronym(data$title), c("CPVPFD", "WTIIWH",
+                                           "TD06LJ", "DCLRMR",
+                                           "CEBRIP", "RIVER",
+                                           "WTIIWH", "GU11TC",
+                                           "GU13PO"))
 })
 
 # Test for datasets that have ranged dates

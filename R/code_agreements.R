@@ -298,3 +298,80 @@ code_known_agreements <- function(title) {
   out
 }
 
+abbreviations <- dplyr::tribble(~title,~abbreviation,~signature,
+  "United Nations Convention On The Law Of The Sea","UNCLOS","1982-12-10",
+  "Convention On Biological Diversity","CBD","1992-06-05",
+  "Convention On The Conservation Of Antarctic Marine Living Resources","CCAMLR","1980-05-20",
+  "Convention On International Trade In Endangered Species Of Wild Fauna And Flora","CITES","1973-03-03",
+  "International Convention On Civil Liability For Oil Pollution Damage","CLC","1969-11-29",
+  "Antarctic Mineral Resources Convention","CRAMRA","1988-06-02",
+  "Convention On The Protection And Use Of Transboundary Watercourses And International Lakes","CECE","1992-03-17",
+  "Convention On Long-Range Transboundary Air Pollution","LRTAP","1979-11-13",
+  "International Convention For The Prevention Of Pollution From Ships","MARPOL","1973-11-02",
+  "North American Agreement On Environmental Cooperation","NAAEC","1993-09-14",
+  "Constitutional Agreement Of The Latin American Organization For Fisheries Development","OLDEPESCA","1982-10-29",
+  "International Convention On Oil Pollution Preparedness, Response And Cooperation","OPRC","1990-11-30",
+  "Convention For The Protection Of The Marine Environment Of The North East Atlantic","OSPAR","1992-09-22",
+  "Paris Agreement Under The United Nations Framework Convention On Climate Change","PARIS","2015-12-12",
+  "Convention On The Prior Informed Consent Procedure For Certain Hazardous Chemicals And Pesticides In International Trade","PIC","1998-09-10",
+  "Convention On Wetlands Of International Importance Especially As Waterfowl Habitat","RAMSA","1971-02-02",
+  "Convention To Combat Desertification In Those Countries Experiencing Serious Drought And/Or Desertification, Particularly In Africa","UNCCD","1994-06-17",
+  "United Nations Framework Convention On Climate Change","UNFCCC","1992-05-09",
+  "Convention For The Protection Of The Ozone Layer","VIENNA","1985-03-22"
+)
+
+#' Code Acronym for Titles
+#'
+#' Codes an acronym for agreement titles to facilitate comparison.
+#' @param title A character vector of treaty title
+#' @import stringr
+#' @importFrom tm stopwords removeWords
+#' @details Codes acronyms that are 4 to 6 digits long.
+#' For shorter treaty titles, six words or less, acronym includes first letter
+#' of each word.
+#' For longer treaty titles, seven words or more, acronym includes first letter
+#' of first word in title, followed by the number of words in the title,
+#' and first letter of last word in title.
+#' @examples
+#' \dontrun{
+#' IEADB <- dplyr::slice_sample(manyenviron::agreements$IEADB, n = 10)
+#' code_acronym(IEADB$Title)
+#' }
+#' @export
+code_acronym <- function(title) {
+  # Step 1: standardise titles
+  x <- standardise_titles(tm::removeWords(tolower(title),
+                                          tm::stopwords("SMART")))
+  # Step 2: remove agreement types, numbers, and punctuation marks
+  x <- gsub("protocol|protocols|amendment|amendments|amend|
+            |amending|Agreement|agreements|convention|
+            |Exchange|Exchanges|Notes|Strategy|strategies|
+            |Resolution|resolutions", "", x, ignore.case = TRUE)
+  x <- stringr::str_remove_all(x, "\\s\\([:alpha:]{3,9}\\)")
+  x <- stringr::str_remove_all(x, "\\s\\(.{3,20}\\)")
+  x <- stringr::str_remove_all(x, "[0-9]")
+  x <- stringr::str_remove_all(x, "\\(|\\)")
+  x <- gsub("-", " ", x)
+  # Step 3: remove known agreement cities or short titles
+  x <- gsub("\\<Nairobi\\>|\\<Basel\\>|\\<Bamako\\>|\\<Lusaka\\>|
+            |\\<Stockholm\\>|\\<Kyoto\\>|\\<Hong Kong\\>", "", x)
+  x <- ifelse(grepl("^Fisheries", x), gsub("Fisheries", "", x), x)
+  # Step 4: remove unimportant but differentiating words
+  x <- gsub("\\<populations\\>|\\<basin\\>|\\<resources\\>|\\<stock\\>|
+            |\\<concerning\\>|\\<priority\\>|\\<revised\\>|\\<version\\>|
+            |\\<national\\>|\\<trilateral\\>|\\<multilateral\\>|\\<between\\>|
+            |\\<marine\\>|\\<Fao\\>|\\<field\\>|\\<sphere\\>|\\<adjustment\\>|
+            |\\<activities\\>", "", x, ignore.case = TRUE)
+  # Step 5: get abbreviations for words left
+  x <- suppressWarnings(abbreviate(x, minlength = 6, method = "both.sides",
+                                   strict = TRUE))
+  x <- toupper(x)
+  # Step 6: cut longer abbreviations into four digits
+  x <- ifelse(stringr::str_detect(x, "[:upper:]{7}"),
+              paste0(substr(x, 1, 2),
+                     stringr::str_pad(nchar(x) - 3, 2, pad = "0"),
+                     substr(x, nchar(x) - 1, nchar(x))), x)
+  x <- as.character(x)
+  x
+}
+
