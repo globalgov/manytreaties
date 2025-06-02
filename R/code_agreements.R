@@ -221,3 +221,29 @@ agreement_type <- dplyr::tribble(~type,~category,~terms,
                                  "R","RESOL","Agreed Measures|Agreed Record|Consensus|Conclusions|Decision|Directive|Regulation|Reglamento|Resolution|Rules|Recommendation|Statement|Communiq|Comminiq|Joint Declaration|Declaration|Proclamation|Administrative Order"
 )
 
+#' Creates Numerical IDs from Signature Dates
+#'
+#' Agreements should have a unique identification
+#' number that is meaningful, we condense their
+#' signature dates to produce this number.
+#' @param date A date variable
+#' @return A character vector with condensed dates
+#' @import stringr
+#' @examples
+#' \dontrun{
+#' IEADB <- dplyr::slice_sample(manyenviron::agreements$IEADB, n = 10)
+#' code_dates(IEADB$Title)
+#' }
+#' @export
+code_dates <- function(date) {
+  # Step 1: collapse dates
+  uID <- stringr::str_remove_all(date, "-")
+  # Step 2: code missing dates as far future dates to facilitate identification
+  uID[is.na(uID)] <- paste0(sample(5000:9999, 1), "NULL")
+  # Step 3: remove ranges, first date is taken
+  uID <- stringr::str_replace_all(uID, "\\:[:digit:]{8}$", "")
+  # Step 4: keep year only
+  uID <- ifelse(nchar(uID) > 4, substr(uID, 1, nchar(uID) - 4), uID)
+  uID
+}
+

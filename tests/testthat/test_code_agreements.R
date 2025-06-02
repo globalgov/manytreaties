@@ -14,8 +14,21 @@ test_that("Code_agreements helper functions work properly", {
   #                                          NA, "RUS-USA[KTC]", "RUS-USA[FON]"))
   expect_equal(code_type(data$title), c("A", "E1", "A", "R",
                                         "N", "S", "A", "A", "A"))
+  expect_equal(code_dates(data$date), c("1980", "1990",
+                                        "1981", "1982",
+                                        "1976", "1983",
+                                        "1971", "1973", "1973"))
 })
 
+# Test for datasets that have ranged dates
+data2 <- data.frame(title = c("Agreement Between Cape Verde And Portugal On Fisheries Development",
+                              "Traité De Délimitation Maritime, Signé À Paris Le 30 Janvier 19819"),
+                    date = c("1980-01-01:1980-12-31", "1981-01-01:1981-12-31"))
+
+test_that("code_dates() helper function treats date range correctly", {
+  # Add title to the code_dates function arguments
+  expect_equal(code_dates(data2$date), c("1980", "1981"))
+})
 
 # Test numbers assigned to procotol/amendment
 data5 <- data.frame(title = c("Amendments On The Transport Of Corrosive Substances To Protocol 18 Of The 1868 Revised Convention On The Navigation Of The Rhine",
@@ -30,6 +43,7 @@ test_that("code_agreements() identify correct number of protocol or amendment", 
 
 # Test that some functions return coding information when argument is missing
 test_that("certain functions return coding information when argument is missing", {
+  expect_type(code_type(), "character")
   expect_type(code_known_agreements(), "character")
 })
 
