@@ -1,3 +1,21 @@
+data <- data.frame(title = c("Agreement Between Cape Verde And Portugal On Fisheries Development",
+                             "Amendment 1 To The Convention On Wetlands Of International Importance Especially As Waterfowl Habitat",
+                             "Traité De Délimitation Maritime, Signé À Paris Le 30 Janvier 1981",
+                             "Declaration Modifying Agreement on the River",
+                             "Exchange Of Notes Constituting An Agreement On The Exploitation Of Border Rivers For Industrial Purposes",
+                             "Strategy On The Agreement On The River Basin",
+                             "Convention On Wetlands Of International Importance Especially As Waterfowl Habitat",
+                             "Agreement Between The Government Of The United States Of America And The Government Of The Union Of Soviet Socialist Republics Relating To Fishing For King And Tanner Crab",
+                             "Agreement Between The Government Of The United States Of America And The Government Of The Union Of Soviet Socialist Republics Relating To Fishing Operations In The Northeastern Pacific Ocean"),
+                   date = c("1980-05-08", "1990-12-31", "1981-01-30", "1982-12-03", "1976-12-03", "1983-04-29", "1971-02-02", "1973-02-21", "1973-02-21"))
+
+test_that("Code_agreements helper functions work properly", {
+  # expect_equal(code_states(data$title), c("CPV-PRT[FSD]", NA, NA, NA, NA, NA,
+  #                                          NA, "RUS-USA[KTC]", "RUS-USA[FON]"))
+  expect_equal(code_type(data$title), c("A", "E1", "A", "R",
+                                        "N", "S", "A", "A", "A"))
+})
+
 
 # Test numbers assigned to procotol/amendment
 data5 <- data.frame(title = c("Amendments On The Transport Of Corrosive Substances To Protocol 18 Of The 1868 Revised Convention On The Navigation Of The Rhine",
