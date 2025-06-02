@@ -212,3 +212,12 @@ code_type <- function(title) {
   type
 }
 
+agreement_type <- dplyr::tribble(~type,~category,~terms,
+                                 "P","PROTO","protocol|additional|subsidiary|supplementary|complementaire|complementar|complementario|annex |annexes",
+                                 "E","AMEND","amendment|modify|extend|proces-verbal|amend|extension|agreement extending|amending",
+                                 "A","AGREE","agreement|arrangement|accord|acuerdo|bilateral co|technical co|treat|trait|tratado|convention|convencion|convenio|constitution|charte|instrument|statute|estatuto|provisional understanding|provisions relating|ubereinkunft|Act|Covenant|Scheme|Government Of|Law",
+                                 "N","NOTES","Exchange|Letters|Notas|Minute|Adjustment|First Session Of|First Meeting Of|Commission|Committee|Center",
+                                 "S","STRAT","Memorandum|memorando|Principles of Conduct|Code of Conduct|Strategy|Plan|Program|Improvement|Project|Study|Working Party|Working Group",
+                                 "R","RESOL","Agreed Measures|Agreed Record|Consensus|Conclusions|Decision|Directive|Regulation|Reglamento|Resolution|Rules|Recommendation|Statement|Communiq|Comminiq|Joint Declaration|Declaration|Proclamation|Administrative Order"
+)
+
