@@ -10,7 +10,7 @@
 memberships <- readRDS("memberships.Rds")
 # memberships <- manyenviron::memberships$IEADB_MEM |>
 #   dplyr::select("stateID", "manyID", "Title") |>
-#   dplyr::mutate(type = manypkgs::code_type(Title),
+#   dplyr::mutate(type = code_type(Title),
 #                 agr_type = dplyr::case_when(stringr::str_detect(type, "A") ~ "Agreement",
 #                                             stringr::str_detect(type, "P") ~ "Protocol",
 #                                             stringr::str_detect(type, "E") ~ "Amendment",

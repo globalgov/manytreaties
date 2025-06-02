@@ -64,7 +64,7 @@ test_that("Punctation marks are not in the treatyID", {
 })
 
 # Test that linkages are not duplicates
-mem <- tibble::tibble(
+mem <- dplyr::tibble(
   Title = c("3 ACP-EEC Convention",
             "2 Arrangement Implementing The Nauru Agreement Setting Forth Additional Terms And Conditions Of Access To The Fisheries Zones Of The Parties",
             "Agreement Between Sri Lanka And India On The Maritime Boundary Between The 2 Countries In The Gulf Of Mannar And The Bay Of Bengal And Related Matters",
@@ -84,7 +84,7 @@ mem <- tibble::tibble(
             "Maritime Agreement Between The Government Of The French Republic And The Government Of The Republic Of Latvia Signed In Riga December 5 1997",
             "3 ACP-EEC Convention",
             "Convencin Para El Establecimiento De La RED De Acuicultura De Las Amricas (RAA)"),
-  Beg = messydates::as_messydate(
+  Beg = as.Date(
     c("1984-12-08", "1990-09-19", "1976-03-23", "1980-05-21", "1944-12-07",
       "1982-02-11", "1990-09-19", "1976-02-26", "1994-04-26", "1972-07-28",
       "1954-05-12", "1973-04-05", "1954-05-12", "1976-07-31", "2000-10-05",

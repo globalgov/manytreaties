@@ -47,7 +47,7 @@
 #' ```
 "parties"
 
-info_parties <- tibble::tibble(Dataset = names(utils::data(parties, package = "manytreaties")),
+info_parties <- dplyr::tibble(Dataset = names(utils::data(parties, package = "manytreaties")),
                                 Source = c("Hollway, James, Henrique Sposito, and Jael Tan. 2021. International agreements for manydata.",
                                            "Mitchell, Ron B. et al. 2020. 'What we know (and could know) about international environmental agreements'. _Global Environmental Politics_ 20.1, pp. 103-121.",
                                            "Duer, Andreas, Leonardo Baccini, and Manfred Elsig. 2014. 'The Design of International Trade Agreements: Introducing a New Database'. _The Review of International Organizations_ 9.3, pp. 353-375.",

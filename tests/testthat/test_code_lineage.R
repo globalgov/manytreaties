@@ -1,4 +1,4 @@
-# data <- tibble::tibble(title = c("Agreement Between Cape Verde And Portugal On Fisheries Development",
+# data <- dplyr::tibble(title = c("Agreement Between Cape Verde And Portugal On Fisheries Development",
 #                              "Amendment 1 To The Convention On Wetlands Of International Importance Especially As Waterfowl Habitat",
 #                              "Traité De Délimitation Maritime, Signé À Paris Le 30 Janvier 1981",
 #                              "Declaration Modifying Agreement on the River",
