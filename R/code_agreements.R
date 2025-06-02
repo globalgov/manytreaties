@@ -102,7 +102,7 @@ code_agreements <- function(dataset = NULL, title, date) {
 code_activity <- function(title) {
   # Step 1: remove states' names and agreements' type
   out <- as.character(title)
-  states <- countryregex$Label
+  states <- manystates::code_states()$Label
   states <- paste(states, collapse = "|")
   words <- agreement_type$words
   words <- paste(words, collapse = "|")

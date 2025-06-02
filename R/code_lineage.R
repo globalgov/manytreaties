@@ -7,6 +7,7 @@
 #' @importFrom purrr map
 #' @importFrom stringr str_squish
 #' @importFrom stringi stri_trans_general
+#' @importFrom manystates code_states
 #' @examples
 #' \dontrun{
 #' code_lineage(title = sample(manyenviron::agreements$IEADB$Title, 30))
@@ -30,7 +31,7 @@ code_lineage <- function(title = NULL, datacube = NULL) {
   title <- stringi::stri_trans_general(title, id = "Latin-ASCII")
   entity <- code_entity(title)
   domain <- code_domain(title)
-  parties <- code_states(title)
+  parties <- manystates::code_states(title)
   # Get entity and actions from preamble if missing from title
   if (exists("txt")) {
     entity <- ifelse(is.na(entity), code_entity(txt), entity)
@@ -91,7 +92,7 @@ code_entity <- function(title) {
   # title$doc_id <- paste0("text", as.numeric(rownames(title)))
   # out <- dplyr::left_join(title, out, by = "doc_id")
   # Remove states
-  parties <- paste(countrynames$c, collapse = "|")
+  parties <- paste(manystates::code_states()$Label, collapse = "|")
   out <- gsub(parties, "", out, ignore.case = TRUE)
   out <- gsub("^c|Britain|England", "", out)
   out <- gsub("[^[:alnum:]]", " ", out)
