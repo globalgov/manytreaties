@@ -466,3 +466,251 @@ code_linkage <- function(title, date, return_all = FALSE) {
   }
 }
 
+predictable_words <- dplyr::tribble(~predictable_words,
+"amendment",
+"amendments",
+"amend",
+"amending",
+"modifying",
+"modify",
+"extension",
+"extend",
+"extending",
+"verbal",
+"protocol",
+"additional",
+"subsidiary",
+"supplementary",
+"complementary",
+"complementario",
+"agreement",
+"agreements",
+"arrangement",
+"arrangements",
+"accord",
+"acuerdo",
+"bilateral",
+"technical",
+"treaty",
+"trait",
+"tratado",
+"convention",
+"convencion",
+"convenio",
+"constitution",
+"charte",
+"instrument",
+"statute",
+"estatuto",
+"provisional",
+"understanding",
+"provisions",
+"relating",
+"ubereinkunft",
+"Act",
+"Acts",
+"Declaration",
+"Covenant",
+"Scheme",
+"Government Of |Law",
+"Exchange",
+"Letters",
+"Letter",
+"Notas",
+"Notes",
+"Memorandum",
+"memorando",
+"Principles of Conduct",
+"Code of Conduct",
+"Agreed Measures",
+"Agreed Record",
+"Consensus",
+"Conclusions",
+"Conclusion",
+"Decision",
+"Directive",
+"Regulation",
+"Reglamento",
+"Resolution",
+"Resolutions",
+"Rule",
+"Rules",
+"Recommendation",
+"Minute",
+"Adjustment",
+"First|Session Of",
+"First Meeting Of",
+"Commission",
+"Committee",
+"Center",
+"Meeting",
+"Meetings",
+"Statement",
+"Communiq",
+"Comminiq",
+"Joint Declaration",
+"Proclamation",
+"Administrative Order",
+"Strategy",
+"Plan",
+"Program",
+"Improvement",
+"Project",
+"Study",
+"Article",
+"Articles",
+"Working Party",
+"Working Group",
+"Supplementary",
+"supplementing",
+"Annex",
+"Annexes",
+"extended",
+"Constitutional",
+"Constituent",
+"A",
+"B",
+"C",
+"D",
+"E",
+"F",
+"G",
+"H",
+"I",
+"J",
+"K",
+"L",
+"M",
+"N",
+"O",
+"P",
+"Q",
+"R",
+"S",
+"T",
+"U",
+"V",
+"W",
+"X",
+"Y",
+"Z",
+"and",
+"the",
+"of",
+"for",
+"to",
+"in",
+"a",
+"an",
+"on",
+"the",
+"as",
+"optional",
+"concerning",
+"compulsory",
+"Settlement",
+"disputes",
+"dispute",
+"schedule",
+"adhesion",
+"implementation",
+"government",
+"Cooperation",
+"Appendices",
+"integrated",
+"integrating",
+"Signature",
+"terminating",
+"Appendices",
+"integrated",
+"integrating",
+"Signature",
+"terminating",
+"or",
+"between",
+"constituing",
+"between",
+"constituing",
+"january",
+"february",
+"march",
+"april",
+"may",
+"june",
+"july",
+"august",
+"september",
+"october",
+"november",
+"december",
+"about",
+"river"
+)
+
+order_agreements <- function(title) {
+  # Step 1: remove dates signs title
+  title <- stringr::str_replace_all(title, " \\- ", "")
+  title <- stringr::str_replace_all(title, "\\-|\\/", " ")
+  title <- stringr::str_squish(title)
+  # Step 2: remove dates from title
+  rd <- stringr::str_remove_all(title, "[:digit:]{2}\\s[:alpha:]{3}\\s[:digit:]{4}|
+                                |[:digit:]{2}\\s[:alpha:]{4}\\s[:digit:]{4}|
+                                |[:digit:]{2}\\s[:alpha:]{5}\\s[:digit:]{4}|
+                                |[:digit:]{2}\\s[:alpha:]{6}\\s[:digit:]{4}|
+                                |[:digit:]{2}\\s[:alpha:]{7}\\s[:digit:]{4}|
+                                |[:digit:]{2}\\s[:alpha:]{8}\\s[:digit:]{4}|
+                                |[:digit:]{2}\\s[:alpha:]{9}\\s[:digit:]{4}|
+                                |[:digit:]{1}\\s[:alpha:]{3}\\s[:digit:]{4}|
+                                |[:digit:]{1}\\s[:alpha:]{4}\\s[:digit:]{4}|
+                                |[:digit:]{1}\\s[:alpha:]{5}\\s[:digit:]{4}|
+                                |[:digit:]{1}\\s[:alpha:]{6}\\s[:digit:]{4}|
+                                |[:digit:]{1}\\s[:alpha:]{7}\\s[:digit:]{4}|
+                                |[:digit:]{1}\\s[:alpha:]{8}\\s[:digit:]{4}|
+                                |[:digit:]{1}\\s[:alpha:]{9}\\s[:digit:]{4}|
+                                |[:digit:]{4}\\s[:alpha:]{3}\\s[:digit:]{2}|
+                                |[:digit:]{4}\\s[:alpha:]{4}\\s[:digit:]{2}|
+                                |[:digit:]{4}\\s[:alpha:]{5}\\s[:digit:]{2}|
+                                |[:digit:]{4}\\s[:alpha:]{6}\\s[:digit:]{2}|
+                                |[:digit:]{4}\\s[:alpha:]{7}\\s[:digit:]{2}|
+                                |[:digit:]{4}\\s[:alpha:]{8}\\s[:digit:]{2}|
+                                |[:digit:]{4}\\s[:alpha:]{9}\\s[:digit:]{2}|
+                                |[:digit:]{4}| [:digit:]{2}\\s[:digit:]{2}|
+                                |[:digit:]{4}\\s[:digit:]{2}\\s[:digit:]{2}|
+                                |[:digit:]{4}\\s[:digit:]{2}\\s[:digit:]{1}|
+                                |[:digit:]{4}\\s[:digit:]{1}\\s[:digit:]{2}|
+                                |[:digit:]{4}\\s[:digit:]{1}\\s[:digit:]{1}|
+                                |[:digit:]{2}\\s[:digit:]{2}\\s[:digit:]{4}|
+                                |[:digit:]{1}\\s[:digit:]{2}\\s[:digit:]{4}|
+                                |[:digit:]{2}\\s[:digit:]{1}\\s[:digit:]{4}|
+                                |[:digit:]{1}\\s[:digit:]{1}\\s[:digit:]{4}")
+  # remove also numbers in parenthesis
+  rd <- stringr::str_remove_all(rd, "\\s\\(No\\s.{3,7}\\)")
+  # Step 3: standardises ordinal numbers and ordering text into digits
+  oa <- gsub("\\<one\\>|\\<first\\>|  I ", "1", rd)
+  oa <- gsub("\\<two\\>|\\<second\\>| Ii ", "2", oa)
+  oa <- gsub("\\<three\\>|\\<third\\>| Iii ", "3", oa)
+  oa <- gsub("\\<four\\>|\\<fourth\\>| Iv ", "4", oa)
+  oa <- gsub("\\<five\\>|\\<fifth\\>| V |No5", "5", oa)
+  oa <- gsub("\\<six\\>|\\<sixth\\>|No6", "6", oa)
+  oa <- gsub("\\<seven\\>|\\<seventh\\>", "7", oa)
+  oa <- gsub("\\<eight\\>|\\<eighth\\>", "8", oa)
+  oa <- gsub("\\<nine\\>|\\<ninth\\>", "9", oa)
+  oa <- gsub("\\<ten\\>|\\<tenth\\>", "10", oa)
+  oa <- gsub("\\<eleven\\>|\\<eleventh\\>", "11", oa)
+  oa <- gsub("\\<twelve\\>|\\<twelfth\\>", "12", oa)
+  oa <- gsub("\\<thirteen\\>|\\<thirteenth\\>", "13", oa)
+  oa <- gsub("\\<fourteen\\>|\\<fourteenth\\>", "14", oa)
+  oa <- gsub("\\<fifteen\\>|\\<fifteenth\\>", "15", oa)
+  oa <- gsub("\\<sixteen\\>|\\<sixteenth\\>", "16", oa)
+  oa <- gsub("\\<seventeen\\>|\\<seventeenth\\>", "17", oa)
+  oa <- gsub("\\<eighteen\\>|\\<eighteenth\\>", "18", oa)
+  oa <- gsub("\\<nineteen\\>|\\<nineteenth\\>", "19", oa)
+  oa <- gsub("\\<twenty\\>|\\<twentieth\\>", "20", oa)
+  # Step 4: make sure meaningful numbers extracted correctly
+  oa <- stringr::str_extract(oa, "\\s[:digit:]{1}\\s|\\s[:digit:]{2}\\s|\\s[:digit:]{2}|
+                             |[:digit:]{2}\\s|\\s[:digit:]{1}|[:digit:]{1}\\s")
+  oa <- stringr::str_replace_all(oa, "\\s", "")
+  oa <- stringr::str_replace_na(oa)
+  oa <- stringr::str_remove_all(oa, "NA")
+  oa
+}
