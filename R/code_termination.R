@@ -119,3 +119,18 @@ code_term_date <- function(title, text = NULL) {
   date
 }
 
+termination_type <- dplyr::tribble(~type, ~meaning, ~abbreviation,
+"Sunset/Expiry","Treaty concluded for a specific period of time","SUN",
+"Success/Completion","The main purpose of the treaty has been fulfilled","SUC",
+"Mutual Consent - Recession","The Parties decided to dissolve the treaty","DIS",
+"Mutual Consent - Substitution","The Parties decide to substitute the old treaty by a new one","SUB",
+"Mututal Consent - Renunciation","A Party can renounce its right arising from the treaty","REN",
+"Extinction","When one of the Party State's existence come to an end","EXT",
+"Incompatibility","Incompatibility between an obligation from an agreement and obligations under the UN Charter","INC",
+"War","In a case of a war, the contractual obligations of the Parties come to an end","WAR",
+"Withdrawal","When one of the Party withdrawals from the treaty","WTH",
+"Injuriousness","When the terms of a treaty become either wholly or party injurious to one of the party states","INJ",
+"Nonperformance","In the case of failure or nonperformance of certain essential conditions arising from the treaty","NON",
+"Rebus sic stantibus","The doctrine Rebus sic stantibus means if by any unforeseen change, or circumstances an obligation provided for in the treaty should imperil the existence of one of the State and such state has a right to demand and to be released from the contractual obligations","REB",
+"Jus Cogens","When a treaty is in conflict with a peremptory norm of general international law","JUS"
+)
