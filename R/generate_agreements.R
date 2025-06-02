@@ -1,12 +1,12 @@
 #' Generate agreements
 #' @description Generates a list of fictional agreements or a
-#' list memberships to agreements.
+#'   list memberships to agreements.
 #' @param n Integer number of fictional agreements to generate.
 #' @param treaty_type What type of agreements would you like to generate?
-#' By default, "any" agreements.
-#' Other options include "bilaterals" or "multilaterals".
+#'   By default, "any" agreements.
+#'   Other options include "bilaterals" or "multilaterals".
 #' @return String vector of fictional agreement names and/or memberships
-#' to agreements.
+#'   to agreements.
 #' @name generate_
 
 #' @rdname generate_
@@ -20,9 +20,9 @@
 generate_agreements <- function(n = 10, treaty_type = "any") {
   agreements <- NULL
   partylib <- trimws(paste(rep("Between The Parties of ", n),
-                           sample(countryregex$Label, n, replace = TRUE),
+                           sample(manystates::code_states()$Label, n, replace = TRUE),
                            rep(" and ", n),
-                           sample(countryregex$Label, n, replace = TRUE)))
+                           sample(manystates::code_states()$Label, n, replace = TRUE)))
   typelib <- c("Agreement", "Convention")
   subjlib <- c("On", "For", "Concerning", "Limiting",
                "Regulating", "Regarding", "Relating To",
@@ -71,7 +71,7 @@ generate_agreements <- function(n = 10, treaty_type = "any") {
                         sample(subjlib, n, replace = TRUE),
                         sample(targetlib, n, replace = TRUE)))
   }
-  out
+  stringi::stri_replace_all_regex(out, "\\s\\s+", " ")
 }
 
 #' @rdname generate_
