@@ -32,14 +32,14 @@ IEADB <- as_tibble(IEADB)  %>%
                                               "Exchange of Notes" = "X",
                                               "Memorandum of Understanding" = "Y",
                                               "Protocol" = "P")) %>%
-  dplyr::mutate(DocType = dplyr::recode(Inclusion, "BEA" = "B", "MEA" = "M")) %>%
-  dplyr::filter(DocType == "M" | DocType == "B") %>%
+  dplyr::mutate(Ambit = dplyr::recode(Inclusion, "BEA" = "B", "MEA" = "M")) %>%
+  dplyr::filter(Ambit == "M" | DocType == "B") %>%
   manydata::transmutate(ieadbID = as.character(`IEA# (click for add'l info)`),
                         Title = manypkgs::standardise_titles(`Treaty Name`),
                         Signature = messydates::as_messydate(`Signature Date`),
                         Force = messydates::as_messydate(`Date IEA entered into force`)) %>%
   dplyr::mutate(Begin = dplyr::coalesce(Signature, Force)) %>%
-  dplyr::select(ieadbID, Title, Begin, DocType, AgreementType, Signature, Force) %>%
+  dplyr::select(ieadbID, Title, Begin, Ambit, AgreementType, Signature, Force) %>%
   dplyr::mutate(Begin = messydates::as_messydate(ifelse(is.na(Begin), "9999-12-31", Begin))) %>%
   # Add future date in cases where Begin and force are missing
   dplyr::arrange(Signature)
@@ -50,11 +50,17 @@ IEADB$treatyID <- manypkgs::code_agreements(IEADB, IEADB$Title, IEADB$Begin)
 IEADB$Lineage <- manypkgs::code_lineage(IEADB$Title)
 
 # Add manyID column
-manyID <- manypkgs::condense_agreements(manyenviron::agreements)
-IEADB <- dplyr::left_join(IEADB, manyID, by = "treatyID") %>%
+# manyID <- manypkgs::condense_agreements(manyenviron::agreements)
+# IEADB <- dplyr::left_join(IEADB, manyID, by = "treatyID") %>%
+#   dplyr::distinct() %>%
+#   dplyr::relocate(manyID, Title, Begin, DocType, AgreementType, Signature,
+#                 Force, Lineage, treatyID, ieadbID) %>%
+#   dplyr::arrange(Begin)
+
+IEADB <- IEADB %>%
   dplyr::distinct() %>%
-  dplyr::relocate(manyID, Title, Begin, DocType, AgreementType, Signature,
-                Force, Lineage, treatyID, ieadbID) %>%
+  dplyr::relocate(treatyID,  Title, Begin, Ambit, AgreementType, Signature,
+                  Force, Lineage, mitchID) %>%
   dplyr::arrange(Begin)
 
 # manypkgs includes several functions that should help cleaning

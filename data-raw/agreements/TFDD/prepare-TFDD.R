@@ -51,17 +51,16 @@ TFDD$treatyID <- manypkgs::code_agreements(TFDD,
                                            TFDD$Begin)
 
 # Add manyID column
-manyID <- manypkgs::condense_agreements(manytreaties::agreements)
-TFDD <- dplyr::left_join(TFDD, manyID, by = "treatyID")
+# manyID <- manypkgs::condense_agreements(manytreaties::agreements)
+# TFDD <- dplyr::left_join(TFDD, manyID, by = "treatyID")
 
 # Re-order the columns
-TFDD <- dplyr::relocate(TFDD, manyID)
+TFDD <- dplyr::relocate(TFDD, treatyID)
 
 # Remove duplicates and ensure NAs are coded correctly
 TFDD <- TFDD %>%
   dplyr::filter(!is.na(Title)) %>%
-  dplyr::mutate(manyID = ifelse(is.na(manyID), treatyID, manyID),
-                Issue = dplyr::case_match(Issue,
+  dplyr::mutate(Issue = dplyr::case_match(Issue,
                                           c("0", "#N/A", "Y") ~ NA,
                                           .default = Issue),
                 across(everything(),

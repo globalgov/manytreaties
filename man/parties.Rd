@@ -6,54 +6,39 @@
 \title{parties datacube}
 \format{
 \describe{
-\item{HUGGO \if{html}{\out{<img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>}}:}{A dataset with 91,729
-observations and 41 variables:
-manyID, Title, Begin, stateID, StateName, StateSignature, StateRatification, StateForce, StateEnd, Rat=Notif, Accession, Succession, treatyID, Signature, Force, End, gengID, url, ..., Domain, and Coder.}
+\item{HUGGO \if{html}{\out{<img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>}}:}{A dataset with 91,673
+observations and 30 variables:
+treatyID, stateID, Title, Begin, End, StateSignature, StateRatification, StateForce, StateEnd, Rat=Notif, Accession, Succession, Signature, Force, url, StateForce2, StateForce3, StateEnd2, ..., match, and Coder.}
 \item{IEADB: }{A dataset with 15,463
-observations and 12 variables:
-manyID, treatyID, Title, Begin, stateID, End, stateSignature, Signature, Rat, Force, DocType, and ieadbID.}
-\item{GPTAD \if{html}{\out{<img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>}}:}{A dataset with 2,192
-observations and 9 variables:
-manyID, treatyID, Title, Begin, stateID, Signature, Force, StateName, and gptadID.}
-\item{TFDD \if{html}{\out{<img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/cc-zero.png" height="12"/>}}:}{A dataset with 1,832
+observations and 10 variables:
+stateID, treatyID, Begin, End, Title, stateSignature, Signature, Rat, Force, and ieadbID.}
+\item{DESTA: }{A dataset with 7,466
 observations and 8 variables:
-manyID, treatyID, Title, Begin, stateID, Signature, tfddID, and Memberships.}
+stateID, treatyID, Begin, Title, Signature, Force, StateName, and destaID.}
+\item{GPTAD: }{A dataset with 2,192
+observations and 6 variables:
+stateID, treatyID, Begin, Title, Signature, and Force.}
+\item{TFDD: }{A dataset with 1,832
+observations and 6 variables:
+stateID, treatyID, Begin, Title, Signature, and tfddID.}
 }
 For more information and references to each of the datasets used,
 please use the \code{manydata::call_sources()} and \code{manydata::compare_dimensions()} functions.
 }
 \source{
 \itemize{
-\item{HUGGO: }{
-Hollway, James, Henrique Sposito, and Jael Tan. 2021.
-International agreements for manydata.
-}
-\item{IEADB: }{
-Mitchell, Ron B. et al. 2020.
-"What we know (and could know) about international environmental agreements".
-\emph{Global Environmental Politics} 20.1, pp. 103-121.
-\url{https://www.iea.ulaval.ca/en/country-members}
-}
-\item{GPTAD: }{
-World Bank Group. 2014.
-\emph{Global Preferential Trade Agreement Database (GPTAD)}.
-Online database. World Bank Group.
-\url{https://wits.worldbank.org/gptad/library.aspx}
-}
-\item{TFDD: }{
-Oregon College of Earth and Oregon State University Atmospheric Science. 2021.
-\emph{Product of the Transboundary Freshwater Dispute Database}.
-\url{http://transboundarywaters.science.oregonstate.edu}.
-}
+\item Hollway, James, Henrique Sposito, and Jael Tan. 2021. International agreements for manydata.
+\item Mitchell, Ron B. et al. 2020. 'What we know (and could know) about international environmental agreements'. \emph{Global Environmental Politics} 20.1, pp. 103-121.
+\item Duer, Andreas, Leonardo Baccini, and Manfred Elsig. 2014. 'The Design of International Trade Agreements: Introducing a New Database'. \emph{The Review of International Organizations} 9.3, pp. 353-375.
+\item World Bank Group. 2014. \emph{Global Preferential Trade Agreement Database (GPTAD)}. Online database. World Bank Group.
+\item Oregon College of Earth and Oregon State University Atmospheric Science. 2021. \emph{Product of the Transboundary Freshwater Dispute Database}.
 }
 }
 \usage{
 parties
 }
 \description{
-The \code{parties} datacube is a list containing
-4 datasets:
-HUGGO, IEADB, GPTAD, and TFDD.
+The \code{manytreaties::parties} datacube is a list containing 5 datasets: HUGGO, IEADB, DESTA, GPTAD, and TFDD.
 It is a work-in-progress, so please let us know if you have any comments or suggestions.
 }
 \details{
@@ -61,47 +46,36 @@ It is a work-in-progress, so please let us know if you have any comments or sugg
 #> ------------------------------------------------------------
 #> |    Variable     |  Class  |  Obs  |  Missing  |  Miss \%  |
 #> ------------------------------------------------------------
-#> |manyID           |character|  91729|          0|         0|
-#> |Title            |character|  91729|          0|         0|
-#> |Begin            |mdate    |  91717|         12|      0.01|
-#> |stateID          |character|  91729|          0|         0|
-#> |StateName        |character|  41244|      50485|     55.04|
-#> |StateSignature   |mdate    |  73785|      17944|     19.56|
-#> |StateRatification|mdate    |  27769|      63960|     69.73|
-#> |StateForce       |mdate    |  40878|      50851|     55.44|
-#> |StateEnd         |mdate    |  58258|      33471|     36.49|
-#> |Rat=Notif        |character|   1227|      90502|     98.66|
-#> |Accession        |mdate    |  14499|      77230|     84.19|
-#> |Succession       |character|  91729|          0|         0|
-#> |treatyID         |character|  91729|          0|         0|
-#> |Signature        |mdate    |  91713|         16|      0.02|
-#> |Force            |mdate    |  57180|      34549|     37.66|
-#> |End              |mdate    |  52937|      38792|     42.29|
-#> |gengID           |character|  50959|      40770|     44.45|
-#> |url              |character|    931|      90798|     98.99|
-#> |ieaID            |character|  42351|      49378|     53.83|
-#> |ecolexID         |character|  19999|      71730|      78.2|
-#> |StateForce2      |mdate    |   6687|      85042|     92.71|
-#> |StateForce3      |mdate    |   3690|      88039|     95.98|
-#> |StateEnd2        |mdate    |   3696|      88033|     95.97|
-#> |Term             |mdate    |   1178|      90551|     98.72|
-#> |Comments         |character|   3280|      88449|     96.42|
-#> |Deposit          |character|   1650|      90079|      98.2|
-#> |obsolete         |character|  12575|      79154|     86.29|
-#> |ProvisionalApp   |character|    772|      90957|     99.16|
-#> |Reservation      |character|    756|      90973|     99.18|
-#> |Notes            |character|    186|      91543|      99.8|
-#> |stateForce_ecolex|mdate    |  18517|      73212|     79.81|
-#> |stateForce_iea   |mdate    |  18517|      73212|     79.81|
-#> |Consent          |character|    224|      91505|     99.76|
-#> |Acceptance       |character|    525|      91204|     99.43|
-#> |Orig_noneng_title|character|      4|      91725|       100|
-#> |match            |character|      4|      91725|       100|
-#> |gptadID          |character|   2169|      89560|     97.64|
-#> |destaID          |character|   5035|      86694|     94.51|
-#> |Title2           |character|    477|      91252|     99.48|
-#> |Domain           |character|  91729|          0|         0|
-#> |Coder            |character|  91714|         15|      0.02|
+#> |treatyID         |character|  91673|          0|         0|
+#> |stateID          |character|  91673|          0|         0|
+#> |Title            |character|  91673|          0|         0|
+#> |Begin            |mdate    |  91661|         12|      0.01|
+#> |End              |mdate    |  52885|      38788|     42.31|
+#> |StateSignature   |mdate    |  73756|      17917|     19.54|
+#> |StateRatification|mdate    |  27769|      63904|     69.71|
+#> |StateForce       |mdate    |  40826|      50847|     55.47|
+#> |StateEnd         |mdate    |  58205|      33468|     36.51|
+#> |Rat=Notif        |character|   1227|      90446|     98.66|
+#> |Accession        |mdate    |  14472|      77201|     84.21|
+#> |Succession       |character|  91673|          0|         0|
+#> |Signature        |mdate    |  91657|         16|      0.02|
+#> |Force            |mdate    |  57124|      34549|     37.69|
+#> |url              |character|    931|      90742|     98.98|
+#> |StateForce2      |character|   6687|      84986|     92.71|
+#> |StateForce3      |character|   3690|      87983|     95.97|
+#> |StateEnd2        |character|   3696|      87977|     95.97|
+#> |Term             |character|   1178|      90495|     98.71|
+#> |Comments         |character|   3280|      88393|     96.42|
+#> |obsolete         |character|  12575|      79098|     86.28|
+#> |ProvisionalApp   |character|    772|      90901|     99.16|
+#> |Reservation      |character|    756|      90917|     99.18|
+#> |Notes            |character|    186|      91487|      99.8|
+#> |stateForce_ecolex|character|  18517|      73156|      79.8|
+#> |stateForce_iea   |character|  18517|      73156|      79.8|
+#> |Consent          |character|    224|      91449|     99.76|
+#> |Acceptance       |character|    525|      91148|     99.43|
+#> |match            |character|      4|      91669|       100|
+#> |Coder            |character|  91658|         15|      0.02|
 #> ------------------------------------------------------------
 #> 
 #> 
@@ -109,34 +83,44 @@ It is a work-in-progress, so please let us know if you have any comments or sugg
 #> ---------------------------------------------------------
 #> |   Variable   |  Class  |  Obs  |  Missing  |  Miss \%  |
 #> ---------------------------------------------------------
-#> |manyID        |character|  15463|          0|         0|
-#> |treatyID      |character|  15463|          0|         0|
-#> |Title         |character|  15463|          0|         0|
-#> |Begin         |mdate    |  15463|          0|         0|
 #> |stateID       |character|  15463|          0|         0|
+#> |treatyID      |character|  15463|          0|         0|
+#> |Begin         |mdate    |  15463|          0|         0|
 #> |End           |mdate    |    870|      14593|     94.37|
+#> |Title         |character|  15463|          0|         0|
 #> |stateSignature|mdate    |   9666|       5797|     37.49|
 #> |Signature     |mdate    |  15463|          0|         0|
 #> |Rat           |mdate    |   9978|       5485|     35.47|
 #> |Force         |mdate    |  15463|          0|         0|
-#> |DocType       |character|  15463|          0|         0|
 #> |ieadbID       |numeric  |  15463|          0|         0|
 #> ---------------------------------------------------------
+#> 
+#> 
+#> $DESTA
+#> -------------------------------------------------------
+#> |  Variable  |  Class  |  Obs  |  Missing  |  Miss \%  |
+#> -------------------------------------------------------
+#> |stateID     |character|   7455|         11|      0.15|
+#> |treatyID    |character|   7466|          0|         0|
+#> |Begin       |mdate    |   6836|        630|      8.44|
+#> |Title       |character|   7466|          0|         0|
+#> |Signature   |mdate    |   6836|        630|      8.44|
+#> |Force       |mdate    |   4602|       2864|     38.36|
+#> |StateName   |character|   7466|          0|         0|
+#> |destaID     |character|   7466|          0|         0|
+#> -------------------------------------------------------
 #> 
 #> 
 #> $GPTAD
 #> -------------------------------------------------------
 #> |  Variable  |  Class  |  Obs  |  Missing  |  Miss \%  |
 #> -------------------------------------------------------
-#> |manyID      |character|   2192|          0|         0|
-#> |treatyID    |character|   2192|          0|         0|
-#> |Title       |character|   2192|          0|         0|
-#> |Begin       |mdate    |   2093|         99|      4.52|
 #> |stateID     |character|   2137|         55|      2.51|
+#> |treatyID    |character|   2192|          0|         0|
+#> |Begin       |mdate    |   2093|         99|      4.52|
+#> |Title       |character|   2192|          0|         0|
 #> |Signature   |mdate    |   1882|        310|     14.14|
 #> |Force       |mdate    |   1907|        285|        13|
-#> |StateName   |character|   2156|         36|      1.64|
-#> |gptadID     |character|   2192|          0|         0|
 #> -------------------------------------------------------
 #> 
 #> 
@@ -144,32 +128,30 @@ It is a work-in-progress, so please let us know if you have any comments or sugg
 #> -------------------------------------------------------
 #> |  Variable  |  Class  |  Obs  |  Missing  |  Miss \%  |
 #> -------------------------------------------------------
-#> |manyID      |character|   1832|          0|         0|
-#> |treatyID    |character|   1832|          0|         0|
-#> |Title       |character|   1831|          1|      0.05|
-#> |Begin       |mdate    |   1730|        102|      5.57|
 #> |stateID     |character|   1831|          1|      0.05|
+#> |treatyID    |character|   1832|          0|         0|
+#> |Begin       |mdate    |   1730|        102|      5.57|
+#> |Title       |character|   1831|          1|      0.05|
 #> |Signature   |mdate    |   1730|        102|      5.57|
 #> |tfddID      |numeric  |   1831|          1|      0.05|
-#> |Memberships |character|   1027|        805|     43.94|
 #> -------------------------------------------------------
 }\if{html}{\out{</div>}}
 }
 \section{Mapping}{
-\tabular{llll}{
-   \emph{manytreaties} \tab \emph{IEADB} \tab \emph{GPTAD} \tab \emph{TFDD} \cr
-   stateID \tab country \tab  \tab CCODE \cr
-   Signature \tab csig \tab Date.of.Signature \tab DateSigned \cr
-   Rat \tab crat \tab  \tab  \cr
-   Force \tab ceif3 \tab Date.of.Entry.into.Force \tab  \cr
-   Force2 \tab ceif4 \tab  \tab  \cr
-   End \tab tterm \tab  \tab  \cr
-   Title \tab treatyname \tab Common.Name \tab DocumentName \cr
-   Memberships \tab  \tab StateName \tab Signatories \cr
-   tfddID \tab  \tab  \tab 2016Update ID \cr
-   mitchID \tab ieadbID \tab  \tab  \cr
-   AgreementType \tab  \tab  \tab  \cr
-   DocType \tab inclusion \tab  \tab  \cr
+\tabular{lllll}{
+   \emph{manytreaties} \tab \emph{IEADB} \tab \emph{DESTA} \tab \emph{GPTAD} \tab \emph{TFDD} \cr
+   stateID \tab country \tab Member \tab  \tab CCODE \cr
+   Signature \tab csig \tab year \tab Date.of.Signature \tab DateSigned \cr
+   Rat \tab crat \tab  \tab  \tab  \cr
+   Force \tab ceif3 \tab entryforceyear \tab Date.of.Entry.into.Force \tab  \cr
+   Force2 \tab ceif4 \tab  \tab  \tab  \cr
+   End \tab tterm \tab  \tab  \tab  \cr
+   Title \tab treatyname \tab name \tab Common.Name \tab DocumentName \cr
+   Memberships \tab  \tab  \tab StateName \tab Signatories \cr
+   destaID \tab  \tab base_treaty \tab  \tab  \cr
+   tfddID \tab  \tab  \tab  \tab 2016Update ID \cr
+   mitchID \tab ieadbID \tab  \tab  \tab  \cr
+   DocType \tab inclusion \tab  \tab  \tab  \cr
 }
 }
 

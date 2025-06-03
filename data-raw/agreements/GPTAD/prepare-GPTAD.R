@@ -51,19 +51,14 @@ GPTAD <- tibble::as_tibble(GPTAD) %>%
 GPTAD$treatyID <- manypkgs::code_agreements(GPTAD, GPTAD$Title, GPTAD$Begin)
 
 # Add manyID column
-manyID <- manypkgs::condense_agreements(manytrade::agreements)
-GPTAD <- dplyr::left_join(GPTAD, manyID, by = "treatyID")
+# manyID <- manypkgs::condense_agreements(manytrade::agreements)
+# GPTAD <- dplyr::left_join(GPTAD, manyID, by = "treatyID")
 
 # Re-order the columns
 GPTAD <- GPTAD %>%
-  dplyr::select(manyID, Title, Begin, AgreementType, DocType, GeogArea,
-                Signature, Force, treatyID, gptadID) %>% 
+  dplyr::select(treatyID, Title, Begin, AgreementType, DocType, GeogArea,
+                Signature, Force, gptadID) %>% 
   dplyr::arrange(Begin)
-
-# Check for duplicates in manyID
-# duplicates <- GPTAD %>%
-#   dplyr::mutate(duplicates = duplicated(GPTAD[, 1])) %>%
-#   dplyr::relocate(manyID, duplicates)
 
 # delete rows that only have diff title but same Beg and other variables
 GPTAD <- subset(GPTAD, subset = !duplicated(GPTAD[, c(1,3,4,9)]))
