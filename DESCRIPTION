@@ -30,13 +30,14 @@ Imports:
     tm,
     usethis
 Suggests:
-    pointblank,
-    testthat (>= 3.0.0),
-    lubridate,
-    rmarkdown,
-    remotes,
+    entity (>= 0.1.0),
     ggplot2,
-    migraph
+    lubridate,
+    migraph,
+    pointblank,
+    remotes,
+    rmarkdown,
+    testthat (>= 3.0.0)
 Remotes:
     globalgov/manystates
 Encoding: UTF-8
