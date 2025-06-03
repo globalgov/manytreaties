@@ -37,6 +37,8 @@ Suggests:
     remotes,
     ggplot2,
     migraph
+Remotes:
+    globalgov/manystates
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
