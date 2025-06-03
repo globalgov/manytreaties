@@ -1,11 +1,12 @@
 # manytreaties 0.1.1
 
-2025-06-02
+2025-06-03
 
 ## Package
 * Updated healthdata vignette to match changes to datasets
 * Updated pkgdown file with new logo
 * Updated documentation for `agreements` and `parties` datacubes
+* Closed #12 by moving over some functions from `{manypkgs}`
 
 ## Data
 * Added back DESTA in `agreements` and `parties` datacube
