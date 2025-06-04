@@ -50,6 +50,17 @@ reference:
     contents:
     - agreements
     - parties
+  - title: "Functions to assist treaty text analysis"
+    desc: "These functions assist users in processing and extracting information from treaty texts."
+    contents:
+    - starts_with("code_")
+    - read_clauses
+    - standardise_titles
+    - standardise_treaty_text
+  - title: "Function to generate agreements"
+    desc: "This function assists users to generate a list of fictional agreements or a list of memberships to agreements."
+    contents:
+    - generate_agreements
 footer:
   structure:
     left: devs
