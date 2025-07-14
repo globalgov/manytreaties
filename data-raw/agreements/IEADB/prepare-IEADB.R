@@ -10,39 +10,25 @@ IEADB <- readr::read_delim("data-raw/agreements/IEADB/db_treaties.csv", ",")
 # In this stage you will want to correct the variable names and
 # formats of the 'IEADB' object until the object created
 # below (in stage three) passes all the tests.
-
 IEADB <- as_tibble(IEADB)  %>%
-  dplyr::mutate(AgreementType = dplyr::recode(`Agreement Type (level 2)`,
-                                              "Agreement" = "A", "Amendment" = "E",
-                                              "Agreed Minute (non-binding)" = "Q",
-                                              "Declaration" = "V", "Resolution" = "W",
-                                              "Exchange of Notes" = "X",
-                                              "Memorandum of Understanding" = "Y",
-                                              "Protocol" = "P")) %>%
-  dplyr::mutate(Ambit = dplyr::recode(Inclusion, "BEA" = "B", "MEA" = "M")) %>%
-  dplyr::filter(Ambit == "M" | DocType == "B") %>%
-  manydata::transmutate(ieadbID = as.character(`IEA# (click for add'l info)`),
-                        Title = manypkgs::standardise_titles(`Treaty Name`),
-                        Signature = messydates::as_messydate(`Signature Date`),
-                        Force = messydates::as_messydate(`Date IEA entered into force`)) %>%
-  dplyr::mutate(Begin = dplyr::coalesce(Signature, Force)) %>%
-  dplyr::select(ieadbID, Title, Begin, Ambit, AgreementType, Signature, Force) %>%
-  dplyr::mutate(Begin = messydates::as_messydate(ifelse(is.na(Begin), "9999-12-31", Begin))) %>%
-  # Add future date in cases where Begin and force are missing
-  dplyr::arrange(Signature)
-
-# Add treatyID column
-IEADB$treatyID <- manypkgs::code_agreements(IEADB, IEADB$Title, IEADB$Begin)
-# Add Lineage column
-IEADB$Lineage <- manypkgs::code_lineage(IEADB$Title)
-
-# Add manyID column
-# manyID <- manypkgs::condense_agreements(manyenviron::agreements)
-# IEADB <- dplyr::left_join(IEADB, manyID, by = "treatyID") %>%
-#   dplyr::distinct() %>%
-#   dplyr::relocate(manyID, Title, Begin, DocType, AgreementType, Signature,
-#                 Force, Lineage, treatyID, ieadbID) %>%
-#   dplyr::arrange(Begin)
+  manydata::transmutate(mitchID = as.character(`IEA#`),
+                        Title = manytreaties::standardise_titles(`Agreement Name`),
+                        Signature = messydates::as_messydate(`Date IEA was concluded`),
+                        Force = messydates::as_messydate(`Date IEA entered into force`),
+                        TextURL = `URL to text of IEA`,
+                        Language = Lang1,
+                        PartyURL = `URL to membership list`,
+                        Sequence = `Sequence in lineage`,
+                        Subject = `Issue area (subject)`,
+                        Term = messydates::as_messydate(`Term Date`),
+                        Grounds = dplyr::coalesce(`Term Type`,
+                                                  paste("Term by", `Term by ID`)),
+                        OrigTitle = `Alternative Treaty Name`,
+                        Auspices = `Org Auspices`,
+                        AdoptedIn = `Place IEA was concluded`,
+                        Comments = `Data entry notes`,
+                        Coded = `Data complete`,
+                        Coder = `Researcher`) %>%
 
 IEADB <- IEADB %>% 
   # Add treatyID column
