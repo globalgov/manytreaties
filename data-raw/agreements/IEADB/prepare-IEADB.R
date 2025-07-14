@@ -44,11 +44,22 @@ IEADB$Lineage <- manypkgs::code_lineage(IEADB$Title)
 #                 Force, Lineage, treatyID, ieadbID) %>%
 #   dplyr::arrange(Begin)
 
-IEADB <- IEADB %>%
-  dplyr::distinct() %>%
-  dplyr::relocate(treatyID,  Title, Begin, Ambit, AgreementType, Signature,
-                  Force, Lineage, mitchID) %>%
+IEADB <- IEADB %>% 
+  # Add treatyID column
+  dplyr::mutate(treatyID = manytreaties::code_agreements(IEADB, IEADB$Title, 
+                                                         IEADB$Begin))
+IEADB <- IEADB %>% 
+  dplyr::select(treatyID, Title, Begin, End, Signature, Force, Term, 
+                Ambit, AgreementType, 
+                Lineage, AdoptedIn, Auspices, Secretariat, OrigTitle, 
+                TextURL, 
+                Comments, Coder, everything()) %>% 
+  
+  dplyr::filter(Ambit == "Multilateral" |
+                  Ambit == "Bilateral") %>%
+  dplyr::distinct(treatyID, .keep_all = TRUE) %>%
   dplyr::arrange(Begin)
+IEADB
 
 # manypkgs includes several functions that should help cleaning
 # and standardising your data.
