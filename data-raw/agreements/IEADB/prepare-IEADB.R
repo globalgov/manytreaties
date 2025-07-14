@@ -58,7 +58,7 @@ IEADB <- IEADB %>%
 # Next run the following line to make IEADB available
 # within the package.
 manypkgs::export_data(IEADB, datacube = "agreements",
-                      URL = "https://iea.uoregon.edu/base-agreement-list")
+                      URL = "https://www.iea.ulaval.ca/en")
 # This function also does two additional things.
 # First, it creates a set of tests for this object to ensure
 # adherence to certain standards. You can hit Cmd-Shift-T (Mac)
