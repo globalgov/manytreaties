@@ -32,6 +32,17 @@ IEADB <- as_tibble(IEADB)  %>%
   dplyr::mutate(Begin = messydates::as_messydate(dplyr::coalesce(Signature, Force)),
                 End = Term) %>%
   dplyr::select(-dplyr::contains("(legacy)")) %>%
+  manydata::transmutate(AgreementType = dplyr::case_match(`Agreement Type Level 3`,
+                                                          c("Agreement","Acuerdo") ~ "Agreement",
+                                                          c("Convention","Convenzione","Convencion","Convenio") ~ "Convention",
+                                                          c("Declaration","Declaracion") ~ "Declaration",
+                                                          c("Treaty","Tratado") ~ "Treaty",
+                                                          c("Protocol","Protocolo","Protocole") ~ "Protocol",
+                                                          .default = `Agreement Type Level 3`),
+                        Ambit = dplyr::case_match(`Inclusion (type of agreements)`, 
+                                                  c("BEA","Bilateral (2 and only 2 governments)") ~ "Bilateral", 
+                                                  c("MEA","Multilateral (3 or more governments)") ~ "Multilateral",
+                                                  .default = `Inclusion (type of agreements)`)) %>%
 
 IEADB <- IEADB %>% 
   # Add treatyID column
