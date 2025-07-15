@@ -29,6 +29,12 @@ IEADB <- as_tibble(IEADB)  %>%
                         Comments = `Data entry notes`,
                         Coded = `Data complete`,
                         Coder = `Researcher`) %>%
+  dplyr::mutate(Signature = dplyr::case_when(Signature == "1111-11-11" ~ NA,
+                                             .default = Signature),
+                Force = dplyr::case_when(Force == "1111-11-11" ~ NA,
+                                         .default = Force),
+                Term = dplyr::case_when(Term == "1111-11-11" ~ NA,
+                                        .default = Term)) %>% 
   dplyr::mutate(Begin = messydates::as_messydate(dplyr::coalesce(Signature, Force)),
                 End = Term) %>%
   dplyr::select(-dplyr::contains("(legacy)")) %>%
