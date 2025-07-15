@@ -43,6 +43,14 @@ IEADB <- as_tibble(IEADB)  %>%
                                                   c("BEA","Bilateral (2 and only 2 governments)") ~ "Bilateral", 
                                                   c("MEA","Multilateral (3 or more governments)") ~ "Multilateral",
                                                   .default = `Inclusion (type of agreements)`)) %>%
+  dplyr::select(-c(AmendProtToA,UNEP2005pg,
+                   `Date *Bilateral* signed by 2nd state (ONLY if BEA)`,
+                   `E (environment) Code (agreement is environmental or not)`,
+                   `Possible Sources (additional)`,`Treaty Text`,
+                   `Membership eligibility (multilateral, bilateral, etc)`,
+                   `Words used to code as Environmental`,
+                   Category, `Coded Text`, `Source for E (environmental) code`,
+                   `Text used for E (environmental) coding`, Nid))
 
 IEADB <- IEADB %>% 
   # Add treatyID column
