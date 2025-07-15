@@ -29,6 +29,8 @@ IEADB <- as_tibble(IEADB)  %>%
                         Comments = `Data entry notes`,
                         Coded = `Data complete`,
                         Coder = `Researcher`) %>%
+  dplyr::mutate(Begin = messydates::as_messydate(dplyr::coalesce(Signature, Force)),
+                End = Term) %>%
 
 IEADB <- IEADB %>% 
   # Add treatyID column
