@@ -31,6 +31,7 @@ IEADB <- as_tibble(IEADB)  %>%
                         Coder = `Researcher`) %>%
   dplyr::mutate(Begin = messydates::as_messydate(dplyr::coalesce(Signature, Force)),
                 End = Term) %>%
+  dplyr::select(-dplyr::contains("(legacy)")) %>%
 
 IEADB <- IEADB %>% 
   # Add treatyID column
