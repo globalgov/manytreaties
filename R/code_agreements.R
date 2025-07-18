@@ -410,7 +410,7 @@ code_linkage <- function(title, date, return_all = FALSE) {
     # Step 1: standardise titles to improve matching
     treaty <- standardise_titles(as.character(title))
     # Step 2: code parties if present
-    parties <- manystates::code_states(treaty)
+    parties <- manystates::code_states(treaty, max_count = 2)
     usethis::ui_done("Coded agreement parties")
     # Step 3: code agreement type
     type <- code_type(treaty)
