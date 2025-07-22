@@ -22,14 +22,15 @@
 #' e==c("A Treaty Concerning Things")
 #' @export
 standardise_titles <- function(s) {
-  # Step one: capitalises first letter in words
+  
+  # 1: Capitalise first letter in words ####
   cap <- function(s) paste(toupper(substring(s, 1, 1)), {
     s <- substring(s, 2)
-  }
-  , sep = "", collapse = " ")
+  }, sep = "", collapse = " ")
   out <- vapply(strsplit(s, split = " "), cap, "",
                 USE.NAMES = !is.null(names(s)))
-  # Step two: standardise strings returned
+  
+  # 2: Standardise strings returned ####
   # Transforms strings to ASCII character encoding
   out <- suppressWarnings(stringi::stri_trans_general(out, id = "Latin-ASCII"))
   # standardises NAs
@@ -47,7 +48,8 @@ standardise_titles <- function(s) {
   out <- gsub("\\#", "Number ", out)
   # standardise some country abbreviations and specific words
   out <- correct_words(out)
-  # Step three: Standardises how ordinal numbers are returned
+  
+  # 3: Standardise ordinal numbers ####
   out <- textclean::mgsub(out,
                           paste0("(?<!\\w)", as.roman(1:100), "(?!\\w)"),
                           as.numeric(1:100), safe = TRUE, perl = TRUE)
@@ -68,7 +70,8 @@ standardise_titles <- function(s) {
                           paste0("(?<!\\w)", num, "(?!\\w)"),
                           as.numeric(1:100), safe = TRUE, perl = TRUE,
                           ignore.case = TRUE, fixed = FALSE)
-  # Step four: make sure most punctuations extra whitespaces are removed
+  
+  # 4: Remove most punctuation and extra whitespaces ####
   out <- gsub("(?!\\-|\\(|\\))[[:punct:]]", "", out, perl = TRUE)
   # removes all punctuations but hyphen and parentheses,
   # which may contain important information for distinguishing
