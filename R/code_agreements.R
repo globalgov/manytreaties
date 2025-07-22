@@ -33,16 +33,16 @@ code_agreements <- function(dataset = NULL, title, date) {
     if (exists("Title", dataset) & exists("Begin", dataset)) {
       title <- dataset$Title
       date <- dataset$Begin
-      usethis::ui_done(
-        "Title and date conforming columns in dataset automatically found")
+      cli::cli_inform(
+        "Title and date conforming columns in dataset found automagically.")
     } else if (!exists("Title", dataset) | !exists("Begin", dataset)) {
-      stop("Unable to find both 'Title' and 'Begin' columns in dataset.
+      cli::cli_abort("Unable to find both 'Title' and 'Begin' columns in dataset.
          Please declare the name of these columns or rename them.")
     }
   }
   # Step 1: get parties, acronym, type, dates, and lineage with code_linkage()
   line <- code_linkage(title, date, return_all = TRUE)
-  usethis::ui_done("Coded agreement linkages")
+  # cli::cli_alert_success("Coded agreement linkages")
   # Get variables from returned table
   abbrev <- line$abbrev
   type <- line$type
@@ -79,10 +79,14 @@ code_agreements <- function(dataset = NULL, title, date) {
   treatyID <- stringr::str_remove_all(treatyID, "_$")
   treatyID <- stringr::str_remove_all(treatyID, ":$")
   # step 3: inform users about observations not matched and duplicates
-  cat(sum(is.na(treatyID)), "entries were not matched at all.\n")
-  cat("There were", sum(duplicated(treatyID,
-                                   incomparables = NA)), "duplicated IDs.\n")
-  usethis::ui_done("Please run `vignette('agreements')` for more information.")
+  if(sum(is.na(treatyID)) > 0) {
+    cli::cli_alert_danger(sum(is.na(treatyID)), "entries were unmatched.\n")
+  }
+  if(sum(duplicated(treatyID, incomparables = NA)) > 0) {
+    cli::cli_alert_warning(sum(duplicated(treatyID, incomparables = NA)),
+                           "entries were duplicated.\n")
+  }
+  cli::cli_inform("Please run `vignette('agreements')` for more information.")
   treatyID
 }
 
