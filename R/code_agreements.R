@@ -1,21 +1,20 @@
 #' Code Agreement Titles
-#'
-#' Creates an ID that contains information on the parties to an agreement,
-#' the type of agreement, the date, and the linkage to other agreements.
+#' @description
+#'   Creates an ID that contains information on the parties to an agreement,
+#'   the type of agreement, the date, and the linkage to other agreements.
 #' @param dataset A 'many' dataset.
-#' If provided without a title and date variables, the function finds title and
-#' date conforming columns in the dataset.
-#' The function "expects" that there are variables named `Title` and `Begin`
-#' that they have been standardised using `standardise_titles()` and
-#' `messydates::as_messydate()`, respectively.
+#'   If provided without a title and date variables, the function finds title 
+#'   and date conforming columns in the dataset.
+#'   The function expects that there are variables named `Title` and `Begin`
+#'   that they have been standardised using `standardise_titles()` and
+#'   `messydates::as_messydate()`, respectively.
 #' @param title A title variable.
-#' The function "expects" that the variable has been standardised using
-#' `standardise_titles()`.
+#'   The function expects that the variable has been standardised using
+#'   `standardise_titles()`.
 #' @param date A date variable.
-#' The function "expects" that the variable has been standardised using
-#' `messydates::as_messydate()`.
+#'   The function expects that the variable has been standardised using
+#'   `messydates::as_messydate()`.
 #' @return a character vector with the treatyIDs
-#' @importFrom usethis ui_done
 #' @importFrom stringr str_replace_all str_detect
 #' @importFrom purrr map
 #' @examples
