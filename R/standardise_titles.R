@@ -48,6 +48,8 @@ standardise_titles <- function(s) {
   out <- gsub("\\#", "Number ", out)
   # standardise some country abbreviations and specific words
   out <- correct_words(out)
+  # remove "the government of"
+  out <- gsub("the government of ", "", out, ignore.case = TRUE)
   
   # 3: Standardise ordinal numbers ####
   out <- textclean::mgsub(out,
