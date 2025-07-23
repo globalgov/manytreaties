@@ -592,6 +592,11 @@
 HUGGO <- readr::read_csv("data-raw/agreements/HUGGO/HUGGO_clean.csv")
 HUGGO$treatyID <- manytreaties::code_agreements(HUGGO)
 HUGGO <- HUGGO %>%
+  dplyr::mutate(Begin = messydates::as_messydate(Begin),
+                End = messydates::as_messydate(End),
+                Signature = messydates::as_messydate(Signature),
+                Force = messydates::as_messydate(Force),
+                Term = messydates::as_messydate(Term)) %>%
   dplyr::select(treatyID, everything()) %>%
   dplyr::arrange(Begin)
 
