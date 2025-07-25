@@ -63,6 +63,7 @@ code_type <- function(title) {
   type
 }
 
+# Agreement type data ####
 agreement_type <- dplyr::tribble(~type,~category,~terms,
                                  "P","PROTO","protocol|additional|subsidiary|supplementary|complementaire|complementar|complementario|annex |annexes",
                                  "E","AMEND","amendment|modify|extend|proces-verbal|amend|extension|agreement extending|amending",
