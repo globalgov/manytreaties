@@ -150,35 +150,9 @@ code_activity <- function(title) {
   out
 }
 
-#' Creates Numerical IDs from Signature Dates
-#'
-#' Agreements should have a unique identification
-#' number that is meaningful, we condense their
-#' signature dates to produce this number.
-#' @param date A date variable
-#' @return A character vector with condensed dates
-#' @import stringr
-#' @examples
-#' \dontrun{
-#' IEADB <- dplyr::slice_sample(manyenviron::agreements$IEADB, n = 10)
-#' code_dates(IEADB$Title)
-#' }
-#' @export
-code_dates <- function(date) {
-  # Step 1: collapse dates
-  uID <- stringr::str_remove_all(date, "-")
-  # Step 2: code missing dates as far future dates to facilitate identification
-  uID[is.na(uID)] <- paste0(sample(5000:9999, 1), "NULL")
-  # Step 3: remove ranges, first date is taken
-  uID <- stringr::str_replace_all(uID, "\\:[:digit:]{8}$", "")
-  # Step 4: keep year only
-  uID <- ifelse(nchar(uID) > 4, substr(uID, 1, nchar(uID) - 4), uID)
-  uID
-}
-
 #' Code Known Agreements Abbreviation
-#'
-#' Some agreements have known abbreviations that facilitate their identification.
+#' @description
+#'   Some agreements have known abbreviations that facilitate their identification.
 #' @param title A character vector of treaty title
 #' @return A character vector of abbreviation of known treaties
 #' @importFrom dplyr case_when
@@ -350,7 +324,7 @@ code_linkage <- function(title, date, return_all = FALSE) {
     abbrev <- code_known_agreements(treaty)
     cli::cli_alert_success("Coded known agreements")
     # Step 5: give the observation a unique ID and acronym
-    uID <- code_dates(date)
+    uID <- as.character(messydates::year(date))
     cli::cli_alert_success("Coded agreement dates")
     # Step 6: code acronyms from titles
     acronym <- code_acronym(title)
