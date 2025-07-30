@@ -98,36 +98,6 @@ standardise_numbers <- function(title){
   out
 }
 
-#' @rdname standardise_titles
-#' @export
-standardise_numbers_old <- function(title){
-  
-  # Roman numerals
-  out <- textclean::mgsub(title,
-                          paste0("(?<!\\w)", as.roman(1:100), "(?!\\w)"),
-                          as.numeric(1:100), safe = TRUE, perl = TRUE)
-  # Ordinal numbers
-  ords <- number_words$ordinal
-  ords <- paste0(ords,
-                 dplyr::if_else(stringr::str_count(ords, "\\S+") == 2,
-                                paste0("|", gsub(" ", "-", as.character(ords))), ""))
-  out <- textclean::mgsub(out,
-                          paste0("(?<!\\w)", ords, "(?!\\w)"),
-                          as.numeric(1:100), safe = TRUE, perl = TRUE,
-                          ignore.case = TRUE, fixed = FALSE)
-  # Written numbers
-  num <- number_words$word
-  num <- paste0(num,
-                dplyr::if_else(stringr::str_count(num, "\\S+") == 2,
-                               paste0("|", gsub(" ", "-",
-                                                as.character(num))), ""))
-  out <- textclean::mgsub(out,
-                          paste0("(?<!\\w)", num, "(?!\\w)"),
-                          as.numeric(1:100), safe = TRUE, perl = TRUE,
-                          ignore.case = TRUE, fixed = FALSE)
-  out
-}
-
 mstringi_replace_all <- function(text, pattern, replacement) {
   stopifnot(length(pattern) == length(replacement))
   for (i in seq_along(pattern)) {
