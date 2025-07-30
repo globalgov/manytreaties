@@ -76,9 +76,8 @@ standardise_titles <- function(s) {
   # 4: Remove most punctuation and extra whitespaces ####
   out <- gsub("(?!\\-|\\(|\\))[[:punct:]]", "", out, perl = TRUE)
   # removes all punctuations but hyphen and parentheses,
-  # which may contain important information for distinguishing
-  # treaties
-  out <- stringr::str_squish(out)
+  # which may contain important information for distinguishing treaties
+  out <- stri_squish(out)
   out
 }
 
@@ -135,3 +134,7 @@ corrected_words <- dplyr::tribble(~words,~corr_words,
 "Indo-Pacific|Indopacific|Asia-Pacific|Asiapacific","Asia Pacific",
 "Co-ordinating|cordinating","Coordinating"
 )
+
+stri_squish <- function(charvec){
+  stringi::stri_trim_both(stringi::stri_replace_all_regex(charvec, "\\s+", " "))
+}
