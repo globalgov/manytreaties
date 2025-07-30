@@ -27,8 +27,7 @@ Imports:
     stringi,
     stringr,
     textclean,
-    tm,
-    usethis
+    tm
 Suggests:
     entity (>= 0.1.0),
     ggplot2,
