@@ -40,7 +40,8 @@ code_agreements <- function(dataset = NULL, title, date) {
          Please declare the name of these columns or rename them.")
     }
   }
-  # Step 1: get parties, acronym, type, dates, and lineage with code_linkage()
+  
+  # 1: get parties, acronym, type, dates, and lineage with code_linkage() ####
   line <- code_linkage(title, date, return_all = TRUE)
   # cli::cli_alert_success("Coded agreement linkages")
   # Get variables from returned table
@@ -50,7 +51,8 @@ code_agreements <- function(dataset = NULL, title, date) {
   acronym <- line$acronym
   uID <- line$uID
   line <- line$line
-  # Step 2: add items together correctly
+  
+  # 2: add items together correctly ####
   out <- vector(mode = "character", length = length(title)) # initialize vector
   # bilateral agreements (A) where abbreviation is known
   treatyID <- ifelse(!is.na(abbrev) & (type == "A") & !is.na(parties),
@@ -78,13 +80,14 @@ code_agreements <- function(dataset = NULL, title, date) {
   # deletes empty line or linkage
   treatyID <- stringr::str_remove_all(treatyID, "_$")
   treatyID <- stringr::str_remove_all(treatyID, ":$")
-  # step 3: inform users about observations not matched and duplicates
+  
+  # 3: inform users about observations not matched and duplicates ####
   if(sum(is.na(treatyID)) > 0) {
-    cli::cli_alert_danger(sum(is.na(treatyID)), "entries were unmatched.\n")
+    cli::cli_alert_danger(sum(is.na(treatyID)), "entries were unmatched.")
   }
   if(sum(duplicated(treatyID, incomparables = NA)) > 0) {
     cli::cli_alert_warning(sum(duplicated(treatyID, incomparables = NA)),
-                           "entries were duplicated.\n")
+                           "entries were duplicated.")
   }
   cli::cli_inform("Please run `vignette('agreements')` for more information.")
   treatyID
@@ -303,6 +306,7 @@ code_acronym <- function(title) {
 #' }
 #' @export
 code_linkage <- function(title, date, return_all = FALSE) {
+  
   # Initialize variables to suppress CMD notes
   ref <- dup <- NULL
   if (missing(title) & missing(date)) {
@@ -310,41 +314,51 @@ code_linkage <- function(title, date, return_all = FALSE) {
     pred_words <- knitr::kable(pred, "simple")
     pred_words
   } else {
-    # Step 1: standardise titles to improve matching
+    
+    # 1: Standardise titles to improve matching ####
     treaty <- standardise_titles(as.character(title))
-    # Step 2: code parties if present
+    
+    # 2: Code parties if present ####
     parties <- manystates::code_states(treaty, max_count = 2)
     parties <- stringi::stri_replace_all_fixed(parties, ",", "-")
     parties <- stringi::stri_replace_all_regex(parties, "\\{|\\}", "")
     cli::cli_alert_success("Coded agreement parties")
-    # Step 3: code agreement type
+    
+    # 3: Code agreement type ####
     type <- code_type(treaty)
     cli::cli_alert_success("Coded agreement type")
-    # Step 4: code known agreements
+    
+    # 4: Code known agreements ####
     abbrev <- code_known_agreements(treaty)
     cli::cli_alert_success("Coded known agreements")
-    # Step 5: give the observation a unique ID and acronym
+    
+    # 5: Give observation a unique ID and acronym ####
     uID <- as.character(messydates::year(date))
     cli::cli_alert_success("Coded agreement dates")
-    # Step 6: code acronyms from titles
+    
+    # 6: Code acronyms from titles ####
     acronym <- code_acronym(title)
     cli::cli_alert_success("Coded acronyms for agreements")
-    # Step 7: remove 'predictable words' in agreements
+    
+    # 7: Remove 'predictable words' in agreements ####
     pw <- paste0("\\<", paste(predictable_words$predictable_words,
                               collapse = "\\>|\\<"), "\\>")
     treaty <- gsub(pw, "", treaty, ignore.case = TRUE)
-    # Step 8: remove numbers, signs and parentheses
+    
+    # 8: Remove numbers, signs and parentheses ####
     treaty <- gsub("\\s*\\([^\\)]+\\)", "", treaty, ignore.case = FALSE)
     treaty <- gsub("-", " ", treaty, ignore.case = FALSE)
-    treaty <- stringr::str_replace_all(treaty, ",", "")
-    treaty <- stringr::str_remove_all(treaty, "[0-9]")
+    treaty <- stringi::stri_replace_all_fixed(treaty, ",", "")
+    treaty <- stringi::stri_replace_all_regex(treaty, "[0-9]", "")
     treaty <- data.frame(treaty = stringr::str_squish(treaty))
-    # Step 9: assign ID to observations
+    
+    # 9: Assign ID to observations ####
     id <- ifelse((!is.na(abbrev)), paste0(abbrev, "A"),
                  (ifelse((is.na(parties)), paste0(acronym, "_", uID, type),
                          (ifelse((!is.na(parties)), paste0(parties, "_", uID,
                                                            type), NA)))))
-    # Step 10: bind, arrange, find duplicates, original values, and assign same id
+    
+    # 10: Bind, arrange, find duplicates, original values, and assign same id ####
     out <- cbind(treaty, id, parties, type, abbrev, uID, acronym) %>%
       dplyr::mutate(row = dplyr::row_number()) %>%
       dplyr::arrange(type) %>%
@@ -357,7 +371,8 @@ code_linkage <- function(title, date, return_all = FALSE) {
                     line = dplyr::case_when(n != 1 ~ paste(ref),
                                             n == 1 ~ "1")) %>%
       dplyr::arrange(row)
-    # Step 11: keep only linkages for agreements
+    
+    # 11: Keep only linkages for agreements ####
     out$line <- ifelse(out$id == out$ref & out$type == "A", "1", out$line)
     out$line <- stringr::str_replace_all(out$line, "^1$", "")
     out$line <- stringr::str_replace_all(out$line,
