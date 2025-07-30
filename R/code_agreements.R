@@ -93,66 +93,6 @@ code_agreements <- function(dataset = NULL, title, date) {
   treatyID
 }
 
-#' Code Abbreviations for Activity
-#'
-#' Code in abbreviated form the activity of bilateral treaties' titles.
-#' @param title A character vector of treaty titles
-#' @details Bilateral agreements usually detail their activity and specify area
-#' in the last words of the titles.
-#' These last words are abbreviated by the function to differentiate between
-#' bilateral treaties and avoid false positives being generated since multiple,
-#' different, bilateral treaties are often signed in the same day.
-#' @importFrom stringr str_squish str_extract
-#' @importFrom tm stopwords removeWords
-#' @return A character vector of abbreviations of last words in treaty title.
-code_activity <- function(title) {
-  # Step 1: remove states' names and agreements' type
-  out <- as.character(title)
-  states <- manystates::code_states()$Label
-  states <- paste(states, collapse = "|")
-  words <- agreement_type$words
-  words <- paste(words, collapse = "|")
-  out <- gsub(states, "", out, ignore.case = TRUE)
-  out <- gsub(words, "", out, ignore.case = TRUE)
-  # Some states and abbreviations are missed
-  out <- gsub("Soviet Socialist Republics|\\<USSR\\>|\\<UK\\>|
-              |\\<US\\>||\\<united\\>|\\<america\\>",
-              "", out, ignore.case = TRUE)
-  # Step 2: remove stop words, numbers and parenthesis
-  out <- tm::removeWords(tolower(out), tm::stopwords("SMART"))
-  out <- gsub("[0-9]", "", out)
-  out <- gsub("\\(|\\)|\U00AC|\U00F1 ", "", out)
-  out <- gsub("-", " ", out)
-  # Step 3: remove months and unimportant words
-  out <- gsub("january|february|march|april|may|june|july|
-              |august|september|october|november|december",
-              "", out, ignore.case = TRUE)
-  out <- gsub("\\<text\\>|\\<signed\\>|\\<government\\>|\\<federal\\>|
-              |\\<republic\\>|\\<states\\>|\\<confederation\\>|
-              |\\<federative\\>|\\<kingdom\\>|\\<republics\\>",
-              "", out, ignore.case = TRUE)
-  out <- gsub("\\<coast\\>|\\<ocean\\>|\\<eastern\\>|\\<western\\>|
-              |\\<north\\>|\\<south\\>|\\<west\\>|\\<east\\>|
-              |\\<southern\\>|\\<northern\\>|\\<middle\\>|\\<atlantic\\>|
-              |\\<pacific\\>|\\<columbia\\>|\\<danube\\>",
-              "", out, ignore.case = TRUE)
-  out <- gsub("\\<between\\>|\\<cooperation\\>|\\<cooperative\\>|
-              |\\<scientific\\>|\\<technical\\>|\\<basic\\>|\\<border\\>|
-              |\\<pollution\\>|\\<river\\>|\\<basin\\>|\\<water\\>|
-              |\\<resources\\>|\\<aim\\>|\\<reducing\\>|\\<cross\\>|
-              |\\<relating\\>|\\<iron\\>|\\<gates\\>|\\<power\\>|
-              |\\<navigation\\>|\\<system\\>|\\<sphere\\>|\\<field\\>|
-              |\\<partnership\\>|\\<science\\>|\\<matters\\>",
-              "", out, ignore.case = TRUE)
-  # Step 4: get abbreviations for last three words and counting of words
-  out <- stringr::str_squish(out)
-  out <- suppressWarnings(abbreviate(out, minlength = 3,
-                                     method = "both.sides", strict = TRUE))
-  out <- stringr::str_extract(out, ".{3}$")
-  out <- toupper(out)
-  out
-}
-
 #' Code Known Agreements Abbreviation
 #' @description
 #'   Some agreements have known abbreviations that facilitate their identification.
