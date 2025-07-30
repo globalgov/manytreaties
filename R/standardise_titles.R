@@ -51,8 +51,59 @@ standardise_titles <- function(s) {
   # remove "the government of"
   out <- gsub("the government of ", "", out, ignore.case = TRUE)
   
-  # 3: Standardise ordinal numbers ####
-  out <- textclean::mgsub(out,
+  # 3: Standardise numbers ####
+  out <- standardise_numbers(out)
+  
+  # 4: Remove most punctuation and extra whitespaces ####
+  out <- gsub("(?!\\-|\\(|\\))[[:punct:]]", "", out, perl = TRUE)
+  # removes all punctuations but hyphen and parentheses,
+  # which may contain important information for distinguishing treaties
+  out <- stri_squish(out)
+  out
+}
+
+#' @rdname standardise_titles
+#' @export
+standardize_titles <- standardise_titles
+
+#' @rdname standardise_titles
+#' @section standardise_numbers(): 
+#'   This function is used to standardise numbers in treaty titles
+#'   to improve readability and facilitate string matching.
+#'   It replaces written numbers with their numerical equivalents.
+#' @export
+standardise_numbers <- function(title){
+
+  # Roman numerals
+  out <- mstringi_replace_all(title,
+                          paste0("(?<!\\w)", as.roman(1:100), "(?!\\w)"),
+                          as.numeric(1:100))
+  # Ordinal numbers
+  ords <- number_words$ordinal
+  ords <- paste0(ords,
+                 dplyr::if_else(stringr::str_count(ords, "\\S+") == 2,
+                                paste0("|", gsub(" ", "-", as.character(ords))), ""))
+  out <- mstringi_replace_all(out,
+                          paste0("(?<!\\w)", ords, "(?!\\w)"),
+                          as.numeric(1:100))
+  # Written numbers
+  num <- number_words$word
+  num <- paste0(num,
+                dplyr::if_else(stringr::str_count(num, "\\S+") == 2,
+                               paste0("|", gsub(" ", "-",
+                                                as.character(num))), ""))
+  out <- mstringi_replace_all(out,
+                          paste0("(?<!\\w)", num, "(?!\\w)"),
+                          as.numeric(1:100))
+  out
+}
+
+#' @rdname standardise_titles
+#' @export
+standardise_numbers_old <- function(title){
+  
+  # Roman numerals
+  out <- textclean::mgsub(title,
                           paste0("(?<!\\w)", as.roman(1:100), "(?!\\w)"),
                           as.numeric(1:100), safe = TRUE, perl = TRUE)
   # Ordinal numbers
@@ -74,18 +125,16 @@ standardise_titles <- function(s) {
                           paste0("(?<!\\w)", num, "(?!\\w)"),
                           as.numeric(1:100), safe = TRUE, perl = TRUE,
                           ignore.case = TRUE, fixed = FALSE)
-  
-  # 4: Remove most punctuation and extra whitespaces ####
-  out <- gsub("(?!\\-|\\(|\\))[[:punct:]]", "", out, perl = TRUE)
-  # removes all punctuations but hyphen and parentheses,
-  # which may contain important information for distinguishing treaties
-  out <- stri_squish(out)
   out
 }
 
-#' @rdname standardise_titles
-#' @export
-standardize_titles <- standardise_titles
+mstringi_replace_all <- function(text, pattern, replacement) {
+  stopifnot(length(pattern) == length(replacement))
+  for (i in seq_along(pattern)) {
+    text <- stringi::stri_replace_all_regex(text, pattern[i], replacement[i])
+  }
+  text
+}
 
 # Helper functions
 correct_words <- function(s) {
