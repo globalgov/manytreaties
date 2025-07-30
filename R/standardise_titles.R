@@ -43,9 +43,7 @@ standardise_titles <- function(s) {
   # Delete special character found in some treaty titles
   out <- gsub("\U00AC[[:alpha:]]{1}\\s|\U00AC\\s| -", "", out)
   # Add space after a comma
-  out <- textclean::add_comma_space(out)
-  # Change number symbol into word
-  out <- gsub("\\#", "Number ", out)
+  out <- stringi::stri_replace_all_regex(out, ",\\s*", ", ")
   # standardise some country abbreviations and specific words
   out <- correct_words(out)
   # remove "the government of"
@@ -73,6 +71,9 @@ standardize_titles <- standardise_titles
 #'   It replaces written numbers with their numerical equivalents.
 #' @export
 standardise_numbers <- function(title){
+
+  # Change number symbol into word
+  out <- stringi::stri_replace_all_regex(out, "\\#", "Number ")
 
   # Roman numerals
   out <- mstringi_replace_all(title,

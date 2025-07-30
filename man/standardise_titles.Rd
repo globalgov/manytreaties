@@ -3,11 +3,14 @@
 \name{standardise_titles}
 \alias{standardise_titles}
 \alias{standardize_titles}
+\alias{standardise_numbers}
 \title{Standardise titles}
 \usage{
 standardise_titles(s)
 
 standardize_titles(s)
+
+standardise_numbers(title)
 }
 \arguments{
 \item{s}{A string}
@@ -27,6 +30,13 @@ Removes ambiguous punctions and symbols from strings.
 All the strings are transformed into to ASCII character encoding.
 Written numbers in ordinal form are transformed into numerical form.
 }
+\section{standardise_numbers()}{
+
+This function is used to standardise numbers in treaty titles
+to improve readability and facilitate string matching.
+It replaces written numbers with their numerical equivalents.
+}
+
 \examples{
 e <- standardise_titles("A treaty concerning things")
 e==c("A Treaty Concerning Things")
