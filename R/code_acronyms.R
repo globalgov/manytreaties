@@ -110,13 +110,9 @@ code_acronym <- function(title) {
   x <- stringi::stri_replace_all_regex(x, "\\(|\\)", "")
   x <- stringi::stri_replace_all_fixed(x, "-", " ")
   
-  # 3: remove known agreement cities or short titles ####
-  x <- gsub("\\<Nairobi\\>|\\<Basel\\>|\\<Bamako\\>|\\<Lusaka\\>|
-            |\\<Stockholm\\>|\\<Kyoto\\>|\\<Hong Kong\\>", "", x)
-  x <- ifelse(grepl("^Fisheries", x), gsub("Fisheries", "", x), x)
-  
-  # 4: remove unimportant but differentiating words ####
-  x <- gsub("\\<populations\\>|\\<basin\\>|\\<resources\\>|\\<stock\\>|
+  # 3: Remove known agreement cities or short titles ####
+  x <- stringi::stri_replace_all_regex(x, cities, "")
+
   # 4: Remove unimportant but differentiating words ####
   x <- stringi::stri_replace_all_regex(x, "\\<populations\\>|\\<basin\\>|\\<resources\\>|\\<stock\\>|
             |\\<concerning\\>|\\<priority\\>|\\<revised\\>|\\<version\\>|

@@ -394,3 +394,23 @@ match_to_table <- function(char_vec, pattern_table, pattern_col, value_col, case
   result[!matched] <- NA_character_
   result
 }
+
+cities <- "Amsterdam|Ankara|Athens|Auckland|Algiers|Abu Dhabi|
+  Bangkok|Beirut|Bogota|Brasilia|Beijing|Berlin|Brussels|Buenos Aires|Basel|Bamako|
+  Cairo|Canberra|Caracas|Copenhagen|Courtray|  
+  Dakar|Dublin|Dar es Salaam|Doha|
+  Helsinki|Havana|Hong Kong|
+  Istanbul|
+  Jakarta|
+  Kabul|Kampala|Kuala Lumpur|Kyoto|
+  Lisbon|London|Lusaka|
+  Madrid|Manila|Moscow|
+  Nairobi|New Delhi|
+  Oslo|Ottawa|
+  Paris|Prague|
+  Rabat|Rio de Janeiro|Rome|
+  Stockholm|San Jose|Santiago|Sao Paulo|Seoul|Singapore|Stockholm|
+  Tokyo|Tunis|
+  Vienna|
+  Warsaw|Washington DC|
+  Zagreb|Zurich"
