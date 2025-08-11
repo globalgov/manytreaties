@@ -395,6 +395,20 @@ match_to_table <- function(char_vec, pattern_table, pattern_col, value_col, case
   result
 }
 
+#' Code locations from agreement titles
+#'
+#' @param title Treaty titles
+#' @return The location taken from agreement title
+#' @examples
+#' \dontrun{
+#' code_location(HUGGO$Title)
+#' }
+#' @export
+code_location <- function(title) {
+  unlist(stringi::stri_extract_all_regex(title, cities))
+  cli::cli_alert_success("Coded locations")
+}
+
 cities <- "Amsterdam|Ankara|Athens|Auckland|Algiers|Abu Dhabi|
   Bangkok|Beirut|Bogota|Brasilia|Beijing|Berlin|Brussels|Buenos Aires|Basel|Bamako|
   Cairo|Canberra|Caracas|Copenhagen|Courtray|  
