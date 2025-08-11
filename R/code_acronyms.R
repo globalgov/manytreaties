@@ -54,25 +54,29 @@ code_known_agreements <- function(title) {
 }
 
 abbreviations <- dplyr::tribble(~title,~abbreviation,~signature,
-                                "United Nations Convention On The Law Of The Sea","UNCLOS","1982-12-10",
+                                "Antarctic Mineral Resources Convention","CRAMRA","1988-06-02",
+                                "Constitutional Agreement Of The Latin American Organization For Fisheries Development","OLDEPESCA","1982-10-29",
+                                "Convention For The Protection Of The Marine Environment Of The North East Atlantic","OSPAR","1992-09-22",
+                                "Convention For The Protection Of The Ozone Layer","VIENNA","1985-03-22",
                                 "Convention On Biological Diversity","CBD","1992-06-05",
                                 "Convention On The Conservation Of Antarctic Marine Living Resources","CCAMLR","1980-05-20",
                                 "Convention On International Trade In Endangered Species Of Wild Fauna And Flora","CITES","1973-03-03",
-                                "International Convention On Civil Liability For Oil Pollution Damage","CLC","1969-11-29",
-                                "Antarctic Mineral Resources Convention","CRAMRA","1988-06-02",
                                 "Convention On The Protection And Use Of Transboundary Watercourses And International Lakes","CECE","1992-03-17",
                                 "Convention On Long-Range Transboundary Air Pollution","LRTAP","1979-11-13",
-                                "International Convention For The Prevention Of Pollution From Ships","MARPOL","1973-11-02",
-                                "North American Agreement On Environmental Cooperation","NAAEC","1993-09-14",
-                                "Constitutional Agreement Of The Latin American Organization For Fisheries Development","OLDEPESCA","1982-10-29",
-                                "International Convention On Oil Pollution Preparedness, Response And Cooperation","OPRC","1990-11-30",
-                                "Convention For The Protection Of The Marine Environment Of The North East Atlantic","OSPAR","1992-09-22",
-                                "Paris Agreement Under The United Nations Framework Convention On Climate Change","PARIS","2015-12-12",
                                 "Convention On The Prior Informed Consent Procedure For Certain Hazardous Chemicals And Pesticides In International Trade","PIC","1998-09-10",
                                 "Convention On Wetlands Of International Importance Especially As Waterfowl Habitat","RAMSA","1971-02-02",
                                 "Convention To Combat Desertification In Those Countries Experiencing Serious Drought And/Or Desertification, Particularly In Africa","UNCCD","1994-06-17",
-                                "United Nations Framework Convention On Climate Change","UNFCCC","1992-05-09",
-                                "Convention For The Protection Of The Ozone Layer","VIENNA","1985-03-22"
+                                "International Convention For The Prevention Of Pollution From Ships","MARPOL","1973-11-02",
+                                "International Convention On Civil Liability For Oil Pollution Damage","CLC","1969-11-29",
+                                "International Convention On The Elimination Of All Forms Of Racial Discrimination","ICERD","1965-12-21",
+                                "International Convention On Oil Pollution Preparedness, Response And Cooperation","OPRC","1990-11-30",
+                                "International Covenant On Civil and Political Rights","ICCPR","1966-12-16",
+                                "International Covenant On Economic, Social And Cultural Rights","ICESCR","1966-12-16",
+                                "International Treaty On Plant Genetic Resources For Food And Agriculture","ITPGRFA","2001-11-03",
+                                "North American Agreement On Environmental Cooperation","NAAEC","1993-09-14",
+                                "Paris Agreement Under The United Nations Framework Convention On Climate Change","PARIS","2015-12-12",
+                                "United Nations Convention On The Law Of The Sea","UNCLOS","1982-12-10",
+                                "United Nations Framework Convention On Climate Change","UNFCCC","1992-05-09"
 )
 
 #' Code Acronyms from Titles
