@@ -25,10 +25,10 @@ code_known_agreements <- function(title) {
     out <- knitr::kable(ka, "simple")
   } else {
     
-    # 1: get abbreviations dataset ####
+    # 1: Get abbreviations ####
     abbreviations <- purrr::map(abbreviations, as.character)
     
-    # 2: assign the specific abbreviation to the "known" treaties ####
+    # 2: Assign specific abbreviation to "known" treaties ####
     ab <- sapply(abbreviations$title, function(x) grepl(x, title,
                                                         ignore.case = T,
                                                         perl = T) * 1)
@@ -43,13 +43,14 @@ code_known_agreements <- function(title) {
     out <- as.character(out)
     out <- ifelse(grepl("c\\(", out), "PARIS_20151212", out)
     
-    # 3: keep year only for IDs ####
+    # 3: Keep year only for IDs ####
     out <- ifelse(is.na(out), out, substr(out, 1, nchar(out) - 4))
     
-    # 4: if all missing, returns an empty list ####
+    # 4: If all missing, returns an empty list ####
     lt <- as.numeric(length(title))
     ifelse(length(out) == 0, out <- rep(NA_character_, lt), out)
   }
+  cli::cli_alert_success("Coded known agreements")
   out
 }
 
