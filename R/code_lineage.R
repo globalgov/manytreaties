@@ -58,11 +58,11 @@ code_lineage <- function(title = NULL, datacube = NULL) {
 #' @export
 code_entity <- function(title) {
   # Add a note about JavaScript
-  usethis::ui_info("Please make sure JavaScript is installed.")
+  cli::cli_alert_info("Please make sure JavaScript is installed.")
   # Download entity package
   pkgs <- NULL
   pkgs <- data.frame(utils::installed.packages())
-  if (any(grepl("entity", pkgs$Package))) {
+  if (!any(grepl("entity", pkgs$Package))) {
     remotes::install_github("trinker/entity")
     usethis::ui_info("Downloaded entity package.")
   }
