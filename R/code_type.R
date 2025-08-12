@@ -47,8 +47,8 @@ code_type <- function(title) {
     
     # 3: Assign type abbreviations ####
     type <- dplyr::case_when(
-      grepl("PROTO", type) ~ "P", # protocol
       grepl("AMEND", type) ~ "E", # amendment
+      grepl("PROTO", type) ~ "P", # protocol
       grepl("AGREE", type) ~ "A", # agreement
       grepl("NOTES", type) ~ "N", # notes
       grepl("STRAT", type) ~ "S", # strategy

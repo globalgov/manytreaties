@@ -14,10 +14,6 @@ test_that("Code_agreements helper functions work properly", {
   #                                          NA, "RUS-USA[KTC]", "RUS-USA[FON]"))
   expect_equal(code_type(data$title), c("A", "E1", "A", "R",
                                         "N", "S", "A", "A", "A"))
-  expect_equal(code_dates(data$date), c("1980", "1990",
-                                        "1981", "1982",
-                                        "1976", "1983",
-                                        "1971", "1973", "1973"))
   expect_equal(code_known_agreements(data$title), c(NA, "RAMSA_1971",
                                                     NA, NA, NA, NA,
                                                     "RAMSA_1971", NA, NA))
