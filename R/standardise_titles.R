@@ -1,18 +1,16 @@
 #' Standardise titles
-#'
-#' Standardises words in a character title variable to improve readability,
-#' facilitate string matching and enable more accurate comparisons
-#' for variables in different datatsets.
+#' @description
+#'   Standardises words in a character title variable to improve readability,
+#'   facilitate string matching and enable more accurate comparisons
+#'   for variables in different datatsets.
 #' @name standardise_titles
-#' @param s A string
+#' @param title A string or a character vector of titles.
 #' @details The function capitalises words in the strings passed to it.
-#' It trims white spaces from the start, middle and end of the strings.
-#' Removes ambiguous punctions and symbols from strings.
-#' All the strings are transformed into to ASCII character encoding.
-#' Written numbers in ordinal form are transformed into numerical form.
+#'   It trims white spaces from the start, middle and end of the strings.
+#'   Removes ambiguous punctions and symbols from strings.
+#'   All the strings are transformed into to ASCII character encoding.
+#'   Written numbers in ordinal form are transformed into numerical form.
 #' @return A capitalised, trimmed and standardised string
-#' @importFrom textclean add_comma_space mgsub
-#' @importFrom english ordinal words
 #' @importFrom stringr str_count str_squish str_to_title
 #' @importFrom utils as.roman
 #' @importFrom stringi stri_trans_general
@@ -21,7 +19,7 @@
 #' e <- standardise_titles("A treaty concerning things")
 #' e==c("A Treaty Concerning Things")
 #' @export
-standardise_titles <- function(s) {
+standardise_titles <- function(title) {
   
   # 1: Capitalise first letter in words ####
   out <- standardise_caps(title)
@@ -44,15 +42,18 @@ standardise_titles <- function(s) {
   out <- correct_words(out)
   # remove "the government of"
   out <- gsub("the government of ", "", out, ignore.case = TRUE)
+  out <- gsub("the cabinet of ministers of ", "", out, ignore.case = TRUE)
   
   # 3: Standardise numbers ####
   out <- standardise_numbers(out)
-  
+
   # 4: Remove most punctuation and extra whitespaces ####
   out <- gsub("(?!\\-|\\(|\\))[[:punct:]]", "", out, perl = TRUE)
   # removes all punctuations but hyphen and parentheses,
   # which may contain important information for distinguishing treaties
   out <- stri_squish(out)
+  
+  cli::cli_alert_success("Standardised titles")
   out
 }
 
@@ -87,29 +88,23 @@ standardise_caps <- function(title){
 standardise_numbers <- function(title){
 
   # Change number symbol into word
-  out <- stringi::stri_replace_all_regex(out, "\\#", "Number ")
+  out <- stringi::stri_replace_all_regex(title, "\\#", "Number ")
 
   # Roman numerals
-  out <- mstringi_replace_all(title,
+  out <- mstringi_replace_all(out,
                           paste0("(?<!\\w)", as.roman(1:100), "(?!\\w)"),
                           as.numeric(1:100))
   # Ordinal numbers
   ords <- number_words$ordinal
-  ords <- paste0(ords,
-                 dplyr::if_else(stringr::str_count(ords, "\\S+") == 2,
-                                paste0("|", gsub(" ", "-", as.character(ords))), ""))
   out <- mstringi_replace_all(out,
                           paste0("(?<!\\w)", ords, "(?!\\w)"),
                           as.numeric(1:100))
   # Written numbers
   num <- number_words$word
-  num <- paste0(num,
-                dplyr::if_else(stringr::str_count(num, "\\S+") == 2,
-                               paste0("|", gsub(" ", "-",
-                                                as.character(num))), ""))
   out <- mstringi_replace_all(out,
                           paste0("(?<!\\w)", num, "(?!\\w)"),
                           as.numeric(1:100))
+  cli::cli_alert_success("Standardised numbers in titles")
   out
 }
 
