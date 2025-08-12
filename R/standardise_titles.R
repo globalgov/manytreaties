@@ -24,11 +24,7 @@
 standardise_titles <- function(s) {
   
   # 1: Capitalise first letter in words ####
-  cap <- function(s) paste(toupper(substring(s, 1, 1)), {
-    s <- substring(s, 2)
-  }, sep = "", collapse = " ")
-  out <- vapply(strsplit(s, split = " "), cap, "",
-                USE.NAMES = !is.null(names(s)))
+  out <- standardise_caps(title)
   
   # 2: Standardise strings returned ####
   # Transforms strings to ASCII character encoding
@@ -63,6 +59,24 @@ standardise_titles <- function(s) {
 #' @rdname standardise_titles
 #' @export
 standardize_titles <- standardise_titles
+
+#' @rdname standardise_titles
+#' @section standardise_caps(): 
+#'  This function is used to standardise the capitalisation
+#'  of words in treaty titles.
+#'  It capitalises the first letter of each word
+#'  while keeping the rest of the letters in lowercase.
+#'  Unlike stringi or stringr solutions though, this function retains
+#'  abbreviations and acronyms in uppercase.
+#' @export
+standardise_caps <- function(title){
+  cap <- function(s) paste(toupper(substring(s, 1, 1)), {
+    s <- substring(s, 2)
+  }, sep = "", collapse = " ")
+  cli::cli_alert_success("Standardised capitalisation in titles")
+  vapply(strsplit(title, split = " "), cap, "",
+         USE.NAMES = !is.null(names(title)))
+}
 
 #' @rdname standardise_titles
 #' @section standardise_numbers(): 
