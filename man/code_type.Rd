@@ -14,9 +14,8 @@ A character vector of the treaty type
 }
 \description{
 Identify the type of international agreement from titles.
-Agreements can be, for example,
-multilateral treaties or coventions (A),
-protocols (P) or amendments (E),
+Agreements can be, for example, treaties or conventions (A),
+protocols (P), or amendments (E),
 if they contain words in title.
 }
 \details{
