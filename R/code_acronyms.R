@@ -1,3 +1,62 @@
+#' Code Acronyms from Titles
+#' @description
+#'   Codes an acronym from agreement titles to enable matching.
+#' @param title A character vector of treaty title
+#' @importFrom tm stopwords removeWords
+#' @details Codes acronyms that are 4 to 6 digits long.
+#'   For shorter treaty titles, six words or less, acronym includes first letter
+#'   of each word.
+#'   For longer treaty titles, seven words or more, acronym includes first letter
+#'   of first word in title, followed by the number of words in the title,
+#'   and first letter of last word in title.
+#' @examples
+#' \dontrun{
+#' IEADB <- dplyr::slice_sample(manyenviron::agreements$IEADB, n = 10)
+#' code_acronyms(IEADB$Title)
+#' }
+#' @export
+code_acronyms <- function(title) {
+  
+  # 1: Remove stop words ####
+  x <- stri_squish(tm::removeWords(title,
+                                   stringi::stri_trans_totitle(tm::stopwords("SMART"))))
+  x <- stri_remove_all(x, "\\<populations\\>|\\<basin\\>|\\<resources\\>|\\<stock\\>|
+            |\\<concerning\\>|\\<priority\\>|\\<revised\\>|\\<version\\>|
+            |\\<national\\>|\\<trilateral\\>|\\<multilateral\\>|\\<between\\>|
+            |\\<marine\\>|\\<Fao\\>|\\<field\\>|\\<sphere\\>|\\<adjustment\\>|
+            |\\<activities\\>")
+  
+  ## 1b: Remove agreement types, numbers, and punctuation marks ####
+  x <- stringi::stri_replace_all_regex(x, 
+                                       "protocols|protocol|amendments|amendment|amend|
+            |amending|agreements|Agreement|convention|
+            |Exchanges|Exchange|Notes|Strategy|strategies|
+            |resolutions|Resolution", "", case_insensitive = TRUE)
+  x <- stringi::stri_replace_all_regex(x, "\\s\\([:alpha:]{3,9}\\)", "")
+  x <- stringi::stri_replace_all_regex(x, "\\s\\(.{3,20}\\)", "")
+  x <- stringi::stri_replace_all_regex(x, "[0-9]", "")
+  x <- stringi::stri_replace_all_regex(x, "\\(|\\)", "")
+  x <- stringi::stri_replace_all_fixed(x, "-", " ")
+  x <- stringi::stri_replace_all_regex(x, cities, "")
+  
+  # 2: Abbreviate remaining words ####
+  x <- suppressWarnings(abbreviate(x, minlength = 6, method = "both.sides",
+                                   strict = TRUE))
+  x <- toupper(x)
+  ## 2b: Condense abbreviations to four digits ####
+  x <- ifelse(stringi::stri_detect_regex(x, "[:upper:]{7}"),
+              paste0(substr(x, 1, 2),
+                     stringi::stri_pad(nchar(x) - 3, 2, pad = "0"),
+                     substr(x, nchar(x) - 1, nchar(x))), x)
+  
+  # 3: Code/merge known agreements ####
+  y <- code_known_agreements(x)
+  x <- ifelse(is.na(y), x, y)
+  
+  cli::cli_alert_success("Coded acronyms")
+  as.character(x)
+}
+
 #' Code Known Agreements Abbreviation
 #' @description
 #'   Some agreements have known abbreviations that facilitate their identification.
@@ -7,9 +66,11 @@
 #' @importFrom purrr map
 #' @details The function identifies agreements that match the list of known
 #'   agreements with their titles, abbreviations and signature dates and
-#'   substitutes the known titles for abbreviations. For the complete list of
-#'   known agreements coded for and their respective abbreviations please run
-#'   the function without an argument (i.e. `code_known_agreements()`).
+#'   substitutes the known titles for abbreviations.
+#'   
+#'   For the complete list of known agreements coded for and their respective 
+#'   abbreviations please run the function without an argument 
+#'   (i.e. `code_known_agreements()`).
 #' @examples
 #' \dontrun{
 #' IEADB <- dplyr::slice_sample(manyenviron::agreements$IEADB, n = 10)
@@ -33,7 +94,7 @@ code_known_agreements <- function(title) {
                                                         ignore.case = T,
                                                         perl = T) * 1)
     colnames(ab) <- paste0(abbreviations$abbreviation, "_",
-                           as.character(stringr::str_remove_all(
+                           as.character(stri_remove_all(
                              abbreviations$signature, "-")))
     rownames(ab) <- title
     out <- apply(ab, 1, function(x) paste(names(x[x == 1])))
@@ -79,63 +140,4 @@ abbreviations <- dplyr::tribble(~title,~abbreviation,~signature,
                                 "United Nations Convention On The Law Of The Sea","UNCLOS","1982-12-10",
                                 "United Nations Framework Convention On Climate Change","UNFCCC","1992-05-09"
 )
-
-#' Code Acronyms from Titles
-#' @description
-#'   Codes an acronym from agreement titles to enable matching.
-#' @param title A character vector of treaty title
-#' @importFrom tm stopwords removeWords
-#' @details Codes acronyms that are 4 to 6 digits long.
-#'   For shorter treaty titles, six words or less, acronym includes first letter
-#'   of each word.
-#'   For longer treaty titles, seven words or more, acronym includes first letter
-#'   of first word in title, followed by the number of words in the title,
-#'   and first letter of last word in title.
-#' @examples
-#' \dontrun{
-#' IEADB <- dplyr::slice_sample(manyenviron::agreements$IEADB, n = 10)
-#' code_acronym(IEADB$Title)
-#' }
-#' @export
-code_acronym <- function(title) {
-  
-  # 1: Remove stop words ####
-  x <- stri_squish(tm::removeWords(title,
-             stringi::stri_trans_totitle(tm::stopwords("SMART"))))
-  
-  # 2: Remove agreement types, numbers, and punctuation marks ####
-  x <- stringi::stri_replace_all_regex(x, 
-  "protocols|protocol|amendments|amendment|amend|
-            |amending|agreements|Agreement|convention|
-            |Exchanges|Exchange|Notes|Strategy|strategies|
-            |resolutions|Resolution", "", case_insensitive = TRUE)
-  x <- stringi::stri_replace_all_regex(x, "\\s\\([:alpha:]{3,9}\\)", "")
-  x <- stringi::stri_replace_all_regex(x, "\\s\\(.{3,20}\\)", "")
-  x <- stringi::stri_replace_all_regex(x, "[0-9]", "")
-  x <- stringi::stri_replace_all_regex(x, "\\(|\\)", "")
-  x <- stringi::stri_replace_all_fixed(x, "-", " ")
-  
-  # 3: Remove known agreement cities or short titles ####
-  x <- stringi::stri_replace_all_regex(x, cities, "")
-
-  # 4: Remove unimportant but differentiating words ####
-  x <- stringi::stri_replace_all_regex(x, "\\<populations\\>|\\<basin\\>|\\<resources\\>|\\<stock\\>|
-            |\\<concerning\\>|\\<priority\\>|\\<revised\\>|\\<version\\>|
-            |\\<national\\>|\\<trilateral\\>|\\<multilateral\\>|\\<between\\>|
-            |\\<marine\\>|\\<Fao\\>|\\<field\\>|\\<sphere\\>|\\<adjustment\\>|
-            |\\<activities\\>", "")
-  
-  # 5: Abbreviate remaining words ####
-  x <- suppressWarnings(abbreviate(x, minlength = 6, method = "both.sides",
-                                   strict = TRUE))
-  x <- toupper(x)
-  
-  # 6: Condense longer abbreviations to four digits ####
-  x <- ifelse(stringr::str_detect(x, "[:upper:]{7}"),
-              paste0(substr(x, 1, 2),
-                     stringr::str_pad(nchar(x) - 3, 2, pad = "0"),
-                     substr(x, nchar(x) - 1, nchar(x))), x)
-  cli::cli_alert_success("Coded acronyms")
-  as.character(x)
-}
 
