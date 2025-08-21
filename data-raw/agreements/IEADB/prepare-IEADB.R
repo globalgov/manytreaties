@@ -15,20 +15,20 @@ IEADB <- as_tibble(IEADB)  %>%
                         Title = manytreaties::standardise_titles(`Agreement Name`),
                         Signature = messydates::as_messydate(`Date IEA was concluded`),
                         Force = messydates::as_messydate(`Date IEA entered into force`),
+                        Location = `Place IEA was concluded`,
                         TextURL = `URL to text of IEA`,
-                        Language = Lang1,
-                        PartyURL = `URL to membership list`,
-                        Sequence = `Sequence in lineage`,
+                        Language = tolower(gsub("\\..*", "", Lang1)),
                         Subject = `Issue area (subject)`,
                         Term = messydates::as_messydate(`Term Date`),
                         Grounds = dplyr::coalesce(`Term Type`,
-                                                  paste("Term by", `Term by ID`)),
-                        OrigTitle = `Alternative Treaty Name`,
+                                                  ifelse(is.na(`Term by ID`), 
+                                                         NA_character_, 
+                                                         paste("Term by", 
+                                                               `Term by ID`))),
+                        TitleAlt = `Alternative Treaty Name`,
                         Auspices = `Org Auspices`,
-                        AdoptedIn = `Place IEA was concluded`,
-                        Comments = `Data entry notes`,
-                        Coded = `Data complete`,
-                        Coder = `Researcher`) %>%
+                        Coder = `Researcher`,
+                        Comments = `Data entry notes`) %>%
   dplyr::mutate(Signature = dplyr::case_when(Signature == "1111-11-11" ~ NA,
                                              .default = Signature),
                 Force = dplyr::case_when(Force == "1111-11-11" ~ NA,
@@ -38,42 +38,44 @@ IEADB <- as_tibble(IEADB)  %>%
   dplyr::mutate(Begin = messydates::as_messydate(dplyr::coalesce(Signature, Force)),
                 End = Term) %>%
   dplyr::select(-dplyr::contains("(legacy)")) %>%
-  manydata::transmutate(AgreementType = dplyr::case_match(`Agreement Type Level 3`,
+  manydata::transmutate(TypeAgree = dplyr::case_match(`Agreement Type Level 3`,
                                                           c("Agreement","Acuerdo") ~ "Agreement",
                                                           c("Convention","Convenzione","Convencion","Convenio") ~ "Convention",
                                                           c("Declaration","Declaracion") ~ "Declaration",
                                                           c("Treaty","Tratado") ~ "Treaty",
                                                           c("Protocol","Protocolo","Protocole") ~ "Protocol",
                                                           .default = `Agreement Type Level 3`),
-                        Ambit = dplyr::case_match(`Inclusion (type of agreements)`, 
+                        TypeAmbit = dplyr::case_match(`Inclusion (type of agreements)`, 
                                                   c("BEA","Bilateral (2 and only 2 governments)") ~ "Bilateral", 
                                                   c("MEA","Multilateral (3 or more governments)") ~ "Multilateral",
                                                   .default = `Inclusion (type of agreements)`)) %>%
-  dplyr::select(-c(AmendProtToA,UNEP2005pg,
-                   `Date *Bilateral* signed by 2nd state (ONLY if BEA)`,
+  dplyr::select(-c(AmendProtToA,UNEP2005pg,`URL to membership list`,
+                   `Date *Bilateral* signed by 2nd state (ONLY if BEA)`, UNTS,
                    `E (environment) Code (agreement is environmental or not)`,
-                   `Possible Sources (additional)`,`Treaty Text`,
+                   `Possible Sources (additional)`,`Treaty Text`,`Data complete`,
                    `Membership eligibility (multilateral, bilateral, etc)`,
-                   `Words used to code as Environmental`,
+                   `Words used to code as Environmental`, `Sequence in lineage`,
                    Category, `Coded Text`, `Source for E (environmental) code`,
                    `Text used for E (environmental) coding`, Nid))
 
+# Add treatyID column
 IEADB <- IEADB %>% 
-  # Add treatyID column
   dplyr::mutate(treatyID = manytreaties::code_agreements(IEADB, IEADB$Title, 
                                                          IEADB$Begin))
 IEADB <- IEADB %>% 
-  dplyr::select(treatyID, Title, Begin, End, Signature, Force, Term, 
-                Ambit, AgreementType, 
-                Lineage, AdoptedIn, Auspices, Secretariat, OrigTitle, 
-                TextURL, 
-                Comments, Coder, everything()) %>% 
-  
-  dplyr::filter(Ambit == "Multilateral" |
-                  Ambit == "Bilateral") %>%
+  dplyr::select(treatyID, Title, Begin, End, Signature, Force, 
+                Term, Grounds,
+                TypeAmbit, TypeAgree, 
+                Lineage, Subject,
+                Location, Auspices, Secretariat, TitleAlt, 
+                TextURL, Language,
+                Coder, Comments, Version, mitchID,
+                everything()) %>% 
+  dplyr::filter(TypeAmbit == "Multilateral" |
+                  TypeAmbit == "Bilateral") %>%
   dplyr::distinct(treatyID, .keep_all = TRUE) %>%
   dplyr::arrange(Begin)
-IEADB
+glimpse(IEADB)
 
 # manypkgs includes several functions that should help cleaning
 # and standardising your data.
