@@ -19,14 +19,15 @@ Depends:
     R (>= 3.5.0),
     manydata
 Imports:
+    cli,
     dplyr,
-    english,
     knitr,
     manystates,
+    messydates,
     purrr,
+    stringdist,
     stringi,
-    stringr,
-    textclean,
+    tidyr,
     tm
 Suggests:
     entity (>= 0.1.0),
