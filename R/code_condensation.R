@@ -10,7 +10,6 @@
 #' @param idvar Two or more treatyID variables
 #' @import dplyr
 #' @importFrom purrr map
-#' @importFrom stringr str_detect str_trim str_remove_all str_extract_all
 #' @importFrom tidyr fill
 #' @return A dataframe of treatyID and treatyID references
 #' @examples
@@ -35,21 +34,21 @@ condense_agreements <- function(datacube = NULL, idvar = NULL) {
   # Step two: rbind variables and remove duplicates
   treatyID <- data.frame(treatyID = treatyID) %>%
     dplyr::distinct(treatyID) %>%
-    dplyr::mutate(treatyID = stringr::str_trim(treatyID, "both"))
+    dplyr::mutate(treatyID = stringi::stri_trim(treatyID, "both"))
   # Step three: split treatyID and organize data
   similar <- treatyID %>%
     dplyr::mutate(linkage = ifelse(grepl(":", treatyID), gsub(".*:", "",
                                                               treatyID), NA),
                   ID1 = gsub("\\:.*", "", treatyID),
-                  acronym = as.character(ifelse(stringr::str_detect(treatyID, "\\["),
+                  acronym = as.character(ifelse(stringi::stri_detect_regex(treatyID, "\\["),
                                                 NA, gsub("\\_.*", "", ID1))),
-                  parties = as.character(ifelse(stringr::str_detect(treatyID,
+                  parties = as.character(ifelse(stringi::stri_detect_regex(treatyID,
                                                                     "\\["),
                                                 gsub("*\\[.*", "", ID1), NA)),
                   year_type = gsub(".*_", "", ID1),
-                  activity = stringr::str_remove_all(ifelse(
+                  activity = stri_remove_all(ifelse(
                     grepl("\\[", treatyID),
-                    stringr::str_extract_all(treatyID, "\\[[^()]+\\]"),
+                    stringi::stri_extract_all_regex(treatyID, "\\[[^()]+\\]"),
                     NA_character_), "\\[|\\]"))
   # Step four: identify very similar acronyms and activities
   if (all(is.na(similar$parties))) {
@@ -79,7 +78,7 @@ condense_agreements <- function(datacube = NULL, idvar = NULL) {
     dplyr::group_by(ID) %>%
     tidyr::fill(linkage, .direction = "updown") %>%
     dplyr::ungroup() %>%
-    dplyr::mutate(manyID = stringr::str_trim((ifelse(is.na(linkage), ID,
+    dplyr::mutate(manyID = stringi::stri_trim((ifelse(is.na(linkage), ID,
                                                      paste0(ID, ":", linkage))),
                                              "both")) %>%
     dplyr::select(treatyID, manyID) %>%
