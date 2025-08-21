@@ -7,7 +7,6 @@
 #' @param title A character vector of treaty title
 #' @return A character vector of the treaty type
 #' @importFrom dplyr case_when
-#' @importFrom stringr str_extract str_replace_na
 #' @importFrom purrr map
 #' @importFrom knitr kable
 #' @details Types of agreements differentiate agreements
@@ -79,12 +78,12 @@ agreement_type <- dplyr::tribble(~type,~category,~terms,
 order_agreements <- function(title) {
   
   # 1: Remove dates signs title ####
-  title <- stringr::str_replace_all(title, " \\- ", "")
-  title <- stringr::str_replace_all(title, "\\-|\\/", " ")
-  title <- stringr::str_squish(title)
+  title <- stri_remove_all(title, " \\- ")
+  title <- stri_remove_all(title, "\\-|\\/")
+  title <- stri_squish(title)
   
   # 2: Remove dates from title ####
-  rd <- stringr::str_remove_all(title, "[:digit:]{2}\\s[:alpha:]{3}\\s[:digit:]{4}|
+  rd <- stri_remove_all(title, "[:digit:]{2}\\s[:alpha:]{3}\\s[:digit:]{4}|
                                 |[:digit:]{2}\\s[:alpha:]{4}\\s[:digit:]{4}|
                                 |[:digit:]{2}\\s[:alpha:]{5}\\s[:digit:]{4}|
                                 |[:digit:]{2}\\s[:alpha:]{6}\\s[:digit:]{4}|
@@ -115,7 +114,7 @@ order_agreements <- function(title) {
                                 |[:digit:]{2}\\s[:digit:]{1}\\s[:digit:]{4}|
                                 |[:digit:]{1}\\s[:digit:]{1}\\s[:digit:]{4}")
   # remove also numbers in parenthesis
-  rd <- stringr::str_remove_all(rd, "\\s\\(No\\s.{3,7}\\)")
+  rd <- stri_remove_all(rd, "\\s\\(No\\s.{3,7}\\)")
   
   # 3: Standardises ordinal numbers and ordering text into digits ####
   oa <- gsub("\\<one\\>|\\<first\\>|  I ", "1", rd)
@@ -140,11 +139,11 @@ order_agreements <- function(title) {
   oa <- gsub("\\<twenty\\>|\\<twentieth\\>", "20", oa)
   
   # 4: Ensure meaningful numbers extracted correctly ####
-  oa <- stringr::str_extract(oa, "\\s[:digit:]{1}\\s|\\s[:digit:]{2}\\s|\\s[:digit:]{2}|
+  oa <- stringi::stri_extract_first_regex(oa, "\\s[:digit:]{1}\\s|\\s[:digit:]{2}\\s|\\s[:digit:]{2}|
                              |[:digit:]{2}\\s|\\s[:digit:]{1}|[:digit:]{1}\\s")
-  oa <- stringr::str_replace_all(oa, "\\s", "")
-  oa <- stringr::str_replace_na(oa)
-  oa <- stringr::str_remove_all(oa, "NA")
+  oa <- stri_remove_all(oa, "\\s")
+  oa <- stringi::stri_replace_na(oa)
+  oa <- stri_remove_all(oa, "NA")
   oa
 }
 
@@ -157,7 +156,6 @@ order_agreements <- function(title) {
 #'   These last words are abbreviated by the function to differentiate between
 #'   bilateral treaties and avoid false positives being generated since multiple,
 #'   different, bilateral treaties are often signed in the same day.
-#' @importFrom stringr str_squish str_extract
 #' @importFrom tm stopwords removeWords
 #' @return A character vector of abbreviations of last words in treaty title.
 code_activity <- function(title) {
@@ -207,7 +205,7 @@ code_activity <- function(title) {
   out <- stri_squish(out)
   out <- suppressWarnings(abbreviate(out, minlength = 3,
                                      method = "both.sides", strict = TRUE))
-  out <- stringr::str_extract(out, ".{3}$")
+  out <- stringi::stri_extract_first_regex(out, ".{3}$")
   out <- toupper(out)
   out
 }

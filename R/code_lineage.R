@@ -5,7 +5,6 @@
 #' @return A list of lineages that combines agreement area
 #' and agreement action.
 #' @importFrom purrr map
-#' @importFrom stringr str_squish
 #' @importFrom stringi stri_trans_general
 #' @importFrom manystates code_states
 #' @examples
@@ -49,7 +48,6 @@ code_lineage <- function(title = NULL, datacube = NULL) {
 #'
 #' @param title Treaty titles
 #' @return The region of the agreement
-#' @importFrom stringr str_squish
 #' @examples
 #' \dontrun{
 #' title <- sample(manyenviron::agreements$IEADB$Title, 30)
@@ -64,7 +62,7 @@ code_entity <- function(title) {
   pkgs <- data.frame(utils::installed.packages())
   if (!any(grepl("entity", pkgs$Package))) {
     remotes::install_github("trinker/entity")
-    usethis::ui_info("Downloaded entity package.")
+    cli::cli_alert_info("Downloaded entity package.")
   }
   # Make sure necessary model is available (adapted from entity package)
   outcome <- "openNLPmodels.en" %in% list.files(.libPaths())
@@ -96,7 +94,7 @@ code_entity <- function(title) {
   out <- gsub(parties, "", out, ignore.case = TRUE)
   out <- gsub("^c|Britain|England", "", out)
   out <- gsub("[^[:alnum:]]", " ", out)
-  out <- stringr::str_squish(out)
+  out <- stri_squish(out)
   out <- gsub("NULL", NA_character_, out)
   out <- ifelse(grepl("^$", out), NA_character_, out)
   out
@@ -213,7 +211,8 @@ code_domain <- function(title, type = c("environment", "health")) {
 #' Code areas from agreement titles
 #'
 #' @param title Treaty titles
-#' @param type Issue-type of agreement, either environment or health
+#' @param return Whether to return the full area name or the short version.
+#'   "full" by default.
 #' @return The area taken from agreement title
 #' @examples
 #' \dontrun{

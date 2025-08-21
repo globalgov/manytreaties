@@ -15,7 +15,6 @@
 #'   The function expects that the variable has been standardised using
 #'   `messydates::as_messydate()`.
 #' @return a character vector with the treatyIDs
-#' @importFrom stringr str_replace_all str_detect
 #' @importFrom purrr map
 #' @examples
 #' \dontrun{
@@ -100,7 +99,6 @@ code_agreements <- function(dataset = NULL, title, date) {
 #' @param date A date variable
 #' @param return_all Do you want all the variables to be returned in a list?
 #'   By default, FALSE.
-#' @importFrom stringr str_replace_all str_squish str_remove_all
 #' @importFrom purrr map
 #' @import dplyr
 #' @return A character vector of the agreements that are linked
@@ -119,7 +117,6 @@ code_agreements <- function(dataset = NULL, title, date) {
 #' @export
 code_linkage <- function(title, date, return_all = FALSE) {
   
-  # Initialize variables to suppress CMD notes
   ref <- dup <- NULL
   if (missing(title) & missing(date)) {
     pred <- as.data.frame(predictable_words)
@@ -142,29 +139,29 @@ code_linkage <- function(title, date, return_all = FALSE) {
     uID <- as.character(messydates::year(date))
     cli::cli_alert_success("Coded agreement dates")
     
-    # 4: Code acronyms for known and unknown agreements ####
+    # 4: Code acronyms for (un)known agreements ####
     abbrev <- code_known_agreements(treaty)
-    acronym <- code_acronym(treaty)
+    acronym <- code_acronyms(treaty)
     
-    # 6: Remove 'predictable words' in agreements ####
+    # 5: Remove 'predictable words' in agreements ####
     pw <- paste0("\\<", paste(predictable_words$predictable_words,
                               collapse = "\\>|\\<"), "\\>")
     treaty <- gsub(pw, "", treaty, ignore.case = TRUE)
     
-    # 7: Remove numbers, signs and parentheses ####
+    # 6: Remove numbers, signs and parentheses ####
     treaty <- gsub("\\s*\\([^\\)]+\\)", "", treaty, ignore.case = FALSE)
     treaty <- gsub("-", " ", treaty, ignore.case = FALSE)
-    treaty <- stringi::stri_replace_all_fixed(treaty, ",", "")
-    treaty <- stringi::stri_replace_all_regex(treaty, "[0-9]", "")
-    treaty <- data.frame(treaty = stringr::str_squish(treaty))
+    treaty <- stri_remove_all(treaty, ",")
+    treaty <- stri_remove_all(treaty, "[0-9]")
+    treaty <- data.frame(treaty = stri_squish(treaty))
     
-    # 8: Assign ID to observations ####
+    # 7: Assign ID to observations ####
     id <- ifelse((!is.na(abbrev)), paste0(abbrev, "A"),
                  (ifelse((is.na(parties)), paste0(acronym, "_", uID, type),
                          (ifelse((!is.na(parties)), paste0(parties, "_", uID,
                                                            type), NA)))))
     
-    # 9: Bind, arrange, find duplicates, original values, and assign same id ####
+    # 8: Bind, arrange, find duplicates, original values, and assign same id ####
     out <- cbind(treaty, id, parties, type, abbrev, uID, acronym) %>%
       dplyr::mutate(row = dplyr::row_number()) %>%
       dplyr::arrange(type) %>%
@@ -178,10 +175,10 @@ code_linkage <- function(title, date, return_all = FALSE) {
                                             n == 1 ~ "1")) %>%
       dplyr::arrange(row)
     
-    # 10: Keep only linkages for agreements ####
+    # 9: Keep only linkages for agreements ####
     out$line <- ifelse(out$id == out$ref & out$type == "A", "1", out$line)
-    out$line <- stringr::str_replace_all(out$line, "^1$", "")
-    out$line <- stringr::str_replace_all(out$line,
+    out$line <- stringi::stri_replace_all_regex(out$line, "^1$", "")
+    out$line <- stringi::stri_replace_all_regex(out$line,
                                          "[0-9]{4}E|[0-9]{4}P|[0-9]{4}S|[0-9]{4}N|[0-9]{4}R|[0-9]{4}O",
                                          "xxxxxxxxxxxxxxxxxxxxXx")
     out$line <- ifelse(nchar(as.character(out$line)) > 20, "", out$line)
