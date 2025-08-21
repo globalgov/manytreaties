@@ -17,7 +17,6 @@
 #' a certain issue-domain, open membership for all,
 #' or nomination of new members.
 #' @importFrom dplyr case_when
-#' @importFrom stringr str_remove_all str_trim
 #' @examples
 #' \dontrun{
 #' m <- manyenviron::agreements$HUGGO[200:300,] %>%
@@ -43,14 +42,14 @@ code_accession_terms <- function(textvar, title = NULL, accession = NULL) {
       condition_2 <- dplyr::case_when(grepl("nomination", memb,
                                             ignore.case = T) ~ "Semi-open", )
       condition_3 <- code_entity(title)
-      condition_3 <- ifelse(!stringr::str_detect(condition_3, "NA"),
+      condition_3 <- ifelse(!stringi::stri_detect_fixed(condition_3, "NA"),
                           paste0("entity: ", condition_3), NA)
       condition_4 <- code_domain(title)
-      condition_4 <- ifelse(!stringr::str_detect(condition_4, "NA"),
+      condition_4 <- ifelse(!stringi::stri_detect_fixed(condition_4, "NA"),
                           paste0("domain: ", condition_4), NA)
       condition <- paste0(condition_1, " + ", condition_2, " + ",
                         condition_3, " + ", condition_4)
-      condition <- stringr::str_remove_all(condition, "NA\\s\\+\\s|\\s\\+\\sNA")
+      condition <- stringi::stri_replace_all_regex(condition, "NA\\s\\+\\s|\\s\\+\\sNA", "")
       condition
   } else {
     # Third step: when the user select "process" instead of "condition",
@@ -70,8 +69,8 @@ code_accession_terms <- function(textvar, title = NULL, accession = NULL) {
                                         ignore.case = T) ~ "unanimity", )
     process <- paste0(process_1, " + ", process_2, " + ", process_3, " + ",
                       process_4, " + ", process_5)
-    process <- stringr::str_remove_all(process, "\\+ NA|NA \\+")
-    process <- stringr::str_trim(process)
+    process <- stringi::stri_replace_all_regex(process, "\\+ NA|NA \\+", "")
+    process <- stri_trim(process)
     process
   }
   }
