@@ -11,7 +11,6 @@
 #'   All the strings are transformed into to ASCII character encoding.
 #'   Written numbers in ordinal form are transformed into numerical form.
 #' @return A capitalised, trimmed and standardised string
-#' @importFrom stringr str_count str_squish str_to_title
 #' @importFrom utils as.roman
 #' @importFrom stringi stri_trans_general
 #' @import dplyr
@@ -166,8 +165,12 @@ corrected_words <- dplyr::tribble(~words,~corr_words,
 "Co-ordinating|cordinating","Coordinating"
 )
 
-stri_squish <- function(charvec){
-  stringi::stri_trim_both(stringi::stri_replace_all_regex(charvec, "\\s+", " "))
+stri_squish <- function(str){
+  stringi::stri_trim_both(stringi::stri_replace_all_regex(str, "\\s+", " "))
+}
+
+stri_remove_all <- function(str, pattern){
+  stringi::stri_replace_all_regex(str, pattern, "")
 }
 
 # Number_words ####
