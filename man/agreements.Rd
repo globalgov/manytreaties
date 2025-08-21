@@ -6,9 +6,9 @@
 \title{agreements datacube documentation}
 \format{
 \describe{
-\item{HUGGO \if{html}{\out{<img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>}}:}{A dataset with 4,756
+\item{HUGGO \if{html}{\out{<img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>}}:}{A dataset with 4,731
 observations and 27 variables:
-treatyID, Title, Begin, End, Signature, Force, Term, Grounds, Domain, TypeAgree, TypeAmbit, Region, Keywords, Lineage, Location, Depository, Published, Secretariat, ..., Comments, and Source.}
+treatyID, Title, Begin, End, Signature, Force, Term, Grounds, Domain, TypeAgree, TypeAmbit, Region, Subject, Lineage, Location, Depository, Published, Secretariat, ..., Comments, and Source.}
 \item{IEADB: }{A dataset with 3,577
 observations and 22 variables:
 treatyID, Title, Begin, End, Signature, Force, Term, Grounds, TypeAmbit, TypeAgree, Lineage, Subject, Location, Auspices, Secretariat, TitleAlt, TextURL, Language, ..., Version, and mitchID.}
@@ -62,33 +62,33 @@ It is a work-in-progress, so please let us know if you have any comments or sugg
 #> -------------------------------------------------------
 #> |  Variable  |  Class  |  Obs  |  Missing  |  Miss \%  |
 #> -------------------------------------------------------
-#> |treatyID    |character|   4756|          0|         0|
-#> |Title       |character|   4756|          0|         0|
-#> |Begin       |mdate    |   4719|         37|      0.78|
-#> |End         |mdate    |   1665|       3091|     64.99|
-#> |Signature   |mdate    |   4714|         42|      0.88|
-#> |Force       |mdate    |   3005|       1751|     36.82|
-#> |Term        |mdate    |    801|       3955|     83.16|
-#> |Grounds     |logical  |      0|       4756|       100|
-#> |Domain      |character|   4731|         25|      0.53|
-#> |TypeAgree   |character|   3936|        820|     17.24|
-#> |TypeAmbit   |character|   2909|       1847|     38.84|
-#> |Region      |character|   1047|       3709|     77.99|
-#> |Keywords    |character|    404|       4352|     91.51|
-#> |Lineage     |character|    693|       4063|     85.43|
-#> |Location    |character|    483|       4273|     89.84|
-#> |Depository  |character|    386|       4370|     91.88|
-#> |Published   |character|    260|       4496|     94.53|
-#> |Secretariat |character|    692|       4064|     85.45|
-#> |Website     |character|    841|       3915|     82.32|
-#> |TitleAlt    |character|     57|       4699|      98.8|
-#> |Language    |character|   1340|       3416|     71.83|
-#> |Languages   |character|    474|       4282|     90.03|
-#> |Text        |logical  |   4755|          1|      0.02|
-#> |TextURL     |character|   2068|       2688|     56.52|
-#> |Coder       |character|   4756|          0|         0|
-#> |Comments    |character|   1113|       3643|      76.6|
-#> |Source      |character|    159|       4597|     96.66|
+#> |treatyID    |character|   4731|          0|         0|
+#> |Title       |character|   4731|          0|         0|
+#> |Begin       |mdate    |   4726|          5|      0.11|
+#> |End         |mdate    |   1681|       3050|     64.47|
+#> |Signature   |mdate    |   4720|         11|      0.23|
+#> |Force       |mdate    |   3036|       1695|     35.83|
+#> |Term        |mdate    |    819|       3912|     82.69|
+#> |Grounds     |logical  |      0|       4731|       100|
+#> |Domain      |character|   4706|         25|      0.53|
+#> |TypeAgree   |character|   4615|        116|      2.45|
+#> |TypeAmbit   |character|   3952|        779|     16.47|
+#> |Region      |character|   1553|       3178|     67.17|
+#> |Subject     |character|   2860|       1871|     39.55|
+#> |Lineage     |character|    693|       4038|     85.35|
+#> |Location    |character|    498|       4233|     89.47|
+#> |Depository  |character|    387|       4344|     91.82|
+#> |Published   |character|    260|       4471|      94.5|
+#> |Secretariat |character|    695|       4036|     85.31|
+#> |Website     |character|    841|       3890|     82.22|
+#> |TitleAlt    |character|     82|       4649|     98.27|
+#> |Language    |character|   1340|       3391|     71.68|
+#> |Languages   |character|    474|       4257|     89.98|
+#> |Text        |logical  |   4730|          1|      0.02|
+#> |TextURL     |character|   2120|       2611|     55.19|
+#> |Coder       |character|   4731|          0|         0|
+#> |Comments    |character|   1176|       3555|     75.14|
+#> |Source      |character|    253|       4478|     94.65|
 #> -------------------------------------------------------
 #> 
 #> 
