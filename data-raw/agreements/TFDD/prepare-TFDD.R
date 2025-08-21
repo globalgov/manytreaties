@@ -13,13 +13,14 @@ TFDD <- readr::read_csv("data-raw/agreements/TFDD/TFDD.csv")
 # We recommend that you avoid using one letter variable names to keep
 # away from issues with ambiguous names down the road.
 TFDD <- as_tibble(TFDD) %>%
-  dplyr::mutate(Signature = messydates::as_messydate(DateSigned),
-                Begin = messydates::as_messydate(as.character(Signature))) %>%
-  manydata::transmutate(tfddID = `2016Update ID`,
-                        Title = manypkgs::standardise_titles(DocumentName),
+  manydata::transmutate(Signature = messydates::as_messydate(DateSigned),
+                        Begin = messydates::as_messydate(as.character(Signature)),
+                        tfddID = `2016Update ID`,
+                        Title = manytreaties::standardise_titles(DocumentName),
                         Lineage = PrimaryTFDDID, # original agreement to which a replacement, amendment or protocol refers
                         Basin = `Basin Name`,
-                        Issue = `Issue Area`) %>%
+                        Issue = `Issue Area`,
+                        Comments = Notes) %>%
   dplyr::mutate(AgreementType = dplyr::case_match(DocType,
                   c(2, 4, 8) ~ "A",
                   6 ~ "E",
@@ -46,7 +47,7 @@ TFDD <- as_tibble(TFDD) %>%
   dplyr::arrange(Begin)
 
 # Add a treatyID column
-TFDD$treatyID <- manypkgs::code_agreements(TFDD,
+TFDD$treatyID <- manytreaties::code_agreements(TFDD,
                                            TFDD$Title,
                                            TFDD$Begin)
 
