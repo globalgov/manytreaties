@@ -9,7 +9,8 @@ code_area(title, return = c("full", "short"))
 \arguments{
 \item{title}{Treaty titles}
 
-\item{type}{Issue-type of agreement, either environment or health}
+\item{return}{Whether to return the full area name or the short version.
+"full" by default.}
 }
 \value{
 The area taken from agreement title

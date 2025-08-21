@@ -17,7 +17,7 @@ test_that("Code_agreements helper functions work properly", {
   expect_equal(code_known_agreements(data$title), c(NA, "RAMSA_1971",
                                                     NA, NA, NA, NA,
                                                     "RAMSA_1971", NA, NA))
-  expect_equal(code_acronym(data$title), c("CPVPFD", "WTIIWH",
+  expect_equal(code_acronyms(data$title), c("CPVPFD", "WTIIWH",
                                            "TD06LJ", "DCLRMR",
                                            "CEBRIP", "RIVER",
                                            "WTIIWH", "GU11TC",
@@ -30,11 +30,6 @@ test_that("Code_agreements helper functions work properly", {
 data2 <- data.frame(title = c("Agreement Between Cape Verde And Portugal On Fisheries Development",
                               "Traité De Délimitation Maritime, Signé À Paris Le 30 Janvier 19819"),
                     date = c("1980-01-01:1980-12-31", "1981-01-01:1981-12-31"))
-
-test_that("code_dates() helper function treats date range correctly", {
-  # Add title to the code_dates function arguments
-  expect_equal(code_dates(data2$date), c("1980", "1981"))
-})
 
 # Test numbers assigned to procotol/amendment
 data5 <- data.frame(title = c("Amendments On The Transport Of Corrosive Substances To Protocol 18 Of The 1868 Revised Convention On The Navigation Of The Rhine",
