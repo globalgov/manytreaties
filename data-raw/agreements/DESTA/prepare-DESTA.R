@@ -13,50 +13,57 @@ DESTA <- read.csv2("data-raw/agreements/DESTA/DESTA.csv")
 # In this stage you will want to correct the variable names and
 # formats of the 'DESTA' object until the object created
 # below (in stage three) passes all the tests.
-DESTA <- tibble::as_tibble(DESTA) %>%
+DESTA <- dplyr::as_tibble(DESTA) %>%
+  dplyr::select(-matches("^(c|mc)\\d")) %>%
+  dplyr::select(-c(consolidated, wto_listed)) %>% 
   dplyr::filter(typememb != "5", typememb != "6",  typememb != "7",
                 entry_type != "accession", entry_type != "withdrawal") %>%
   #categories removed because they relate to changes in membership that are
   #reflected in the memberships datacube
-  dplyr::rename(Ambit = typememb, AgreementType = entry_type) %>%
-  dplyr::case_match(Ambit,
-                    "1" ~ "B",
-                    "2" ~ "P",
-                    "3" ~ "P-3",
-                    "4" ~ "P-R") %>%
-  # P-3 distinguishes plurilateral agreements with third countries.
-  # P-R distinguishes plurilateral agreements between regions
-  dplyr::case_match(AgreementType,
-                    "base_treaty" ~ "A",
-                    "protocol or amendment" ~ "P/E",
-                    "consolidated" ~ "P/E",
-                    "negotiation" ~ "A") %>%
-  dplyr::rename(GeogArea = regioncon) %>%
-  dplyr::case_match(GeogArea,
-                    "Intercontinental" ~ "G",
-                    "Asia" ~ "R",
-                    "Africa" ~ "R",
-                    "Americas" ~ "R",
-                    "Europe" ~ "R",
-                    "Oceania" ~ "R") %>%
-  manydata::transmutate(destaID = as.character(`base_treaty`),
-                        Title = manypkgs::standardise_titles(name)) %>%
+  # dplyr::rename(TypeAmbit = typememb, TypeAgree = entry_type, TypeGeo = regioncon) %>%
+  manydata::transmutate(TypeAmbit = dplyr::case_match(typememb,
+                                              1 ~ "Bilateral",
+                                              2 ~ "Regional",
+                                              3 ~ "External",
+                                              4 ~ "Interregional"),
+                # External distinguishes plurilateral agreements with third countries.
+                # Interregional distinguishes plurilateral agreements between regions
+                TypeAgree = dplyr::case_match(entry_type,
+                                              "base_treaty" ~ "Agreement",
+                                              "protocol or amendment" ~ "Protocol",
+                                              "consolidated" ~ "Protocol",
+                                              "negotiation" ~ "Agreement"),
+                TypeGeo = dplyr::case_match(regioncon,
+                    "Intercontinental" ~ "Global",
+                    .default = regioncon),
+                destaID = as.character(`base_treaty`),
+                Title = manytreaties::standardise_titles(name),
+                TitleAlt = wto_name,
+                Language = dplyr::case_match(language,
+                                             "English" ~ "en",
+                                             "French" ~ "fr",
+                                             "Spanish" ~ "es",
+                                             "Portuguese" ~ "pt",
+                                             "German" ~ "de",
+                                             "Italian" ~ "it",
+                                             "Dutch" ~ "nl",
+                                             "Russian" ~ "ru",
+                                             "Chinese" ~ "zh",
+                                             "Arabic" ~ "ar",
+                                             .default = language)) %>%
   dplyr::mutate(beg = dplyr::coalesce(year, entryforceyear)) %>%
-  dplyr::arrange(beg) %>%
   # standardise date formats across agreements datacube
-  dplyr::mutate(beg = ifelse(beg == "NA", "NA", paste0(beg, "-01-01"))) %>%
-  dplyr::mutate(year = ifelse(year == "NA", "NA", paste0(year, "-01-01"))) %>%
-  dplyr::mutate(entryforceyear = ifelse(entryforceyear == "NA",
-                                        "NA",
-                                        paste0(entryforceyear, "-01-01"))) %>%
+  # dplyr::mutate(beg = ifelse(beg == "NA", "NA", paste0(beg, "-01-01"))) %>%
+  # dplyr::mutate(year = ifelse(year == "NA", "NA", paste0(year, "-01-01"))) %>%
+  # dplyr::mutate(entryforceyear = ifelse(entryforceyear == "NA",
+  #                                       "NA",
+  #                                       paste0(entryforceyear, "-01-01"))) %>%
   manydata::transmutate(Begin = messydates::as_messydate(as.character(beg)),
                         Signature = messydates::as_messydate(as.character(year)),
-                        Force = messydates::as_messydate(as.character(entryforceyear))) %>%
-  dplyr::select(destaID, Title, Begin, Signature, Force, AgreementType, Ambit,
-                GeogArea)
+                        Force = messydates::as_messydate(as.character(entryforceyear)))
 
 # Add treatyID column
-DESTA$treatyID <- manypkgs::code_agreements(DESTA, DESTA$Title, DESTA$Begin)
+DESTA$treatyID <- manytreaties::code_agreements(DESTA, DESTA$Title, DESTA$Begin)
 
 # Add manyID column
 # manyID <- manypkgs::condense_agreements(manytrade::agreements)
@@ -64,8 +71,9 @@ DESTA$treatyID <- manypkgs::code_agreements(DESTA, DESTA$Title, DESTA$Begin)
 
 # Re-order the columns
 DESTA <- DESTA %>% 
-  dplyr::select(treatyID, Title, Begin, AgreementType, Ambit, GeogArea,
-                Signature, Force, destaID) %>% 
+  dplyr::select(treatyID, Title, Begin, Signature, Force, 
+                TypeAgree, TypeAmbit, TypeGeo,
+                TitleAlt, Language, destaID) %>% 
   dplyr::arrange(Begin)
 
 # manypkgs includes several functions that should help cleaning and 
