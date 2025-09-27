@@ -51,3 +51,90 @@ _james.hollway@graduateinstitute.ch_
 The variables are as follows:
 `r paste(names(manytreaties::agreements$GGO), collapse = ", ")`.
 
+## Title, TitleAlt
+
+This is the title of the treaty or agreement. 
+We interpret an agreement broadly to include not only formal treaties,
+such as treaties, conventions, or declarations,
+but also other types of international agreements such as memoranda of understanding,
+resolutions, protocols, and amendments.
+We generally use the title of the agreement as listed on the treaty text itself,
+or as listed in the source from which the treaty was identified.
+
+In some situations an agreement might be known by several different titles.
+These situations include:
+
+- When treaties are recorded in different languages, or there are multiple valid versions of the treaty,
+translation or transliterations can result in similar but different titles
+- When treaties are recorded with different titles in different sources or databases (or versions of the database),
+through translation or standardisation efforts
+- When treaties are recorded with different titles by different parties to the treaty,
+for example a bilateral agreement might be recorded under different names by each party
+when they deposit it
+
+In such situations, the shorter or more common title is generally preferred for the `Title` variable,
+so long as it is unambiguous.
+If only the longer version of the title mentions the parties, subject, or other distinguishing information,
+then this title will be used as the `Title` variable.
+Any alternative titles are included in the `TitleAlt` variable,
+using commas to separate multiple alternative titles if necessary.
+
+### Exclusion
+
+While we strive to include a comprehensive list of international agreements,
+including agrements that are not formal treaties, for instance,
+but that can be filtered out by users if they wish (see `TypeAgree`),
+there are some agreements that we do not include.
+For the main part, it is because the information contained is not substantive,
+but rather procedural or administrative.
+
+- Exclude protocols of signature, accession, or confirmation (unless they come with substantive changes) -> these are dealt with in memberships data
+- Exclude protocols of application or implementation, dealt with in entry into force date or (usually) as additional text
+- Exclude amendments that are minor or technical, e.g. correcting typos, changing names, etc.
+
+Note that exchanges of letters or similar documents that form part of a treaty are included.
+
+### Differentiation
+
+In some cases treaties with exactly the same title are in fact different treaties.
+This might be because they were signed on different dates,
+or because they were signed by different parties.
+In other cases, treaties with different titles are actually the same treaty --
+signed on the same date by the same parties.
+We differentiated such entries as follows:
+
+- confirmed duplicates were removed from the dataset
+- confirmed non-duplicates were retained in the dataset but distinguished
+from each other by adding distinguishing information, such as the year or subject,
+to the treaty title(s).
+
+### Deduplication
+
+In other cases, treaties with very similar titles are actually the same treaties.
+This is more challenging to determine.
+We approach this deduplication task as follows:
+
+- We first identify potential duplicates by searching for agreements that are concluded with the same date of signature
+- From this list, we disregard those agreements that clearly concern different regions or subjects
+
+With the list of remaining potential duplicates,
+we then check the texts of the treaties themselves, if available,
+or the sources from which they were identified.
+We also use Google to search for the treaty title and date of signature,
+to see if there are any sources that clarify whether these are the same or different treaties.
+We use the following heuristics to assist with this process:
+
+- Merge duplications representing multiple translations
+- Similar treaty titles that refer to different articles, appendices, or annexes are retained separately
+- Keep agreements referring to different parties
+- Merge agreements that refer to the same parties but use different names for them, e.g. "the Government of X" and "the State of X"
+- Merge agreements that are identifical except one mentions the parties and the other does not
+- If we have other information that differs, such as different information for entry into force, this will cause a further check
+- If Google returns (only) the same information, then this is a suggestion that these are duplicates
+- We also note that some states or dyads have a history of concluding a set of agreements on related topics on the same day, e.g. China and Kazakhstan, and so this is also taken note of
+- If there is a document combining multiple amendments on the same day to the same treaty, and also a listing separating out the amendments, then the combined amendment will be retained
+- Merge duplications where substantive similarities and no treaty texts (or not for both) to indicate that they are different agreements
+
+Note that agreements that are amendments or protocols to existing treaties are retained,
+as these are often important in their own right.
+
