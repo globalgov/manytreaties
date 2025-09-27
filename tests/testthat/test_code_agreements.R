@@ -18,10 +18,10 @@ test_that("Code_agreements helper functions work properly", {
                                                     NA, NA, NA, NA,
                                                     "RAMSA_1971", NA, NA))
   expect_equal(code_acronyms(data$title), c("CPVPFD", "WTIIWH",
-                                           "TD06LJ", "DCLRMR",
-                                           "CEBRIP", "RIVER",
+                                           "TD06LJ", "DCMOTR",
+                                           "CEBRIP", "RVRBSN",
                                            "WTIIWH", "GU11TC",
-                                           "GU13PO"))
+                                           "GU12PO"))
   expect_equal(code_linkage(data$title, data$date), c("", "RAMSA_1971A", "",
                                                       "", "", "", "", "", ""))
 })
@@ -39,7 +39,7 @@ data5 <- data.frame(title = c("Amendments On The Transport Of Corrosive Substanc
 
 test_that("code_agreements() identify correct number of protocol or amendment", {
   expect_equal(code_agreements(data5, data5$title, data5$date),
-               c("TRCSNR_1899E18", "LMTTNA_2000E34", "LMTTNA_2010E4"))
+               c("TCSRNR_1899E18", "LMTTNA_2000E34", "LMTTNA_2010E4"))
 })
 
 # Test that some functions return coding information when argument is missing
