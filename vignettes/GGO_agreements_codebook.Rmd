@@ -204,3 +204,39 @@ the signature year of this specific amendment (1990),
 the type of treaty (E),
 its number (2), and the treatyID of the "mother" treaty (MARPOL197A).
 
+## Dates
+
+### Begin, End, Signature, Force, Term
+
+These are the dates when an agreement is deemed to have begun or ended.
+Where more precise coding is available, we code also offer the date of signature,
+the date when the agreement entered into force, and
+the date when the agreement terminated.
+
+Dates are coded using the messydates system. 
+This implements ISO’s extended date/time format. 
+As such, some dates are only entered as a year or are annotated with a question mark if the source is uncertain. 
+For more details see `{messydates}`.
+
+Agreements that are known to still be in force at the time that the data was
+collected or checked have an end date `9999-12-31`.
+However, an `NA` in this field simply means that we could not verify the
+status of the agreement at the time of coding.
+
+### Grounds
+
+Where the agreement has been terminated, we code the grounds for termination.
+The grounds for a treaty's termination is coded as one of the following categories:
+
+- _Sunset_: the treaty terminates at the end of a specified period
+- _Success_: the treaty terminates when its main purpose has been fulfilled
+- _Recession_: the parties mutually agree to dissolve the treaty
+- _Substitution_: the parties mutually agree to substitute the old treaty with a new one
+- _Renunciation_: a party renounces its rights arising from the treaty
+- _Withdrawal_: a party withdraws from the treaty
+- _Extinction_: the treaty ends when one of the party state's existence comes to an end 
+- _Other_: to be explained in the comments
+
+As this coding is incomplete, it is currently only available for a subset of the agreements.
+For more details, please reach out to the maintainer.
+
