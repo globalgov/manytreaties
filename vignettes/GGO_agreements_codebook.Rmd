@@ -240,3 +240,104 @@ The grounds for a treaty's termination is coded as one of the following categori
 As this coding is incomplete, it is currently only available for a subset of the agreements.
 For more details, please reach out to the maintainer.
 
+## Type
+
+These variables are useful for filtering the dataset,
+and better understanding the lineage of certain agreements.
+
+### Domain
+
+The domain is a simple character/string variable that indicates the main domain of the agreement.
+At the moment this is a fairly coarse coding,
+containing the following categories:
+`r paste(names(table(manytreaties::agreements$GGO$Domain))[!grepl(",", names(table(manytreaties::agreements$GGO$Domain)))], collapse = ", ")`.
+We have many more agreements for environment, trade, and health than the others.
+
+### TypeAgree
+
+The type of agreement is coded as one of the following categories:
+
+- _Agreement_: This is a full agreement between the parties
+- _Protocol_: This is a protocol to an existing agreement
+- _Amendment_: This is an amendment to an existing agreement or protocol
+- _MOU_: This is a memorandum of understanding, which is generally a non-binding agreement
+- _Resolution_: This is a resolution, generally adopted by an international organisation
+- _Regulation_: This is a regulation, generally adopted by an international organisation
+- _Report_: This is a strategy document, generally adopted by an international organisation
+
+For the most part our observations are either agreements, protocols, or amendments.
+The others are current rather residual categories.
+
+### TypeAmbit
+
+The ambit of the agreement is coded as one of the following categories:
+
+- _Bilateral_: This is an agreement between (strictly) two parties
+- _Trilateral_: This is an agreement between (strictly) three parties
+- _Regional_: This is an agreement between multiple parties in a specific region
+- _Multilateral_: This is an agreement between more than two parties
+- _External_: This is an agreement between a regional organisation and a non-member state
+- _Interregional_: This is an agreement between two or more regional organisations
+- _Interministerial_: This is an agreement between states' ministries or departments
+
+### Region
+
+We code the region more specifically than in some other datasets. 
+We code the region descriptively and as a character string, 
+which affords the opportunity to search by regular expression such as “America” to get “Northern America”, “Southern America”, “Central America”, and “Caribbean America”. 
+Note that we use the adjectival form, e.g. “Southern Africa”, to distinguish the region from the country “South Africa”. 
+We use “Central” to describe areas in the middle of the continent, if applicable. 
+The data includes the following regions:
+
+- _Northern America_
+- _Southern America_
+- _Central America_
+- _Caribbean America_
+- _Northern Europe_
+- _Eastern Europe_
+- _Southeastern Europe_
+- _Southern Europe_
+- _Western Europe_
+- _Central Europe_
+- _Eastern Asia_
+- _Southeastern Asia_
+- _Southern Asia_
+- _Western Asia_
+- _Central Asia_
+- _Northern Africa_
+- _Eastern Africa_
+- _Southern Africa_
+- _Western Africa_
+- _Central Africa_
+- _Oceania_
+
+However, we code not only regions but also specific geographical features,
+such as rivers, seas, and oceans.
+Codes that appear more than 8 times include:
+
+```{r, echo=FALSE, results='hold'} 
+names(table(manytreaties::agreements$GGO$Region))[
+  table(manytreaties::agreements$GGO$Region) > 8]
+```
+
+For the Region to be "Global", the agreement must explicitly refer to the whole world or globe.
+
+### Subject
+
+In addition to the `Region`, we also code the subject of the agreement.
+We code this as a one- or two-keyword description of the subject matter of the agreement.
+For example, "Water Energy".
+This is a character/string variable, so users can search or filter as they wish.
+Filtering by regular expression is therefore possible, 
+e.g. "Water|Energy" to get all agreements that mention either water or energy.
+So this could include agreements on water, energy, water and energy, 
+water and pollution, or nuclear and energy,
+for instance.
+
+Codes that appear more than 8 times include:
+
+```{r, echo=FALSE, results='hold'} 
+names(table(manytreaties::agreements$GGO$Subject))[
+  table(manytreaties::agreements$GGO$Subject) > 8]
+```
+
