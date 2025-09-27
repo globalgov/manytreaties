@@ -4,7 +4,7 @@
 \name{manytreaties-package}
 \alias{manytreaties}
 \alias{manytreaties-package}
-\title{manytreaties: International Agreements for the many Universe}
+\title{manytreaties: Many international agreements and their parties}
 \description{
 Ensemble of data on international environmental, trade, and health agreements, and states membership in them for research use.
 }
