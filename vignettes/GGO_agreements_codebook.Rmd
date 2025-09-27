@@ -341,3 +341,47 @@ names(table(manytreaties::agreements$GGO$Subject))[
   table(manytreaties::agreements$GGO$Subject) > 8]
 ```
 
+## Further information
+
+We have also attempted to record some additional information about each agreement,
+such as sources and such, where available.
+
+### Location, Depository, Published
+
+This is the name of the city where the agreement was concluded.
+This has been drawn from the title of the agreement in some cases,
+or from the treaty text itself, or metadata available from the source from which the treaty was identified.
+For the most part, this is fairly straightforward, 
+however in some cases there is a second city.
+Since second locations are relatively rare, 
+this will appear only in the `Comments` for now.
+
+### Secretariat, Website
+
+Where applicable, we code the name of the secretariat or
+international organisation that administers the agreement.
+This is drawn from the treaty text itself, 
+or metadata available from the source from which the treaty was identified.
+Where available, we also provide a link to the website of the agreement or its secretariat.
+
+### Text, TextURL
+
+We have collected the text of many agreements where available.
+Texts for the agreements are formatted and stored in .txt files in the
+'data_raw/agreements/GGO/TreatyText' folder within the package.
+The `Text` variable denotes if the corresponding text has been stored in the folder.
+Where possible, we provide a link to the source from which the text was obtained.
+
+### Language, Languages
+
+The `Language` variable indicates the language in which the treaty text is available
+as a two-letter code, e.g. "en".
+We retain the English language version wherever available to facilitate analysis.
+However, some agreements are available in other languages;
+these are listed in `Languages` as a pipe separated vector.
+
+### Coder, Comments, Source
+
+The `Coder` variable is a comma separated vector of the surnames of those who have added or verified data for each entry/observation. 
+Where special conditions arise, the `Comments` variable offers a free text area for explanations or recording how the coding has changed from version to version. 
+The `Source` variable should contain only links or bibliographic information for the sources used to add or verify information.
