@@ -245,7 +245,7 @@ For more details, please reach out to the maintainer.
 These variables are useful for filtering the dataset,
 and better understanding the lineage of certain agreements.
 
-### Domain
+### TypeDomain
 
 The domain is a simple character/string variable that indicates the main domain of the agreement.
 At the moment this is a fairly coarse coding,
@@ -280,9 +280,9 @@ The ambit of the agreement is coded as one of the following categories:
 - _Interregional_: This is an agreement between two or more regional organisations
 - _Interministerial_: This is an agreement between states' ministries or departments
 
-### Region
+### TypeGeo
 
-We code the region more specifically than in some other datasets. 
+We code geographical region more specifically than in some other datasets. 
 We code the region descriptively and as a character string, 
 which affords the opportunity to search by regular expression such as “America” to get “Northern America”, “Southern America”, “Central America”, and “Caribbean America”. 
 Note that we use the adjectival form, e.g. “Southern Africa”, to distinguish the region from the country “South Africa”. 
@@ -320,9 +320,10 @@ names(table(manytreaties::agreements$GGO$Region))[
   table(manytreaties::agreements$GGO$Region) > 8]
 ```
 
-For the Region to be "Global", the agreement must explicitly refer to the whole world or globe.
+For the geographical region to be "Global", 
+the agreement must explicitly refer to the whole world or globe.
 
-### Subject
+### TypeSubject
 
 In addition to the `Region`, we also code the subject of the agreement.
 We code this as a one- or two-keyword description of the subject matter of the agreement.
