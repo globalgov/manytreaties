@@ -22,7 +22,7 @@ library(manytreaties)
 
 ## Release 1.0
 
-This document provides a brief overview of the coding rationale for key variables in the list of episodes of independent states and state-like entities in the international system provided in `manytreaties::agreements$GGO`. 
+This document provides a brief overview of the coding rationale for key variables in the list of international agreements provided in `manytreaties::agreements$GGO`. 
 
 Note that this dataset was constructed as a complement to datasets such as 
 the International Environmental Agreements Database (`manytreaties::agreements$IEADB`)
@@ -170,7 +170,7 @@ The linkage portion links the agreement to the treatyID its "mother" treaty
 
 ### Multilateral treatyID
 
-A multilateral treaty that is an agreement will have the following treatyID: "HSPDF_2005A".
+A multilateral treaty that is an agreement will have a treatyID format similar to: "HSPDF_2005A".
 The treatyID indicates the acronym (HSPDF),
 the signature year of the agreement (2005),
 and the type (A). 
@@ -194,7 +194,7 @@ Amendment of known treaties | J09H_1990E2:MARPOL1973A | acronym_uID, type(number
 
 Famous multilateral treaties have a simplified treatyID with a known abbreviation. 
 For example, the United Nations Convention On The Law Of The Sea
-will have the following treatyID: "UNCLOC1982A". 
+will have the following treatyID: "UNCLOS1982A". 
 This is the known abbreviation (UNCLOS),
 the signature year (1982) and the treaty type (A). 
 
@@ -202,7 +202,7 @@ Protocols or amendments of the known treaties will have this treatyID format: "J
 It indicates the acronym (J09H),
 the signature year of this specific amendment (1990),
 the type of treaty (E),
-its number (2), and the treatyID of the "mother" treaty (MARPOL197A).
+its number (2), and the treatyID of the "mother" treaty (MARPOL1973A).
 
 ## Dates
 
