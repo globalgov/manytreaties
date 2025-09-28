@@ -70,7 +70,7 @@ code_accession_terms <- function(textvar, title = NULL, accession = NULL) {
     process <- paste0(process_1, " + ", process_2, " + ", process_3, " + ",
                       process_4, " + ", process_5)
     process <- stringi::stri_replace_all_regex(process, "\\+ NA|NA \\+", "")
-    process <- stri_trim(process)
+    process <- stringi::stri_trim_both(process)
     process
   }
   }
