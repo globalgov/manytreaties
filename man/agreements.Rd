@@ -55,7 +55,8 @@ agreements
 }
 \description{
 The \code{manytreaties::agreements} datacube is a list containing 9 datasets: IEADB, HEIDI, TFDD, TREND, LABPTA, TOTA, GPTAD, GGO, and DESTA.
-It is a work-in-progress, so please let us know if you have any comments or suggestions.
+Development of this datacube continues,
+so please let us know if you have any comments or suggestions.
 }
 \details{
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#> $IEADB

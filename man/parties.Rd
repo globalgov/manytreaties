@@ -6,9 +6,9 @@
 \title{parties datacube}
 \format{
 \describe{
-\item{HUGGO \if{html}{\out{<img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>}}:}{A dataset with 91,673
-observations and 30 variables:
-treatyID, stateID, Title, Begin, End, StateSignature, StateRatification, StateForce, StateEnd, Rat=Notif, Accession, Succession, Signature, Force, url, StateForce2, StateForce3, StateEnd2, ..., match, and Coder.}
+\item{HUGGO \if{html}{\out{<img src="https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by.png" height="12"/>}}:}{A dataset with
+observations and  variables:
+.}
 \item{IEADB: }{A dataset with 15,463
 observations and 10 variables:
 stateID, treatyID, Begin, End, Title, stateSignature, Signature, Rat, Force, and ieadbID.}
@@ -38,48 +38,11 @@ please use the \code{manydata::call_sources()} and \code{manydata::compare_dimen
 parties
 }
 \description{
-The \code{manytreaties::parties} datacube is a list containing 5 datasets: HUGGO, IEADB, DESTA, GPTAD, and TFDD.
+The \code{manytreaties::parties} datacube is a list containing 5 datasets: IEADB, DESTA, GPTAD, TFDD, and GGO.
 It is a work-in-progress, so please let us know if you have any comments or suggestions.
 }
 \details{
-\if{html}{\out{<div class="sourceCode">}}\preformatted{#> $HUGGO
-#> ------------------------------------------------------------
-#> |    Variable     |  Class  |  Obs  |  Missing  |  Miss \%  |
-#> ------------------------------------------------------------
-#> |treatyID         |character|  91673|          0|         0|
-#> |stateID          |character|  91673|          0|         0|
-#> |Title            |character|  91673|          0|         0|
-#> |Begin            |mdate    |  91661|         12|      0.01|
-#> |End              |mdate    |  52885|      38788|     42.31|
-#> |StateSignature   |mdate    |  73756|      17917|     19.54|
-#> |StateRatification|mdate    |  27769|      63904|     69.71|
-#> |StateForce       |mdate    |  40826|      50847|     55.47|
-#> |StateEnd         |mdate    |  58205|      33468|     36.51|
-#> |Rat=Notif        |character|   1227|      90446|     98.66|
-#> |Accession        |mdate    |  14472|      77201|     84.21|
-#> |Succession       |character|  91673|          0|         0|
-#> |Signature        |mdate    |  91657|         16|      0.02|
-#> |Force            |mdate    |  57124|      34549|     37.69|
-#> |url              |character|    931|      90742|     98.98|
-#> |StateForce2      |character|   6687|      84986|     92.71|
-#> |StateForce3      |character|   3690|      87983|     95.97|
-#> |StateEnd2        |character|   3696|      87977|     95.97|
-#> |Term             |character|   1178|      90495|     98.71|
-#> |Comments         |character|   3280|      88393|     96.42|
-#> |obsolete         |character|  12575|      79098|     86.28|
-#> |ProvisionalApp   |character|    772|      90901|     99.16|
-#> |Reservation      |character|    756|      90917|     99.18|
-#> |Notes            |character|    186|      91487|      99.8|
-#> |stateForce_ecolex|character|  18517|      73156|      79.8|
-#> |stateForce_iea   |character|  18517|      73156|      79.8|
-#> |Consent          |character|    224|      91449|     99.76|
-#> |Acceptance       |character|    525|      91148|     99.43|
-#> |match            |character|      4|      91669|       100|
-#> |Coder            |character|  91658|         15|      0.02|
-#> ------------------------------------------------------------
-#> 
-#> 
-#> $IEADB
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> $IEADB
 #> ---------------------------------------------------------
 #> |   Variable   |  Class  |  Obs  |  Missing  |  Miss \%  |
 #> ---------------------------------------------------------
@@ -135,6 +98,27 @@ It is a work-in-progress, so please let us know if you have any comments or sugg
 #> |Signature   |mdate    |   1730|        102|      5.57|
 #> |tfddID      |numeric  |   1831|          1|      0.05|
 #> -------------------------------------------------------
+#> 
+#> 
+#> $GGO
+#> ------------------------------------------------------------
+#> |    Variable     |  Class  |  Obs  |  Missing  |  Miss \%  |
+#> ------------------------------------------------------------
+#> |stateID          |character|  98320|          0|         0|
+#> |treatyID         |character|  98320|          0|         0|
+#> |Title            |character|  98320|          0|         0|
+#> |Begin            |mdate    |  98320|          0|         0|
+#> |End              |mdate    |  68402|      29918|     30.43|
+#> |Signature        |mdate    |  98320|          0|         0|
+#> |StateSignature   |mdate    |  80137|      18183|     18.49|
+#> |StateRatification|mdate    |  29013|      69307|     70.49|
+#> |Force            |mdate    |  63700|      34620|     35.21|
+#> |StateForce       |mdate    |  62574|      35746|     36.36|
+#> |Term             |Date     |   1167|      97153|     98.81|
+#> |StateEnd         |mdate    |  61895|      36425|     37.05|
+#> |Coder            |character|  98305|         15|      0.02|
+#> |Comments         |character|   4642|      93678|     95.28|
+#> ------------------------------------------------------------
 }\if{html}{\out{</div>}}
 }
 \section{Mapping}{

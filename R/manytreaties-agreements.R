@@ -1,6 +1,7 @@
 #' agreements datacube documentation
 #' @description `r describe_datacube(manytreaties::agreements)`.
-#'   It is a work-in-progress, so please let us know if you have any comments or suggestions.
+#'   Development of this datacube continues, 
+#'   so please let us know if you have any comments or suggestions.
 #' @format 
 #' \describe{
 #' \item{IEADB: }{A dataset with `r prettyNum(nrow(manytreaties::agreements$IEADB), big.mark=",")` 
