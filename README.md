@@ -1,5 +1,5 @@
 
-# manytreaties <img src="man/figures/manytreatiesLogo.png" align="right" width="220"/>
+# manytreaties <img src="man/figures/manytreatiesLogo.png" align="right" width="220" alt="many treaties logo"/>
 
 ## manytreaties
 
