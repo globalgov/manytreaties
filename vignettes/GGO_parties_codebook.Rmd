@@ -81,3 +81,23 @@ collected or checked have an end date `9999-12-31`.
 However, an `NA` in this field simply means that we could not verify the
 status of the agreement at the time of coding.
 
+## Party dates: StateSignature, StateRatification, StateForce, StateEnd
+
+These dates record dated actions that a state took with respect to an agreement,
+to become a party to it, or to end its participation in it.
+Its signature is the date that it first signed the agreement.
+Its ratification is the date that it ratified, acceded to, or approved the 
+agreement, depending on which the appropriate action is for the state,
+agreement, and context.
+Its force is the date that the agreement entered into force for that state,
+typically being the date of ratification plus any period necessary
+for the agreement to enter into force or other waiting period.
+In some situations, the state terminates its relationship with the agreement
+and this is recorded in the `StateEnd` variable.
+Where a state terminates its relationship with an agreement, and it can rejoin,
+this is recorded in a separate observation/row.
+For the most part, this data is drawn from the same sources as we find
+information about the agreements, their texts, and other metadata.
+But in some cases we have drawn on other sources to verify or add this,
+including through correspondence with responsible ministries of the parties.
+
