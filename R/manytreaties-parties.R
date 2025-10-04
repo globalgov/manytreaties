@@ -48,14 +48,14 @@
 "parties"
 
 info_parties <- dplyr::tibble(Dataset = names(utils::data(parties, package = "manytreaties")),
-                                Source = c("Hollway, James, Henrique Sposito, and Jael Tan. 2021. International agreements for manydata.",
-                                           "Mitchell, Ron B. et al. 2020. 'What we know (and could know) about international environmental agreements'. _Global Environmental Politics_ 20.1, pp. 103-121.",
+                                Source = c("Mitchell, Ron B. et al. 2020. 'What we know (and could know) about international environmental agreements'. _Global Environmental Politics_ 20.1, pp. 103-121.",
                                            "Duer, Andreas, Leonardo Baccini, and Manfred Elsig. 2014. 'The Design of International Trade Agreements: Introducing a New Database'. _The Review of International Organizations_ 9.3, pp. 353-375.",
                                            "World Bank Group. 2014. _Global Preferential Trade Agreement Database (GPTAD)_. Online database. World Bank Group.",
-                                           "Oregon College of Earth and Oregon State University Atmospheric Science. 2021. _Product of the Transboundary Freshwater Dispute Database_."),
-                                URL = c("",
-                                        "https://www.iea.ulaval.ca/en/country-members",
+                                           "Oregon College of Earth and Oregon State University Atmospheric Science. 2021. _Product of the Transboundary Freshwater Dispute Database_.",
+                                           "Hollway, James, and Jael Tan. 'Global governance observations on parties to international agreements' (2025)."),
+                                URL = c("https://www.iea.ulaval.ca/en/country-members",
                                         "https://www.designoftradeagreements.org/downloads/",
                                         "https://wits.worldbank.org/gptad/library.aspx",
-                                        "http://transboundarywaters.science.oregonstate.edu"))
+                                        "http://transboundarywaters.science.oregonstate.edu",
+                                        "https://www.panarchic.ch/"))
 

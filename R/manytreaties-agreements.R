@@ -71,7 +71,7 @@ info_agreements <- dplyr::tibble(Dataset = names(utils::data(agreements, package
                                               "Raess, Damien, Andreas Duer, and D. Sari. 2018. 'Protecting labor rights in preferential trade agreements: The role of trade unions, left governments, and skilled labor'. _The Review of International Organizations_ 2.13, pp. 143-162.",
                                               "Alschner, Wolfgang, Julia Seiermann, and Dmitriy Skougarevskiy. 2017. 'Text-as-data analysis of preferential trade agreements: Mapping the PTA landscape'. UNCTAD Research Paper No. 5.",
                                               "World Bank Group. 2014. _Global Preferential Trade Agreement Database (GPTAD)_. Online database. World Bank Group.",
-                                              "Hollway, James, Henrique Sposito, and Jael Tan. 2025. Many international agreements."),
+                                              "Hollway, James, and Jael Tan. 'Global governance observations on international agreements' (2025)."),
                                       URL = c("https://www.iea.ulaval.ca/en/country-members",
                                               "https://www.chaire-epi.ulaval.ca/en/data/heidi",
                                               "https://www.designoftradeagreements.org/downloads/",

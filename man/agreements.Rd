@@ -47,7 +47,7 @@ please use the \code{manydata::call_sources()} and \code{manydata::compare_dimen
 \item Raess, Damien, Andreas Duer, and D. Sari. 2018. 'Protecting labor rights in preferential trade agreements: The role of trade unions, left governments, and skilled labor'. \emph{The Review of International Organizations} 2.13, pp. 143-162.
 \item Alschner, Wolfgang, Julia Seiermann, and Dmitriy Skougarevskiy. 2017. 'Text-as-data analysis of preferential trade agreements: Mapping the PTA landscape'. UNCTAD Research Paper No. 5.
 \item World Bank Group. 2014. \emph{Global Preferential Trade Agreement Database (GPTAD)}. Online database. World Bank Group.
-\item Hollway, James, Henrique Sposito, and Jael Tan. 2025. Many international agreements.
+\item Hollway, James, and Jael Tan. 'Global governance observations on international agreements' (2025).
 }
 }
 \usage{
