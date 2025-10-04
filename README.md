@@ -56,41 +56,39 @@ listing the official references in the function above, as well as the
 package providers for their work assembling the data by using the
 function below.
 
+## Development
+
+### Funding details
+
+Development on this package has been funded by the Swiss National
+Science Foundation (SNSF) [Grant Number
+188976](https://data.snf.ch/grants/grant/188976): “Power and Networks
+and the Rate of Change in Institutional Complexes” (PANARCHIC). If you
+find the package useful, please cite the package.
+
 ``` r
 citation("manytreaties")
 ```
 
     ## To cite manytreaties in publications use:
     ## 
-    ##   J. Hollway. Agreements for manydata. 2021.
+    ##   Hollway J, Sposito H (2025). _Manytreaties: Agreements for manydata_.
+    ##   <https://globalgov.github.io/manytreaties/>.
     ## 
     ## A BibTeX entry for LaTeX users is
     ## 
     ##   @Manual{,
     ##     title = {Manytreaties: Agreements for manydata},
-    ##     author = {James Hollway},
-    ##     year = {2021},
-    ##     url = {https://github.com/globalgov/manytreaties},
+    ##     author = {James Hollway and Henrique Sposito},
+    ##     year = {2025},
+    ##     url = {https://globalgov.github.io/manytreaties/},
     ##   }
 
-## Contributing
-
-[`{manypkgs}`](https://github.com/globalgov/manypkgs) also makes it easy
-to contribute in lots of different ways.
+### Contributing
 
 If you have already developed a dataset salient to this package, please
-reach out by flagging it as an
-[issue](https://github.com/globalgov/manytreaties/issues) for us, or by
+reach out by flagging this as an
+[issue](https://github.com/globalgov/manystates/issues) for us, or by
 forking, further developing the package yourself, and opening a [pull
-request](https://github.com/globalgov/manytreaties/pulls) so that your
-data can be used easily.
-
-If you have collected or developed other data that may not be best for
-this package, but could be useful within the wider universe,
-[`{manypkgs}`](https://github.com/globalgov/manypkgs) includes a number
-of functions that make it easy to create a new “many” package and
-populate with clean, consistent global governance data.
-
-If you have any other ideas about how this package or the manydata
-universe more broadly might better facilitate your empirical analysis,
-we’d be very happy to hear from you.
+request](https://github.com/globalgov/manystates/pulls) so that your
+data can be made available at the next opportunity.
