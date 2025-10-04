@@ -101,3 +101,7 @@ information about the agreements, their texts, and other metadata.
 But in some cases we have drawn on other sources to verify or add this,
 including through correspondence with responsible ministries of the parties.
 
+## Further information: Coder, Comments
+
+The `Coder` variable is a comma separated vector of the surnames of those who have added or verified data for each entry/observation. 
+Where special conditions arise, the `Comments` variable offers a free text area for explanations or recording how the coding has changed from version to version. 
