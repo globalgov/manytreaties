@@ -54,13 +54,20 @@ reference:
     contents:
     - agreements
     - parties
+  - title: "Functions to standardise treaty text related inputs"
+    desc: | 
+      These functions standardise titles and texts by making sure they are
+      in the right case, removing extra spaces, and standardising how numbers 
+      are referenced.
+    contents:
+    - standardise_titles
+    - standardise_treaty_text
   - title: "Functions to assist treaty text analysis"
     desc: "These functions assist users in processing and extracting information from treaty texts."
     contents:
     - starts_with("code_")
     - read_clauses
-    - standardise_titles
-    - standardise_treaty_text
+    - condense_agreements
   - title: "Function to generate agreements"
     desc: "This function assists users to generate a list of fictional agreements or a list of memberships to agreements."
     contents:
