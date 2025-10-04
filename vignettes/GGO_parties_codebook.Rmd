@@ -53,3 +53,13 @@ _james.hollway@graduateinstitute.ch_
 The variables are as follows:
 `r paste(names(manytreaties::parties$GGO), collapse = ", ")`.
 
+## Identification: stateID, treatyID, Title
+
+These are the identifying variables of this dataset.
+The `stateID` is a standard three-letter country code as defined in `manystates::code_states()`.
+The `Title` is the title of the agreement as listed on the treaty text itself,
+or as listed in the source from which the treaty was identified.
+The `treatyID` is a meaningful shorthand ID created from a combination of
+elements extracted from the agreement title and date.
+See `manytreaties::code_agreements()` for more details.
+
