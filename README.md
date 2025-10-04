@@ -6,11 +6,11 @@
 manytreaties is a data package in the many universe of packages. It
 currently includes an ensemble of datasets on international
 environmental, trade, and health agreements, and
-[states](https://github.com/globalgov/manystates)’ membership or other
+[states](https://globalgov.github.io/manystates)’ membership or other
 relationships to those agreements.
 
-Please also check out [`{manydata}`](https://github.com/globalgov) for
-more information about the other packages in the many universe.
+Please also check out [`{manydata}`](https://www.manydata.ch/) for more
+information about the other packages in the many universe.
 
 ## How to install:
 
@@ -33,12 +33,13 @@ included in a specific datacube in the {`manytreaties`} package using
 the following function.
 
 ``` r
-manydata::call_sources("manytreaties", "agreements")
+library(manytreaties)
+manydata::describe_datacube(agreements)
+manydata::describe_datacube(parties)
 ```
 
 Working with ensembles of related data has many advantages for robust
-analysis. Just take a look at our vignettes
-[here](https://globalgov.github.io/manydata/articles/user.html).
+analysis.
 
 ## Many packages
 
@@ -72,13 +73,14 @@ citation("manytreaties")
 
     ## To cite manytreaties in publications use:
     ## 
-    ##   Hollway J, Sposito H (2025). _Manytreaties: Agreements for manydata_.
+    ##   Hollway J, Sposito H (2025). _manytreaties: Many international
+    ##   agreements and their parties_.
     ##   <https://globalgov.github.io/manytreaties/>.
     ## 
     ## A BibTeX entry for LaTeX users is
     ## 
     ##   @Manual{,
-    ##     title = {Manytreaties: Agreements for manydata},
+    ##     title = {manytreaties: Many international agreements and their parties},
     ##     author = {James Hollway and Henrique Sposito},
     ##     year = {2025},
     ##     url = {https://globalgov.github.io/manytreaties/},
