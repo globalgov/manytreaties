@@ -27,8 +27,8 @@ This document provides a brief overview of the coding rationale for key variable
 Note that this dataset was constructed as a complement to datasets such as 
 the International Environmental Agreements Database (`manytreaties::agreements$IEADB`)
 and the Design of Trade Agreements Database (`manytreaties::agreements$DESTA`).
-As such, it is incomplete in observations nor variables, 
-yet offers some more specificity and some additional entries compared to such other datasets.
+As such, it is neither complete in observations nor variables,
+yet offers more specificity and some additional entries compared to such other datasets.
 
 Work on this dataset was supported by the Swiss National Science Foundation (SNSF)
 [Grant Number 188976](https://data.snf.ch/grants/grant/188976): 
