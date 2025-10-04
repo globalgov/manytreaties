@@ -4,14 +4,14 @@
 \name{manytreaties-package}
 \alias{manytreaties}
 \alias{manytreaties-package}
-\title{manytreaties: Many international agreements and their parties}
+\title{manytreaties: Many International Agreements and Their Parties}
 \description{
-Ensemble of data on international environmental, trade, and health agreements, and states membership in them for research use.
+Ensemble of data on international environmental, trade, and health agreements, and states membership in them for research use. The package also includes several functions for working with treaties and their texts.
 }
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/globalgov/manytreaties}
+  \item \url{https://globalgov.github.io/manytreaties/}
   \item Report bugs at \url{https://github.com/globalgov/manytreaties/issues}
 }
 

@@ -1,19 +1,37 @@
 Package: manytreaties
-Title: Many international agreements and their parties
+Title: Many International Agreements and Their Parties
 Version: 1.0.0
-Date: 2025-09-27
+Date: 2025-10-01
 Authors@R: 
     c(person(given = "James",
              family = "Hollway",
              role = c("aut", "cre", "ctb"),
              email = "james.hollway@graduateinstitute.ch",
              comment = c("IHEID", ORCID = "0000-0002-8361-9647")),
+      person(given = "Henrique",
+             family = "Sposito",
+             role = c("aut","ctb"),
+             comment = c("IHEID", ORCID = "0000-0003-3420-6085")),
+      person(given = "Mylan",
+             family = "Evrard",
+             role = "ctb",
+             comment = c("IHEID", ORCID = "0009-0009-4404-1078")),
+      person(given = "Diego",
+             family = "del Moral Suarez",
+             role = "ctb",
+             comment = c("IHEID")),
       person(given = "Jael",
              family = "Tan",
              role = "ctb",
-             comment = c("IHEID", ORCID = "0000-0002-6234-9764")))
-Description: Ensemble of data on international environmental, trade, and health agreements,
-    and states membership in them for research use.
+             comment = c("IHEID", ORCID = "0000-0002-6234-9764")),
+      person(given = "Anders",
+             family = "Viemose",
+             role = "ctb",
+             comment = c("IHEID")))
+Description: Ensemble of data on international environmental, trade, 
+    and health agreements, and states membership in them for research use.
+    The package also includes several functions for working with treaties and
+    their texts.
 License: CC BY 4.0
 Depends: 
     R (>= 3.5.0),
@@ -45,7 +63,7 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
-URL: https://github.com/globalgov/manytreaties
+URL: https://globalgov.github.io/manytreaties/
 BugReports: https://github.com/globalgov/manytreaties/issues
 Config/Needs/build: 
     roxygen2, 
@@ -58,5 +76,4 @@ Config/Needs/website:
     pkgdown
 Config/testthat/edition: 3
 Config/testthat/parallel: true
-Config/testthat/start-first: HUGGO_MEM
 VignetteBuilder: knitr
