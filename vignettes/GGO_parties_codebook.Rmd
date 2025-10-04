@@ -63,3 +63,21 @@ The `treatyID` is a meaningful shorthand ID created from a combination of
 elements extracted from the agreement title and date.
 See `manytreaties::code_agreements()` for more details.
 
+## Document dates: Begin, End, Signature, Force, Term
+
+These are the dates when an agreement is deemed to have begun or ended.
+Where more precise coding is available, we code also offer the date of signature,
+the date when the agreement entered into force, and
+the date when the agreement terminated.
+These dates are drawn from `agreements$GGO`.
+
+Dates are coded using the messydates system. 
+This implements ISO’s extended date/time format. 
+As such, some dates are only entered as a year or are annotated with a question mark if the source is uncertain. 
+For more details see `{messydates}`.
+
+Agreements that are known to still be in force at the time that the data was
+collected or checked have an end date `9999-12-31`.
+However, an `NA` in this field simply means that we could not verify the
+status of the agreement at the time of coding.
+
