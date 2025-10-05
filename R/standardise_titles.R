@@ -1,19 +1,16 @@
 #' Standardise titles
-#'
-#' Standardises words in a character title variable to improve readability,
-#' facilitate string matching and enable more accurate comparisons
-#' for variables in different datatsets.
+#' @description
+#'   Standardises words in a character title variable to improve readability,
+#'   facilitate string matching and enable more accurate comparisons
+#'   for variables in different datatsets.
 #' @name standardise_titles
-#' @param s A string
+#' @param title A string or a character vector of titles.
 #' @details The function capitalises words in the strings passed to it.
-#' It trims white spaces from the start, middle and end of the strings.
-#' Removes ambiguous punctions and symbols from strings.
-#' All the strings are transformed into to ASCII character encoding.
-#' Written numbers in ordinal form are transformed into numerical form.
+#'   It trims white spaces from the start, middle and end of the strings.
+#'   Removes ambiguous punctions and symbols from strings.
+#'   All the strings are transformed into to ASCII character encoding.
+#'   Written numbers in ordinal form are transformed into numerical form.
 #' @return A capitalised, trimmed and standardised string
-#' @importFrom textclean add_comma_space mgsub
-#' @importFrom english ordinal words
-#' @importFrom stringr str_count str_squish str_to_title
 #' @importFrom utils as.roman
 #' @importFrom stringi stri_trans_general
 #' @import dplyr
@@ -21,15 +18,12 @@
 #' e <- standardise_titles("A treaty concerning things")
 #' e==c("A Treaty Concerning Things")
 #' @export
-standardise_titles <- function(s) {
-  # Step one: capitalises first letter in words
-  cap <- function(s) paste(toupper(substring(s, 1, 1)), {
-    s <- substring(s, 2)
-  }
-  , sep = "", collapse = " ")
-  out <- vapply(strsplit(s, split = " "), cap, "",
-                USE.NAMES = !is.null(names(s)))
-  # Step two: standardise strings returned
+standardise_titles <- function(title) {
+  
+  # 1: Capitalise first letter in words ####
+  out <- standardise_caps(title)
+  
+  # 2: Standardise strings returned ####
   # Transforms strings to ASCII character encoding
   out <- suppressWarnings(stringi::stri_trans_general(out, id = "Latin-ASCII"))
   # standardises NAs
@@ -42,44 +36,84 @@ standardise_titles <- function(s) {
   # Delete special character found in some treaty titles
   out <- gsub("\U00AC[[:alpha:]]{1}\\s|\U00AC\\s| -", "", out)
   # Add space after a comma
-  out <- textclean::add_comma_space(out)
-  # Change number symbol into word
-  out <- gsub("\\#", "Number ", out)
+  out <- stringi::stri_replace_all_regex(out, ",\\s*", ", ")
   # standardise some country abbreviations and specific words
   out <- correct_words(out)
-  # Step three: Standardises how ordinal numbers are returned
-  out <- textclean::mgsub(out,
-                          paste0("(?<!\\w)", as.roman(1:100), "(?!\\w)"),
-                          as.numeric(1:100), safe = TRUE, perl = TRUE)
-  ords <- english::ordinal(1:100)
-  ords <- paste0(ords,
-                 dplyr::if_else(stringr::str_count(ords, "\\S+") == 2,
-                         paste0("|", gsub(" ", "-", as.character(ords))), ""))
-  out <- textclean::mgsub(out,
-                          paste0("(?<!\\w)", ords, "(?!\\w)"),
-                          as.numeric(1:100), safe = TRUE, perl = TRUE,
-                          ignore.case = TRUE, fixed = FALSE)
-  num <- english::words(1:100)
-  num <- paste0(num,
-                 dplyr::if_else(stringr::str_count(num, "\\S+") == 2,
-                                paste0("|", gsub(" ", "-",
-                                                 as.character(num))), ""))
-  out <- textclean::mgsub(out,
-                          paste0("(?<!\\w)", num, "(?!\\w)"),
-                          as.numeric(1:100), safe = TRUE, perl = TRUE,
-                          ignore.case = TRUE, fixed = FALSE)
-  # Step four: make sure most punctuations extra whitespaces are removed
+  # remove "the government of"
+  out <- gsub("the government of ", "", out, ignore.case = TRUE)
+  out <- gsub("the cabinet of ministers of ", "", out, ignore.case = TRUE)
+  
+  # 3: Standardise numbers ####
+  out <- standardise_numbers(out)
+
+  # 4: Remove most punctuation and extra whitespaces ####
   out <- gsub("(?!\\-|\\(|\\))[[:punct:]]", "", out, perl = TRUE)
   # removes all punctuations but hyphen and parentheses,
-  # which may contain important information for distinguishing
-  # treaties
-  out <- stringr::str_squish(out)
+  # which may contain important information for distinguishing treaties
+  out <- stri_squish(out)
+  
+  cli::cli_alert_success("Standardised titles")
   out
 }
 
 #' @rdname standardise_titles
 #' @export
 standardize_titles <- standardise_titles
+
+#' @rdname standardise_titles
+#' @section standardise_caps(): 
+#'  This function is used to standardise the capitalisation
+#'  of words in treaty titles.
+#'  It capitalises the first letter of each word
+#'  while keeping the rest of the letters in lowercase.
+#'  Unlike stringi or stringr solutions though, this function retains
+#'  abbreviations and acronyms in uppercase.
+#' @export
+standardise_caps <- function(title){
+  cap <- function(s) paste(toupper(substring(s, 1, 1)), {
+    s <- substring(s, 2)
+  }, sep = "", collapse = " ")
+  cli::cli_alert_success("Standardised capitalisation in titles")
+  vapply(strsplit(title, split = " "), cap, "",
+         USE.NAMES = !is.null(names(title)))
+}
+
+#' @rdname standardise_titles
+#' @section standardise_numbers(): 
+#'   This function is used to standardise numbers in treaty titles
+#'   to improve readability and facilitate string matching.
+#'   It replaces written numbers with their numerical equivalents.
+#' @export
+standardise_numbers <- function(title){
+
+  # Change number symbol into word
+  out <- stringi::stri_replace_all_regex(title, "\\#", "Number ")
+
+  # Roman numerals
+  out <- mstringi_replace_all(out,
+                          paste0("(?<!\\w)", as.roman(1:100), "(?!\\w)"),
+                          as.numeric(1:100))
+  # Ordinal numbers
+  ords <- number_words$ordinal
+  out <- mstringi_replace_all(out,
+                          paste0("(?<!\\w)", ords, "(?!\\w)"),
+                          as.numeric(1:100))
+  # Written numbers
+  num <- number_words$word
+  out <- mstringi_replace_all(out,
+                          paste0("(?<!\\w)", num, "(?!\\w)"),
+                          as.numeric(1:100))
+  cli::cli_alert_success("Standardised numbers in titles")
+  out
+}
+
+mstringi_replace_all <- function(text, pattern, replacement) {
+  stopifnot(length(pattern) == length(replacement))
+  for (i in seq_along(pattern)) {
+    text <- stringi::stri_replace_all_regex(text, pattern[i], replacement[i])
+  }
+  text
+}
 
 # Helper functions
 correct_words <- function(s) {
@@ -129,4 +163,117 @@ corrected_words <- dplyr::tribble(~words,~corr_words,
 "South-Western|Southwestern","South Western",
 "Indo-Pacific|Indopacific|Asia-Pacific|Asiapacific","Asia Pacific",
 "Co-ordinating|cordinating","Coordinating"
+)
+
+stri_squish <- function(str){
+  stringi::stri_trim_both(stringi::stri_replace_all_regex(str, "\\s+", " "))
+}
+
+stri_remove_all <- function(str, pattern){
+  stringi::stri_replace_all_regex(str, pattern, "")
+}
+
+# Number_words ####
+number_words <- dplyr::tribble(
+  ~number, ~word, ~ordinal,
+  1, "one", "first",
+  2, "two", "second",
+  3, "three", "third",
+  4, "four", "fourth",
+  5, "five", "fifth",
+  6, "six", "sixth",
+  7, "seven", "seventh",
+  8, "eight", "eighth",
+  9, "nine", "ninth",
+  10, "ten", "tenth",
+  11, "eleven", "eleventh",
+  12, "twelve", "twelfth",
+  13, "thirteen", "thirteenth",
+  14, "fourteen", "fourteenth",
+  15, "fifteen", "fifteenth",
+  16, "sixteen", "sixteenth",
+  17, "seventeen", "seventeenth",
+  18, "eighteen", "eighteenth",
+  19, "nineteen", "nineteenth",
+  20, "twenty", "twentieth",
+  21, "twenty-one", "twenty-first",
+  22, "twenty-two", "twenty-second",
+  23, "twenty-three", "twenty-third",
+  24, "twenty-four", "twenty-fourth",
+  25, "twenty-five", "twenty-fifth",
+  26, "twenty-six", "twenty-sixth",
+  27, "twenty-seven", "twenty-seventh",
+  28, "twenty-eight", "twenty-eighth",
+  29, "twenty-nine", "twenty-ninth",
+  30, "thirty", "thirtieth",
+  31, "thirty-one", "thirty-first",
+  32, "thirty-two", "thirty-second",
+  33, "thirty-three", "thirty-third",
+  34, "thirty-four", "thirty-fourth",
+  35, "thirty-five", "thirty-fifth",
+  36, "thirty-six", "thirty-sixth",
+  37, "thirty-seven", "thirty-seventh",
+  38, "thirty-eight", "thirty-eighth",
+  39, "thirty-nine", "thirty-ninth",
+  40, "forty", "fortieth",
+  41, "forty-one", "forty-first",
+  42, "forty-two", "forty-second",
+  43, "forty-three", "forty-third",
+  44, "forty-four", "forty-fourth",
+  45, "forty-five", "forty-fifth",
+  46, "forty-six", "forty-sixth",
+  47, "forty-seven", "forty-seventh",
+  48, "forty-eight", "forty-eighth",
+  49, "forty-nine", "forty-ninth",
+  50, "fifty", "fiftieth",
+  51, "fifty-one", "fifty-first",
+  52, "fifty-two", "fifty-second",
+  53, "fifty-three", "fifty-third",
+  54, "fifty-four", "fifty-fourth",
+  55, "fifty-five", "fifty-fifth",
+  56, "fifty-six", "fifty-sixth",
+  57, "fifty-seven", "fifty-seventh",
+  58, "fifty-eight", "fifty-eighth",
+  59, "fifty-nine", "fifty-ninth",
+  60, "sixty", "sixtieth",
+  61, "sixty-one", "sixty-first",
+  62, "sixty-two", "sixty-second",
+  63, "sixty-three", "sixty-third",
+  64, "sixty-four", "sixty-fourth",
+  65, "sixty-five", "sixty-fifth",
+  66, "sixty-six", "sixty-sixth",
+  67, "sixty-seven", "sixty-seventh",
+  68, "sixty-eight", "sixty-eighth",
+  69, "sixty-nine", "sixty-ninth",
+  70, "seventy", "seventieth",
+  71, "seventy-one", "seventy-first",
+  72, "seventy-two", "seventy-second",
+  73, "seventy-three", "seventy-third",
+  74, "seventy-four", "seventy-fourth",
+  75, "seventy-five", "seventy-fifth",
+  76, "seventy-six", "seventy-sixth",
+  77, "seventy-seven", "seventy-seventh",
+  78, "seventy-eight", "seventy-eighth",
+  79, "seventy-nine", "seventy-ninth",
+  80, "eighty", "eightieth",
+  81, "eighty-one", "eighty-first",
+  82, "eighty-two", "eighty-second",
+  83, "eighty-three", "eighty-third",
+  84, "eighty-four", "eighty-fourth",
+  85, "eighty-five", "eighty-fifth",
+  86, "eighty-six", "eighty-sixth",
+  87, "eighty-seven", "eighty-seventh",
+  88, "eighty-eight", "eighty-eighth",
+  89, "eighty-nine", "eighty-ninth",
+  90, "ninety", "ninetieth",
+  91, "ninety-one", "ninety-first",
+  92, "ninety-two", "ninety-second",
+  93, "ninety-three", "ninety-third",
+  94, "ninety-four", "ninety-fourth",
+  95, "ninety-five", "ninety-fifth",
+  96, "ninety-six", "ninety-sixth",
+  97, "ninety-seven", "ninety-seventh",
+  98, "ninety-eight", "ninety-eighth",
+  99, "ninety-nine", "ninety-ninth",
+  100, "hundred", "hundredth"
 )

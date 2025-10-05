@@ -5,7 +5,6 @@
 #' @return A list of lineages that combines agreement area
 #' and agreement action.
 #' @importFrom purrr map
-#' @importFrom stringr str_squish
 #' @importFrom stringi stri_trans_general
 #' @importFrom manystates code_states
 #' @examples
@@ -49,7 +48,6 @@ code_lineage <- function(title = NULL, datacube = NULL) {
 #'
 #' @param title Treaty titles
 #' @return The region of the agreement
-#' @importFrom stringr str_squish
 #' @examples
 #' \dontrun{
 #' title <- sample(manyenviron::agreements$IEADB$Title, 30)
@@ -58,13 +56,13 @@ code_lineage <- function(title = NULL, datacube = NULL) {
 #' @export
 code_entity <- function(title) {
   # Add a note about JavaScript
-  usethis::ui_info("Please make sure JavaScript is installed.")
+  cli::cli_alert_info("Please make sure JavaScript is installed.")
   # Download entity package
   pkgs <- NULL
   pkgs <- data.frame(utils::installed.packages())
-  if (any(grepl("entity", pkgs$Package))) {
+  if (!any(grepl("entity", pkgs$Package))) {
     remotes::install_github("trinker/entity")
-    usethis::ui_info("Downloaded entity package.")
+    cli::cli_alert_info("Downloaded entity package.")
   }
   # Make sure necessary model is available (adapted from entity package)
   outcome <- "openNLPmodels.en" %in% list.files(.libPaths())
@@ -96,7 +94,7 @@ code_entity <- function(title) {
   out <- gsub(parties, "", out, ignore.case = TRUE)
   out <- gsub("^c|Britain|England", "", out)
   out <- gsub("[^[:alnum:]]", " ", out)
-  out <- stringr::str_squish(out)
+  out <- stri_squish(out)
   out <- gsub("NULL", NA_character_, out)
   out <- ifelse(grepl("^$", out), NA_character_, out)
   out
@@ -209,3 +207,223 @@ code_domain <- function(title, type = c("environment", "health")) {
     domain
   }
 }
+
+#' Code areas from agreement titles
+#'
+#' @param title Treaty titles
+#' @param return Whether to return the full area name or the short version.
+#'   "full" by default.
+#' @return The area taken from agreement title
+#' @examples
+#' \dontrun{
+#' code_area(HUGGO$Title)
+#' }
+#' @export
+code_area <- function(title, return = c("full", "short")) {
+  
+  return <- match.arg(return)
+  match_to_table(title, area_type, "terms", return)
+
+}
+
+# Area type data ####
+area_type <- dplyr::tribble(~short,~full,~terms,
+                            "Adriatic","Adriatic Sea","Adriatic",
+                            "Alberta","Lake Alberta","Lake Alberta",
+                            "Amudarya","Amudarya River","Amudarya|Amu-Darya|Oxus",
+                            "Amur","Amur River","Heilong|Amur",
+                            "Andaman","Andaman Sea","Andaman Sea",
+                            "Aral","Aral Sea","Aral Sea",
+                            "Araxes","Araxes River","Araxes|Aras",
+                            "Atrak","Atrak River","Atrek|Atrak",
+                            "Azov","Azov Sea","Azov Sea|Sea Of Azov",
+                            "Baltic","Baltic Sea","Baltic|Baltic Sea",
+                            "Barents","Barents Sea","Barents",
+                            "Beaufort","Beaufort Sea","Beaufort",
+                            "Bering","Bering Sea","Bering",
+                            "Bidassoa","Bidassoa River","Bidassoa",
+                            "Biscay","Bay of Biscay","Bay Of Biscay",
+                            "Black","Black Sea","Black Sea",
+                            "Brahmaputra","Brahmaputra River","Brahmaputra",
+                            "Caledon","Caledon River","Caledon River",
+                            "Caribbean","Caribbean Sea","Caribbean",
+                            "Caspian","Caspian Sea","Caspian",
+                            "Chad","Lake Chad","Lake Chad",
+                            "Colorado","Colorado River","Colorado River",
+                            "Columbia","Columbia River","Columbia River",
+                            "Congo","Congo River","Congo River|Zaire River",
+                            "Constance","Lake Constance","Constance|Bodensee",
+                            "Corubal","Corubal River","Koliba-Korubal|Corubal",
+                            "Cuareim","Cuareim River","Cuareim",
+                            "Danube","Danube River","Danube|Donau|Rajka-Gonyu",
+                            "Dniester","Dniestr River","Dniester|Dniestr|Dnestr",
+                            "Dojran","Lake Dojran","Dojran|Lake Ohrid|Doiran",
+                            "Douro","Douro River","Douro",
+                            "Dover","Straints of Dover","Straits Of Dover",
+                            "Elefantes","Elefantes River","Elefantes|Massingir",
+                            "Enningdal","Enningdal River","Enningdal|Enningdalselva",
+                            "Euphrates","Euphrates River","Euphrates|Al-Asi",
+                            "Finland","Gulf of Finland","Gulf Of Finland",
+                            "Fraser","Fraser River","Fraser",
+                            "Gambia","Gambia River","Gambia River|River Gambia",
+                            "Gander","Gander River","Gander",
+                            "Garda","Lake Garda","Garda",
+                            "Gash","Gash River","River Gash|Khor Baraka|Gash River",
+                            "Geneva","Lake Geneva","Lake Geneva|Lac Leman|Leman Lake",
+                            "Grande","Rio Grande","Rio Grande",
+                            "GreatLakes","Great Lakes","Great Lakes",
+                            "GreatBarrier","Great Barrier Reef","Great Barrier Reef",
+                            "Hanka","Lake Hanka","Hanka|Khanka",
+                            "Helmand","Helmand River","Helmand|Hilmand",
+                            "Horgos","Khorgos River","Khorgos|Korgas|Horgos",
+                            "Iddefjord","Iddefjord","Iddefjord|Iddefjorden",
+                            "Inari","Lake Inari","Inari",
+                            "Indus","Indus River","Indus",
+                            "Jaguarao","Jaguarao River","Jaguarao",
+                            "Kagera","Kagera River","Kagera",
+                            "Khorgos","Khorgos River","Khorgos",
+                            "Kolente","Kolente River","Kolente|Great Scarcies",
+                            "Komati","Komati River","Komati",
+                            "Kunene","Kunene River","Kunene|Cunene",
+                            "Kwando","Kwando River","Kwando|Linyanti",
+                            "Ladoga","Lake Ladoga","Ladoga",
+                            "Lanoux","Lanoux River","Lanoux|Lanos",
+                            "Latorica","Latorica River","Latorica|Latoritza",
+                            "Lielupe","Lielupe River","Lielupe|Western Dvina",
+                            "Litani","Litani River","Litani|Leontes",
+                            "Lugano","Lake Lugano","Lugano|Luganus",
+                            "Lys","Lys River","Lys|Leie",
+                            "Mahakali","Mahakali River","Karnali|Mahakali",
+                            "Mano","Mano River","Mano River|Manya",
+                            "Maule","Maule River","Maule",
+                            "Mediterranean","Mediterranean Sea","Mediterranean",
+                            "Mekong","Mekong River","Mekong",
+                            "Mekrou","Mekrou River","Mekrou",
+                            "Memphremagog","Lake Memphremagog","Memphremagog",
+                            "Meuse","Meuse River","Maas|Meuse",
+                            "Minho","Minho River","Minho|Mino",
+                            "Naaf","Naaf River","Naaf|Naf",
+                            "Neiden","Neiden River","Neiden|Neidenelva|Naatamo",
+                            "Neman","Neman River","Neman|Nemunas|Memel",
+                            "Nestos","Nestos River","Nestos|Nestus",
+                            "Niagara","Niagara River","Niagara",
+                            "Niger","Niger River","Niger River",
+                            "Nile","Nile River","Nile",
+                            "North","North Sea","North Sea",
+                            "Oder","Oder River","Oder|Odra",
+                            "Okavango","Okavango River","Okavango",
+                            "Okhotsk","Sea of Okhotsk","Okhotsk|Sea Of Okhotsk",
+                            "Orange","Orange River","Orange River|Orange-Senqu",
+                            "Orawa","Orawa River","Orawa|Orava",
+                            "Pacific","Pacific Ocean","Pacific Ocean",
+                            "Paraguay","Paraguay River","Paraguay River|Rio Paraguay|River Paraguay",
+                            "Parana","Parana River","Parana",
+                            "Pasvik","Pasvik River","Pasvik|Paz River",
+                            "Peipsi","Lake Peipsi","Peipsi|Lake Peipus",
+                            "Pilcomayo","Pilcomayo River","Pilcomayo",
+                            "Plate","La Plata River","La Plata|River Plate|Plate River",
+                            "Prut","Prut River","Prut|Pruth",
+                            "Rainy","Rainy Lake","Rainy Lake|Lake Rainy",
+                            "RedSea","Red Sea","Red Sea",
+                            "RedRiver","Red River","Red River",
+                            "Rhine","Rhine River","Rhine",
+                            "Ross","Ross Sea","Ross Sea",
+                            "Roya","Roya River","Roya River|River Roya",
+                            "Saimaa","Lake Saimaa","Saima",
+                            "Sava","Sava River","Sava",
+                            "Scheldt","Scheldt River","Scheldt",
+                            "Selenga","Selenga River","Selenga|Selenge",
+                            "Senegal","Senegal River","Senegal River",
+                            "Skagit","Skagit River","Skagit",
+                            "Skagerrak","Skagerrak Strait","Skagerrak|Skagerak",
+                            "Souris","Souris River","Souris",
+                            "StFrancis","Lake St Francis","Lake St Francis|Lake Saint Francis",
+                            "StJohn","St John River","Saint John River|St John River",
+                            "StLawrence","St Lawrence River","Saint Lawrence River|St Lawrence River",
+                            "Talas","Talas River","Talas",
+                            "Tana","Tana River","Tana|Tana River",
+                            "Tanganyika","Lake Tanganyika","Tanganyika",
+                            "Teesta","Teesta River","Teesta|Tista",
+                            "Tigris","Tigris River","Tigris",
+                            "Timok","Timok River","Timok|Timoc",
+                            "Timor","Timor Sea","Timor Sea",
+                            "Tisza","Tisza River","Tisza|Theiss",
+                            "Titicaca","Lake Titicaca","Titicaca",
+                            "Tonkin","Tonkin Gulf","Tonkin|Gulf Of Tonkin",
+                            "Tonle","Tonle Lake","Tonle Sap|Great Lake Of Cambodia",
+                            "Tornea","Tornea River","Tornio|Tornea|Torne",
+                            "Tsana","Tsana River","Tsana|Tsani",
+                            "Uruguay","Uruguay River","Uruguay River|Uruguai River|River Uruguay",
+                            "Vanern","Lake Vanern","Vanern",
+                            "Varanger","Varanger Fjord","Varanger Fjord|Varangerfjord",
+                            "Victoria","Lake Victoria","Lake Victoria",
+                            "Videa","Videa River","Videa|Vydra",
+                            "Vistula","Vistula River","Vistula",
+                            "Vistytis","Lake Vistytis","Vistytis|Vishtynets",
+                            "Volta","Volta River","Volta",
+                            "Vuoksi","Vuoksi River","Vuoksi|Voksa",
+                            "Walvis","Walvis Bay","Walvis Bay|Walfisch Bay",
+                            "Witka","Witka River","Witka",
+                            "Woods","Lake Of The Woods","Lake Of The Woods",
+                            "Yalu","Yalu River","Yalu|Amnok",
+                            "Yarmuk","Yarmuk River","Yarmuk",
+                            "Yukon","Yukon River","Yukon",
+                            "Zambezi","Zambezi River","Zambezi|Zambesi",
+                            "Border","Border","Border River|Trans-border River|Transboundary River|Frontier River|Rivers Of Common Interest|Rivers Flowing Through Their Territories|Rivers Flowing Through The Territory Of Both Countries|Rivers Flowing Through The Territories Of The Both Countries|Frontier Lakes And Rivers|Watercourses Forming Part Of The Frontier|Waters Of Rivers Crossing Their Territories",
+)
+
+match_to_table <- function(char_vec, pattern_table, pattern_col, value_col, case = TRUE) {
+  # Precompile regex patterns
+  patterns <- pattern_table[[pattern_col]]
+  values <- pattern_table[[value_col]]
+  
+  # Initialize result vector
+  result <- character(length(char_vec))
+  matched <- logical(length(char_vec))
+  
+  # Iterate over the lookup table (small) and apply patterns to the whole char_vec (large)
+  for (i in seq_along(patterns)) {
+    hits <- stringi::stri_detect_regex(char_vec, patterns[i], 
+                                       case_insensitive = case) & !matched
+    result[hits] <- values[i]
+    matched[hits] <- TRUE  # Prevent overwriting earlier matches
+  }
+  
+  # Replace unmatched with NA
+  result[!matched] <- NA_character_
+  result
+}
+
+#' Code locations from agreement titles
+#'
+#' @param title Treaty titles
+#' @return The location taken from agreement title
+#' @examples
+#' \dontrun{
+#' code_location(HUGGO$Title)
+#' }
+#' @export
+code_location <- function(title) {
+  unlist(stringi::stri_extract_all_regex(title, cities))
+  cli::cli_alert_success("Coded locations")
+}
+
+cities <- "Amsterdam|Ankara|Athens|Auckland|Algiers|Abu Dhabi|
+  Bangkok|Beirut|Bogota|Brasilia|Beijing|Berlin|Brussels|Buenos Aires|Basel|Bamako|
+  Cairo|Canberra|Caracas|Copenhagen|Courtray|  
+  Dakar|Dublin|Dar es Salaam|Doha|
+  Helsinki|Havana|Hong Kong|
+  Istanbul|
+  Jakarta|
+  Kabul|Kampala|Kuala Lumpur|Kyoto|
+  Lisbon|London|Lusaka|
+  Madrid|Manila|Moscow|
+  Nairobi|New Delhi|
+  Oslo|Ottawa|
+  Paris|Prague|
+  Rabat|Rio de Janeiro|Rome|
+  Stockholm|San Jose|Santiago|Sao Paulo|Seoul|Singapore|Stockholm|
+  Tokyo|Tunis|
+  Vienna|
+  Warsaw|Washington DC|
+  Zagreb|Zurich"

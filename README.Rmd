@@ -2,15 +2,15 @@
 output: github_document
 ---
 
-# manytreaties <img src="man/figures/manytreatiesLogo.png" align="right" width="220"/>
+# manytreaties <img src="man/figures/manytreatiesLogo.png" align="right" width="220" alt="many treaties logo"/>
 
 ## manytreaties
 
 manytreaties is a data package in the many universe of packages.
 It currently includes an ensemble of datasets on international environmental, trade, and health agreements,
-and [states](https://github.com/globalgov/manystates)' membership or other relationships to those agreements.
+and [states](https://globalgov.github.io/manystates)' membership or other relationships to those agreements.
 
-Please also check out [`{manydata}`](https://github.com/globalgov) for more information about the other packages in the many universe. 
+Please also check out [`{manydata}`](https://www.manydata.ch/) for more information about the other packages in the many universe. 
 
 ## How to install:
 
@@ -28,11 +28,12 @@ manydata::call_packages("manytreaties") # this downloads and installs the named 
 Once you have installed the package, you can see the different datasets included in a specific datacube in the {`manytreaties`} package using the following function.
 
 ```{r datasets, eval = FALSE}
-manydata::call_sources("manytreaties", "agreements")
+library(manytreaties)
+manydata::describe_datacube(agreements)
+manydata::describe_datacube(parties)
 ```
 
 Working with ensembles of related data has many advantages for robust analysis.
-Just take a look at our vignettes [here](https://globalgov.github.io/manydata/articles/user.html).
 
 ## Many packages
 
@@ -49,22 +50,23 @@ by listing the official references in the function above,
 as well as the package providers for their work assembling the data
 by using the function below.
 
+## Development
+
+### Funding details
+
+Development on this package has been funded by the Swiss National Science Foundation (SNSF)
+[Grant Number 188976](https://data.snf.ch/grants/grant/188976): 
+"Power and Networks and the Rate of Change in Institutional Complexes" (PANARCHIC).
+If you find the package useful, please cite the package.
+
 ``` {r cites}
 citation("manytreaties")
 ```
 
-## Contributing
-
-[`{manypkgs}`](https://github.com/globalgov/manypkgs) also makes it easy to contribute in lots of different ways.
+### Contributing
 
 If you have already developed a dataset salient to this package,
-please reach out by flagging it as an [issue](https://github.com/globalgov/manytreaties/issues) for us,
-or by forking, further developing the package yourself, and opening a [pull request](https://github.com/globalgov/manytreaties/pulls)
-so that your data can be used easily.
-
-If you have collected or developed other data that may not be best for this package,
-but could be useful within the wider universe,
-[`{manypkgs}`](https://github.com/globalgov/manypkgs) includes a number of functions that make it easy to create a new "many" package and populate with clean, consistent global governance data.
-
-If you have any other ideas about how this package or the manydata universe more broadly
-might better facilitate your empirical analysis, we'd be very happy to hear from you.
+please reach out by flagging this as an [issue](https://github.com/globalgov/manystates/issues)
+for us, or by forking, further developing the package yourself, and opening a
+[pull request](https://github.com/globalgov/manystates/pulls)
+so that your data can be made available at the next opportunity.

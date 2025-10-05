@@ -4,64 +4,78 @@
 # for the 'many' packages.
 
 # Stage one: Collecting data
-IEADB <- readr::read_delim("data-raw/agreements/IEADB/treaties.csv", ",")
-# Add Agreement under the United Nations Convention on the Law of the Sea on
-# the conservation and sustainable use of marine biological diversity of areas
-# beyond national jurisdiction (BBNJ agreement), adopted on June 20, 2023
-bbnj <- cbind(9112, "MEA", 2023, "2023-06-23", NA,
-              paste("Agreement under the", "United Nations Convention on the",
-              "Law of the Sea on the conservation and", "sustainable use of marine",
-              "biological diversity of areas beyond national", "jurisdiction",
-              sep = " "), "TreatyText**", "Members", "Agreement",
-              "Biological Diversity Beyond National Jurisdiction", 100.000, NA,
-              NA, "Secretariat not yet identified", NA)
-colnames(bbnj) <- colnames(IEADB)
-IEADB <- rbind(IEADB, bbnj)
-
+IEADB <- readr::read_delim("data-raw/agreements/IEADB/db_treaties.csv", ",")
 
 # Stage two: Correcting data
 # In this stage you will want to correct the variable names and
 # formats of the 'IEADB' object until the object created
 # below (in stage three) passes all the tests.
-
 IEADB <- as_tibble(IEADB)  %>%
-  dplyr::mutate(AgreementType = dplyr::recode(`Agreement Type (level 2)`,
-                                              "Agreement" = "A", "Amendment" = "E",
-                                              "Agreed Minute (non-binding)" = "Q",
-                                              "Declaration" = "V", "Resolution" = "W",
-                                              "Exchange of Notes" = "X",
-                                              "Memorandum of Understanding" = "Y",
-                                              "Protocol" = "P")) %>%
-  dplyr::mutate(Ambit = dplyr::recode(Inclusion, "BEA" = "B", "MEA" = "M")) %>%
-  dplyr::filter(Ambit == "M" | DocType == "B") %>%
-  manydata::transmutate(ieadbID = as.character(`IEA# (click for add'l info)`),
-                        Title = manypkgs::standardise_titles(`Treaty Name`),
-                        Signature = messydates::as_messydate(`Signature Date`),
-                        Force = messydates::as_messydate(`Date IEA entered into force`)) %>%
-  dplyr::mutate(Begin = dplyr::coalesce(Signature, Force)) %>%
-  dplyr::select(ieadbID, Title, Begin, Ambit, AgreementType, Signature, Force) %>%
-  dplyr::mutate(Begin = messydates::as_messydate(ifelse(is.na(Begin), "9999-12-31", Begin))) %>%
-  # Add future date in cases where Begin and force are missing
-  dplyr::arrange(Signature)
+  manydata::transmutate(mitchID = as.character(`IEA#`),
+                        Title = manytreaties::standardise_titles(`Agreement Name`),
+                        Signature = messydates::as_messydate(`Date IEA was concluded`),
+                        Force = messydates::as_messydate(`Date IEA entered into force`),
+                        Location = `Place IEA was concluded`,
+                        TextURL = `URL to text of IEA`,
+                        Language = tolower(gsub("\\..*", "", Lang1)),
+                        TypeSubject = `Issue area (subject)`,
+                        Term = messydates::as_messydate(`Term Date`),
+                        Grounds = dplyr::coalesce(`Term Type`,
+                                                  ifelse(is.na(`Term by ID`), 
+                                                         NA_character_, 
+                                                         paste("Term by", 
+                                                               `Term by ID`))),
+                        TitleAlt = `Alternative Treaty Name`,
+                        Auspices = `Org Auspices`,
+                        Coder = `Researcher`,
+                        Comments = `Data entry notes`) %>%
+  dplyr::mutate(Signature = dplyr::case_when(Signature == "1111-11-11" ~ NA,
+                                             .default = Signature),
+                Force = dplyr::case_when(Force == "1111-11-11" ~ NA,
+                                         .default = Force),
+                Term = dplyr::case_when(Term == "1111-11-11" ~ NA,
+                                        .default = Term)) %>% 
+  dplyr::mutate(Begin = messydates::as_messydate(dplyr::coalesce(Signature, Force)),
+                End = Term) %>%
+  dplyr::select(-dplyr::contains("(legacy)")) %>%
+  manydata::transmutate(TypeAgree = dplyr::case_match(`Agreement Type Level 3`,
+                                                          c("Agreement","Acuerdo") ~ "Agreement",
+                                                          c("Convention","Convenzione","Convencion","Convenio") ~ "Convention",
+                                                          c("Declaration","Declaracion") ~ "Declaration",
+                                                          c("Treaty","Tratado") ~ "Treaty",
+                                                          c("Protocol","Protocolo","Protocole") ~ "Protocol",
+                                                          .default = `Agreement Type Level 3`),
+                        TypeAmbit = dplyr::case_match(`Inclusion (type of agreements)`, 
+                                                  c("BEA","Bilateral (2 and only 2 governments)") ~ "Bilateral", 
+                                                  c("MEA","Multilateral (3 or more governments)") ~ "Multilateral",
+                                                  .default = `Inclusion (type of agreements)`)) %>%
+  dplyr::select(-c(AmendProtToA,UNEP2005pg,`URL to membership list`,
+                   `Date *Bilateral* signed by 2nd state (ONLY if BEA)`, UNTS,
+                   `E (environment) Code (agreement is environmental or not)`,
+                   `Possible Sources (additional)`,`Treaty Text`,`Data complete`,
+                   `Membership eligibility (multilateral, bilateral, etc)`,
+                   `Words used to code as Environmental`, `Sequence in lineage`,
+                   Category, `Coded Text`, `Source for E (environmental) code`,
+                   `Text used for E (environmental) coding`, Nid))
 
 # Add treatyID column
-IEADB$treatyID <- manypkgs::code_agreements(IEADB, IEADB$Title, IEADB$Begin)
-# Add Lineage column
-IEADB$Lineage <- manypkgs::code_lineage(IEADB$Title)
-
-# Add manyID column
-# manyID <- manypkgs::condense_agreements(manyenviron::agreements)
-# IEADB <- dplyr::left_join(IEADB, manyID, by = "treatyID") %>%
-#   dplyr::distinct() %>%
-#   dplyr::relocate(manyID, Title, Begin, DocType, AgreementType, Signature,
-#                 Force, Lineage, treatyID, ieadbID) %>%
-#   dplyr::arrange(Begin)
-
-IEADB <- IEADB %>%
-  dplyr::distinct() %>%
-  dplyr::relocate(treatyID,  Title, Begin, Ambit, AgreementType, Signature,
-                  Force, Lineage, mitchID) %>%
+IEADB <- IEADB %>% 
+  dplyr::mutate(treatyID = manytreaties::code_agreements(IEADB, IEADB$Title, 
+                                                         IEADB$Begin))
+IEADB <- IEADB %>% 
+  dplyr::select(treatyID, Title, Begin, End, Signature, Force, 
+                Term, Grounds,
+                TypeAmbit, TypeAgree, TypeSubject,
+                Lineage, 
+                Location, Auspices, Secretariat, TitleAlt, 
+                TextURL, Language,
+                Coder, Comments, Version, mitchID,
+                everything()) %>% 
+  dplyr::filter(TypeAmbit == "Multilateral" |
+                  TypeAmbit == "Bilateral") %>%
+  dplyr::distinct(treatyID, .keep_all = TRUE) %>%
   dplyr::arrange(Begin)
+glimpse(IEADB)
 
 # manypkgs includes several functions that should help cleaning
 # and standardising your data.
@@ -71,7 +85,7 @@ IEADB <- IEADB %>%
 # Next run the following line to make IEADB available
 # within the package.
 manypkgs::export_data(IEADB, datacube = "agreements",
-                      URL = "https://iea.uoregon.edu/base-agreement-list")
+                      URL = "https://www.iea.ulaval.ca/en")
 # This function also does two additional things.
 # First, it creates a set of tests for this object to ensure
 # adherence to certain standards. You can hit Cmd-Shift-T (Mac)

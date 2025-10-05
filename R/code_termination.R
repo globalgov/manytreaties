@@ -87,7 +87,6 @@ code_term <- function(title, text = NULL) {
 #' @param text treaty text column variable
 #' @return a character vector with the term date of the
 #' treaty
-#' @importFrom stringr str_remove_all str_extract_all
 #' @examples
 #' \dontrun{
 #' HUGGO <- dplyr::slice_sample(manyenviron::agreements$HUGGO, n = 200)
@@ -100,20 +99,20 @@ code_term_date <- function(title, text = NULL) {
   title <- as.character(title)
   # Treaties with the term date in the title had the word "For the Period"
   date <- ifelse(grepl("For The Period", title),
-                 stringr::str_extract_all(title, "\\d{1,2}.\\w{3,}.\\d{4}"), NA)
+                 stringi::stri_extract_all_regex(title, "\\d{1,2}.\\w{3,}.\\d{4}"), NA)
   # Extract only the term date
-  date <- suppressWarnings(stringr::str_remove_all(date, "^c|\\(|\\)|\""))
-  date <- stringr::str_extract_all(date, "\\d{1,2}.\\w{3,}.\\d{4}$")
+  date <- suppressWarnings(stri_remove_all(date, "^c|\\(|\\)|\""))
+  date <- stringi::stri_extract_all_regex(date, "\\d{1,2}.\\w{3,}.\\d{4}$")
   # Standardise the date format
   date <- as.Date(as.character(date), format = "%d %B %Y")
   } else {
     # repeat same operation for the titles
     title <- as.character(title)
     date <- ifelse(grepl("For The Period", title),
-                   stringr::str_extract_all(title, "\\d{1,2}.\\w{3,}.\\d{4}"),
+                   stringi::stri_extract_all_regex(title, "\\d{1,2}.\\w{3,}.\\d{4}"),
                    NA)
-    date <- suppressWarnings(stringr::str_remove_all(date, "^c|\\(|\\)|\""))
-    date <- stringr::str_extract_all(date, "\\d{1,2}.\\w{3,}.\\d{4}$")
+    date <- suppressWarnings(stri_remove_all(date, "^c|\\(|\\)|\""))
+    date <- stringi::stri_extract_all_regex(date, "\\d{1,2}.\\w{3,}.\\d{4}$")
     date <- as.Date(as.character(date), format = "%d %B %Y")
   }
   date

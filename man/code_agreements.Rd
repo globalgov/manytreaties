@@ -8,18 +8,18 @@ code_agreements(dataset = NULL, title, date)
 }
 \arguments{
 \item{dataset}{A 'many' dataset.
-If provided without a title and date variables, the function finds title and
-date conforming columns in the dataset.
-The function "expects" that there are variables named \code{Title} and \code{Begin}
+If provided without a title and date variables, the function finds title
+and date conforming columns in the dataset.
+The function expects that there are variables named \code{Title} and \code{Begin}
 that they have been standardised using \code{standardise_titles()} and
 \code{messydates::as_messydate()}, respectively.}
 
 \item{title}{A title variable.
-The function "expects" that the variable has been standardised using
+The function expects that the variable has been standardised using
 \code{standardise_titles()}.}
 
 \item{date}{A date variable.
-The function "expects" that the variable has been standardised using
+The function expects that the variable has been standardised using
 \code{messydates::as_messydate()}.}
 }
 \value{

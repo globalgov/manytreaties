@@ -4,14 +4,14 @@
 \name{manytreaties-package}
 \alias{manytreaties}
 \alias{manytreaties-package}
-\title{manytreaties: International Agreements for the many Universe}
+\title{manytreaties: Many International Agreements and Their Parties}
 \description{
-Ensemble of data on international environmental, trade, and health agreements, and states membership in them for research use.
+Ensemble of data on international environmental, trade, and health agreements, and states membership in them for research use. The package also includes several functions for working with treaties and their texts.
 }
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/globalgov/manytreaties}
+  \item \url{https://globalgov.github.io/manytreaties/}
   \item Report bugs at \url{https://github.com/globalgov/manytreaties/issues}
 }
 
@@ -19,9 +19,17 @@ Useful links:
 \author{
 \strong{Maintainer}: James Hollway \email{james.hollway@graduateinstitute.ch} (\href{https://orcid.org/0000-0002-8361-9647}{ORCID}) (IHEID) [contributor]
 
+Authors:
+\itemize{
+  \item Henrique Sposito (\href{https://orcid.org/0000-0003-3420-6085}{ORCID}) (IHEID) [contributor]
+}
+
 Other contributors:
 \itemize{
+  \item Mylan Evrard (\href{https://orcid.org/0009-0009-4404-1078}{ORCID}) (IHEID) [contributor]
+  \item Diego del Moral Suarez (IHEID) [contributor]
   \item Jael Tan (\href{https://orcid.org/0000-0002-6234-9764}{ORCID}) (IHEID) [contributor]
+  \item Anders Viemose (IHEID) [contributor]
 }
 
 }

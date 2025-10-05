@@ -1,0 +1,388 @@
+---
+title: "GGO agreements codebook"
+output: rmarkdown::html_vignette
+author: James Hollway
+date: "2025-09-27"
+vignette: >
+  %\VignetteIndexEntry{GGO agreements codebook}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, echo=FALSE, message=FALSE}
+library(manytreaties)
+```
+
+## Release 1.0
+
+This document provides a brief overview of the coding rationale for key variables in the list of international agreements provided in `manytreaties::agreements$GGO`. 
+
+Note that this dataset was constructed as a complement to datasets such as 
+the International Environmental Agreements Database (`manytreaties::agreements$IEADB`)
+and the Design of Trade Agreements Database (`manytreaties::agreements$DESTA`).
+As such, it is neither complete in observations nor variables,
+yet offers more specificity and some additional entries compared to such other datasets.
+
+Work on this dataset was supported by the Swiss National Science Foundation (SNSF)
+[Grant Number 188976](https://data.snf.ch/grants/grant/188976): 
+"Power and Networks and the Rate of Change in Institutional Complexes" (PANARCHIC).
+
+Please direct all comments and suggestions to:
+
+<center>
+_James Hollway_
+
+_International Relations/Political Science Department_
+
+_Graduate Institute of International and Development Studies_
+
+_Geneva, Switzerland_
+
+_james.hollway@graduateinstitute.ch_
+</center>
+
+The variables are as follows:
+`r paste(names(manytreaties::agreements$GGO), collapse = ", ")`.
+
+## Title, TitleAlt
+
+This is the title of the treaty or agreement. 
+We interpret an agreement broadly to include not only formal treaties,
+such as treaties, conventions, or declarations,
+but also other types of international agreements such as memoranda of understanding,
+resolutions, protocols, and amendments.
+We generally use the title of the agreement as listed on the treaty text itself,
+or as listed in the source from which the treaty was identified.
+
+In some situations an agreement might be known by several different titles.
+These situations include:
+
+- When treaties are recorded in different languages, or there are multiple valid versions of the treaty,
+translation or transliterations can result in similar but different titles
+- When treaties are recorded with different titles in different sources or databases (or versions of the database),
+through translation or standardisation efforts
+- When treaties are recorded with different titles by different parties to the treaty,
+for example a bilateral agreement might be recorded under different names by each party
+when they deposit it
+
+In such situations, the shorter or more common title is generally preferred for the `Title` variable,
+so long as it is unambiguous.
+If only the longer version of the title mentions the parties, subject, or other distinguishing information,
+then this title will be used as the `Title` variable.
+Any alternative titles are included in the `TitleAlt` variable,
+using commas to separate multiple alternative titles if necessary.
+
+### Exclusion
+
+While we strive to include a comprehensive list of international agreements,
+including agrements that are not formal treaties, for instance,
+but that can be filtered out by users if they wish (see `TypeAgree`),
+there are some agreements that we do not include.
+For the main part, it is because the information contained is not substantive,
+but rather procedural or administrative.
+
+- Exclude protocols of signature, accession, or confirmation (unless they come with substantive changes) -> these are dealt with in memberships data
+- Exclude protocols of application or implementation, dealt with in entry into force date or (usually) as additional text
+- Exclude amendments that are minor or technical, e.g. correcting typos, changing names, etc.
+
+Note that exchanges of letters or similar documents that form part of a treaty are included.
+
+### Differentiation
+
+In some cases treaties with exactly the same title are in fact different treaties.
+This might be because they were signed on different dates,
+or because they were signed by different parties.
+In other cases, treaties with different titles are actually the same treaty --
+signed on the same date by the same parties.
+We differentiated such entries as follows:
+
+- confirmed duplicates were removed from the dataset
+- confirmed non-duplicates were retained in the dataset but distinguished
+from each other by adding distinguishing information, such as the year or subject,
+to the treaty title(s).
+
+### Deduplication
+
+In other cases, treaties with very similar titles are actually the same treaties.
+This is more challenging to determine.
+We approach this deduplication task as follows:
+
+- We first identify potential duplicates by searching for agreements that are concluded with the same date of signature
+- From this list, we disregard those agreements that clearly concern different regions or subjects
+
+With the list of remaining potential duplicates,
+we then check the texts of the treaties themselves, if available,
+or the sources from which they were identified.
+We also use Google to search for the treaty title and date of signature,
+to see if there are any sources that clarify whether these are the same or different treaties.
+We use the following heuristics to assist with this process:
+
+- Merge duplications representing multiple translations
+- Similar treaty titles that refer to different articles, appendices, or annexes are retained separately
+- Keep agreements referring to different parties
+- Merge agreements that refer to the same parties but use different names for them, e.g. "the Government of X" and "the State of X"
+- Merge agreements that are identifical except one mentions the parties and the other does not
+- If we have other information that differs, such as different information for entry into force, this will cause a further check
+- If Google returns (only) the same information, then this is a suggestion that these are duplicates
+- We also note that some states or dyads have a history of concluding a set of agreements on related topics on the same day, e.g. China and Kazakhstan, and so this is also taken note of
+- If there is a document combining multiple amendments on the same day to the same treaty, and also a listing separating out the amendments, then the combined amendment will be retained
+- Merge duplications where substantive similarities and no treaty texts (or not for both) to indicate that they are different agreements
+
+Note that agreements that are amendments or protocols to existing treaties are retained,
+as these are often important in their own right.
+
+## treatyID
+
+A treatyID is a meaningful shorthand ID created from a combination of
+elements extracted from the agreement title and date. 
+The treatyID allows users to identify date, type and linkage.
+
+### Bilateral treatyID
+
+A bilateral treaty that is an agreement will have the following treatyID: "FRA-TON[DEZ]_1980A". 
+This is a combination of the parties to the agreement (FRA-TON),
+the activity described in the treaty,
+which is here "Delimitation of Economic Zone (DEZ)",
+with the year of signature (1980),
+followed by the type (A = Agreement).
+
+**Type** | **Pasting** | **Pasting**
+--- | --- |--- 
+Bilateral | FRA-TON[DEZ]_1980A | parties[subject]_year(type)
+Bilateral + Protocol | 	RUS-USA[FKC]_1967E:RUS-USA[FKC]_1965A | parties[subject]_year(type):linkage
+
+A bilateral treaty that is any other type than an agreement
+(e.g. protocol, amendments) will have 
+the treatyID under this format: "RUS-USA[FKC]_1967E:FKC_1965A". 
+It is composed of the parties (RUS-USA),
+the subject abbreviation from treaty title "Fishing for King Crab (FKC)", 
+the year of signature of the amendment (1967), and
+the type (E) which refers to Amendment. 
+The linkage portion links the agreement to the treatyID its "mother" treaty 
+(RUS-USA[FKC]_1965A).
+
+### Multilateral treatyID
+
+A multilateral treaty that is an agreement will have a treatyID format similar to: "HSPDF_2005A".
+The treatyID indicates the acronym (HSPDF),
+the signature year of the agreement (2005),
+and the type (A). 
+
+**Type** | **Pasting** | **Pasting**
+--- | --- |--- 
+Multilateral | HSPDF_2005A | acronym_year(type)
+Multilateral + Protocol | SFDP_2007E2:H08F_1992A | acronym_year(type and number):linkage
+
+A multilateral treaty that is not an agreement will have this treatyID format: "SFDP_2007E2:H08F_1992A". 
+This represents the acronym (SFDP),
+the signature year of the amendment (2007),
+the type (E = Amendment),
+the number of amendment (2),
+and the treatyID (H08F_1992A) of the "mother" treaty. 
+
+**Type** | **Pasting** | **Pasting**
+--- | --- |--- 
+Known treaties | 	UNCLOS1982A | abbreviation, uID, type
+Amendment of known treaties | J09H_1990E2:MARPOL1973A | acronym_uID, type(number):linkage
+
+Famous multilateral treaties have a simplified treatyID with a known abbreviation. 
+For example, the United Nations Convention On The Law Of The Sea
+will have the following treatyID: "UNCLOS1982A". 
+This is the known abbreviation (UNCLOS),
+the signature year (1982) and the treaty type (A). 
+
+Protocols or amendments of the known treaties will have this treatyID format: "J09H_1990E2:MARPOL1973A". 
+It indicates the acronym (J09H),
+the signature year of this specific amendment (1990),
+the type of treaty (E),
+its number (2), and the treatyID of the "mother" treaty (MARPOL1973A).
+
+## Dates
+
+### Begin, End, Signature, Force, Term
+
+These are the dates when an agreement is deemed to have begun or ended.
+Where more precise information is available, we code also the date of signature,
+the date when the agreement entered into force, and
+the date when the agreement terminated.
+
+Dates are coded using the messydates system. 
+This implements ISO’s extended date/time format. 
+As such, some dates are only entered as a year or are annotated with a question mark if the source is uncertain. 
+For more details see `{messydates}`.
+
+Agreements that are known to still be in force at the time that the data was
+collected or checked have an end date `9999-12-31`.
+However, an `NA` in this field simply means that we could not verify the
+status of the agreement at the time of coding.
+
+### Grounds
+
+Where the agreement has been terminated, we code the grounds for termination.
+The grounds for a treaty's termination is coded as one of the following categories:
+
+- _Sunset_: the treaty terminates at the end of a specified period
+- _Success_: the treaty terminates when its main purpose has been fulfilled
+- _Recession_: the parties mutually agree to dissolve the treaty
+- _Substitution_: the parties mutually agree to substitute the old treaty with a new one
+- _Renunciation_: a party renounces its rights arising from the treaty
+- _Withdrawal_: a party withdraws from the treaty
+- _Extinction_: the treaty ends when one of the party state's existence comes to an end 
+- _Other_: to be explained in the comments
+
+As this coding is incomplete, it is currently only available for a subset of the agreements.
+For more details, please reach out to the maintainer.
+
+## Type
+
+These variables are useful for filtering the dataset,
+and better understanding the lineage of certain agreements.
+
+### TypeDomain
+
+The domain is a simple character/string variable that indicates the main domain of the agreement.
+At the moment this is a fairly coarse coding,
+containing the following categories:
+`r paste(names(table(manytreaties::agreements$GGO$Domain))[!grepl(",", names(table(manytreaties::agreements$GGO$Domain)))], collapse = ", ")`.
+We have many more agreements for environment, trade, and health than the others.
+
+### TypeAgree
+
+The type of agreement is coded as one of the following categories:
+
+- _Agreement_: This is a full agreement between the parties
+- _Protocol_: This is a protocol to an existing agreement
+- _Amendment_: This is an amendment to an existing agreement or protocol
+- _MOU_: This is a memorandum of understanding, which is generally a non-binding agreement
+- _Resolution_: This is a resolution, generally adopted by an international organisation
+- _Regulation_: This is a regulation, generally adopted by an international organisation
+- _Report_: This is a strategy document, generally adopted by an international organisation
+
+For the most part our observations are either agreements, protocols, or amendments.
+The others are current rather residual categories.
+
+### TypeAmbit
+
+The ambit of the agreement is coded as one of the following categories:
+
+- _Bilateral_: This is an agreement between (strictly) two parties
+- _Trilateral_: This is an agreement between (strictly) three parties
+- _Regional_: This is an agreement between multiple parties in a specific region
+- _Multilateral_: This is an agreement between more than two parties
+- _External_: This is an agreement between a regional organisation and a non-member state
+- _Interregional_: This is an agreement between two or more regional organisations
+- _Interministerial_: This is an agreement between states' ministries or departments
+
+### TypeGeo
+
+We code geographical region more specifically than in some other datasets. 
+We code the region descriptively and as a character string, 
+which affords the opportunity to search by regular expression such as “America” to get “Northern America”, “Southern America”, “Central America”, and “Caribbean America”. 
+Note that we use the adjectival form, e.g. “Southern Africa”, to distinguish the region from the country “South Africa”. 
+We use “Central” to describe areas in the middle of the continent, if applicable. 
+The data includes the following regions:
+
+- _Northern America_
+- _Southern America_
+- _Central America_
+- _Caribbean America_
+- _Northern Europe_
+- _Eastern Europe_
+- _Southeastern Europe_
+- _Southern Europe_
+- _Western Europe_
+- _Central Europe_
+- _Eastern Asia_
+- _Southeastern Asia_
+- _Southern Asia_
+- _Western Asia_
+- _Central Asia_
+- _Northern Africa_
+- _Eastern Africa_
+- _Southern Africa_
+- _Western Africa_
+- _Central Africa_
+- _Oceania_
+
+However, we code not only regions but also specific geographical features,
+such as rivers, seas, and oceans.
+Codes that appear more than 8 times include:
+
+```{r, echo=FALSE, results='hold'} 
+names(table(manytreaties::agreements$GGO$Region))[
+  table(manytreaties::agreements$GGO$Region) > 8]
+```
+
+For the geographical region to be "Global", 
+the agreement must explicitly refer to the whole world or globe.
+
+### TypeSubject
+
+In addition to the `Region`, we also code the subject of the agreement.
+We code this as a one- or two-keyword description of the subject matter of the agreement.
+For example, "Water Energy".
+This is a character/string variable, so users can search or filter as they wish.
+Filtering by regular expression is therefore possible, 
+e.g. "Water|Energy" to get all agreements that mention either water or energy.
+So this could include agreements on water, energy, water and energy, 
+water and pollution, or nuclear and energy,
+for instance.
+
+Codes that appear more than 8 times include:
+
+```{r, echo=FALSE, results='hold'} 
+names(table(manytreaties::agreements$GGO$Subject))[
+  table(manytreaties::agreements$GGO$Subject) > 8]
+```
+
+## Further information
+
+We have also attempted to record some additional information about each agreement,
+such as sources and such, where available.
+
+### Location, Depository, Published
+
+This is the name of the city where the agreement was concluded.
+This has been drawn from the title of the agreement in some cases,
+or from the treaty text itself, or metadata available from the source from which the treaty was identified.
+For the most part, this is fairly straightforward, 
+however in some cases there is a second city.
+Since second locations are relatively rare, 
+this will appear only in the `Comments` for now.
+
+### Secretariat, Website
+
+Where applicable, we code the name of the secretariat or
+international organisation that administers the agreement.
+This is drawn from the treaty text itself, 
+or metadata available from the source from which the treaty was identified.
+Where available, we also provide a link to the website of the agreement or its secretariat.
+
+### Text, TextURL
+
+We have collected the text of many agreements where available.
+Texts for the agreements are formatted and stored in .txt files in the
+'data_raw/agreements/GGO/TreatyText' folder within the package.
+The `Text` variable denotes if the corresponding text has been stored in the folder.
+Where possible, we provide a link to the source from which the text was obtained.
+
+### Language, Languages
+
+The `Language` variable indicates the language in which the treaty text is available
+as a two-letter code, e.g. "en".
+We retain the English language version wherever available to facilitate analysis.
+However, some agreements are available in other languages;
+these are listed in `Languages` as a pipe separated vector.
+
+### Coder, Comments, Source
+
+The `Coder` variable is a comma separated vector of the surnames of those who have added or verified data for each entry/observation. 
+Where special conditions arise, the `Comments` variable offers a free text area for explanations or recording how the coding has changed from version to version. 
+The `Source` variable should contain only links or bibliographic information for the sources used to add or verify information.

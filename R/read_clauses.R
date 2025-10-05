@@ -26,7 +26,6 @@
 #' @details Please make sure treaty texts have been standardised first
 #' using `standardise_texts()` for best results.
 #' @importFrom purrr map
-#' @importFrom stringr str_extract str_split
 #' @return A list of treaty sections of the same length.
 #' @examples
 #' \dontrun{
@@ -60,7 +59,7 @@ read_clauses <- function(textvar, article = NULL,
                   out, ignore.case = TRUE,
                   perl = TRUE)
     }
-    type <- stringr::str_extract(out, "PROTO|AMEND|AGREE|NOTES|STRAT|RESOL")
+    type <- stringi::stri_extract_first_regex(out, "PROTO|AMEND|AGREE|NOTES|STRAT|RESOL")
     if (treaty_type == "agreements") {
       textvar <- ifelse(type == "AGREE", textvar, NA_character_)
     } else if (treaty_type == "protocols") {
@@ -78,7 +77,7 @@ read_clauses <- function(textvar, article = NULL,
   }
   # Split list (if already not split by paragraph marks)
   t <- ifelse(lengths(textvar) < 10,
-              stringr::str_split(as.character(textvar),
+              stringi::stri_split_regex(as.character(textvar),
                                  "((?=ARTICLE)|(?=ANNEX))"), textvar)
   # Get articles if declared
   if (!is.null(article)) {

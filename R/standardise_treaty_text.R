@@ -5,7 +5,6 @@
 #' @name standardise_treaty_text
 #' @param textvar A text variable.
 #' @importFrom purrr map
-#' @importFrom stringr str_remove_all str_replace_all
 #' @importFrom stringi stri_trans_general
 #' @importFrom tm stripWhitespace
 #' @return A list of treaty sections of the same length.
@@ -25,28 +24,28 @@ standardise_treaty_text <- function(textvar) {
     x <- unlist(x)
     x <- stringi::stri_trans_general(tolower(as.character(x)),
                                      id = "Latin-ASCII")
-    x <- stringr::str_replace_all(x, "\nannex| \nannex|\n annex| \n annex|
+    x <- stringi::stri_replace_all_regex(x, "\nannex| \nannex|\n annex| \n annex|
                                   |\\.\\sannex\\s|\\.annex\\s|
                                   |\\d\\sannex\\s", ". ANNEX ")
-    x <- stringr::str_replace_all(x, "\narticle|\n article|\nart\\.|\n art\\.|
+    x <- stringi::stri_replace_all_regex(x, "\narticle|\n article|\nart\\.|\n art\\.|
                                   |\\.\\sarticle\\s|\\.article\\s|\nchapter|
                                   |\n chapter|\\.\\schapter\\s|\\.chapter\\s|
                                   | \narticle| \n article",
                                   ". ARTICLE ")
-    x <- stringr::str_replace_all(x, "\nappendix|\n appendix|\\.\\sappendix\\s|
+    x <- stringi::stri_replace_all_regex(x, "\nappendix|\n appendix|\\.\\sappendix\\s|
                                   |\\.appendix\\s| \nappendix| \n appendix",
                                   ". APPENDIX ")
-    x <- stringr::str_replace_all(x, "\nprotocol|\n protocol|\\.\\sprotocol\\s|
+    x <- stringi::stri_replace_all_regex(x, "\nprotocol|\n protocol|\\.\\sprotocol\\s|
                                   |\\.protocol\\s|\\d\\sprotocol\\s|
                                   | \nprotocol| \n protocol",
                                   ". PROTOCOL ")
-    x <- stringr::str_remove_all(x, "(http\\:\\/\\/)(.+)(?=\\s)")
-    x <- stringr::str_remove_all(x, "(?<=\\<)(.+)(?=\\>)")
-    x <- stringr::str_remove_all(x, "\r|\t|\n")
-    x <- stringr::str_remove_all(x, "\\<|\\>|\\-\\-")
-    x <- stringr::str_remove_all(x, "this page uses javascript|this website uses javascript|
+    x <- stringi::stri_replace_all_regex(x, "(http\\:\\/\\/)(.+)(?=\\s)", "")
+    x <- stringi::stri_replace_all_regex(x, "(?<=\\<)(.+)(?=\\>)", "")
+    x <- stringi::stri_replace_all_regex(x, "\r|\t|\n", "")
+    x <- stringi::stri_replace_all_regex(x, "\\<|\\>|\\-\\-", "")
+    x <- stringi::stri_replace_all_regex(x, "this page uses javascript|this website uses javascript|
                                     |javascript is required (for this page)?|javascript|java script|
-                                    |please use a javascript enabled browser")
+                                    |please use a javascript enabled browser", "")
     x <- tm::stripWhitespace(x)
     x
   })

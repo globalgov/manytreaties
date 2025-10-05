@@ -2,10 +2,13 @@ citHeader("To cite manytreaties in publications use:")
 
 citEntry(
   entry    = "Manual",
-  title    = "Manytreaties: Agreements for manydata",
-  author   = "James Hollway",
-  year     = "2021",
-  url      = "https://github.com/globalgov/manytreaties",
-  textVersion = paste("J. Hollway. Agreements for manydata. 2021."
+  title    = "manytreaties: Many international agreements and their parties",
+  author = c(
+    person("James", "Hollway", 
+         role = c("cre", "aut", "ctb"),
+         email = "james.hollway@graduateinstitute.ch"),
+    person("Henrique", "Sposito", 
+         role = c("aut", "ctb"))),
+    year = "2025",
+    url = "https://globalgov.github.io/manytreaties/"
   )
-)

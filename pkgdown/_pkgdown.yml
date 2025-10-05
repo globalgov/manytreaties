@@ -7,8 +7,8 @@ template:
 authors:
   James Hollway:
     href: https://jameshollway.com
-  Bernhard Bieri:
-    href: https://bernhardbieri.ch
+  Henrique Sposito:
+    href: https://henriquesposito.com
 navbar:
   structure:
     left: [home, reference, articles, news]
@@ -21,12 +21,16 @@ navbar:
       text: Reference
       href: reference/index.html
     articles:
-      text: Articles
+      text: GGO Codebooks
       menu:
-      - text: Types of Environmental Treaties
-        href: articles/membership_dashboard.html
-      - text: Trade Treaties by Country and Year
-        href: articles/trade_treaty_year_dashboard.html
+      - text: GGO Agreements
+        href: articles/GGO_agreements_codebook.html
+      - text: GGO Parties
+        href: articles/GGO_parties_codebook.html
+      # - text: Types of Environmental Treaties
+      #   href: articles/membership_dashboard.html
+      # - text: Trade Treaties by Country and Year
+      #   href: articles/trade_treaty_year_dashboard.html
       # - text: What Does Global Health Governance Look Like?
       #   href: articles/healthdata.html
     news:
@@ -50,21 +54,26 @@ reference:
     contents:
     - agreements
     - parties
+  - title: "Functions to standardise treaty text related inputs"
+    desc: | 
+      These functions standardise titles and texts by making sure they are
+      in the right case, removing extra spaces, and standardising how numbers 
+      are referenced.
+    contents:
+    - standardise_titles
+    - standardise_treaty_text
   - title: "Functions to assist treaty text analysis"
     desc: "These functions assist users in processing and extracting information from treaty texts."
     contents:
     - starts_with("code_")
     - read_clauses
-    - standardise_titles
-    - standardise_treaty_text
+    - condense_agreements
   - title: "Function to generate agreements"
     desc: "This function assists users to generate a list of fictional agreements or a list of memberships to agreements."
     contents:
     - generate_agreements
 footer:
   structure:
-    left: devs
     right: panarchic
   components:
-    devs: Developed by [James Hollway](https://jameshollway.com/).
     panarchic: Part of the [PANARCHIC project](https://panarchic.ch/).

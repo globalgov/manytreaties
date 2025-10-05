@@ -1,0 +1,107 @@
+---
+title: "GGO parties codebook"
+output: rmarkdown::html_vignette
+author: James Hollway
+date: "2025-09-28"
+vignette: >
+  %\VignetteIndexEntry{GGO parties codebook}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, echo=FALSE, message=FALSE}
+library(manytreaties)
+```
+
+## Release 1.0
+
+This document provides a brief overview of the coding rationale for key variables 
+in the dataset of states' relationships to international agreements 
+provided in `manytreaties::parties$GGO`. 
+
+Note that this dataset was constructed as a complement to datasets such as 
+the International Environmental Agreements Database (`manytreaties::parties$IEADB`)
+and the Design of Trade Agreements Database (`manytreaties::parties$DESTA`).
+As such, it is neither complete in observations nor variables,
+but offers some additional or alternative coding to other datasets.
+
+Work on this dataset was supported by the Swiss National Science Foundation (SNSF)
+[Grant Number 188976](https://data.snf.ch/grants/grant/188976): 
+"Power and Networks and the Rate of Change in Institutional Complexes" (PANARCHIC).
+
+Please direct all comments and suggestions to:
+
+<center>
+_James Hollway_
+
+_International Relations/Political Science Department_
+
+_Graduate Institute of International and Development Studies_
+
+_Geneva, Switzerland_
+
+_james.hollway@graduateinstitute.ch_
+</center>
+
+The variables are as follows:
+`r paste(names(manytreaties::parties$GGO), collapse = ", ")`.
+
+## Identification: stateID, treatyID, Title
+
+These are the identifying variables of this dataset.
+The `stateID` is a standard three-letter country code as defined in `manystates::code_states()`.
+The `Title` is the title of the agreement as listed on the treaty text itself,
+or as listed in the source from which the treaty was identified.
+The `treatyID` is a meaningful shorthand ID created from a combination of
+elements extracted from the agreement title and date.
+See `manytreaties::code_agreements()` for more details.
+
+## Document dates: Begin, End, Signature, Force, Term
+
+These are the dates when an agreement is deemed to have begun or ended.
+Where more precise information is available, we code also the date of signature,
+the date when the agreement entered into force, and
+the date when the agreement terminated.
+These dates are drawn from `agreements$GGO`.
+
+Dates are coded using the messydates system. 
+This implements ISO’s extended date/time format. 
+As such, some dates are only entered as a year or are annotated with a question mark if the source is uncertain. 
+For more details see `{messydates}`.
+
+Agreements that are known to still be in force at the time that the data was
+collected or checked have an end date `9999-12-31`.
+However, an `NA` in this field simply means that we could not verify the
+status of the agreement at the time of coding.
+
+## Party dates: StateSignature, StateRatification, StateForce, StateEnd
+
+These dates record dated actions that a state took with respect to an agreement,
+to become a party to it, or to end its participation in it.
+Its signature is the date that it first signed the agreement.
+Its ratification is the date that it ratified, acceded to, or approved the 
+agreement, depending on which the appropriate action is for the state,
+agreement, and context.
+Its force is the date that the agreement entered into force for that state,
+typically being the date of ratification plus any period necessary
+for the agreement to enter into force or other waiting period.
+In some situations, the state terminates its relationship with the agreement
+and this is recorded in the `StateEnd` variable.
+Where a state terminates its relationship with an agreement, and it can rejoin,
+this is recorded in a separate observation/row.
+For the most part, this data is drawn from the same sources as we find
+information about the agreements, their texts, and other metadata.
+But in some cases we have drawn on other sources to verify or add this,
+including through correspondence with responsible ministries of the parties.
+
+## Further information: Coder, Comments
+
+The `Coder` variable is a comma separated vector of the surnames of those who have added or verified data for each entry/observation. 
+Where special conditions arise, the `Comments` variable offers a free text area for explanations or recording how the coding has changed from version to version. 

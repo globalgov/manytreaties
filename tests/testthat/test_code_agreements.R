@@ -14,18 +14,14 @@ test_that("Code_agreements helper functions work properly", {
   #                                          NA, "RUS-USA[KTC]", "RUS-USA[FON]"))
   expect_equal(code_type(data$title), c("A", "E1", "A", "R",
                                         "N", "S", "A", "A", "A"))
-  expect_equal(code_dates(data$date), c("1980", "1990",
-                                        "1981", "1982",
-                                        "1976", "1983",
-                                        "1971", "1973", "1973"))
   expect_equal(code_known_agreements(data$title), c(NA, "RAMSA_1971",
                                                     NA, NA, NA, NA,
                                                     "RAMSA_1971", NA, NA))
-  expect_equal(code_acronym(data$title), c("CPVPFD", "WTIIWH",
-                                           "TD06LJ", "DCLRMR",
-                                           "CEBRIP", "RIVER",
+  expect_equal(code_acronyms(data$title), c("CPVPFD", "WTIIWH",
+                                           "TD06LJ", "DCMOTR",
+                                           "CEBRIP", "RVRBSN",
                                            "WTIIWH", "GU11TC",
-                                           "GU13PO"))
+                                           "GU12PO"))
   expect_equal(code_linkage(data$title, data$date), c("", "RAMSA_1971A", "",
                                                       "", "", "", "", "", ""))
 })
@@ -35,11 +31,6 @@ data2 <- data.frame(title = c("Agreement Between Cape Verde And Portugal On Fish
                               "Traité De Délimitation Maritime, Signé À Paris Le 30 Janvier 19819"),
                     date = c("1980-01-01:1980-12-31", "1981-01-01:1981-12-31"))
 
-test_that("code_dates() helper function treats date range correctly", {
-  # Add title to the code_dates function arguments
-  expect_equal(code_dates(data2$date), c("1980", "1981"))
-})
-
 # Test numbers assigned to procotol/amendment
 data5 <- data.frame(title = c("Amendments On The Transport Of Corrosive Substances To Protocol 18 Of The 1868 Revised Convention On The Navigation Of The Rhine",
                               "Amendments 34 Of The Limitation Amounts In The 1992 Convention",
@@ -48,7 +39,7 @@ data5 <- data.frame(title = c("Amendments On The Transport Of Corrosive Substanc
 
 test_that("code_agreements() identify correct number of protocol or amendment", {
   expect_equal(code_agreements(data5, data5$title, data5$date),
-               c("TRCSNR_1899E18", "LMTTNA_2000E34", "LMTTNA_2010E4"))
+               c("TCSRNR_1899E18", "LMTTNA_2000E34", "LMTTNA_2010E4"))
 })
 
 # Test that some functions return coding information when argument is missing
