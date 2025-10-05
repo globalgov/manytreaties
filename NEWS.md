@@ -1,3 +1,61 @@
+# manytreaties 1.0.0
+
+## Package
+
+- Updated README
+- Updated website
+
+## Data
+
+- Updated GGO agreements (closes #34)
+  - Fixed various inconsistent dates (thanks @myevrard, @jaeltan)
+  - Fixed duplicates (thanks @myevrard)
+  - Substantially more coding on TypeRegion and TypeSubject (closes #15)
+  - Standardised TypeSubject coding to be more consistent
+  - TypeAmbit now codes not just "Bilateral" and "Multilateral",
+  but also "Regional" (plurilateral), "Trilateral", "Interministerial", and
+  "Interregional"
+  - TypeRegion now codes main region instead of multiregion
+  - Removed outdated variables (e.g. GENGID)
+  - Using "None" for confirmed none now
+  - Added codebook
+  - Fixed citations
+- Updated GGO parties
+  - Fixed various inconsistent dates (thanks @myevrard)
+  - Fixed duplicates (thanks @myevrard)
+  - Added codebook
+  - Fixed citations
+- Updated IEADB agreements (closes #35)
+- Updated IEADB parties (closes #36)
+- Updated TFDD preparation
+- Updated DESTA preparation and reexported
+
+## Functions
+
+- Added `standardise_*()` and `code_*()` functions from `{manypkgs}`
+- Improved `standardise_treaty_text()`
+  - Uses `{stringi}` now for speed
+- Improved `standardise_titles()`
+  - Dropped "The Government Of" from treaty titles
+  - Gave function more internal structure
+  - Uses `{stringi}` and own stringi-based `mgsub()` (internal) now for speed
+  - Uses internal number words for speed
+- Added `standardise_caps()` as separate function for capitalising every word,
+  not the same as title case
+- Improved `code_agreements()`
+  - Now uses `{cli}`
+  - Uses `{stringi}` now for speed
+- Improved `code_acronyms()`
+  - Renamed from `code_acronym()` to be more consistent
+  - Uses `{stringi}` now for speed
+  - Now removes all cities from central list
+  - Alphabetised abbreviations list
+- Improved `code_term_date()`
+  - Uses `{stringi}` now for speed
+- Improved `condense_agreements()`
+  - Uses `{stringi}` now for speed
+- Added `code_area()` for coding the geographical area
+
 # manytreaties 0.1.1
 
 2025-06-03
