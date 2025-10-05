@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">manytreaties</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -33,15 +33,15 @@
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Articles
+    GGO Codebooks
 
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="../articles/membership_dashboard.html">Types of Environmental Treaties</a>
+      <a href="../articles/GGO_agreements_codebook.html">GGO Agreements</a>
     </li>
     <li>
-      <a href="../articles/trade_treaty_year_dashboard.html">Trade Treaties by Country and Year</a>
+      <a href="../articles/GGO_parties_codebook.html">GGO Parties</a>
     </li>
   </ul></li>
 <li>
@@ -94,6 +94,18 @@
         </td>
         <td><p>parties datacube</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="functions-to-standardise-treaty-text-related-inputs">Functions to standardise treaty text related inputs <a href="#functions-to-standardise-treaty-text-related-inputs" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>These functions standardise titles and texts by making sure they are in the right case, removing extra spaces, and standardising how numbers are referenced.</p>
+        </th>
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="standardise_titles.html">standardise_titles()</a></code> <code><a href="standardise_titles.html">standardize_titles()</a></code> <code><a href="standardise_titles.html">standardise_caps()</a></code> <code><a href="standardise_titles.html">standardise_numbers()</a></code> </p>
+        </td>
+        <td><p>Standardise titles</p></td>
+      </tr><tr><td>
+          <p><code><a href="standardise_treaty_text.html">standardise_treaty_text()</a></code> <code><a href="standardise_treaty_text.html">standardize_treaty_text()</a></code> </p>
+        </td>
+        <td><p>Standardise treaty texts</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
           <h2 id="functions-to-assist-treaty-text-analysis">Functions to assist treaty text analysis <a href="#functions-to-assist-treaty-text-analysis" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p><p>These functions assist users in processing and extracting information from treaty texts.</p>
         </th>
@@ -102,9 +114,9 @@
         </td>
         <td><p>Get conditions and processes to accede memberships</p></td>
       </tr><tr><td>
-          <p><code><a href="code_acronym.html">code_acronym()</a></code> </p>
+          <p><code><a href="code_acronyms.html">code_acronyms()</a></code> </p>
         </td>
-        <td><p>Code Acronym for Titles</p></td>
+        <td><p>Code Acronyms from Titles</p></td>
       </tr><tr><td>
           <p><code><a href="code_activity.html">code_activity()</a></code> </p>
         </td>
@@ -114,9 +126,9 @@
         </td>
         <td><p>Code Agreement Titles</p></td>
       </tr><tr><td>
-          <p><code><a href="code_dates.html">code_dates()</a></code> </p>
+          <p><code><a href="code_area.html">code_area()</a></code> </p>
         </td>
-        <td><p>Creates Numerical IDs from Signature Dates</p></td>
+        <td><p>Code areas from agreement titles</p></td>
       </tr><tr><td>
           <p><code><a href="code_domain.html">code_domain()</a></code> </p>
         </td>
@@ -138,6 +150,10 @@
         </td>
         <td><p>Code Agreement Linkages</p></td>
       </tr><tr><td>
+          <p><code><a href="code_location.html">code_location()</a></code> </p>
+        </td>
+        <td><p>Code locations from agreement titles</p></td>
+      </tr><tr><td>
           <p><code><a href="code_term.html">code_term()</a></code> </p>
         </td>
         <td><p>Code Treaty Termination Type</p></td>
@@ -154,13 +170,9 @@
         </td>
         <td><p>Read treaty articles by number or match</p></td>
       </tr><tr><td>
-          <p><code><a href="standardise_titles.html">standardise_titles()</a></code> <code><a href="standardise_titles.html">standardize_titles()</a></code> </p>
+          <p><code><a href="condense_agreements.html">condense_agreements()</a></code> </p>
         </td>
-        <td><p>Standardise titles</p></td>
-      </tr><tr><td>
-          <p><code><a href="standardise_treaty_text.html">standardise_treaty_text()</a></code> <code><a href="standardise_treaty_text.html">standardize_treaty_text()</a></code> </p>
-        </td>
-        <td><p>Standardise treaty texts</p></td>
+        <td><p>Condense similar treatyIDs</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
           <h2 id="function-to-generate-agreements">Function to generate agreements <a href="#function-to-generate-agreements" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p><p>This function assists users to generate a list of fictional agreements or a list of memberships to agreements.</p>
@@ -178,7 +190,7 @@
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by <a href="https://jameshollway.com/" class="external-link">James Hollway</a>.</p>
+  <p></p><p>Developed by <a href="https://jameshollway.com" class="external-link">James Hollway</a>, <a href="https://henriquesposito.com" class="external-link">Henrique Sposito</a>.</p>
 </div>
 
 <div class="pkgdown">

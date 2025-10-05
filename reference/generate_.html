@@ -18,7 +18,7 @@ list memberships to agreements."><!-- mathjax --><script src="https://cdnjs.clou
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">manytreaties</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -34,15 +34,15 @@ list memberships to agreements."><!-- mathjax --><script src="https://cdnjs.clou
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Articles
+    GGO Codebooks
 
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="../articles/membership_dashboard.html">Types of Environmental Treaties</a>
+      <a href="../articles/GGO_agreements_codebook.html">GGO Agreements</a>
     </li>
     <li>
-      <a href="../articles/trade_treaty_year_dashboard.html">Trade Treaties by Country and Year</a>
+      <a href="../articles/GGO_parties_codebook.html">GGO Parties</a>
     </li>
   </ul></li>
 <li>
@@ -117,44 +117,44 @@ to agreements.</p>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="fu">generate_agreements</span><span class="op">(</span><span class="fl">12</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "Convention Between The Parties of Sri Lanka and Solomon Islands On The Talamasi River"                                                       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2] "Agreement Between The Parties of Cuba and Tuscany Regarding The Brine River"                                                                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3] "Convention Between The Parties of Central African Republic and Belarus For The Development Of Geothermal Energy"                             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4] "Agreement Between The Parties of Mauritania and Dir Concerning Fishing For King And Tanner Crab"                                             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5] "Convention Between The Parties of Modena and Sirohi On The Talamasi River"                                                                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "Convention Between The Parties of Albania and Qu'aiti Sultanate On Cooperation In The Area Of North Eastern Ocean of Peace"                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "Agreement Between The Parties of Shoa and Kuba For The Protection Of Migratory Birds And Birds In Danger Of Extinction And Their Environment"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8] "Convention Between The Parties of Benin and Kuwait Regulating Fishing For King And Tanner Crab"                                              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] "Agreement Between The Parties of Algeria and Orange Free State Cooperation In Hydroelectric Power Station and Dams"                          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10] "Convention Between The Parties of Cameroon and Nepal On The Development Of Fisheries"                                                        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "Convention Between The Parties of Costa Rica and Bhutan Concerning North Eastern Ocean of Peace"                                             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [12] "Convention Between The Parties of Bhutan and Bosnia and Herzegovina On Cooperation In The Field Of The Conduct Of Fishing Operations"        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "Convention Between The Parties of Tigray and Lahej Concerning North Eastern Ocean of Peace"                                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2] "Agreement Between The Parties of Lao People's Democratic Republic and Georgia On Cooperation In The Field Of The Conduct Of Fishing Operations"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3] "Convention Between The Parties of Kalat and Liechtenstein Concerning Navigation And Fisheries Safety"                                          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4] "Agreement Between The Parties of Equatorial Guinea and Saint Pierre and Miquelon For Shrimp"                                                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5] "Agreement Between The Parties of Gobir-Tibiri and Dominica Relating To The Brine River"                                                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "Agreement Between The Parties of Jersey and South Sudan On Cooperation In The Field Of The Protection Of The Great Border Reef"                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "Convention Between The Parties of Jambi and Anjouan Concerning Hydroelectric Power Station and Dams"                                           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8] "Agreement Between The Parties of Bonaire Sint Eustatius and Saba and Hesse-Homburg Regarding Hydroelectric Power Station and Dams"             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] "Convention Between The Parties of Segou and Hohenzollern-Hechingen Limiting The Development Of Fisheries"                                      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10] "Agreement Between The Parties of Austria and Armenia On Cooperation In The Field Of The Fishing Of The Pico-Scindian Herring"                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "Convention Between The Parties of Tampin and Congo On The Conduct Of Fishing Operations"                                                       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [12] "Convention Between The Parties of Bremen and Saudi Arabia Relating To The Peaceful Uses Of Atomic Energy And Space Research"                   </span>
 <span class="r-in"><span><span class="fu">generate_agreements</span><span class="op">(</span><span class="fl">12</span>, treaty_type <span class="op">=</span> <span class="st">"bilaterals"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "Agreement Between The Parties of Khairpur and Wadai Regarding The Fishing Of The Pico-Scindian Herring"                                                                            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2] "Convention Between The Parties of Sind and Sao Tome and Principe On Cooperation In The Area Of Navigation And Fisheries Safety"                                                    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3] "Agreement Between The Parties of Yemen and Solomon Islands Regulating Marine Pollution By Dumping From Ships And Aircraft"                                                         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4] "Agreement Between The Parties of Barbados and Romania Concerning Fishing For King And Tanner Crab"                                                                                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5] "Convention Between The Parties of Malta and Slovakia For The Fishing Of The Pico-Scindian Herring"                                                                                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "Convention Between The Parties of Republic of Korea and Ashanti Relating To Certain Fishery Problems On The High Seas"                                                             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "Convention Between The Parties of Asir and Gabon Limiting The Establishment Of An International Fund For Compensation For Oil Pollution Damage"                                    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8] "Agreement Between The Parties of Trinidad and Tobago and Algeria Limiting The Development Of Fisheries"                                                                            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] "Agreement Between The Parties of Brunei Darussalam and Togo For Environmental Protection"                                                                                          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10] "Agreement Between The Parties of Czech Republic and Modena On Cooperation In The Area Of The Protection Of Migratory Birds And Birds In Danger Of Extinction And Their Environment"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "Agreement Between The Parties of Guinea and Holy See For Hydroelectric Power Station and Dams"                                                                                     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [12] "Agreement Between The Parties of Seychelles and Assam Concerning The Talamasi River"                                                                                               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "Agreement Between The Parties of Benin and Klungkung Regarding The Fishing Of The Pico-Scindian Herring"                                                                        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2] "Agreement Between The Parties of Burgundy and Peshwa On Cooperation In The Area Of Navigation And Fisheries Safety"                                                             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3] "Convention Between The Parties of Cutch and Lesotho Regulating Marine Pollution By Dumping From Ships And Aircraft"                                                             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4] "Agreement Between The Parties of Palau and Albania Concerning Fishing For King And Tanner Crab"                                                                                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5] "Agreement Between The Parties of Samoa and Whanganui For The Fishing Of The Pico-Scindian Herring"                                                                              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "Convention Between The Parties of Macao and Colombia Relating To Certain Fishery Problems On The High Seas"                                                                     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "Convention Between The Parties of Majeerteen and Serbia Limiting The Establishment Of An International Fund For Compensation For Oil Pollution Damage"                          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8] "Convention Between The Parties of Loango and Bunyoro Limiting The Development Of Fisheries"                                                                                     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] "Agreement Between The Parties of Lebanon and Uganda For Environmental Protection"                                                                                               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10] "Agreement Between The Parties of Waikato and Madagascar On Cooperation In The Area Of The Protection Of Migratory Birds And Birds In Danger Of Extinction And Their Environment"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "Agreement Between The Parties of Qatar and Ile Ife For Hydroelectric Power Station and Dams"                                                                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [12] "Agreement Between The Parties of Tunisia and Manipur Concerning The Talamasi River"                                                                                             </span>
 <span class="r-in"><span><span class="fu">generate_agreements</span><span class="op">(</span><span class="fl">12</span>, treaty_type <span class="op">=</span> <span class="st">"multilaterals"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "Agreement On Cooperation In The Area Of Navigation And Fisheries Safety"                           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2] "Agreement Concerning The Protection Of The Great Border Reef"                                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3] "Agreement On Cooperation In The Area Of The Fishing Of The Pico-Scindian Herring"                  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4] "Convention Concerning The Talamasi River"                                                          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5] "Convention On The Establishment Of An International Fund For Compensation For Oil Pollution Damage"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "Convention Relating To The Protection Of The Great Border Reef"                                    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "Convention Regulating The Fishing Of The Pico-Scindian Herring"                                    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8] "Agreement On Cooperation In The Area Of Energy Research And Development"                           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] "Agreement Limiting The Brine River"                                                                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10] "Convention Regarding The Development Of Fisheries"                                                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "Agreement Cooperation In The Protection Of Migratory Birds And Game Mammals"                       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [12] "Convention Relating To Hydroelectric Power Station and Dams"                                       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "Convention Cooperation In Fishing For King And Tanner Crab"                                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [2] "Convention Limiting The Peaceful Uses Of Atomic Energy And Space Research"                                     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [3] "Convention On Cooperation In The Area Of Navigation And Fisheries Safety"                                      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4] "Agreement On Shrimp"                                                                                           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [5] "Agreement Relating To Navigation And Fisheries Safety"                                                         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] "Agreement Limiting Civil Liability In The Field Of Maritime Carriage Of Nuclear Material"                      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "Convention Cooperation In Marine Pollution By Dumping From Ships And Aircraft"                                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [8] "Agreement On Cooperation In The Field Of Civil Liability In The Field Of Maritime Carriage Of Nuclear Material"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] "Convention Cooperation In The Development Of Geothermal Energy"                                                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10] "Convention Relating To An International Energy Programme"                                                      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [11] "Convention On Cooperation In The Area Of Shrimp"                                                               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [12] "Agreement On Cooperation In The Area Of Fisheries"                                                             </span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
@@ -166,7 +166,7 @@ to agreements.</p>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by <a href="https://jameshollway.com/" class="external-link">James Hollway</a>.</p>
+  <p></p><p>Developed by <a href="https://jameshollway.com" class="external-link">James Hollway</a>, <a href="https://henriquesposito.com" class="external-link">Henrique Sposito</a>.</p>
 </div>
 
 <div class="pkgdown">
