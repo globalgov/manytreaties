@@ -66,7 +66,7 @@ See `manytreaties::code_agreements()` for more details.
 ## Document dates: Begin, End, Signature, Force, Term
 
 These are the dates when an agreement is deemed to have begun or ended.
-Where more precise coding is available, we code also offer the date of signature,
+Where more precise information is available, we code also the date of signature,
 the date when the agreement entered into force, and
 the date when the agreement terminated.
 These dates are drawn from `agreements$GGO`.

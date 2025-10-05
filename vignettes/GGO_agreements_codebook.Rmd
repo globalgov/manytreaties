@@ -155,18 +155,18 @@ followed by the type (A = Agreement).
 
 **Type** | **Pasting** | **Pasting**
 --- | --- |--- 
-Bilateral | FRA-TON[DEZ]_1980A | parties[activity]_year(type)
-Bilateral + Protocol | 	RUS-USA[FKC]_1967E:RUS-USA[FKC]_1967A | parties[activity]_year(type):linkage
+Bilateral | FRA-TON[DEZ]_1980A | parties[subject]_year(type)
+Bilateral + Protocol | 	RUS-USA[FKC]_1967E:RUS-USA[FKC]_1965A | parties[subject]_year(type):linkage
 
 A bilateral treaty that is any other type than an agreement
 (e.g. protocol, amendments) will have 
 the treatyID under this format: "RUS-USA[FKC]_1967E:FKC_1965A". 
 It is composed of the parties (RUS-USA),
-the activity abbreviation from treaty title "Fishing for King Crab (FKC)", 
+the subject abbreviation from treaty title "Fishing for King Crab (FKC)", 
 the year of signature of the amendment (1967), and
 the type (E) which refers to Amendment. 
 The linkage portion links the agreement to the treatyID its "mother" treaty 
-(RUS-USA[FKC]_1967A).
+(RUS-USA[FKC]_1965A).
 
 ### Multilateral treatyID
 
@@ -180,12 +180,12 @@ and the type (A).
 Multilateral | HSPDF_2005A | acronym_year(type)
 Multilateral + Protocol | SFDP_2007E2:H08F_1992A | acronym_year(type and number):linkage
 
-A multilateral treaty that is not an agreement will have this treatyID format: "SFDP_1992E2:H08F_2007". 
+A multilateral treaty that is not an agreement will have this treatyID format: "SFDP_2007E2:H08F_1992A". 
 This represents the acronym (SFDP),
 the signature year of the amendment (2007),
 the type (E = Amendment),
 the number of amendment (2),
-and the linkage number (H08F_2007) of the "mother" treaty. 
+and the treatyID (H08F_1992A) of the "mother" treaty. 
 
 **Type** | **Pasting** | **Pasting**
 --- | --- |--- 
@@ -209,7 +209,7 @@ its number (2), and the treatyID of the "mother" treaty (MARPOL1973A).
 ### Begin, End, Signature, Force, Term
 
 These are the dates when an agreement is deemed to have begun or ended.
-Where more precise coding is available, we code also offer the date of signature,
+Where more precise information is available, we code also the date of signature,
 the date when the agreement entered into force, and
 the date when the agreement terminated.
 
